@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+/*******************************backend*********************************/
+Route::group(['prefix'=>'admin','middleware'=>'web', 'namespace'=>'Admin'], function(){
+    require (__DIR__ . '/webs/admin/AdminRoutes.php');
+});
