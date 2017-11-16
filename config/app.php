@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Shanghai',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -177,6 +177,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        /******************user-setting************************/
+
+        //ide-helper
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        //debugbar
+        Barryvdh\Debugbar\ServiceProvider::class,
+
     ],
 
     /*
@@ -225,6 +233,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /******************user-setting************************/
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

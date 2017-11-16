@@ -20,4 +20,13 @@ class IndexController extends controller
         return view('admin.index.index');
     }
 
+    public function main()
+    {
+        return view('admin.index.main');
+    }
+    public function test()
+    {
+        return view('admin.index.test');
+    }
+
 }
