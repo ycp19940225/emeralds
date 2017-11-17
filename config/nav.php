@@ -27,7 +27,8 @@ return [
                     'icon'=>''
                 ],
             ]
-        ],[
+        ],
+        [
             'name'=>'管理员',
             'icon'=>'user',
             'access'=>[

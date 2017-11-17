@@ -1,4 +1,7 @@
 @foreach(config('nav.NAV') as $k=>$v)
+    @if(checkMenu($v))
+        @continue
+        @endif
 <li class="nav-body">
     <a href="#">
         <i class="fa fa-{{ $v['icon'] }}"></i>

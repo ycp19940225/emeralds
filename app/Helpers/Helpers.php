@@ -100,6 +100,17 @@ if ( ! function_exists('checkPri')){
     }
 }
 /**
+ * 检测一级菜单
+ */
+if ( ! function_exists('checkMenu')){
+    function checkMenu($access){
+        $pris = SC::getUserAccess();
+        $pris_id = SC::getLoginSession();
+
+        return true;
+    }
+}
+/**
  * 检测分类下拉框选中
  */
 if ( ! function_exists('check_select')){
