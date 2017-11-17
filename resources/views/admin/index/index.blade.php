@@ -26,7 +26,7 @@
                                 <li><a class="J_menuItem" href="mailbox.html">信箱</a>
                                 </li>
                                 <li class="divider"></li>
-                                <li><a href="login.html">安全退出</a>
+                                <li><a href="{{ url('admin/logout') }}">安全退出</a>
                                 </li>
                             </ul>
                         </div>
@@ -61,7 +61,7 @@
                                 <li class="m-t-xs">
                                     <div class="dropdown-messages-box">
                                         <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="img/a7.jpg">
+                                            <img alt="image" class="img-circle" src="{{ loadStatic('admin/img/a7.jpg') }}">
                                         </a>
                                         <div class="media-body">
                                             <small class="pull-right">46小时前</small>
@@ -75,7 +75,7 @@
                                 <li>
                                     <div class="dropdown-messages-box">
                                         <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="img/a4.jpg">
+                                            <img alt="image" class="img-circle" src="{{ loadStatic('admin/img/a4.jpg') }}">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right text-navy">25小时前</small>
@@ -160,13 +160,13 @@
                         </li>
                     </ul>
                 </div>
-                <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+                <a href="{{ url('admin/logout') }}" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="{{ url('admin/main') }}" frameborder="0" data-id="index_v1.html" seamless></iframe>
+                <iframe class="J_iframe" name="iframe0"  src="{{ url('admin/main') }}" frameborder="0" data-id="" ></iframe>
             </div>
             <div class="footer">
-                <div class="pull-right">&copy; 2016-2017 <a href="www.yangcp.me" target="_blank">YCP blog</a>
+                <div class="pull-right">&copy; 2016-2017 <a href="http://www.yangcp.me" target="_blank">YCP blog</a>
                 </div>
             </div>
         </div>
@@ -274,7 +274,7 @@
                             <div class="sidebar-message">
                                 <a href="#">
                                     <div class="pull-left text-center">
-                                        <img alt="image" class="img-circle message-avatar" src="img/a4.jpg">
+                                        <img alt="image" class="img-circle message-avatar" src="{{ loadStatic('admin/img/a4.jpg') }}">
                                     </div>
                                     <div class="media-body">
                                         我发起了一个投票 【你认为下午大盘会翻红吗？】

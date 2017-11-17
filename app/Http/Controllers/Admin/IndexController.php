@@ -20,13 +20,15 @@ class IndexController extends controller
         return view('admin.index.index');
     }
 
+    /**
+     * @name  后台主页
+     * @desc 后台主页
+     * @author ycp
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function main()
     {
         return view('admin.index.main');
-    }
-    public function test()
-    {
-        return view('admin.index.test');
     }
 
 }

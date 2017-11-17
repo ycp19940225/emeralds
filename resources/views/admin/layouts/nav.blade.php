@@ -1,13 +1,21 @@
-<li>
+@foreach(config('nav.NAV') as $k=>$v)
+<li class="nav-body">
     <a href="#">
-        <i class="fa fa-user"></i>
-        <span class="nav-label">管理员</span>
+        <i class="fa fa-{{ $v['icon'] }}"></i>
+        <span class="nav-label">{{ $v['name'] }}</span>
         <span class="fa arrow"></span>
     </a>
     <ul class="nav nav-second-level">
+        @foreach($v['access'] as $access)
+            @if(!checkPri($access['access']))
         <li>
-            <a class="J_menuItem" href="{{ url('admin/test') }}" data-index="0">主页示例一</a>
+            <a class="J_menuItem" href="{{ url($access['access']) }}" data-index="0">{{ $access['name'] }}</a>
         </li>
+        @else
+            @continue
+        @endif
+        @endforeach
     </ul>
 
 </li>
+@endforeach

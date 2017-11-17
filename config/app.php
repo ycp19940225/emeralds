@@ -125,6 +125,16 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+
+    /**
+     * 自定义配置
+     */
+
+    'ACCESS_CHECK_MODULE' => env('ACCESS_CHECK_MODULE','admin'),
+
+    'name_space' =>'App\Http\Controllers',
+
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -185,6 +195,11 @@ return [
         //debugbar
         Barryvdh\Debugbar\ServiceProvider::class,
 
+        App\Providers\UserServiceProvider::class,
+
+
+        //Captcha
+        Mews\Captcha\CaptchaServiceProvider::class,
     ],
 
     /*
@@ -236,6 +251,9 @@ return [
 
         /******************user-setting************************/
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+        //Captcha
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
 
     ],
 
