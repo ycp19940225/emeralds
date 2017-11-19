@@ -100,14 +100,35 @@ if ( ! function_exists('checkPri')){
     }
 }
 /**
- * 检测一级菜单
+ * 检测菜单
  */
 if ( ! function_exists('checkMenu')){
-    function checkMenu($access){
+    function checkMenu($nav){
         $pris = SC::getUserAccess();
         $pris_id = SC::getLoginSession();
+        $menu = [];
+        if($pris_id->id == 1){  //超级管理员所有菜单
+            return $nav;
+        }
+        foreach($nav as  $k => $v){
+            foreach ($v['access'] as $item){
+                $url = $item['access'];
+                if(!is_array($url)){  //切割 $url
+                    $url = explode('/',$url);
+                }
+                foreach ($pris as $k2 => $pri){
+                    if(strtolower($url[0]) == strtolower($pri->module_name) && strtolower($url[1]) == strtolower($pri->controller) && strtolower($url[2]) == strtolower($pri->action_name)){  //比较权限
+                        $menu[$k]['name'] = $v['name'] ;
+                        $menu[$k]['icon'] = $v['icon'] ;
+                        $menu[$k]['access'][$k2]['name'] = $item['name'] ;
+                        $menu[$k]['access'][$k2]['access'] = $item['access'] ;
+                        $menu[$k]['access'][$k2]['icon'] = $item['icon'] ;
+                    }
+                }
+            }
 
-        return true;
+        }
+        return $menu;
     }
 }
 /**

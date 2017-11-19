@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Services\Admin\SC;
 
 class IndexController extends controller
 {
@@ -17,7 +18,9 @@ class IndexController extends controller
      */
     public function index()
     {
-        return view('admin.index.index');
+        $nav= config('nav.NAV');
+        $menu = checkMenu($nav);
+        return view('admin.index.index',['menu'=>$menu]);
     }
 
     /**
