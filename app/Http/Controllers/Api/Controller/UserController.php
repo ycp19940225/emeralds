@@ -11,13 +11,13 @@ namespace App\Http\Controllers\Api\Controller;
 
 
 use App\Http\Controllers\Api\BaseController;
-
+use Dingo\Api\Http\Middleware\Request;
 
 
 class UserController extends BaseController
 {
    
-    public function show()
+    public function register(Request $request)
     {
         return $this->response->noContent();
     }

@@ -28,10 +28,9 @@
 	<div>
 		<div>
 
-			<h1 class="logo-name">H+</h1>
 
 		</div>
-		<h3>欢迎使用 H+</h3>
+		<h3>欢迎使用 莲叶翡翠管理后台</h3>
 
 		<form class="m-t" role="form" action="{{ url('admin/doLogin') }}" method="post">
 			<div class="login-content">
@@ -62,7 +61,7 @@
 						<button type="submit" class="btn btn-success btn-block btn-lg">登录</button>
 					</div>
 					<div class="m-t-20">
-						Not a member yet? Click <a href="#">here</a> to register.
+						还未加入? 点击 <a href="{{url('agent/register')}}">这里</a> 注册.
 					</div>
 			</div>
 
