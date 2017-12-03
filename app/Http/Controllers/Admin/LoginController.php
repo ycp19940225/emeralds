@@ -54,11 +54,11 @@ class loginController extends controller
         if($is_login){
             SC::setLoginSession($is_login);
             $admin_id = $is_login->id;
+            //设置权限
             $access = DB::table('emerald_admin_role as a')
                 ->Join('emerald_role_pri as b','a.role_id','=','b.role_id')
                 ->Join('emerald_privilege as c','b.pri_id','=','c.id')
                 ->where('admin_id',$admin_id)
-                ->where('status',1)
                 ->get();
             SC::setUserAccess($access->toArray());
             return redirect('admin');

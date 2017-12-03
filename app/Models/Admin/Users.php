@@ -32,7 +32,7 @@ class Users extends Base
      */
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Admin\Role','emerald_admin_role','admin_id','role_id','status');
+        return $this->belongsToMany('App\Models\Admin\Role','emerald_admin_role','admin_id','role_id');
     }
 
     /**
@@ -114,7 +114,7 @@ class Users extends Base
      */
     public function doLogin($password,$username)
     {
-        return $this->where('adminname',$username)->where('password',get_md5_password($password))->first();
+        return $this->where('adminname',$username)->where('status',1)->where('password',get_md5_password($password))->first();
     }
 
 }

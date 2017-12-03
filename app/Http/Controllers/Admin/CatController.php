@@ -55,11 +55,7 @@ class CatController extends controller
      */
     public function addOperate(Request $request)
     {
-        /*$img_path = $uploadServicesImpl->uploadImg($request->file('pic'));
         $data = $request->input();
-        $data['pic'] = $img_path;*/
-        $data = $request->input();
-        dd($this->cat->save($data));
         if($this->cat->save($data)){
             $data=$data=$this->cat->getAll();
             return view('admin.cat.index',['data'=>$data,'title'=>'分类列表']);
@@ -77,6 +73,9 @@ class CatController extends controller
     public function edit($id)
     {
         $data = $this->cat->getOne($id);
+        $child_cat =array_column($data->child_cat->toArray(),'cat_name');
+        $child_cat = implode(',',$child_cat);
+        $data['child_cat'] = $child_cat;
         return view('admin.cat.edit',['data'=>$data,'title'=>'添加分类']);
     }
 
@@ -90,10 +89,6 @@ class CatController extends controller
     public function editOperate(Request $request)
     {
         $data = $request->input();
-        /*if($request->file('pic')){
-            $img_path = $uploadServicesImpl->uploadImg($request->file('pic'));
-            $data['pic'] = $img_path;
-        }*/
         if($this->cat->update($data)){
             $data=$data=$this->cat->getAll();
             return view('admin.cat.index',['data'=>$data,'title'=>'分类列表']);

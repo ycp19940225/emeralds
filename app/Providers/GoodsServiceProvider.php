@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Admin\AttrServicesImpl;
 use App\Services\Admin\CatServicesImpl;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,6 +28,10 @@ class GoodsServiceProvider extends ServiceProvider
         //分类
         $this->app->singleton('App\Services\Ifs\Admin\CatServices',function(){
             return new CatServicesImpl();
+        });
+        //属性
+        $this->app->singleton('App\Services\Ifs\Admin\AttrServices',function(){
+            return new AttrServicesImpl();
         });
 
     }

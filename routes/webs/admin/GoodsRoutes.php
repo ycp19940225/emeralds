@@ -6,3 +6,6 @@ Route::get('/cat/index','CatController@index');
 Route::get('/cat/edit/{id}','CatController@edit')->where('id', '[0-9]+');
 Route::post('/cat/editOperate','CatController@editOperate');
 Route::post('/cat/delete','CatController@delete');
+//属性
+Route::get('/attr/edit/{id}','AttrController@edit')->where('id', '[0-9]+');
+Route::post('/attr/editOperate','AttrController@editOperate');

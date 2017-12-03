@@ -71,7 +71,7 @@
                 onSwitchChange:function(event,state){
                     var id = $(this).attr('data-id');
                     var data;
-                    if(state==true){
+                    if(state == true){
                         $(this).val("1");
                         data = {
                             role_id:id,

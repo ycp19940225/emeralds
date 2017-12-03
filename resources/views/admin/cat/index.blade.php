@@ -37,8 +37,8 @@
                                 <tr>
                                     <td>{{ $v['cat_name'] }}</td>
                                     <td>
-                                        @foreach($v->child_cat as $k=>$v)
-                                            <a href="" style="color: red" title="点击编辑属性">{{ $v['cat_name'] }}</a>
+                                        @foreach($v->child_cat as $child_cat)
+                                            <a href="{{ url('admin/attr/edit',['cat_id'=>$child_cat->id]) }}" style="color: red" title="点击编辑属性">{{ $child_cat['cat_name'] }}</a>
                                         @endforeach
                                     </td>
                                     <td>{{ $v['created_at'] }}</td>
@@ -71,7 +71,7 @@
          */
         function del(i) {
             //询问框
-            layer.confirm('是否删除？', {
+            layer.confirm('二级分类将会一并删除,是否删除？', {
                 title:'确认操作',
                 btn: ['是','否'] //按钮
             }, function(){
@@ -80,12 +80,11 @@
                     id:i,
                     _token: _token
                 };
-                console.log(data);
-                $.post("{{ url('admin/role/delete') }}",data,function (res) {
+                $.post("{{ url('admin/cat/delete') }}",data,function (res) {
                     console.log(res);
                     if(res['code'] === 'success'){
                         layer.msg(res['msg'],{icon: 6});
-                        setTimeout('location.href="{{ url('admin/role/index') }}"',1000);
+                        setTimeout('location.href="{{ url('admin/cat/index') }}"',1000);
                     }else{
                         layer.msg(res['msg'],{icon:5});
                     }

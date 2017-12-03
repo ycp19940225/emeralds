@@ -25,11 +25,18 @@ class Cat extends Base
 
     /**
      * 关联父分类下的子分类
-     * 属于该用户的权限。
      */
     public function child_cat()
     {
         return $this->hasMany('App\Models\Admin\Cat','parent_id','id');
+    }
+
+    /**
+     * 关联子分类下的父分类
+     */
+    public function parent_cat()
+    {
+        return $this->belongsTo('App\Models\Admin\Cat','parent_id','id');
     }
 
     public function add($data)
@@ -52,7 +59,16 @@ class Cat extends Base
      */
     public function edit($data)
     {
-        return $this->find($data['id'])->update($data);
+        $this->find($data['id'])->update($data);
+        $child_name = explode(',',preg_replace("/(\n)|(\s)|(\t)|(\')|(')|(，)/" ,',' ,$data['child_name']));
+        //删除原来的子分类
+        $this->where('parent_id',$data['id'])->delete();
+        $create_data['parent_id'] = $data['id'];
+        foreach ($child_name as $k=>$v){
+            $create_data['cat_name'] = $v;
+            $this->create($create_data);
+        }
+        return true;
     }
 
     public function getAll()
