@@ -18,6 +18,7 @@ Route::get('/', function () {
 /*******************************backend*********************************/
 Route::group(['prefix'=>'admin','middleware'=>'admin', 'namespace'=>'Admin'], function(){
     require (__DIR__ . '/webs/admin/AdminRoutes.php');
+    require (__DIR__ . '/webs/admin/GoodsRoutes.php');
 });
 
 //不做权限,登录

@@ -10,11 +10,10 @@ namespace App\Models\Admin;
 
 
 use App\Models\Rbac;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Models\Base;
-use Yajra\Datatables\Facades\Datatables;
 
 class Pri extends Base
 {

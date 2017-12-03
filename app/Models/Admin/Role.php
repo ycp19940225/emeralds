@@ -12,7 +12,6 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Models\Base;
-use Yajra\Datatables\Facades\Datatables;
 
 class Role extends Base
 {

@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use App\Models\Base;
-use Yajra\Datatables\Facades\Datatables;
 
 class Users extends Base
 {
@@ -33,7 +32,7 @@ class Users extends Base
      */
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Admin\Role','emerald_admin_role','admin_id','role_id');
+        return $this->belongsToMany('App\Models\Admin\Role','emerald_admin_role','admin_id','role_id','status');
     }
 
     /**
@@ -118,15 +117,4 @@ class Users extends Base
         return $this->where('adminname',$username)->where('password',get_md5_password($password))->first();
     }
 
-    /**
-     * @name 获取信息
-     * @desc 获取表结构
-     * @author ycp
-     * @return mixed
-     */
-    public function getTables()
-    {
-        return Datatables::eloquent($this::select('id','adminname','updated_at','created_at'))
-            ->make(true);
-    }
 }

@@ -131,6 +131,8 @@ if ( ! function_exists('checkMenu')){
         return $menu;
     }
 }
+
+
 /**
  * 检测分类下拉框选中
  */
@@ -144,6 +146,19 @@ if ( ! function_exists('check_select')){
             }
         }
         return $res;
+    }
+}
+/**
+ * 检测代理商状态
+ */
+if ( ! function_exists('check_status')){
+    function check_status($data){
+        if($data == 0){
+            echo '<span style="color: red">未审核</span>';
+        }
+        else{
+            echo '<span style="color: green">通过审核</span>';
+        }
     }
 }
 
@@ -176,6 +191,22 @@ if( ! function_exists('showWriteTime'))
             }
         }
         return date('Y-m-d', $time);
+    }
+}
+
+/**
+ * 加载静态资源(图片)
+ *
+ * @param string $file 所要加载的资源
+ */
+if ( ! function_exists('loadStaticImg'))
+{
+    function loadStaticImg($file = '')
+    {
+        if(empty($file)) return '';
+        $realFile = public_path('uploads/').$file;
+        if( ! file_exists($realFile)) return '';
+        return Request::root().'/uploads/'.$file;
     }
 }
 

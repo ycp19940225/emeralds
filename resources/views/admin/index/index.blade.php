@@ -166,7 +166,7 @@
                 <iframe class="J_iframe" name="iframe0"  src="{{ url('admin/main') }}" frameborder="0" data-id="" ></iframe>
             </div>
             <div class="footer">
-                <div class="pull-right">&copy; 2016-2017 <a href="http://www.yangcp.me" target="_blank">YCP blog</a>
+                <div class="pull-right">&copy; 2016-2017 <a href="http://www.yangcp.me" target="_blank">莲叶翡翠</a>
                 </div>
             </div>
         </div>

@@ -18,16 +18,17 @@ class UploadServicesImpl implements UploadServices
     protected $disk;
     public function __construct()
     {
-        $this->disk = Storage::disk('qiniu');
+        $this->disk = Storage::disk('public');
     }
 
     public function uploadImg($uploadFiles)
     {
-        $time = date('Y/m/d-H:i:s-');
+        $time = date('Y/m/d');
         $filename = $this->disk->put($time, $uploadFiles);//上传
         if(!$filename) {
             return false;
         }
-        return $this->disk->getDriver()->downloadUrl($filename); //获取下载链接
+        return $filename;
     }
+
 }

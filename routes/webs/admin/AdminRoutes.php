@@ -8,6 +8,7 @@ Route::get('/admin/tables','AdminController@getTables');
 Route::get('/admin/edit/{id}','AdminController@edit')->where('id', '[0-9]+');
 Route::post('/admin/editOperate','AdminController@editOperate');
 Route::post('/admin/delete','AdminController@delete');
+Route::post('/admin/frozen','AdminController@frozen');
 //角色
 Route::any('/role/add','RoleController@add');
 Route::post('/role/addOperate','RoleController@addOperate');
@@ -22,3 +23,8 @@ Route::post('/user/addUserOperate','RoleController@addUserOperate');
 Route::get('/privilege/index/{role_id}','PrivilegeController@index')->where('role_id', '[0-9]+')->name('pri-index');
 Route::get('/privilege/refresh','PrivilegeController@refresh')->name('pri-refresh');
 Route::post('/privilege/updateRolePri','PrivilegeController@updateRolePri')->name('update_pri_role');
+
+//代理商
+Route::get('/agent/index','AgentController@index');
+Route::post('/agent/editOperate','AgentController@editOperate');
+Route::post('/agent/delete','AgentController@delete');

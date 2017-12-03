@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-11-22 19:00:03
+Date: 2017-12-03 18:32:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,7 @@ CREATE TABLE `emerald_admin` (
   `token` varchar(20) NOT NULL DEFAULT '0' COMMENT 'token',
   `deleted_at` tinyint(5) NOT NULL DEFAULT '0',
   `role_id` tinyint(5) NOT NULL DEFAULT '0' COMMENT '角色ID',
+  `status` tinyint(5) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `adminname` (`adminname`),
   KEY `role_id` (`role_id`) COMMENT '角色'
@@ -39,8 +40,8 @@ CREATE TABLE `emerald_admin` (
 -- ----------------------------
 -- Records of emerald_admin
 -- ----------------------------
-INSERT INTO `emerald_admin` VALUES ('1', 'ycp', '447910ff7241c373129b8761cc312c78', '', '', '1510902753', '1510902753', '0', '0', '0', '0');
-INSERT INTO `emerald_admin` VALUES ('39', 'test', 'fed6fb05c04e7e31bc5a91b25834281f', '', '', '1510910879', '1510910879', '0', '0', '0', '0');
+INSERT INTO `emerald_admin` VALUES ('1', 'ycp', '447910ff7241c373129b8761cc312c78', '', '', '1510902753', '1510902753', '0', '0', '0', '0', '1');
+INSERT INTO `emerald_admin` VALUES ('39', 'test', 'fed6fb05c04e7e31bc5a91b25834281f', '', '', '1510910879', '1510910879', '0', '0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for emerald_admin_role
@@ -56,6 +57,7 @@ CREATE TABLE `emerald_admin_role` (
 -- ----------------------------
 -- Records of emerald_admin_role
 -- ----------------------------
+INSERT INTO `emerald_admin_role` VALUES ('1', '8');
 
 -- ----------------------------
 -- Table structure for emerald_agent
@@ -65,22 +67,46 @@ CREATE TABLE `emerald_agent` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `agent_code` varchar(255) NOT NULL COMMENT '代理商编号',
   `agent_name` varchar(255) NOT NULL COMMENT '姓名',
-  `telphone` int(11) NOT NULL COMMENT '手机号',
+  `telphone` varchar(255) NOT NULL DEFAULT '0' COMMENT '手机号',
+  `booth_number` varchar(255) NOT NULL DEFAULT '' COMMENT '摊位号',
   `wx` varchar(255) NOT NULL COMMENT '微信',
   `pm` varchar(255) NOT NULL COMMENT '主营项目',
   `bank_code` varchar(255) NOT NULL COMMENT '银行卡号',
   `alipay_code` varchar(255) NOT NULL COMMENT '支付宝账号',
   `qq_code` varchar(255) NOT NULL COMMENT 'qq账号',
-  `status` int(11) NOT NULL COMMENT '状态',
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '状态',
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
-  `deleted_at` int(11) NOT NULL,
-  `license_number` int(11) NOT NULL COMMENT '营业执照',
+  `deleted_at` int(11) NOT NULL DEFAULT '0',
+  `license_number` varchar(255) NOT NULL DEFAULT '0' COMMENT '营业执照',
+  `deleted` int(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='代理商';
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='代理商';
 
 -- ----------------------------
 -- Records of emerald_agent
+-- ----------------------------
+INSERT INTO `emerald_agent` VALUES ('4', 'LYFC15114263421', '杨春坪', '18983663382', '123456789', '123456789wx', '翡翠，珠宝', '123456789', '123456789alpay', '820363773', '1', '1511426342', '1511429137', '0', '123456789', '1');
+
+-- ----------------------------
+-- Table structure for emerald_attr
+-- ----------------------------
+DROP TABLE IF EXISTS `emerald_attr`;
+CREATE TABLE `emerald_attr` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `attr_name` varchar(255) NOT NULL DEFAULT '' COMMENT '属性名',
+  `pic` varchar(255) NOT NULL DEFAULT '' COMMENT '图片',
+  `cat_val` varchar(255) NOT NULL DEFAULT '' COMMENT '属性',
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
+  `deleted_at` int(11) NOT NULL DEFAULT '0',
+  `cat_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `cat_id` (`cat_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='商品属性表';
+
+-- ----------------------------
+-- Records of emerald_attr
 -- ----------------------------
 
 -- ----------------------------
@@ -91,17 +117,24 @@ CREATE TABLE `emerald_cat` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `cat_name` varchar(255) NOT NULL DEFAULT '' COMMENT '分类名',
   `pic` varchar(255) NOT NULL DEFAULT '' COMMENT '图片',
-  `goods_id` int(11) NOT NULL COMMENT '商品ID',
-  `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL,
-  `deleted_at` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `goods_id` (`goods_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='商品分类表';
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
+  `deleted_at` int(11) NOT NULL DEFAULT '0',
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='商品分类表';
 
 -- ----------------------------
 -- Records of emerald_cat
 -- ----------------------------
+INSERT INTO `emerald_cat` VALUES ('16', '轻奢小品', '2017/12/02/iESEzXdPWw3ZvtRzwWlWVNN7WpDV56lo75XXDyaE.jpeg', '1512213553', '1512213553', '0', '0');
+INSERT INTO `emerald_cat` VALUES ('17', '南红', '1', '1512213587', '1512285426', '0', '0');
+INSERT INTO `emerald_cat` VALUES ('18', '琥珀蜜蜡', '2017/12/03/rBkdf9VpA3k018xvJFk0falLDUJoC0ROqj6hJjNb.jpeg', '1512213605', '1512285874', '0', '0');
+INSERT INTO `emerald_cat` VALUES ('36', '挂件', '', '1512293718', '1512293718', '0', '0');
+INSERT INTO `emerald_cat` VALUES ('37', '题材', '', '1512293718', '1512293718', '0', '36');
+INSERT INTO `emerald_cat` VALUES ('38', '种水', '', '1512293718', '1512293718', '0', '36');
+INSERT INTO `emerald_cat` VALUES ('39', '颜色', '', '1512293718', '1512293718', '0', '36');
+INSERT INTO `emerald_cat` VALUES ('40', '价格', '', '1512293718', '1512293718', '0', '36');
 
 -- ----------------------------
 -- Table structure for emerald_collect
@@ -109,12 +142,12 @@ CREATE TABLE `emerald_cat` (
 DROP TABLE IF EXISTS `emerald_collect`;
 CREATE TABLE `emerald_collect` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `goods_id` int(11) NOT NULL COMMENT '商品',
-  `user_id` int(11) NOT NULL COMMENT '用户ID',
-  `article_id` int(11) NOT NULL COMMENT '文章',
-  `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL,
-  `deleted_at` int(11) NOT NULL,
+  `goods_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品',
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `article_id` int(11) NOT NULL DEFAULT '0' COMMENT '文章',
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
+  `deleted_at` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='收藏';
 
@@ -138,27 +171,15 @@ CREATE TABLE `emerald_goods` (
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
   `deleted_at` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `cat_id` int(11) NOT NULL COMMENT '分类',
+  `agent_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `cat_id` (`cat_id`),
+  KEY `agent_id` (`agent_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='商品表';
 
 -- ----------------------------
 -- Records of emerald_goods
--- ----------------------------
-
--- ----------------------------
--- Table structure for emerald_goods_cat
--- ----------------------------
-DROP TABLE IF EXISTS `emerald_goods_cat`;
-CREATE TABLE `emerald_goods_cat` (
-  `cat_id` int(11) NOT NULL,
-  `goods_id` int(11) NOT NULL,
-  PRIMARY KEY (`cat_id`),
-  KEY `goods_id` (`goods_id`),
-  KEY `cat_id` (`cat_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of emerald_goods_cat
 -- ----------------------------
 
 -- ----------------------------
@@ -232,7 +253,7 @@ CREATE TABLE `emerald_role` (
   `input_id` int(11) NOT NULL DEFAULT '0' COMMENT '录入人ID',
   `deleted_at` tinyint(5) NOT NULL DEFAULT '0' COMMENT '删除',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色表';
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色表';
 
 -- ----------------------------
 -- Records of emerald_role
@@ -260,6 +281,8 @@ INSERT INTO `emerald_role_pri` VALUES ('125', '8', '0');
 INSERT INTO `emerald_role_pri` VALUES ('126', '8', '0');
 INSERT INTO `emerald_role_pri` VALUES ('127', '8', '0');
 INSERT INTO `emerald_role_pri` VALUES ('128', '8', '0');
+INSERT INTO `emerald_role_pri` VALUES ('129', '8', '0');
+INSERT INTO `emerald_role_pri` VALUES ('130', '8', '0');
 
 -- ----------------------------
 -- Table structure for emerald_user
@@ -267,14 +290,14 @@ INSERT INTO `emerald_role_pri` VALUES ('128', '8', '0');
 DROP TABLE IF EXISTS `emerald_user`;
 CREATE TABLE `emerald_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `telphone` int(11) NOT NULL COMMENT '手机号',
+  `telphone` int(11) NOT NULL DEFAULT '0' COMMENT '手机号',
   `nickname` varchar(255) NOT NULL DEFAULT '' COMMENT '名称',
   `password` varchar(255) NOT NULL DEFAULT '' COMMENT '密码',
   `logo` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
   `email` varchar(255) NOT NULL DEFAULT '',
-  `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL,
-  `deleted_at` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
+  `deleted_at` int(11) NOT NULL DEFAULT '0',
   `token` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

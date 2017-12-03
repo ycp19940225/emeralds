@@ -16,6 +16,7 @@ use App\Services\Admin\SC;
 use App\Services\Ifs\Admin\RoleServices;
 use App\Services\Ifs\Admin\UserServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends controller
 {
@@ -109,5 +110,19 @@ class AdminController extends controller
             return response()->json(msg('success','删除成功!'));
         } else
             return response()->json(msg('error','删除失败!'));
+    }
+
+    /**
+     * @name 冻结账户
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function frozen(Request $request)
+    {
+        $res = DB::table('emerald_admin')->where('id',$request->input())->update(['status'=>$request->input('status')]);
+        if($res){
+            return response()->json(msg('success','操作成功!'));
+        }
+        return response()->json(msg('error','操作失败！'));
     }
 }

@@ -33,100 +33,76 @@
 <body class="fixed-sidebar full-height-layout gray-bg" >
 
 <div class="row">
-    <div class="col-sm-12">
-        <div class="ibox">
+    <div class="col-sm-12" >
+        <div class="ibox" >
             <div class="ibox-title">
-                <h5>带验证的表单向导</h5>
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="form_wizard.html#">
-                        <i class="fa fa-wrench"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="form_wizard.html#">选项1</a>
-                        </li>
-                        <li><a href="form_wizard.html#">选项2</a>
-                        </li>
-                    </ul>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
+                <h5>代理商注册</h5>
             </div>
-            <div class="ibox-content">
+            <div class="ibox-content" style="height: 800px">
                 <h2>
-                    带验证的表单向导
+                    请填写基本信息
                 </h2>
                 <p>
-                    下面这个示例展示了如何在表单向导中使用 jQuery Validation 插件
+                    以下选项为账户为必填信息，其他请尽量完善
                 </p>
 
-                <form id="form" action="http://www.zi-han.net/theme/hplus/form_wizard.html#" class="wizard-big">
+                <form id="form" action="{{url('agent/doRegister')}}" class="wizard-big" method="post">
                     <h1>账户</h1>
-                    <fieldset>
-                        <h2>账户信息</h2>
+                    <fieldset class="" >
                         <div class="row">
-                            <div class="col-sm-8">
-                                <div class="form-group">
-                                    <label>用户名 *</label>
-                                    <input id="userName" name="userName" type="text" class="form-control required">
-                                </div>
-                                <div class="form-group">
-                                    <label>密码 *</label>
-                                    <input id="password" name="password" type="text" class="form-control required">
-                                </div>
-                                <div class="form-group">
-                                    <label>确认密码 *</label>
-                                    <input id="confirm" name="confirm" type="text" class="form-control required">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="text-center">
-                                    <div style="margin-top: 20px">
-                                        <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </fieldset>
-                    <h1>个人资料</h1>
-                    <fieldset>
-                        <h2>个人资料信息</h2>
-                        <div class="row">
-                            <div class="col-sm-6">
+                            {{ csrf_field() }}
+                            <div class="col-sm-6" style="height: 800px">
                                 <div class="form-group">
                                     <label>姓名 *</label>
-                                    <input id="name" name="name" type="text" class="form-control required">
+                                    <input id="agent_name" name="agent_name" type="text" class="form-control required">
+                                </div>
+                                <div class="form-group">
+                                    <label>手机号 *</label>
+                                    <input id="telphone" name="telphone" type="number" class="form-control required">
+                                </div>
+                                <div class="form-group">
+                                    <label>摊位号 *</label>
+                                    <input id="booth_number" name="booth_number" type="text" class="form-control required">
+                                </div>
+                                 <div class="form-group">
+                                    <label>微信号 *</label>
+                                    <input id="wx" name="wx" type="text" class="form-control required">
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <h1>完善个人资料</h1>
+                    <fieldset>
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>主营项目</label>
+                                    <input id="pm" name="pm" type="text" class="form-control ">
+                                </div>
+                                <div class="form-group">
+                                    <label>银行账号</label>
+                                    <input id="bank_code" name="bank_code" type="number" class="form-control">
+                                </div>
+                             <div class="form-group">
+                                    <label>支付宝账号</label>
+                                    <input id="alipay_code" name="alipay_code" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Email *</label>
-                                    <input id="email" name="email" type="text" class="form-control required email">
+                                    <label>qq号码</label>
+                                    <input id="qq_code" name="qq_code" type="number" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label>地址 *</label>
-                                    <input id="address" name="address" type="text" class="form-control">
+                                    <label>营业执照号</label>
+                                    <input id="license_number" name="license_number" type="number" class="form-control">
                                 </div>
                             </div>
-                        </div>
-                    </fieldset>
 
-                    <h1>警告</h1>
-                    <fieldset>
-                        <div class="text-center" style="margin-top: 120px">
-                            <h2>你是火星人 :-)</h2>
                         </div>
-                    </fieldset>
 
-                    <h1>完成</h1>
-                    <fieldset>
-                        <h2>条款</h2>
-                        <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
-                        <label for="acceptTerms">我同意注册条款</label>
                     </fieldset>
                 </form>
             </div>
@@ -166,17 +142,6 @@
                     $(".body:eq(" + newIndex + ") .error", form).removeClass("error")
                 }
                 form.validate().settings.ignore = ":disabled,:hidden";
-                return form.valid()
-            }, onStepChanged: function (event, currentIndex, priorIndex) {
-                if (currentIndex === 2 && Number($("#age").val()) >= 18) {
-                    $(this).steps("next")
-                }
-                if (currentIndex === 2 && priorIndex === 3) {
-                    $(this).steps("previous")
-                }
-            }, onFinishing: function (event, currentIndex) {
-                var form = $(this);
-                form.validate().settings.ignore = ":disabled";
                 return form.valid()
             }, onFinished: function (event, currentIndex) {
                 var form = $(this);

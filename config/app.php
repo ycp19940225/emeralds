@@ -195,14 +195,21 @@ return [
         //debugbar
         Barryvdh\Debugbar\ServiceProvider::class,
 
-        App\Providers\UserServiceProvider::class,
 
 
         //Captcha
         Mews\Captcha\CaptchaServiceProvider::class,
 
         //jwt认证
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
+        /********************业务逻辑
+         */
+
+         //用户
+        App\Providers\UserServiceProvider::class,
+        //商品
+        App\Providers\GoodsServiceProvider::class,
     ],
 
     /*

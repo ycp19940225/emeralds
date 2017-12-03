@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\Admin\AdminLoginServicesImpl;
+use App\Services\Admin\AgentServicesImpl;
 use App\Services\Admin\PriServicesImpl;
 use App\Services\Admin\RoleServicesImpl;
 use App\Services\Admin\UserServicesImpl;
@@ -42,6 +43,10 @@ class UserServiceProvider extends ServiceProvider
         //登陆
         $this->app->singleton('App\Services\Ifs\Admin\AdminLoginServices',function(){
             return new AdminLoginServicesImpl();
+        });
+        //代理商
+        $this->app->singleton('App\Services\Ifs\Admin\AgentServices',function(){
+            return new AgentServicesImpl();
         });
     }
 }

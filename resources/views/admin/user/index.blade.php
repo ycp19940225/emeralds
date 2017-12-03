@@ -32,6 +32,7 @@
                                 <th>角色</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
+                                <th>状态</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -47,9 +48,22 @@
                                 </td>
                                 <td>{{ $v['created_at'] }}</td>
                                 <td>{{ $v['updated_at'] }}</td>
+                                <td>@if( $v['status'] == 0)
+                                        <span style="color: red">冻结</span>
+                                        @elseif($v['status'] == 1)
+                                        <span style="color: green">启用</span>
+                                    @endif</td>
                                 <td>
                                     <a class="btn btn-info btn-xs m-2 detail" href="{{ url('admin/admin/edit',['id'=>$v['id']]) }}" >编辑</a>
                                     <a href="JavaScript:void(0)" onclick="del({{ $v['id'] }})" class="btn btn-danger btn-xs m-2 delete" >删除</a>
+                                    @if( $v['status'] == 0)
+                                        <a href="JavaScript:void(0)" onclick="frozen('{{ $v['id'] }}',1)" class="btn btn-success btn-xs m-2 delete" >启用</a>
+
+                                    @elseif($v['status'] == 1)
+                                        <a href="JavaScript:void(0)" onclick="frozen('{{ $v['id']}}',0)" class="btn btn-default btn-xs m-2 delete" >冻结</a>
+
+                                    @endif
+
                                     <a href="{{ url('admin/role/addUser',['id'=>$v['id']]) }}" class="btn btn-success btn-xs m-2 delete" >角色</a>
                                 </td>
                             </tr>
@@ -123,6 +137,40 @@
                 console.log(data);
                 $.post("{{ url('admin/admin/delete') }}",data,function (res) {
                     console.log(res);
+                    if(res['code'] === 'success'){
+                        layer.msg(res['msg'],{icon: 6});
+                        setTimeout('location.href="{{ url('admin/admin/index') }}"',1000);
+                    }else{
+                        layer.msg(res['msg'],{icon:5});
+                    }
+                },"json");
+            });
+        }
+        /**
+         * 冻结账户
+         * @param i
+         */
+        function frozen(i,status) {
+            //询问框
+            var status_info = '';
+            if(status == '0'){
+                status_info = '冻结';
+            }
+            if(status == '1'){
+                status_info = '启用';
+            }
+            layer.confirm('是否'+status_info+'账户？', {
+                title:'确认操作',
+                btn: ['是','否'] //按钮
+            }, function(){
+                var _token =  "{{ csrf_token() }}";
+                var data = {
+                    id:i,
+                    _token: _token,
+                    status:status
+                };
+                console.log(data);
+                    $.post("{{ url('admin/admin/frozen') }}",data,function (res) {
                     if(res['code'] === 'success'){
                         layer.msg(res['msg'],{icon: 6});
                         setTimeout('location.href="{{ url('admin/admin/index') }}"',1000);

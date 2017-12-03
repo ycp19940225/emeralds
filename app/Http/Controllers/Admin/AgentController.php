@@ -10,16 +10,87 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Services\Ifs\Admin\AgentServices;
 use Illuminate\Http\Request;
 
 class AgentController extends controller
 {
+    protected $agent;
+
+    public function __construct(AgentServices $agentServices)
+    {
+        $this->agent=$agentServices;
+    }
+
+    /**
+     *  注册
+     */
     public function register()
     {
         return view('admin.agent.register');
     }
+
+    /**
+     *  注册 操作
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function doRegister(Request $request)
     {
-        return view('admin.agent.register');
+        $data=$request->input();
+        $agent_code = 'LYFC' .time().rand(1,9);
+        $data['agent_code']=$agent_code;
+        $data['status']=0;
+        if($this->agent->save($data)){
+            $status = '信息已提交，请等待工作人员审核！';
+        }
+        else{
+            $status = '提交失败！';
+        }
+        return redirect ('admin/login')->with('status',$status);
+    }
+
+    /**
+     * @name 代理商列表
+     * @desc
+     * @author ycp
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        $data = $this->agent->getAll();
+        return view('admin.agent.index',['data'=>$data,'title'=>'代理商列表']);
+    }
+
+    /**
+     * @name 代理商审核
+     * @desc
+     * @author ycp
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function editOperate(Request $request)
+    {
+        $data = $request->input();
+        $data['status'] = 1;
+        if($this->agent->update($data)){
+            return response()->json(msg('success','审核通过!'));
+        }
+        return response()->json(msg('error','审核失败！'));
+    }
+
+    /**
+     * @name 代理商删除
+     * @desc
+     * @author ycp
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete(Request $request)
+    {
+        if($this->agent->delete($request->input('id'))){
+            return response()->json(msg('success','删除成功!'));
+        } else
+            return response()->json(msg('error','删除失败!'));
     }
 }
