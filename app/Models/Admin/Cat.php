@@ -21,7 +21,7 @@ class Cat extends Base
      * 可以被集体赋值的表字段
      * @var array
      */
-    public $fillable = array('id','cat_name','parent_id','pic','created_at','updated_at','deleted_at');
+    public $fillable = array('id','cat_name','parent_id','goods_id','pic','created_at','updated_at','deleted_at');
 
     /**
      * 关联父分类下的子分类
@@ -37,6 +37,14 @@ class Cat extends Base
     public function parent_cat()
     {
         return $this->belongsTo('App\Models\Admin\Cat','parent_id','id');
+    }
+
+    /**
+     * 关联子分类下的属性
+     */
+    public function child_cat_attr()
+    {
+        return $this->hasMany('App\Models\Admin\Attr','cat_id','id');
     }
 
     public function add($data)

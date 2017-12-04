@@ -31,6 +31,15 @@ class Attr extends Model
 
     public function add($data)
     {
+        $attr = explode(',',preg_replace("/(\n)|(\s)|(\t)|(\')|(')|(，)|(、)/" ,',' ,$data['attr']));
+        $create_data['cat_id'] = $data['id'];
+        //删除原来的子分类
+        $this->where('cat_id',$data['id'])->delete();
+        foreach ($attr as $k=>$v){
+            $create_data['attr_name'] = $v;
+            $this->create($create_data);
+        }
+        return true;
     }
 
     public function edit($id)
