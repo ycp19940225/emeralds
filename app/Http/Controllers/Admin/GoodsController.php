@@ -11,19 +11,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\Common\UploadServicesImpl;
-use App\Services\Ifs\Admin\AttrServices;
 use App\Services\Ifs\Admin\CatServices;
+use App\Services\Ifs\Admin\GoodsServices;
 use Illuminate\Http\Request;
 
-class CatController extends controller
+class GoodsController extends controller
 {
+    protected $goods;
     protected $cat;
-    protected $attr;
 
-    public function __construct(CatServices $catServices,AttrServices $attrServices)
+    public function __construct(GoodsServices $goodsServices,CatServices $catServices)
     {
+        $this->goods=$goodsServices;
         $this->cat=$catServices;
-        $this->attr=$attrServices;
     }
 
     /**
@@ -34,8 +34,8 @@ class CatController extends controller
      */
     public function index()
     {
-        $data=$this->cat->getAll();
-        return view('admin.cat.index',['data'=>$data,'title'=>'分类列表']);
+        $data=$this->goods->getAll();
+        return view('admin.goods.index',['data'=>$data,'title'=>'翡翠列表']);
     }
 
     /**
@@ -46,7 +46,8 @@ class CatController extends controller
      */
     public function add()
     {
-        return view('admin.cat.edit',['title'=>'添加分类']);
+        $cat_data = $this->cat->getAll();
+        return view('admin.goods.edit',['cat_data'=>$cat_data,'title'=>'添加翡翠']);
     }
 
     /**
@@ -59,9 +60,9 @@ class CatController extends controller
     public function addOperate(Request $request)
     {
         $data = $request->input();
-        if($this->cat->save($data)){
-            $data=$data=$this->cat->getAll();
-            return view('admin.cat.index',['data'=>$data,'title'=>'分类列表','info'=>'添加成功！']);
+        if($this->goods->save($data)){
+            $data=$data=$this->goods->getAll();
+            return view('admin.goods.index',['data'=>$data,'title'=>'翡翠列表','info'=>'添加成功！']);
         }
         return back()->withInput()->with('error','添加失败！');
     }
@@ -75,11 +76,11 @@ class CatController extends controller
      */
     public function edit($id)
     {
-        $data = $this->cat->getOne($id);
-        $child_cat =array_column($data->child_cat->toArray(),'cat_name');
-        $child_cat = implode(',',$child_cat);
-        $data['child_cat'] = $child_cat;
-        return view('admin.cat.edit',['data'=>$data,'title'=>'添加分类']);
+        $data = $this->goods->getOne($id);
+        $child_goods =array_column($data->child_goods->toArray(),'goods_name');
+        $child_goods = implode(',',$child_goods);
+        $data['child_goods'] = $child_goods;
+        return view('admin.goods.edit',['data'=>$data,'title'=>'添加分类']);
     }
 
     /**
@@ -92,9 +93,9 @@ class CatController extends controller
     public function editOperate(Request $request)
     {
         $data = $request->input();
-        if($this->cat->update($data)){
-            $data=$data=$this->cat->getAll();
-            return view('admin.cat.index',['data'=>$data,'title'=>'分类列表','info'=>'编辑成功！']);
+        if($this->goods->update($data)){
+            $data=$data=$this->goods->getAll();
+            return view('admin.goods.index',['data'=>$data,'title'=>'分类列表','info'=>'编辑成功！']);
         }
         return back()->withInput()->with('error','修改失败！');
     }
@@ -108,40 +109,9 @@ class CatController extends controller
      */
     public function delete(Request $request)
     {
-        if($this->cat->delete($request->input('id'))){
+        if($this->goods->delete($request->input('id'))){
             return response()->json(msg('success','删除成功!'));
         } else
             return response()->json(msg('error','删除失败!'));
-    }
-
-    /**
-     * @name 获取子分类
-     * @desc
-     * @author ycp\
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getChild(Request $request)
-    {
-        $data = $this->cat->getOne($request->input('cat_id'));
-        $data = $data->child_cat->toArray();
-        foreach ($data as $k=>$v){
-            $attr = $this->cat->getOne($v['id'])->child_cat_attr;
-            $data[$k]['attr'] = $attr->toArray();
-        }
-      if($data){
-          return response()->json(msg('success','成功获取子分类!',$data));
-      }else{
-          return response()->json(msg('error','获取子分类失败!'));
-      }
-    }
-
-    /**
-     * @name 获取子分类下的属性
-     * @desc
-     * @author ycp\
-     */
-    public function getAttr()
-    {
-
     }
 }

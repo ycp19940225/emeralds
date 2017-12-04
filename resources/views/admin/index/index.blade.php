@@ -34,9 +34,6 @@
                         </div>
                     </li>
                     @include('admin.layouts.nav')
-
-
-
                 </ul>
             </div>
         </nav>

@@ -35,10 +35,16 @@ return [
             'icon'=>'ticket',
             'access'=>[
                 [
+                    'name'=>'翡翠列表',
+                    'access'=>'admin/goods/index',
+                    'icon'=>''
+                ],
+                [
                     'name'=>'分类列表',
                     'access'=>'admin/cat/index',
                     'icon'=>''
-                ]
+                ],
+
 
             ]
         ],

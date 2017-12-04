@@ -51,7 +51,7 @@ class Cat extends Base
     {
         $res_data = $this->create($data);
         $create_data['parent_id'] = $res_data->id;
-        $child_name = explode(',',preg_replace("/(\n)|(\s)|(\t)|(\')|(')|(，)/" ,',' ,$data['child_name']));
+        $child_name = explode(',',replace_others($data['child_name']));
         foreach ($child_name as $k=>$v){
             $create_data['cat_name'] = $v;
             $this->create($create_data);
@@ -68,7 +68,7 @@ class Cat extends Base
     public function edit($data)
     {
         $this->find($data['id'])->update($data);
-        $child_name = explode(',',preg_replace("/(\n)|(\s)|(\t)|(\')|(')|(，)/" ,',' ,$data['child_name']));
+        $child_name = explode(',',replace_others($data['child_name']));
         //删除原来的子分类
         $this->where('parent_id',$data['id'])->delete();
         $create_data['parent_id'] = $data['id'];
@@ -81,11 +81,11 @@ class Cat extends Base
 
     public function getAll()
     {
-        return $this->where('deleted_at',0)->with('child_cat')->get();
+        return $this->where('deleted_at',0)->with('child_cat')->with('child_cat_attr')->get();
     }
 
     public function find($id)
     {
-        return $this->where('deleted_at',0)->find($id);
+        return $this->where('deleted_at',0)->with('child_cat')->find($id);
     }
 }

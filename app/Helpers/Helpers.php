@@ -209,5 +209,17 @@ if ( ! function_exists('loadStaticImg'))
         return Request::root().'/uploads/'.$file;
     }
 }
+/**
+ * 去除输入框空格，回车，替换中文逗号
+ *
+ * @param string $file 所要加载的资源
+ */
+if ( ! function_exists('replace_others'))
+{
+    function replace_others($data)
+    {
+        return preg_replace("/(\n)|(\s)|(\t)|(\')|(')|(，)|(、)/" ,',' ,$data);
+    }
+}
 
 

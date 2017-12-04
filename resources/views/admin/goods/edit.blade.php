@@ -25,17 +25,29 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
-                                <label for="name" class="col-xs-4 control-label">分类名</label>
+                                <label for="name" class="col-xs-4 control-label">翡翠名</label>
                                 <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="cat_name" name="cat_name" value="{{ $data['cat_name'] or ''}}" placeholder="请输入分类名" required>
+                                    <input type="text" class="form-control" id="goods_name" name="goods_name" value="{{ $data['goods_name'] or ''}}" placeholder="请输入翡翠名" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-xs-4 control-label">二级分类</label>
-                                <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="cat_name" name="child_name" value="{{ $data['child_cat'] or ''}}" placeholder="请输入属性" required>
+                                <label for="name" class="col-xs-4 control-label">分类</label>
+                                <div class="col-xs-3">
+                                    <select name="cat_id" id="cat" class="form-control">
+                                        <option value=''>请选择分类--</option>
+                                        @foreach($cat_data as $cat)
+                                            @if($cat['parent_id'] == 0)
+                                            <option value="{{ $cat->id }}">{{ $cat->cat_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <span class="help-block m-b-none">请输入属性，以逗号或者顿号隔开</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">选择属性值</label>
+                                <div class="col-xs-3 " id="attr_list">
+
+                                </div>
                             </div>
                           {{-- <div class="form-group">
                                 <label for="password" class="col-xs-4 control-label">分类图片</label>
@@ -108,17 +120,39 @@
             var method = "{{ Route::current()->getActionMethod() }}";
             var url ='';
             if(method === 'edit'){
-                url = '{{url('admin/cat/editOperate')}}';
+                url = '{{url('admin/goods/editOperate')}}';
                 $("form").attr('action',url)
             }else{
-                url = '{{url('admin/cat/addOperate')}}';
+                url = '{{url('admin/goods/addOperate')}}';
                 $("form").attr('action',url);
             }
-            $("#add_attr").click(function () {
-                var add_id = Math.random() ;
-                var that = $("#attr_group");
-                var html = that.clone(true).attr('id','attr_group' + add_id);
-                that.after(html);
+            $("#cat").change(function () {
+                $("#attr_list").empty();
+                var that = $(this);
+                var cat_id = that.val();
+                var data = {
+                  'cat_id':cat_id,
+                   _token:'{{ csrf_token() }}'
+                };
+                $.post('{{ url('admin/cat/getChild') }}',data,function (res) {
+                    if(res['code'] === 'success'){
+                        $.each(res['data'],function (i,v) {
+                            var html = '';
+                            var option = '';
+                            var num=0;
+                            var attr = v['attr'];
+                            for(num;num<attr.length;num++){
+                                option +='<option value="'+attr[num]['id']+'">'+attr[num]['attr_name']+'</option>';
+                            }
+                            html = ' <select name="goods_attr[]" class="form-control" id="cat_child_'+v['id']+'">'+
+                                    '<option value="">请选择'+v['cat_name']+'--</option>'+option+
+                                    '</select>';
+                            $("#attr_list").append(html);
+                        });
+                    }else{
+                        layer.msg(res['msg'],{icon:5});
+                    }
+                });
             });
         });
     </script>

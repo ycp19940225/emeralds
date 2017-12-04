@@ -38,7 +38,7 @@ class AttrController extends controller
         $child_cat_attr = array_column($data->child_cat_attr->toArray(),'attr_name');
         $child_cat_attr = implode(',',$child_cat_attr);
         $data['child_cat_attr'] = $child_cat_attr;
-        return view('admin.attr.index',['data'=>$data,'title'=>'编辑分类属性']);
+        return view('admin.attr.index',['data'=>$data,'title'=>'编辑分类属性','info'=>'属性编辑成功！']);
     }
 
     /**
@@ -52,7 +52,7 @@ class AttrController extends controller
         $data = $request->input();
         if($this->attr->save($data)){
             $data=$data=$this->cat->getAll();
-            return view('admin.cat.index',['data'=>$data,'title'=>'分类列表']);
+            return view('admin.cat.index',['data'=>$data,'title'=>'分类列表','info'=>'属性编辑成功！']);
         }
         return back()->withInput()->with('error','添加失败！');
     }

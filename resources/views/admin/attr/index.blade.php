@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-xs-4 control-label">当前二级分类</label>
+                                <label for="name" class="col-xs-4 control-label">当前属性</label>
                                 <div class="col-xs-4">
                                     <input type="text" class="form-control" id="" name="" value="{{ $data->cat_name or ''}}" disabled>
                                 </div>
@@ -61,10 +61,11 @@
                                 <label for="attr_name" class="col-xs-3 control-label"></label>
                                 <label for="attr_val" class="col-xs-1 control-label">属性值</label>
                                 <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="attr_val" name="attr" value="{{ $data['child_cat_attr'] or '' }}" placeholder="请输入属性值，以逗号隔开" required>
+                                    <input type="text" class="form-control" id="attr_val" name="attr" value="{{ $data['child_cat_attr'] or '' }}" placeholder="请输入属性值" required>
+                                    <span class="help-block m-b-none">请输入属性值，以逗号或者顿号隔开</span>
                                 </div>
                                 <div class="col-xs-1">
-                                    <button type="button" class="btn btn-sm btn-danger" id="delete_attr">删除属性</button>
+                                    <button type="button" class="btn btn-sm btn-danger" id="delete_attr">删除属性值</button>
                                 </div>
                             </div>
                             <div class="col-md-offset-5" >

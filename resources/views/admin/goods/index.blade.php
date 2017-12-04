@@ -8,7 +8,7 @@
     <!-- begin page-header -->
     <h1 class="page-header">
         <small>
-            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/cat/add' ">添加分类</button>
+            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/goods/add' ">添加翡翠</button>
         </small>
     </h1>
     <div class="row">
@@ -30,8 +30,13 @@
                         <table id="data-table" class="table table-hover table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th>分类名</th>
-                                <th>属性</th>
+                                <th>翡翠名</th>
+                                <th>分类</th>
+                                <th>二级分类</th>
+                                <th>封面图</th>
+                                <th>价格</th>
+                                <th>库存</th>
+                                <th>状态</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
                                 <th>操作</th>
@@ -39,13 +44,20 @@
                             </thead>
                             <tbody>
                             @foreach($data as $k=>$v)
-                                @if($v['parent_id'] == 0)
                                 <tr>
                                     <td>{{ $v['cat_name'] }}</td>
                                     <td>
-                                        @foreach($v->child_cat as $child_cat)
-                                            <a href="{{ url('admin/attr/edit',['cat_id'=>$child_cat->id]) }}" style="color: red" title="点击编辑属性">{{ $child_cat['cat_name'] }}</a>
-                                        @endforeach
+
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
                                     </td>
                                     <td>{{ $v['created_at'] }}</td>
                                     <td>{{ $v['updated_at'] }}</td>
@@ -54,7 +66,6 @@
                                         <a href="JavaScript:void(0)" onclick="del({{ $v['id'] }})" class="btn btn-danger btn-xs m-2 delete" >删除</a>
                                     </td>
                                 </tr>
-                                @endif
                             @endforeach
                             </tbody>
                         </table>
