@@ -76,10 +76,10 @@
                             <br>
 
                             <div class="form-group " >
-                                <label for="name" class="col-xs-3 control-label">相册列表</label>
+                                <label for="name" class="col-xs-4 control-label">相册列表</label>
                             </div>
                             <div class="form-group " id="pic_group">
-                                <div style="width: 100%;height: 100vh;position: relative;">
+                                <div style="width: 100%;position: relative;">
                                     <div id="upBox">
                                         <div id="inputBox">
                                             <input type="file" title="请选择图片" id="file"  multiple=""  accept="image/png,image/jpg,image/gif,image/JPEG">点击选择图片</div>
@@ -88,6 +88,22 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">视频</label>
+                                <div class="col-xs-4">
+                                    <div class="form-group " id="aetherupload-wrapper" ><!--组件最外部需要有一个名为aetherupload-wrapper的id，用以包装组件-->
+                                        <div class="controls" >
+                                            <input type="file" id="file"  onchange="aetherupload(this,'file').success(getVideoUrl).upload()"/><!--需要有一个名为file的id，用以标识上传的文件，video(file,group)中第二个参数为分组名，success方法可用于声名上传成功后的回调方法名-->
+                                            <div class="progress " style="height: 6px;margin-bottom: 2px;margin-top: 10px;width: 200px;">
+                                                <div id="progressbar" style="background:blue;height:6px;width:0;"></div><!--需要有一个名为progressbar的id，用以标识进度条-->
+                                            </div>
+                                            <span style="font-size:12px;color:#aaa;" id="output">等待上传</span><!--需要有一个名为output的id，用以标识提示信息-->
+                                            <input type="hidden" name="video" id="savedpath" ><!--需要有一个名为savedpath的id，用以标识文件保存路径的表单字段，还需要一个任意名称的name-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="result"></div>
                             <div class="col-md-offset-5" >
                                 <button type="submit" class="btn btn-success m-2" id="submit" name="repass">保存</button>
                                 <button type="reset" class="btn btn-success m-2" id="reset" name="repass">重置</button>
@@ -105,6 +121,9 @@
 @section('admin.page.js')
     <script src="{{ loadStatic('admin/js/extend/upload.js') }}"></script>
     <script src="{{ loadStatic('admin/js/extend/uploadImg.js') }}"></script>
+    {{--大文件上传组件--}}
+    <script src="{{ URL::asset('js/spark-md5.min.js') }}"></script><!--需要引入spark-md5.min.js-->
+    <script src="{{ URL::asset('js/aetherupload.js') }}"></script><!--需要引入aetherupload.js-->
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
@@ -148,7 +167,9 @@
                     }
                 });
             });
-
+            /**
+             * 相册
+             */
             imgUpload({
                 inputId:'file', //input框id
                 imgBox:'imgBox', //图片容器id
@@ -157,7 +178,14 @@
                 data:'goods_pic[]', //参数名
                 maxCount:9,//最大上传数量
                 fileFormat:[]//文件格式
-            })
+            });
+
+            getVideoUrl = function(){
+                // Example
+                $('#result').append(
+                    '<p>原文件名：<span >'+this.fileName+'</span> | 原文件大小：<span >'+parseFloat(this.fileSize / (1000 * 1000)).toFixed(2) + 'MB'+'</span> | 储存文件名：<span >'+this.savedPath.substr(this.savedPath.lastIndexOf('/') + 1)+'</span></p>'
+                );
+            }
         });
     </script>
     @endsection

@@ -210,6 +210,8 @@ return [
         App\Providers\UserServiceProvider::class,
         //商品
         App\Providers\GoodsServiceProvider::class,
+        //大文件上传
+        AetherUpload\AetherUploadServiceProvider::class
     ],
 
     /*

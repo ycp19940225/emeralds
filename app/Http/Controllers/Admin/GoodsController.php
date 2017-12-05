@@ -15,6 +15,7 @@ use App\Services\Ifs\Admin\CatServices;
 use App\Services\Ifs\Admin\GoodsServices;
 use App\Services\Ifs\Common\UploadServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GoodsController extends controller
 {
@@ -61,7 +62,7 @@ class GoodsController extends controller
     public function addOperate(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
         $data = $request->input();
-        $logo = $uploadServicesImpl->uploadImg('goods_logo',$request->file('logo'));
+        $logo = $uploadServicesImpl->uploadImg('logo',$request->file('logo'));
         $data['logo'] = $logo;
         $data['pic'] =  implode(',',$data['pic']);
         if($this->goods->save($data)){
