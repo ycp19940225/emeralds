@@ -19,3 +19,4 @@ Route::get('/goods/index','GoodsController@index');
 Route::get('/goods/edit/{id}','GoodsController@edit')->where('id', '[0-9]+');
 Route::post('/goods/editOperate','GoodsController@editOperate');
 Route::post('/goods/delete','GoodsController@delete');
+Route::post('/goods/uploadImg','GoodsController@uploadImg');

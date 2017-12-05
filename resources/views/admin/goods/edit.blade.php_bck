@@ -1,9 +1,5 @@
 @extends('admin.layouts.layouts')
-@section('admin.page.css')
-    <link href="{{ loadStatic('admin/css/upload_img/img.css') }}" rel="stylesheet" />
-    @endsection
 @section('admin.page.content')
-
     <ol class="breadcrumb pull-left">
         <li><a href="javascript:;">Home</a></li>
         <li class="active">{{ $title }}</li>
@@ -67,25 +63,37 @@
                                     @endif
                                 <p>
                                     <a href="javascript:;" class="file">
-                                        <input type="file" id="image-file" name="logo">
+                                        <input type="file" id="image-file" name="pic">
                                     </a>
                                 </p>
                                 <p id="file-info"></p>
                                 </div>
                             </div>
                             <br>
-
+                            <div class="form-group" id="">
+                                <label for="name" class="col-xs-4 control-label">
+                                    <button type="button" class="btn btn-info" id="add_pic">添加相册</button>
+                                </label>
+                                <div class="col-xs-4">
+                                </div>
+                            </div>
                             <div class="form-group " >
                                 <label for="name" class="col-xs-3 control-label">相册列表</label>
                             </div>
                             <div class="form-group " id="pic_group">
-                                <div style="width: 100%;height: 100vh;position: relative;">
-                                    <div id="upBox">
-                                        <div id="inputBox">
-                                            <input type="file" title="请选择图片" id="file"  multiple=""  accept="image/png,image/jpg,image/gif,image/JPEG">点击选择图片</div>
-                                        <div id="imgBox"></div>
-                                        <button type="button" id="btn">上传</button>
+                                <label for="name" class="col-xs-3 control-label"></label>
+                                <div class="col-xs-2">
+                                    <div class="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
+                                        <img class="img" src="" alt="" style="width:100px; height: 100px;">
                                     </div>
+                                    图片
+                                    <a href="javascript:;" class="file">
+                                        <input type="file" class="image-file" id="pic" name="pic[]">
+                                    </a>
+                                    <p class="file-info"></p>
+                                </div>
+                                <div class="col-xs-1">
+                                    <button type="button" class="btn btn-sm btn-danger" id="delete_pic">删除图片</button>
                                 </div>
                             </div>
                             <div class="col-md-offset-5" >
@@ -104,13 +112,11 @@
 @endsection
 @section('admin.page.js')
     <script src="{{ loadStatic('admin/js/extend/upload.js') }}"></script>
-    <script src="{{ loadStatic('admin/js/extend/uploadImg.js') }}"></script>
+    <script src="{{ loadStatic('admin/js/extend/upload_more.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $.ajaxSetup({
-                headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' }
-            });
             upload.init();
+            upload_more.init();
             var method = "{{ Route::current()->getActionMethod() }}";
             var url ='';
             if(method === 'edit'){
@@ -148,16 +154,20 @@
                     }
                 });
             });
-
-            imgUpload({
-                inputId:'file', //input框id
-                imgBox:'imgBox', //图片容器id
-                buttonId:'btn', //提交按钮id
-                upUrl:'{{ url('admin/goods/uploadImg') }}',  //提交地址
-                data:'goods_pic[]', //参数名
-                maxCount:9,//最大上传数量
-                fileFormat:[]//文件格式
-            })
+            $("#add_pic").click(function () {
+                var add_id = Math.random() ;
+                var that = $("#pic_group");
+                var html = that.clone(true).attr('id','pic_group' + add_id);
+                that.after(html);
+            });
+            $("#delete_pic").click(function () {
+                var that = $(this).parent().parent("[id^=pic_group]");
+                if(that.attr('id') == 'pic_group'){
+                    layer.msg('请保留第一张图片！');
+                    return false;
+                }
+                $(this).parent().parent("[id^=pic_group]").remove();
+            });
         });
     </script>
     @endsection

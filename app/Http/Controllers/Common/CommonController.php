@@ -71,9 +71,9 @@ class CommonController extends controller
      * @param UploadServicesImpl $uploadServicesImpl
      * @return mixed
      */
-    public function upLogo(Request $request, UploadServicesImpl $uploadServicesImpl)
+    public function upLogo(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
-        $img_path = $uploadServicesImpl->uploadImg($request->file('logo'));
+        $img_path = $uploadServicesImpl->uploadImg('user_info',$request->file('logo'));
         if($this->user->updateUser(['id'=>SC::getLoginSession()->id,'logo'=>$img_path])){
             return redirect('/admin')->with('status','修改成功！');
         }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Common\UploadServicesImpl;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +27,10 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
+
+        //商品
+        $this->app->singleton('App\Services\Ifs\Admin\UploadServices',function(){
+            return new UploadServicesImpl();
+        });
     }
 }

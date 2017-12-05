@@ -21,10 +21,10 @@ class UploadServicesImpl implements UploadServices
         $this->disk = Storage::disk('public');
     }
 
-    public function uploadImg($uploadFiles)
+    public function uploadImg($file_name,$uploadFiles)
     {
-        $time = date('Y/m/d');
-        $filename = $this->disk->put($time, $uploadFiles);//上传
+        $time = date('Y-m-d');
+        $filename = $this->disk->put($file_name.'/'.$time, $uploadFiles);//上传
         if(!$filename) {
             return false;
         }

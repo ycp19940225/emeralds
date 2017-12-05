@@ -11,5 +11,5 @@ use Illuminate\Http\Request;
 
 interface UploadServices
 {
-    public function uploadImg($uploadFiles);
+    public function uploadImg($file_name,$uploadFiles);
 }

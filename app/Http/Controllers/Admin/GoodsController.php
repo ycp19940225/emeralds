@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Common\UploadServicesImpl;
 use App\Services\Ifs\Admin\CatServices;
 use App\Services\Ifs\Admin\GoodsServices;
+use App\Services\Ifs\Common\UploadServices;
 use Illuminate\Http\Request;
 
 class GoodsController extends controller
@@ -57,9 +58,12 @@ class GoodsController extends controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function addOperate(Request $request)
+    public function addOperate(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
         $data = $request->input();
+        $logo = $uploadServicesImpl->uploadImg('goods_logo',$request->file('logo'));
+        $data['logo'] = $logo;
+        $data['pic'] =  implode(',',$data['pic']);
         if($this->goods->save($data)){
             $data=$data=$this->goods->getAll();
             return view('admin.goods.index',['data'=>$data,'title'=>'翡翠列表','info'=>'添加成功！']);
@@ -101,7 +105,7 @@ class GoodsController extends controller
     }
 
     /**
-     * @name 分类删除
+     * @name 商品删除
      * @desc
      * @author ycp
      * @param Request $request
@@ -113,5 +117,22 @@ class GoodsController extends controller
             return response()->json(msg('success','删除成功!'));
         } else
             return response()->json(msg('error','删除失败!'));
+    }
+
+    /**
+     * @name 上传翡翠相册
+     * @author ycp
+     * @internal param UploadServices $uploadServices
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function uploadImg(Request $request,UploadServicesImpl $uploadServicesImpl)
+    {
+        $pics = $request->file('goods_pic');
+        $pic_data = [];
+        foreach($pics as $k=>$v){
+            $img_path = $uploadServicesImpl->uploadImg('goods_pic',$v);
+            $pic_data[] =$img_path;
+        }
+        return response()->json(msg('success','相册上传成功!',$pic_data));
     }
 }
