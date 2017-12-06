@@ -222,4 +222,16 @@ if ( ! function_exists('replace_others'))
     }
 }
 
+/**
+ * 生成编码
+ *
+ */
+if ( ! function_exists('generate_code'))
+{
+    function generate_code($pre)
+    {
+        return $pre.time();
+    }
+}
+
 

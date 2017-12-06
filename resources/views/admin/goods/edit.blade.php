@@ -1,6 +1,8 @@
 @extends('admin.layouts.layouts')
 @section('admin.page.css')
     <link href="{{ loadStatic('admin/css/upload_img/img.css') }}" rel="stylesheet" />
+    <link href="{{ loadStatic('admin/css/plugins/summernote/summernote.css') }}" rel="stylesheet" />
+    <link href="{{ loadStatic('admin/css/plugins/summernote/summernote-bs3.css') }}" rel="stylesheet" />
     @endsection
 @section('admin.page.content')
 
@@ -73,8 +75,40 @@
                                 <p id="file-info"></p>
                                 </div>
                             </div>
-                            <br>
 
+                            <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">价格</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="price" name="price" value="{{ $data['price'] or ''}}" placeholder="请输入价格" required>
+                                </div>
+                                <span class="help-block m-b-none"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">库存</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="stock" name="stock" value="{{ $data['stock'] or 1}}" placeholder="请输入库存" required>
+                                </div>
+                                <span class="help-block m-b-none"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">翡翠详细描述</label>
+                                <div class="col-xs-4">
+                                    <div id="goods_detail">
+
+                                    </div>
+
+                                    <button  class="btn btn-primary" onclick="goods_detail_save()" type="button">保存</button>
+                                </div>
+                                <span class="help-block m-b-none" style="color: red">请编辑翡翠介绍，完成后记得点击保存按钮</span>
+
+                            </div>
+
+
+                            <br>
                             <div class="form-group " >
                                 <label for="name" class="col-xs-4 control-label">相册列表</label>
                             </div>
@@ -85,6 +119,7 @@
                                             <input type="file" title="请选择图片" id="file"  multiple=""  accept="image/png,image/jpg,image/gif,image/JPEG">点击选择图片</div>
                                         <div id="imgBox"></div>
                                         <button type="button" id="btn">上传</button>
+                                        <span class="help-block m-b-none" style="color: red">请上传相册，完成后记得点击上传按钮</span>
                                     </div>
                                 </div>
                             </div>
@@ -101,9 +136,9 @@
                                             <input type="hidden" name="video" id="savedpath" ><!--需要有一个名为savedpath的id，用以标识文件保存路径的表单字段，还需要一个任意名称的name-->
                                         </div>
                                     </div>
+                                    <div id="result"></div>
                                 </div>
                             </div>
-                            <div id="result"></div>
                             <div class="col-md-offset-5" >
                                 <button type="submit" class="btn btn-success m-2" id="submit" name="repass">保存</button>
                                 <button type="reset" class="btn btn-success m-2" id="reset" name="repass">重置</button>
@@ -124,6 +159,10 @@
     {{--大文件上传组件--}}
     <script src="{{ URL::asset('js/spark-md5.min.js') }}"></script><!--需要引入spark-md5.min.js-->
     <script src="{{ URL::asset('js/aetherupload.js') }}"></script><!--需要引入aetherupload.js-->
+    {{--文本编辑器--}}
+    <script src="{{ loadStatic('admin/js/content.min.js') }}"></script>
+    <script src="{{ loadStatic('admin/js/plugins/summernote/summernote.min.js') }}"></script>
+    <script src="{{ loadStatic('admin/js/plugins/summernote/summernote-zh-CN.js') }}"></script>
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
@@ -180,12 +219,44 @@
                 fileFormat:[]//文件格式
             });
 
-            getVideoUrl = function(){
-                // Example
-                $('#result').append(
-                    '<p>原文件名：<span >'+this.fileName+'</span> | 原文件大小：<span >'+parseFloat(this.fileSize / (1000 * 1000)).toFixed(2) + 'MB'+'</span> | 储存文件名：<span >'+this.savedPath.substr(this.savedPath.lastIndexOf('/') + 1)+'</span></p>'
-                );
-            }
+            /**
+             * 文本编辑
+             */
+            $("#goods_detail").summernote({
+                lang:"zh-CN",
+                height:250,
+                minHeight: 250,
+                maxHeight: 250,
+                focus:true,
+                placeholder: '请填写翡翠详细信息...',
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+            });
         });
+        /**
+         *翡翠详情保存
+         */
+        function goods_detail_save() {
+            var markup = $('#goods_detail').code();
+            var html = '<textarea style="display: none" name="goods_detail" value="'+markup+'" />';
+            console.log(html);
+            $("form").append(html);
+            layer.msg('保存成功！',{icon: 6});
+        }
+        var getVideoUrl = function(){
+            // Example
+            $('#result').append(
+                '<p>原文件名：<span >'+this.fileName+'</span> | 原文件大小：<span >'+parseFloat(this.fileSize / (1000 * 1000)).toFixed(2) + 'MB'+'</span> | 储存文件名：<span >'+this.savedPath.substr(this.savedPath.lastIndexOf('/') + 1)+'</span></p>'
+            );
+            var html = '';
+            var url = this.savedPath.substr(this.savedPath.lastIndexOf('/') + 1);
+            html = '<input type="hidden" name="video" value="'+url+'" />';
+            $("form").append(html);
+        }
     </script>
     @endsection

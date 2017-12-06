@@ -65,6 +65,7 @@ class GoodsController extends controller
         $logo = $uploadServicesImpl->uploadImg('logo',$request->file('logo'));
         $data['logo'] = $logo;
         $data['pic'] =  implode(',',$data['pic']);
+        $data['goods_code'] =  generate_code('LY');
         if($this->goods->save($data)){
             $data=$data=$this->goods->getAll();
             return view('admin.goods.index',['data'=>$data,'title'=>'翡翠列表','info'=>'添加成功！']);
