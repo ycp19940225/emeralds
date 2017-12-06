@@ -44,6 +44,11 @@ return [
                     'access'=>'admin/cat/index',
                     'icon'=>''
                 ],
+                [
+                    'name'=>'属性列表',
+                    'access'=>'admin/attr/index',
+                    'icon'=>''
+                ],
 
 
             ]

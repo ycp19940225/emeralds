@@ -22,7 +22,7 @@ class AttrServicesImpl implements AttrServices
 
     public function getAll()
     {
-        return $this->attrDao->getAll();
+        return $this->attrDao->All();
     }
 
     public function getOne($id)
@@ -43,5 +43,10 @@ class AttrServicesImpl implements AttrServices
     public function delete($id)
     {
         return $this->attrDao->where('id',$id)->update(['deleted_at'=>1]);
+    }
+
+    public function add_batch($data)
+    {
+        return $this->attrDao->add_batch($data);
     }
 }

@@ -8,7 +8,7 @@
     <!-- begin page-header -->
     <h1 class="page-header">
         <small>
-            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" javascript:history.go(-1) ">返回列表</button>
+            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/role/add' ">添加角色</button>
         </small>
     </h1>
     <div class="row">
@@ -20,73 +20,71 @@
                     <h4 class="panel-title">{{ $title }}</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="row">
-                        <form action="{{ url('admin/attr/editOperate') }}" class="form-horizontal form_need_validate" role="form" method="post" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
-                                <label for="name" class="col-xs-4 control-label">当前一级分类</label>
-                                <div class="col-xs-4">
-                                   <input type="text" class="form-control" id="" name="" value="{{ $data->parent_cat->cat_name or ''}}" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="name" class="col-xs-4 control-label">当前属性</label>
-                                <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="" name="" value="{{ $data->cat_name or ''}}" disabled>
-                                </div>
-                            </div>
-                         {{-- <div class="form-group">
-                                <label for="password" class="col-xs-4 control-label">分类图片</label>
-                                <div class="col-xs-4">
-                                    @if(Route::current()->getActionMethod() == 'add')
-                                <div id="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
-                                    <img id="img" src="" alt="" style="width:100px; height: 100px;">
-                                </div>
-                                        @else
-                                        <div id="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
-                                            <img id="img" src="{{ loadStaticImg($data['pic']) }}" alt="" style="width:100px; height: 100px;">
-                                        </div>
-                                    @endif
-                                <p>
-                                    <a href="javascript:;" class="file">
-                                        <input type="file" id="image-file" name="pic">
-                                    </a>
-                                </p>
-                                <p id="file-info"></p>
-                                </div>
-                            </div>--}}
-                            <br>
-                            <div class="form-group " id="attr_group">
-                                <label for="attr_name" class="col-xs-3 control-label"></label>
-                                <label for="attr_val" class="col-xs-1 control-label">属性值</label>
-                                <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="attr_val" name="attr" value="{{ $data['child_cat_attr'] or '' }}" placeholder="请输入属性值" required>
-                                    <span class="help-block m-b-none">请输入属性值，以逗号或者顿号隔开</span>
-                                </div>
-                                <div class="col-xs-1">
-                                    <button type="button" class="btn btn-sm btn-danger" id="delete_attr">删除属性值</button>
-                                </div>
-                            </div>
-                            <div class="col-md-offset-5" >
-                                <button type="submit" class="btn btn-success m-2" id="submit" name="repass">保存</button>
-                                <button type="reset" class="btn btn-success m-2" id="reset" name="repass">重置</button>
-                            </div>
-                        </form>
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-hover table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>属性值</th>
+                                <th>创建时间</th>
+                                <th>修改时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($data as $k=>$v)
+                            <tr>
+                                <td>{{ $v['id'] }}</td>
+                                <td>{{ $v['attr_name'] }}</td>
+                                <td>{{ $v['created_at'] }}</td>
+                                <td>{{ $v['updated_at'] }}</td>
+                                <td>
+                                    <a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/attr/edit',['id'=>$v['id']]) }}" >编辑</a>
+                                    <a href="JavaScript:void(0)" onclick="del({{ $v['id'] }})" class="btn btn-danger btn-xs m-2 delete" >删除</a>
+                                </td>
+                            </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-
                 </div>
             </div>
             <!-- end panel -->
         </div>
         <!-- end col-12 -->
     </div>
+
+@endsection
+@section('page.js')
 @endsection
 @section('admin.page.js')
-    <script src="{{ loadStatic('admin/js/extend/upload.js') }}"></script>
     <script>
-        $(document).ready(function() {
-
-        });
+        /**
+         * 删除
+         * @param i
+         */
+        function del(i) {
+            //询问框
+            layer.confirm('是否删除？', {
+                title:'确认操作',
+                btn: ['是','否'] //按钮
+            }, function(){
+                var _token =  "{{ csrf_token() }}";
+                var data = {
+                    id:i,
+                    _token: _token
+                };
+                console.log(data);
+                $.post("{{ url('admin/attr/delete') }}",data,function (res) {
+                    console.log(res);
+                    if(res['code'] === 'success'){
+                        layer.msg(res['msg'],{icon: 6});
+                        setTimeout('location.href="{{ url('admin/role/index') }}"',1000);
+                    }else{
+                        layer.msg(res['msg'],{icon:5});
+                    }
+                },"json");
+            });
+        }
     </script>
     @endsection

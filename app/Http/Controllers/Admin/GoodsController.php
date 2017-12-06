@@ -29,7 +29,7 @@ class GoodsController extends controller
     }
 
     /**
-     * @name 分类列表
+     * @name 翡翠列表
      * @desc
      * @author ycp
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -41,8 +41,8 @@ class GoodsController extends controller
     }
 
     /**
-     * @name 添加分类页面
-     * @desc 添加分类
+     * @name 添加翡翠页面
+     * @desc 添加翡翠
      * @author ycp
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -57,7 +57,6 @@ class GoodsController extends controller
      * @desc
      * @author ycp
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function addOperate(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
@@ -66,6 +65,9 @@ class GoodsController extends controller
         $data['logo'] = $logo;
         $data['pic'] =  implode(',',$data['pic']);
         $data['goods_code'] =  generate_code('LY');
+        if(!isset($data['goods_detail'])){
+            $data['goods_detail']= '';
+        }
         if($this->goods->save($data)){
             $data=$data=$this->goods->getAll();
             return view('admin.goods.index',['data'=>$data,'title'=>'翡翠列表','info'=>'添加成功！']);

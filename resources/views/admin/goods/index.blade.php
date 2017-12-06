@@ -32,7 +32,7 @@
                             <tr>
                                 <th>翡翠名</th>
                                 <th>分类</th>
-                                <th>二级分类</th>
+                                <th>属性</th>
                                 <th>封面图</th>
                                 <th>价格</th>
                                 <th>库存</th>
@@ -45,21 +45,13 @@
                             <tbody>
                             @foreach($data as $k=>$v)
                                 <tr>
-                                    <td>{{ $v['cat_name'] }}</td>
+                                    <td>{{ $v['goods_name'] }}</td>
+                                    <td>{{ $v->cat->cat_name }}</td>
                                     <td>
-
+                                        @foreach($v->attr as $attr)
+                                            {{ $attr->attr_name }}
+                                            @endforeach
                                     </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>{{ $v['created_at'] }}</td>
                                     <td>{{ $v['updated_at'] }}</td>
                                     <td>
                                         <a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/cat/edit',['id'=>$v['id']]) }}" >编辑</a>

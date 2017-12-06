@@ -9,7 +9,6 @@
 namespace App\Models\Admin;
 
 
-use Illuminate\Http\Request;
 use App\Models\Base;
 
 class Cat extends Base

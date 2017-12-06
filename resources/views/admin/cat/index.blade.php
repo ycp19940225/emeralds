@@ -31,7 +31,7 @@
                             <thead>
                             <tr>
                                 <th>分类名</th>
-                                <th>属性</th>
+                                <th>属性<span style="color: red">(点击属性,可以批量添加属性值)</span></th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
                                 <th>操作</th>
@@ -44,7 +44,7 @@
                                     <td>{{ $v['cat_name'] }}</td>
                                     <td>
                                         @foreach($v->child_cat as $child_cat)
-                                            <a href="{{ url('admin/attr/edit',['cat_id'=>$child_cat->id]) }}" style="color: red" title="点击编辑属性">{{ $child_cat['cat_name'] }}</a>
+                                            <a href="{{ url('admin/attr/addBatch',['cat_id'=>$child_cat->id]) }}" style="color: red" title="点击批量添加属性值">{{ $child_cat['cat_name'] }}</a>
                                         @endforeach
                                     </td>
                                     <td>{{ $v['created_at'] }}</td>

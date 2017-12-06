@@ -20,4 +20,6 @@ interface AttrServices
     public function update($id);
     //删除
     public function delete($id);
+    //批量添加
+    public function add_batch($data);
 }

@@ -9,7 +9,6 @@
 namespace App\Models\Admin;
 
 
-use Illuminate\Http\Request;
 use App\Models\Base;
 
 class Goods extends Base
@@ -24,6 +23,13 @@ class Goods extends Base
     public $fillable = array('id','goods_code','pic','video','goods_detail','price',
         'sort','is_hot','cat_id','agent_id','stock','status','logo','goods_name',
         'created_at','updated_at','deleted_at');
+    /**
+     * 关联商品下的分类
+     */
+    public function Cat()
+    {
+        return $this->belongsTo('App\Models\Admin\Cat','cat_id','id');
+    }
 
     /**
      * 关联商品下的属性

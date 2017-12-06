@@ -9,8 +9,12 @@ Route::post('/cat/delete','CatController@delete');
 Route::post('/cat/getChild','CatController@getChild');
 Route::post('/cat/getAttr','CatController@getAttr');
 //属性
+Route::any('/attr/add','AttrController@add');
+Route::post('/attr/addOperate','AttrController@addOperate');
+Route::get('/attr/index','AttrController@index');
 Route::get('/attr/edit/{id}','AttrController@edit')->where('id', '[0-9]+');
 Route::post('/attr/editOperate','AttrController@editOperate');
+Route::get('/attr/addBatch/{id}','AttrController@addBatch')->where('id', '[0-9]+');
 
 //商品
 Route::any('/goods/add','GoodsController@add');
