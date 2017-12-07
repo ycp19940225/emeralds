@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-05 02:05:52
+Date: 2017-12-08 01:53:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -99,84 +99,68 @@ CREATE TABLE `emerald_attr` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `attr_name` varchar(255) NOT NULL DEFAULT '' COMMENT '属性名',
   `pic` varchar(255) NOT NULL DEFAULT '' COMMENT '图片',
-  `cat_val` varchar(255) NOT NULL DEFAULT '' COMMENT '属性',
   `created_at` int(11) NOT NULL DEFAULT '0',
   `updated_at` int(11) NOT NULL DEFAULT '0',
   `deleted_at` int(11) NOT NULL DEFAULT '0',
-  `cat_id` int(11) NOT NULL DEFAULT '0',
+  `type_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `cat_id` (`cat_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
+  KEY `cat_id` (`type_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=180 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
 
 -- ----------------------------
 -- Records of emerald_attr
 -- ----------------------------
-INSERT INTO `emerald_attr` VALUES ('26', '油青', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('25', '干花青', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('24', '墨翠', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('23', '多彩', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('22', '红黄翡', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('21', '紫绿', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('20', '紫罗兰', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('19', '飘花', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('18', '蓝水', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('17', '晴水', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('16', '飘绿', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('15', '淡浅绿', '', '', '1512393981', '1512393981', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('14', '浓阳绿', '', '', '1512393980', '1512393980', '0', '52');
-INSERT INTO `emerald_attr` VALUES ('27', '观音', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('28', '佛', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('29', '貔貅', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('30', '如意', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('31', '福瓜', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('32', '平安扣', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('33', '叶子', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('34', '财豆', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('35', '路路通', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('36', '白菜', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('37', '葫芦', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('38', '关公', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('39', '生肖', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('40', '无事牌', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('41', '龙凤牌', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('42', '瑞兽', '', '', '1512394470', '1512394470', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('43', '人物', '', '', '1512394471', '1512394471', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('44', '节节高', '', '', '1512394471', '1512394471', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('45', '金蝉', '', '', '1512394471', '1512394471', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('46', '富贵', '', '', '1512394471', '1512394471', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('47', '花鸟鱼', '', '', '1512394471', '1512394471', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('48', '福禄寿', '', '', '1512394471', '1512394471', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('49', '佛手', '', '', '1512394471', '1512394471', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('50', '其他', '', '', '1512394471', '1512394471', '0', '50');
-INSERT INTO `emerald_attr` VALUES ('51', '玻璃种', '', '', '1512394486', '1512394486', '0', '51');
-INSERT INTO `emerald_attr` VALUES ('52', '高冰种', '', '', '1512394486', '1512394486', '0', '51');
-INSERT INTO `emerald_attr` VALUES ('53', '冰种', '', '', '1512394486', '1512394486', '0', '51');
-INSERT INTO `emerald_attr` VALUES ('54', '冰糯种', '', '', '1512394486', '1512394486', '0', '51');
-INSERT INTO `emerald_attr` VALUES ('55', '糯种', '', '', '1512394486', '1512394486', '0', '51');
-INSERT INTO `emerald_attr` VALUES ('56', '豆种', '', '', '1512394486', '1512394486', '0', '51');
-INSERT INTO `emerald_attr` VALUES ('57', '男表', '', '', '1512395116', '1512395116', '0', '88');
-INSERT INTO `emerald_attr` VALUES ('58', '女表', '', '', '1512395116', '1512395116', '0', '88');
-INSERT INTO `emerald_attr` VALUES ('59', '对表', '', '', '1512395116', '1512395116', '0', '88');
-INSERT INTO `emerald_attr` VALUES ('85', '油青', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('84', '干花青', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('83', '墨翠', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('82', '多彩', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('81', '红黄翡', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('80', '紫绿', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('79', '紫罗兰', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('78', '飘花', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('77', '蓝水', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('76', '晴水', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('75', '飘绿', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('74', '淡浅绿', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('73', '浓阳绿', '', '', '1512399560', '1512399560', '0', '85');
-INSERT INTO `emerald_attr` VALUES ('86', '0-3千', '', '', '1512408235', '1512408235', '0', '53');
-INSERT INTO `emerald_attr` VALUES ('87', '3千-8千', '', '', '1512408235', '1512408235', '0', '53');
-INSERT INTO `emerald_attr` VALUES ('88', '8千-1.5万', '', '', '1512408235', '1512408235', '0', '53');
-INSERT INTO `emerald_attr` VALUES ('89', '1.5-3万', '', '', '1512408235', '1512408235', '0', '53');
-INSERT INTO `emerald_attr` VALUES ('90', '3-5万', '', '', '1512408235', '1512408235', '0', '53');
-INSERT INTO `emerald_attr` VALUES ('91', '5万-10万', '', '', '1512408235', '1512408235', '0', '53');
-INSERT INTO `emerald_attr` VALUES ('92', '10以上', '', '', '1512408235', '1512408235', '0', '53');
+INSERT INTO `emerald_attr` VALUES ('122', '玻璃种', '', '1512661807', '1512663630', '1', '123');
+INSERT INTO `emerald_attr` VALUES ('130', '观音', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('131', '佛', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('132', '貔貅', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('133', '如意', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('134', '福瓜', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('135', '平安扣', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('136', '叶子', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('137', '财豆', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('138', '路路通', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('139', '白菜', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('140', '葫芦', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('141', '关公', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('142', '生肖', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('143', '无事牌', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('144', '龙凤牌', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('145', '瑞兽', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('146', '人物', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('147', '节节高', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('148', '金蝉', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('149', '富贵', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('150', '花鸟鱼', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('151', '福禄寿', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('152', '佛手', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('153', '其他', '', '1512666350', '1512666350', '0', '122');
+INSERT INTO `emerald_attr` VALUES ('154', '玻璃种', '', '1512666362', '1512666362', '0', '123');
+INSERT INTO `emerald_attr` VALUES ('155', '高冰种', '', '1512666362', '1512666362', '0', '123');
+INSERT INTO `emerald_attr` VALUES ('156', '冰种', '', '1512666362', '1512666362', '0', '123');
+INSERT INTO `emerald_attr` VALUES ('157', '冰糯种', '', '1512666362', '1512666362', '0', '123');
+INSERT INTO `emerald_attr` VALUES ('158', '糯种', '', '1512666362', '1512666362', '0', '123');
+INSERT INTO `emerald_attr` VALUES ('159', '豆种', '', '1512666362', '1512666362', '0', '123');
+INSERT INTO `emerald_attr` VALUES ('160', '浓阳绿', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('161', '淡浅绿', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('162', '飘绿', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('163', '晴水', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('164', '蓝水', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('165', '飘花', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('166', '紫罗兰', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('167', '紫绿', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('168', '红黄翡', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('169', '多彩', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('170', '墨翠', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('171', '干花青', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('172', '油青', '', '1512666371', '1512666371', '0', '124');
+INSERT INTO `emerald_attr` VALUES ('173', '0-3千', '', '1512666379', '1512666379', '0', '125');
+INSERT INTO `emerald_attr` VALUES ('174', '3千-8千', '', '1512666379', '1512666379', '0', '125');
+INSERT INTO `emerald_attr` VALUES ('175', '8千-1.5万', '', '1512666379', '1512666379', '0', '125');
+INSERT INTO `emerald_attr` VALUES ('176', '1.5-3万', '', '1512666379', '1512666379', '0', '125');
+INSERT INTO `emerald_attr` VALUES ('177', '3-5万', '', '1512666379', '1512666379', '0', '125');
+INSERT INTO `emerald_attr` VALUES ('178', '5万-10万', '', '1512666379', '1512666379', '0', '125');
+INSERT INTO `emerald_attr` VALUES ('179', '10以上', '', '1512666379', '1512666379', '0', '125');
 
 -- ----------------------------
 -- Table structure for emerald_cat
@@ -189,47 +173,17 @@ CREATE TABLE `emerald_cat` (
   `created_at` int(11) NOT NULL DEFAULT '0',
   `updated_at` int(11) NOT NULL DEFAULT '0',
   `deleted_at` int(11) NOT NULL DEFAULT '0',
-  `parent_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COMMENT='商品分类表';
+) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 COMMENT='商品分类表';
 
 -- ----------------------------
 -- Records of emerald_cat
 -- ----------------------------
-INSERT INTO `emerald_cat` VALUES ('16', '轻奢小品', '2017/12/02/iESEzXdPWw3ZvtRzwWlWVNN7WpDV56lo75XXDyaE.jpeg', '1512213553', '1512320267', '0', '0');
-INSERT INTO `emerald_cat` VALUES ('52', '颜色', '', '1512319453', '1512319453', '0', '36');
-INSERT INTO `emerald_cat` VALUES ('18', '琥珀蜜蜡', '2017/12/03/rBkdf9VpA3k018xvJFk0falLDUJoC0ROqj6hJjNb.jpeg', '1512213605', '1512285874', '0', '0');
-INSERT INTO `emerald_cat` VALUES ('36', '挂件', '', '1512293718', '1512293718', '0', '0');
-INSERT INTO `emerald_cat` VALUES ('50', '题材', '', '1512319453', '1512319453', '0', '36');
-INSERT INTO `emerald_cat` VALUES ('51', '种水', '', '1512319453', '1512319453', '0', '36');
-INSERT INTO `emerald_cat` VALUES ('41', '耳钉/坠', '', '1512317676', '1512317676', '0', '0');
-INSERT INTO `emerald_cat` VALUES ('42', '种水', '', '1512317676', '1512317676', '0', '41');
-INSERT INTO `emerald_cat` VALUES ('43', '颜色', '', '1512317676', '1512317676', '0', '41');
-INSERT INTO `emerald_cat` VALUES ('44', '价格', '', '1512317676', '1512317676', '0', '41');
-INSERT INTO `emerald_cat` VALUES ('53', '价格', '', '1512319453', '1512319453', '0', '36');
-INSERT INTO `emerald_cat` VALUES ('54', '类别', '', '1512319468', '1512319468', '0', '18');
-INSERT INTO `emerald_cat` VALUES ('55', '价格', '', '1512319468', '1512319468', '0', '18');
-INSERT INTO `emerald_cat` VALUES ('61', '价格', '', '1512319596', '1512319596', '0', '16');
-INSERT INTO `emerald_cat` VALUES ('60', '颜色', '', '1512319596', '1512319596', '0', '16');
-INSERT INTO `emerald_cat` VALUES ('59', '种水', '', '1512319596', '1512319596', '0', '16');
-INSERT INTO `emerald_cat` VALUES ('62', '戒指', '', '1512394725', '1512394725', '0', '0');
-INSERT INTO `emerald_cat` VALUES ('85', '颜色', '', '1512395002', '1512395002', '0', '62');
-INSERT INTO `emerald_cat` VALUES ('84', '种水', '', '1512395002', '1512395002', '0', '62');
-INSERT INTO `emerald_cat` VALUES ('83', '形态', '', '1512395002', '1512395002', '0', '62');
-INSERT INTO `emerald_cat` VALUES ('82', '佩戴者', '', '1512395002', '1512395002', '0', '62');
-INSERT INTO `emerald_cat` VALUES ('68', '蛋面', '', '1512394789', '1512394789', '0', '0');
-INSERT INTO `emerald_cat` VALUES ('69', '形态', '', '1512394789', '1512394789', '0', '68');
-INSERT INTO `emerald_cat` VALUES ('70', '种水', '', '1512394789', '1512394789', '0', '68');
-INSERT INTO `emerald_cat` VALUES ('71', '颜色', '', '1512394789', '1512394789', '0', '68');
-INSERT INTO `emerald_cat` VALUES ('72', '价格', '', '1512394789', '1512394789', '0', '68');
-INSERT INTO `emerald_cat` VALUES ('73', '原石', '', '1512394854', '1512394854', '0', '0');
-INSERT INTO `emerald_cat` VALUES ('92', '场口', '', '1512399463', '1512399463', '0', '73');
-INSERT INTO `emerald_cat` VALUES ('91', '种水', '', '1512399463', '1512399463', '0', '73');
-INSERT INTO `emerald_cat` VALUES ('90', '颜色', '', '1512399462', '1512399462', '0', '73');
-INSERT INTO `emerald_cat` VALUES ('89', '价格', '', '1512399462', '1512399462', '0', '73');
-INSERT INTO `emerald_cat` VALUES ('86', '价格', '', '1512395002', '1512395002', '0', '62');
-INSERT INTO `emerald_cat` VALUES ('87', '手表', '', '1512395021', '1512395021', '0', '0');
-INSERT INTO `emerald_cat` VALUES ('88', '类别', '', '1512395021', '1512395021', '0', '87');
+INSERT INTO `emerald_cat` VALUES ('16', '轻奢小品', '2017/12/02/iESEzXdPWw3ZvtRzwWlWVNN7WpDV56lo75XXDyaE.jpeg', '1512213553', '1512320267', '0');
+INSERT INTO `emerald_cat` VALUES ('36', '挂件', '', '1512293718', '1512293718', '0');
+INSERT INTO `emerald_cat` VALUES ('41', '耳钉/坠', '', '1512317676', '1512317676', '0');
+INSERT INTO `emerald_cat` VALUES ('62', '戒指', '', '1512394725', '1512662145', '0');
+INSERT INTO `emerald_cat` VALUES ('87', '手表', '', '1512395021', '1512662131', '0');
 
 -- ----------------------------
 -- Table structure for emerald_collect
@@ -260,7 +214,7 @@ CREATE TABLE `emerald_goods` (
   `goods_code` varchar(255) NOT NULL DEFAULT '' COMMENT '翡翠编号',
   `pic` varchar(255) NOT NULL DEFAULT '' COMMENT '图片',
   `video` varchar(255) NOT NULL DEFAULT '' COMMENT '视频',
-  `goods_detail` varchar(255) NOT NULL DEFAULT '' COMMENT '商品详细规格参数',
+  `goods_detail` text NOT NULL COMMENT '商品详细规格参数',
   `price` varchar(255) NOT NULL DEFAULT '' COMMENT '价格',
   `sort` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
   `is_hot` int(5) NOT NULL DEFAULT '0' COMMENT '是否为热销',
@@ -275,12 +229,14 @@ CREATE TABLE `emerald_goods` (
   PRIMARY KEY (`id`),
   KEY `cat_id` (`cat_id`),
   KEY `agent_id` (`agent_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='商品表';
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='商品表';
 
 -- ----------------------------
 -- Records of emerald_goods
 -- ----------------------------
-INSERT INTO `emerald_goods` VALUES ('6', '越南翡翠', '', '', '', '', '', '0', '0', '1512410638', '1512410638', '0', '36', '0', '1', '1', '');
+INSERT INTO `emerald_goods` VALUES ('7', '测试', 'LY1512573252', 'goods_pic/2017-12-06/exgfNlPYHcOSadWMqvBLTqGlEfmanyytFQqif7BS.jpeg,goods_pic/2017-12-06/PT8SKemSuVAHm1f69vt5pPnIx579L90eSLFI1tOY.jpeg,goods_pic/2017-12-06/pWtsrgWyfty12YMdGDG0O9iFhEU3JhiaATSkzW2m.jpeg', 'file\\2017-12\\ef0f9ba5e8dbe06a8e1a85ab44b57bdf.xlb', '前不久召开的中国共产党第十九次全国代表大会制定了新时代中国特色社会主义的行动纲领和发展蓝图。我们将坚持以人民为中心的发展思想，深入贯彻新发展理念，建设现代化经济体<span style=\"text-decoration-line: underline;\">系；全面深化改革，大力激发全社会创造力，持续释放发展活力；发展更高层次的开放型经济，深入推进“一带一路”建设，推动形成全面开放新格局。展望未来，中国发展动力更足、人民获得感更多、同世界互动更深，将为全球发展创造更多机遇、作出更大贡献。</span></span>\r\n\r\n                                    \" />', '10000', '0', '0', '1512573252', '1512573252', '0', '36', '0', '1', '1', 'logo/2017-12-06/k56OzehwICWq0nOFVJaquffhlxmGCwDiy7xnrGO3.jpeg');
+INSERT INTO `emerald_goods` VALUES ('10', '越南翡翠', 'LY1512581987', 'goods_pic/2017-12-07/xYDxA0yTrSeMMO3Ca6gbY0iMEddUwoxDaYFVbiHT.jpeg,goods_pic/2017-12-07/IcNxW8cD0ZPLHiu8VuULEiqcPnCsKpqtya20eO5d.jpeg', 'file\\2017-12\\74ffc976729fae029d6907b460e1428e.xlb', '', '9999', '0', '0', '1512581987', '1512581987', '0', '36', '0', '1', '1', 'logo/2017-12-07/q42Nff10vmKb2f4SGROykodSxWxK0nqyIJ5r9EQP.jpeg');
+INSERT INTO `emerald_goods` VALUES ('13', '黄金戒指', 'LY1512668303', 'goods_pic/2017-12-08/NEhmFOn9POXjpOInNRwx87c8y6Rew7NrBhr6zVMk.jpeg,goods_pic/2017-12-08/aZS3awKzLH8irkaBfSjud27dNuqu9s0UOPPUTmK6.jpeg,goods_pic/2017-12-08/wTq8nJI4lomhciM8w3YKCyUYqUqkRFzGEOUJnMG0.jpeg', 'file\\2017-12\\921ba475d8caec2a988b052ba5fa3c17.xlb', '', '10000', '0', '0', '1512668303', '1512668303', '0', '36', '0', '1', '1', 'logo/2017-12-08/Lz7ROrAweSTG1vLn0fvAx2lwdvIkbplVNEoUJo4f.jpeg');
 
 -- ----------------------------
 -- Table structure for emerald_goods_attr
@@ -310,6 +266,54 @@ INSERT INTO `emerald_goods_attr` VALUES ('6', '25');
 INSERT INTO `emerald_goods_attr` VALUES ('6', '29');
 INSERT INTO `emerald_goods_attr` VALUES ('6', '53');
 INSERT INTO `emerald_goods_attr` VALUES ('6', '92');
+INSERT INTO `emerald_goods_attr` VALUES ('7', '26');
+INSERT INTO `emerald_goods_attr` VALUES ('7', '29');
+INSERT INTO `emerald_goods_attr` VALUES ('7', '53');
+INSERT INTO `emerald_goods_attr` VALUES ('7', '87');
+INSERT INTO `emerald_goods_attr` VALUES ('8', '100');
+INSERT INTO `emerald_goods_attr` VALUES ('8', '31');
+INSERT INTO `emerald_goods_attr` VALUES ('8', '55');
+INSERT INTO `emerald_goods_attr` VALUES ('8', '95');
+INSERT INTO `emerald_goods_attr` VALUES ('9', '100');
+INSERT INTO `emerald_goods_attr` VALUES ('9', '31');
+INSERT INTO `emerald_goods_attr` VALUES ('9', '55');
+INSERT INTO `emerald_goods_attr` VALUES ('9', '95');
+INSERT INTO `emerald_goods_attr` VALUES ('10', '100');
+INSERT INTO `emerald_goods_attr` VALUES ('10', '31');
+INSERT INTO `emerald_goods_attr` VALUES ('10', '55');
+INSERT INTO `emerald_goods_attr` VALUES ('10', '95');
+INSERT INTO `emerald_goods_attr` VALUES ('11', '131');
+INSERT INTO `emerald_goods_attr` VALUES ('11', '155');
+INSERT INTO `emerald_goods_attr` VALUES ('11', '161');
+INSERT INTO `emerald_goods_attr` VALUES ('11', '175');
+INSERT INTO `emerald_goods_attr` VALUES ('12', '131');
+INSERT INTO `emerald_goods_attr` VALUES ('12', '155');
+INSERT INTO `emerald_goods_attr` VALUES ('12', '161');
+INSERT INTO `emerald_goods_attr` VALUES ('12', '175');
+INSERT INTO `emerald_goods_attr` VALUES ('13', '131');
+INSERT INTO `emerald_goods_attr` VALUES ('13', '155');
+INSERT INTO `emerald_goods_attr` VALUES ('13', '161');
+INSERT INTO `emerald_goods_attr` VALUES ('13', '175');
+INSERT INTO `emerald_goods_attr` VALUES ('14', '131');
+INSERT INTO `emerald_goods_attr` VALUES ('14', '155');
+INSERT INTO `emerald_goods_attr` VALUES ('14', '161');
+INSERT INTO `emerald_goods_attr` VALUES ('14', '175');
+INSERT INTO `emerald_goods_attr` VALUES ('15', '131');
+INSERT INTO `emerald_goods_attr` VALUES ('15', '155');
+INSERT INTO `emerald_goods_attr` VALUES ('15', '161');
+INSERT INTO `emerald_goods_attr` VALUES ('15', '175');
+INSERT INTO `emerald_goods_attr` VALUES ('16', '131');
+INSERT INTO `emerald_goods_attr` VALUES ('16', '155');
+INSERT INTO `emerald_goods_attr` VALUES ('16', '161');
+INSERT INTO `emerald_goods_attr` VALUES ('16', '175');
+INSERT INTO `emerald_goods_attr` VALUES ('17', '131');
+INSERT INTO `emerald_goods_attr` VALUES ('17', '155');
+INSERT INTO `emerald_goods_attr` VALUES ('17', '161');
+INSERT INTO `emerald_goods_attr` VALUES ('17', '175');
+INSERT INTO `emerald_goods_attr` VALUES ('18', '131');
+INSERT INTO `emerald_goods_attr` VALUES ('18', '155');
+INSERT INTO `emerald_goods_attr` VALUES ('18', '161');
+INSERT INTO `emerald_goods_attr` VALUES ('18', '175');
 
 -- ----------------------------
 -- Table structure for emerald_history
@@ -444,6 +448,38 @@ INSERT INTO `emerald_role_pri` VALUES ('230', '10', '0');
 INSERT INTO `emerald_role_pri` VALUES ('217', '8', '0');
 INSERT INTO `emerald_role_pri` VALUES ('218', '8', '0');
 INSERT INTO `emerald_role_pri` VALUES ('219', '8', '0');
+
+-- ----------------------------
+-- Table structure for emerald_type
+-- ----------------------------
+DROP TABLE IF EXISTS `emerald_type`;
+CREATE TABLE `emerald_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `type_name` varchar(255) NOT NULL DEFAULT '' COMMENT '属性名',
+  `cat_id` int(11) NOT NULL DEFAULT '0',
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
+  `deleted_at` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `cat_id` (`cat_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=135 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
+
+-- ----------------------------
+-- Records of emerald_type
+-- ----------------------------
+INSERT INTO `emerald_type` VALUES ('122', '题材', '36', '1512656627', '1512656627', '0');
+INSERT INTO `emerald_type` VALUES ('123', '种水', '36', '1512656670', '1512656670', '0');
+INSERT INTO `emerald_type` VALUES ('124', '颜色', '36', '1512656719', '1512656719', '0');
+INSERT INTO `emerald_type` VALUES ('125', '价格', '36', '1512656805', '1512656805', '0');
+INSERT INTO `emerald_type` VALUES ('126', '种水', '16', '1512656883', '1512662246', '0');
+INSERT INTO `emerald_type` VALUES ('127', '种水', '41', '1512666195', '1512666195', '0');
+INSERT INTO `emerald_type` VALUES ('128', '颜色', '41', '1512666195', '1512666195', '0');
+INSERT INTO `emerald_type` VALUES ('129', '价格', '41', '1512666195', '1512666195', '0');
+INSERT INTO `emerald_type` VALUES ('130', '佩戴者', '62', '1512666302', '1512666302', '0');
+INSERT INTO `emerald_type` VALUES ('131', '形态', '62', '1512666302', '1512666302', '0');
+INSERT INTO `emerald_type` VALUES ('132', '种水', '62', '1512666302', '1512666302', '0');
+INSERT INTO `emerald_type` VALUES ('133', '颜色', '62', '1512666302', '1512666302', '0');
+INSERT INTO `emerald_type` VALUES ('134', '价格', '62', '1512666302', '1512666302', '0');
 
 -- ----------------------------
 -- Table structure for emerald_user
