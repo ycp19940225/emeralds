@@ -234,4 +234,22 @@ if ( ! function_exists('generate_code'))
     }
 }
 
+if(!function_exists('buildSelect')){
+    function  buildSelect($data,$select_id='',$select_name,$valueFieldName,$textFieldName,$selectValue=''){
+        $select = "<select class=\"form-control \"  id='$select_id' name ='$select_name'> <option value=''>请选择&nbsp;--</option>";
+        foreach($data as $k => $v){
+            $value = $v[$valueFieldName];   //id循环的id
+            $text = $v[$textFieldName];    //id对应的名称
+            if($selectValue && $selectValue ==$value ){
+                $selected = 'selected ="selected"';
+            }else{
+                $selected ='';
+            }
+            $select .= '<option ' .$selected. ' value="' .$value.'">'.$text. '</option>';
+        }
+        $select .= '</select>';
+        echo $select;
+    }
+}
+
 

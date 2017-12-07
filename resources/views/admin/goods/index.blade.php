@@ -31,9 +31,10 @@
                             <thead>
                             <tr>
                                 <th>翡翠名</th>
-                                <th>分类</th>
+                                <th>所属分类</th>
                                 <th>属性</th>
                                 <th>封面图</th>
+                                <th>视频地址</th>
                                 <th>价格</th>
                                 <th>库存</th>
                                 <th>状态</th>
@@ -49,12 +50,18 @@
                                     <td>{{ $v->cat->cat_name }}</td>
                                     <td>
                                         @foreach($v->attr as $attr)
-                                            {{ $attr->attr_name }}
+                                          {{ $attr->type->type_name }}:{{  $attr->attr_name }} &nbsp;
                                             @endforeach
                                     </td>
+                                    <td><img width="40px" height="40px" src="{{ loadStaticImg($v['logo']) }}" alt=""></td>
+                                    <td>{{ $v['video'] }}</td>
+                                    <td>{{ $v['price'] }}</td>
+                                    <td>{{ $v['stock'] }}</td>
+                                    <td>{{ $v['status'] }}</td>
+                                    <td>{{ $v['created_at'] }}</td>
                                     <td>{{ $v['updated_at'] }}</td>
                                     <td>
-                                        <a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/cat/edit',['id'=>$v['id']]) }}" >编辑</a>
+                                        <a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/goods/edit',['id'=>$v['id']]) }}" >编辑</a>
                                         <a href="JavaScript:void(0)" onclick="del({{ $v['id'] }})" class="btn btn-danger btn-xs m-2 delete" >删除</a>
                                     </td>
                                 </tr>

@@ -22,7 +22,7 @@ class AttrServicesImpl implements AttrServices
 
     public function getAll()
     {
-        return $this->attrDao->All();
+        return $this->attrDao->getAll();
     }
 
     public function getOne($id)

@@ -11,58 +11,54 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repository\Eloquent\Admin\TypeRepository;
-use App\Services\Ifs\Admin\AttrServices;
 use App\Services\Ifs\Admin\CatServices;
 use Illuminate\Http\Request;
 
-class AttrController extends controller
+class TypeController extends controller
 {
-    protected  $cat ;
-    protected  $attr ;
     protected  $type ;
+    protected  $cat ;
 
-    public function __construct(CatServices $catServices,TypeRepository $typeRepository,AttrServices $attrServices)
+    public function __construct(TypeRepository $typeRepository,CatServices $catServices)
     {
-        $this->cat=$catServices;
         $this->type=$typeRepository;
-        $this->attr=$attrServices;
+        $this->cat=$catServices;
     }
 
     /**
-     * @name 属性首页
+     * @name 类型首页
      * @desc
      * @author ycp
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $data = $this->attr->getAll();
-        return view('admin.attr.index',['data'=>$data,'title'=>'属性列表']);
+        $data = $this->type->getAll();
+        return view('admin.type.index',['data'=>$data,'title'=>'类型列表']);
     }
 
 
     /**
-     * @name 添加属性页面
-     * @desc 添加属性
+     * @name 添加类型页面
+     * @desc 添加类型
      * @author ycp
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function add()
     {
         $cat_data = $this->cat->getAll();
-        return view('admin.attr.edit',['cat_data'=>$cat_data,'title'=>'添加属性']);
+        return view('admin.type.edit',['cat_data'=>$cat_data,'title'=>'添加类型']);
     }
 
     /**
-     * @name 添加操作
-     * @desc 添加操作
+     * @name 添加类型操作
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function addOperate(Request $request)
     {
-        if($this->attr->save($request->input())){
-            return redirect('admin/attr/index')->with('info','添加成功！');
+        if($this->type->save($request->input())){
+            return redirect('admin/type/index')->with('info','添加成功！');
         }
         return back()->withInput()->with('error','添加失败！');
     }
@@ -76,20 +72,9 @@ class AttrController extends controller
      */
     public function edit($id)
     {
-        $data = $this->attr->getOne($id);  //属性
-        $type_data = $data->type;  //该属性的类型
-        $cat_data = $this->cat->getAll(); //所有分类
-        $cat_id = $this->type->getOne($type_data['id'])->cat->id; //该属性的分类
-        //所有类型
-        $all_type = $this->type->getAll();
-        return view('admin.attr.edit',[
-            'data'=>$data,
-            'type_data'=>$type_data,
-            'cat_data'=>$cat_data,
-            'cat_id'=>$cat_id,
-            'all_type'=>$all_type,
-            'title'=>'编辑属性'
-        ]);
+        $cat_data = $this->cat->getAll();
+        $data = $this->type->getOne($id);
+        return view('admin.type.edit',['data'=>$data,'cat_data'=>$cat_data,'title'=>'编辑类型']);
     }
     /**
      * @name 修改操作
@@ -104,14 +89,14 @@ class AttrController extends controller
     }
 
     /**
-     * @name 删除属性
-     * @desc 删除属性
+     * @name 删除类型
+     * @desc 删除类型
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function delete(Request $request)
     {
-        if($this->attr->delete($request->input('id'))){
+        if($this->type->delete($request->input('id'))){
             return response()->json(msg('success','删除成功!'));
         } else
             return response()->json(msg('error','删除失败!'));
@@ -119,22 +104,20 @@ class AttrController extends controller
 
 
     /**
-     * @name 批量添加分类属性页面
+     * @name 批量添加分类类型页面
      * @desc
      * @author ycp
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function addBatch($id)
+    public function addBatch()
     {
-        $type_data = $this->type->getOne($id);  //类型
-        $cat_data = $type_data->cat;  //该类型的分类
-        //所有类型
-        return view('admin.attr.add_batch',['type_data'=>$type_data,'cat_data'=>$cat_data,'title'=>'批量添加分类属性']);
+        $cat_data = $this->cat->getAll();
+        return view('admin.type.add_batch',['cat_data'=>$cat_data,'title'=>'批量添加分类类型']);
     }
 
     /**
-     * @name 批量添加分类属性操作
+     * @name 批量添加分类类型操作
      * @desc
      * @author ycp
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
@@ -142,9 +125,8 @@ class AttrController extends controller
     public function addBatchOperate(Request $request)
     {
         $data = $request->input();
-        if($this->attr->add_batch($data)){
-            $data=$data=$this->cat->getAll();
-            return view('admin.cat.index',['data'=>$data,'title'=>'分类列表','info'=>'批量添加成功！']);
+        if($this->type->addBatch($data)){
+            return redirect('admin/type/index')->with('info','批量添加成功！');
         }
         return back()->withInput()->with('error','添加失败！');
     }

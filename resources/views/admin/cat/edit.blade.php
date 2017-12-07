@@ -26,17 +26,17 @@
                             <div class="form-group">
                                 <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
                                 <label for="name" class="col-xs-4 control-label">分类名</label>
-                                <div class="col-xs-4">
+                                <div class="col-xs-3">
                                     <input type="text" class="form-control" id="cat_name" name="cat_name" value="{{ $data['cat_name'] or ''}}" placeholder="请输入分类名" required>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            {{--<div class="form-group">
                                 <label for="name" class="col-xs-4 control-label">二级分类</label>
                                 <div class="col-xs-4">
                                     <input type="text" class="form-control" id="cat_name" name="child_name" value="{{ $data['child_cat'] or ''}}" placeholder="请输入属性" required>
                                 </div>
                                 <span class="help-block m-b-none">请输入属性，以逗号或者顿号隔开</span>
-                            </div>
+                            </div>--}}
                           {{-- <div class="form-group">
                                 <label for="password" class="col-xs-4 control-label">分类图片</label>
                                 <div class="col-xs-4">

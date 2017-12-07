@@ -21,29 +21,21 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <form action="{{ url('admin/attr/addBatchOperate') }}" class="form-horizontal form_need_validate" role="form" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('admin/type/addBatchOperate') }}" class="form-horizontal form_need_validate" role="form" method="post" >
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <input type="hidden" name="type_id" value="{{ $type_data['id'] or '' }}">
-                                <label for="name" class="col-xs-4 control-label">当前分类</label>
-                                <div class="col-xs-4">
-                                   <input type="text" class="form-control" id="" name="" value="{{ $cat_data['cat_name'] or ''}}" disabled>
+                                <label for="name" class="col-xs-4 control-label">选择分类</label>
+                                <div class="col-xs-3">
+                                    {{  buildSelect($cat_data,'','cat_id','id','cat_name',isset($data) ? $data['cat_id']:'') }}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="name" class="col-xs-4 control-label">当前类型</label>
-                                <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="" name="$type_data" value="{{ $type_data['type_name'] or ''}}" disabled>
-                                </div>
-                            </div>
-
                             <br>
                             <div class="form-group " id="attr_group">
                                 <label for="attr_name" class="col-xs-3 control-label"></label>
-                                <label for="attr_val" class="col-xs-1 control-label">属性值</label>
+                                <label for="attr_val" class="col-xs-1 control-label">类型值</label>
                                 <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="attr_val" name="attr" value="" placeholder="请输入属性值" required>
-                                    <span class="help-block m-b-none">请输入属性值，以逗号或者顿号隔开</span>
+                                    <input type="text" class="form-control" id="attr_val" name="type" value="" placeholder="请输入属性值" required>
+                                    <span class="help-block m-b-none">请输入类型值，以逗号或者顿号隔开</span>
                                 </div>
                             </div>
                             <div class="col-md-offset-5" >

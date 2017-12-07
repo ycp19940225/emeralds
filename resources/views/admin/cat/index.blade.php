@@ -31,7 +31,7 @@
                             <thead>
                             <tr>
                                 <th>分类名</th>
-                                <th>属性<span style="color: red">(点击属性,可以批量添加属性值)</span></th>
+                                <th>类型<span style="color: red">(点击类型,可以批量添加属性)</span></th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
                                 <th>操作</th>
@@ -39,12 +39,11 @@
                             </thead>
                             <tbody>
                             @foreach($data as $k=>$v)
-                                @if($v['parent_id'] == 0)
                                 <tr>
                                     <td>{{ $v['cat_name'] }}</td>
                                     <td>
-                                        @foreach($v->child_cat as $child_cat)
-                                            <a href="{{ url('admin/attr/addBatch',['cat_id'=>$child_cat->id]) }}" style="color: red" title="点击批量添加属性值">{{ $child_cat['cat_name'] }}</a>
+                                        @foreach($v->type as $type)
+                                            <a href="{{ url('admin/attr/addBatch',['cat_id'=>$type->id]) }}" style="color: red" title="点击批量添加属性值">{{ $type['type_name'] }}</a>
                                         @endforeach
                                     </td>
                                     <td>{{ $v['created_at'] }}</td>
@@ -54,7 +53,6 @@
                                         <a href="JavaScript:void(0)" onclick="del({{ $v['id'] }})" class="btn btn-danger btn-xs m-2 delete" >删除</a>
                                     </td>
                                 </tr>
-                                @endif
                             @endforeach
                             </tbody>
                         </table>
@@ -77,7 +75,7 @@
          */
         function del(i) {
             //询问框
-            layer.confirm('二级分类将会一并删除,是否删除？', {
+            layer.confirm('该分类下的类型将会一并删除,是否删除？', {
                 title:'确认操作',
                 btn: ['是','否'] //按钮
             }, function(){

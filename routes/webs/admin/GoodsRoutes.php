@@ -6,15 +6,25 @@ Route::get('/cat/index','CatController@index');
 Route::get('/cat/edit/{id}','CatController@edit')->where('id', '[0-9]+');
 Route::post('/cat/editOperate','CatController@editOperate');
 Route::post('/cat/delete','CatController@delete');
-Route::post('/cat/getChild','CatController@getChild');
-Route::post('/cat/getAttr','CatController@getAttr');
+Route::post('/cat/getType','CatController@getType');
+//类型
+Route::any('/type/add','TypeController@add');
+Route::post('/type/addOperate','TypeController@addOperate');
+Route::get('/type/index','TypeController@index');
+Route::get('/type/edit/{id}','TypeController@edit')->where('id', '[0-9]+');
+Route::post('/type/editOperate','TypeController@editOperate');
+Route::get('/type/addBatch','TypeController@addBatch');
+Route::post('/type/addBatchOperate','TypeController@addBatchOperate');
+Route::post('/type/delete','TypeController@delete');
 //属性
 Route::any('/attr/add','AttrController@add');
 Route::post('/attr/addOperate','AttrController@addOperate');
 Route::get('/attr/index','AttrController@index');
 Route::get('/attr/edit/{id}','AttrController@edit')->where('id', '[0-9]+');
 Route::post('/attr/editOperate','AttrController@editOperate');
+Route::post('/attr/delete','AttrController@delete');
 Route::get('/attr/addBatch/{id}','AttrController@addBatch')->where('id', '[0-9]+');
+Route::post('/attr/addBatchOperate','AttrController@addBatchOperate');
 
 //商品
 Route::any('/goods/add','GoodsController@add');

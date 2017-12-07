@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Repository\Eloquent\Admin\TypeRepository;
 use App\Services\Common\UploadServicesImpl;
 use App\Services\Ifs\Admin\AttrServices;
 use App\Services\Ifs\Admin\CatServices;
@@ -18,11 +19,15 @@ use Illuminate\Http\Request;
 class CatController extends controller
 {
     protected $cat;
+    protected $type;
     protected $attr;
 
-    public function __construct(CatServices $catServices,AttrServices $attrServices)
+    public function __construct(CatServices $catServices,
+                                TypeRepository $typeRepository,
+                                AttrServices $attrServices)
     {
         $this->cat=$catServices;
+        $this->type=$typeRepository;
         $this->attr=$attrServices;
     }
 
@@ -76,9 +81,7 @@ class CatController extends controller
     public function edit($id)
     {
         $data = $this->cat->getOne($id);
-        $child_cat =array_column($data->child_cat->toArray(),'cat_name');
-        $child_cat = implode(',',$child_cat);
-        $data['child_cat'] = $child_cat;
+
         return view('admin.cat.edit',['data'=>$data,'title'=>'添加分类']);
     }
 
@@ -115,33 +118,23 @@ class CatController extends controller
     }
 
     /**
-     * @name 获取子分类
+     * @name 获取类型属性
      * @desc
      * @author ycp\
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getChild(Request $request)
+    public function getType(Request $request)
     {
         $data = $this->cat->getOne($request->input('cat_id'));
-        $data = $data->child_cat->toArray();
+        $data = $data->type->toArray();
         foreach ($data as $k=>$v){
-            $attr = $this->cat->getOne($v['id'])->child_cat_attr;
+            $attr = $this->type->getOne($v['id'])->attr;
             $data[$k]['attr'] = $attr->toArray();
         }
       if($data){
           return response()->json(msg('success','成功获取子分类!',$data));
       }else{
-          return response()->json(msg('error','获取子分类失败!'));
+          return response()->json(msg('error','获取类型属性失败!'));
       }
-    }
-
-    /**
-     * @name 获取子分类下的属性
-     * @desc
-     * @author ycp\
-     */
-    public function getAttr()
-    {
-
     }
 }

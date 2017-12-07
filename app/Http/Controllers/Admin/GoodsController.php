@@ -85,9 +85,6 @@ class GoodsController extends controller
     public function edit($id)
     {
         $data = $this->goods->getOne($id);
-        $child_goods =array_column($data->child_goods->toArray(),'goods_name');
-        $child_goods = implode(',',$child_goods);
-        $data['child_goods'] = $child_goods;
         return view('admin.goods.edit',['data'=>$data,'title'=>'添加分类']);
     }
 

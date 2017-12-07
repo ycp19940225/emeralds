@@ -186,7 +186,8 @@
                   'cat_id':cat_id,
                    _token:'{{ csrf_token() }}'
                 };
-                $.post('{{ url('admin/cat/getChild') }}',data,function (res) {
+                $.post('{{ url('admin/cat/getType') }}',data,function (res) {
+                    console.log(res['data']);
                     if(res['code'] === 'success'){
                         $.each(res['data'],function (i,v) {
                             var html = '';
@@ -197,7 +198,7 @@
                                 option +='<option value="'+attr[num]['id']+'">'+attr[num]['attr_name']+'</option>';
                             }
                             html = ' <select name="goods_attr[]" class="form-control" id="cat_child_'+v['id']+'">'+
-                                    '<option value="">请选择'+v['cat_name']+'--</option>'+option+
+                                    '<option value="">请选择'+v['type_name']+'--</option>'+option+
                                     '</select>';
                             $("#attr_list").append(html);
                         });

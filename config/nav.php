@@ -45,6 +45,11 @@ return [
                     'icon'=>''
                 ],
                 [
+                    'name'=>'类型列表',
+                    'access'=>'admin/type/index',
+                    'icon'=>''
+                ],
+                [
                     'name'=>'属性列表',
                     'access'=>'admin/attr/index',
                     'icon'=>''

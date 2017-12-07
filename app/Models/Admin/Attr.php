@@ -19,29 +19,31 @@ class Attr extends Model
      * 可以被集体赋值的表字段
      * @var array
      */
-    public $fillable = array('id','attr_name','cat_id','pic','created_at','updated_at','deleted_at');
+    public $fillable = array('id','attr_name','type_id','created_at','updated_at','deleted_at');
 
     /**
      * 关联分类（类型）
      */
-    public function cat()
+    public function type()
     {
-        return $this->belongsTo('App\Models\Admin\Cat','cat_id','id');
+        return $this->belongsTo('App\Models\Admin\type','type_id','id');
     }
 
 
 
     public function find($id)
     {
+        return $this->where('deleted_at',0)->find($id);
     }
     public function add($data)
     {
+        return $this->create($data);
     }
 
     public function add_batch($data)
     {
         $attr = explode(',',replace_others($data['attr']));
-        $create_data['cat_id'] = $data['id'];
+        $create_data['type_id'] = $data['type_id'];
         foreach ($attr as $k=>$v){
             $create_data['attr_name'] = $v;
             $this->create($create_data);
@@ -51,5 +53,10 @@ class Attr extends Model
 
     public function edit($id)
     {
+    }
+
+    public function getAll()
+    {
+        return $this->where('deleted_at',0)->get();
     }
 }
