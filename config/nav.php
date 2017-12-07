@@ -58,6 +58,64 @@ return [
 
             ]
         ],
+        [
+            'name'=>'内容管理',
+            'icon'=>'cog',
+            'access'=>[
+                [
+                    'name'=>'欢迎页管理',
+                    'access'=>'admin/goods/index',
+                    'icon'=>''
+                ],
+                [
+                    'name'=>'轮播图',
+                    'access'=>'admin/goods/index',
+                    'icon'=>''
+                ],
+                [
+                    'name'=>'新闻资讯管理',
+                    'access'=>'admin/goods/index',
+                    'icon'=>''
+                ],
+                [
+                    'name'=>'客服管理',
+                    'access'=>'admin/goods/index',
+                    'icon'=>''
+                ],
+                [
+                    'name'=>'消息推送',
+                    'access'=>'admin/goods/index',
+                    'icon'=>''
+                ],
+            ]
+        ],
+        [
+            'name'=>'用户管理',
+            'icon'=>'users',
+            'access'=>[
+                [
+                    'name'=>'用户列表',
+                    'access'=>'admin/goods/index',
+                    'icon'=>''
+                ],
+            ]
+        ],
+        [
+            'name'=>'订单管理',
+            'icon'=>'truck',
+            'access'=>[
+                [
+                    'name'=>'欢迎页管理',
+                    'access'=>'admin/goods/index',
+                    'icon'=>''
+                ],
+                [
+                    'name'=>'轮播图',
+                    'access'=>'admin/goods/index',
+                    'icon'=>''
+                ],
+            ]
+        ],
     ],
 
 ];
