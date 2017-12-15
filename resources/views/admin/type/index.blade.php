@@ -8,7 +8,7 @@
     <!-- begin page-header -->
     <h1 class="page-header">
         <small>
-            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/type/add' ">添加类型</button>
+            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/type/add' ">添加二级分类</button>
         </small>
     </h1>
     <div class="row">
@@ -18,10 +18,7 @@
             <div class="panel panel-inverse">
                 <div class="panel-heading">
                     <h4 class="panel-title">{{ $title }}</h4>
-                    <br>
-                    <small>
-                        <button class="btn btn-primary m-l-20" type="button" onclick=" window.location.href='/admin/type/addBatch' ">批量添加类型</button>
-                    </small>
+
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -34,8 +31,8 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>类型名</th>
-                                <th>所属分类</th>
+                                <th>二级分类</th>
+                                <th>三级明细</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
                                 <th>操作</th>
@@ -46,7 +43,7 @@
                             <tr>
                                 <td>{{ $v['id'] }}</td>
                                 <td>{{ $v['type_name'] }}</td>
-                                <td>{{ $v->cat->cat_name }}</td>
+                                <td>{{ $v['type_val'] }}</td>
                                 <td>{{ $v['created_at'] }}</td>
                                 <td>{{ $v['updated_at'] }}</td>
                                 <td>

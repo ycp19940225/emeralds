@@ -36,7 +36,7 @@ class Goods extends Base
      */
     public function attr()
     {
-        return $this->belongsToMany('App\Models\Admin\Attr','emerald_goods_attr','goods_id','attr_id');
+        return $this->belongsToMany('App\Models\Admin\type','emerald_goods_type','goods_id','type_id');
     }
 
 

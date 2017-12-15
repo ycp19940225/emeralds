@@ -20,19 +20,16 @@ class CatController extends controller
 {
     protected $cat;
     protected $type;
-    protected $attr;
 
     public function __construct(CatServices $catServices,
-                                TypeRepository $typeRepository,
-                                AttrServices $attrServices)
+                                TypeRepository $typeRepository)
     {
         $this->cat=$catServices;
         $this->type=$typeRepository;
-        $this->attr=$attrServices;
     }
 
     /**
-     * @name 分类列表
+     * @name 品类列表
      * @desc
      * @author ycp
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -40,18 +37,19 @@ class CatController extends controller
     public function index()
     {
         $data=$this->cat->getAll();
-        return view('admin.cat.index',['data'=>$data,'title'=>'分类列表']);
+        return view('admin.cat.index',['data'=>$data,'title'=>'品类列表']);
     }
 
     /**
-     * @name 添加分类页面
+     * @name 添加品类页面
      * @desc 添加分类
      * @author ycp
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function add()
     {
-        return view('admin.cat.edit',['title'=>'添加分类']);
+        $type_data =  $this->type->getAll();
+        return view('admin.cat.edit',['type_data'=>$type_data,'title'=>'添加品类']);
     }
 
     /**
@@ -66,7 +64,7 @@ class CatController extends controller
         $data = $request->input();
         if($this->cat->save($data)){
             $data=$data=$this->cat->getAll();
-            return view('admin.cat.index',['data'=>$data,'title'=>'分类列表','info'=>'添加成功！']);
+            return view('admin.cat.index',['data'=>$data,'title'=>'品类列表','info'=>'添加成功！']);
         }
         return back()->withInput()->with('error','添加失败！');
     }
@@ -81,8 +79,8 @@ class CatController extends controller
     public function edit($id)
     {
         $data = $this->cat->getOne($id);
-
-        return view('admin.cat.edit',['data'=>$data,'title'=>'添加分类']);
+        $type_data =  $this->type->getAll();
+        return view('admin.cat.edit',['data'=>$data,'type_data'=>$type_data,'title'=>'添加品类']);
     }
 
     /**
@@ -97,13 +95,13 @@ class CatController extends controller
         $data = $request->input();
         if($this->cat->update($data)){
             $data=$data=$this->cat->getAll();
-            return view('admin.cat.index',['data'=>$data,'title'=>'分类列表','info'=>'编辑成功！']);
+            return view('admin.cat.index',['data'=>$data,'title'=>'品类列表','info'=>'编辑成功！']);
         }
         return back()->withInput()->with('error','修改失败！');
     }
 
     /**
-     * @name 分类删除
+     * @name 品类删除
      * @desc
      * @author ycp
      * @param Request $request

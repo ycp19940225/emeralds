@@ -44,7 +44,7 @@ class TypeRepository
 
     public function update($data)
     {
-        return $this->typeModel->where('id',$data['id'])->update($data);
+        return $this->typeModel->find($data['id'])->update($data);
     }
 
     public function delete($id)

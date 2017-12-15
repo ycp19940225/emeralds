@@ -72,9 +72,8 @@ class TypeController extends controller
      */
     public function edit($id)
     {
-        $cat_data = $this->cat->getAll();
         $data = $this->type->getOne($id);
-        return view('admin.type.edit',['data'=>$data,'cat_data'=>$cat_data,'title'=>'编辑类型']);
+        return view('admin.type.edit',['data'=>$data,'title'=>'编辑类型']);
     }
     /**
      * @name 修改操作
@@ -85,7 +84,11 @@ class TypeController extends controller
     public function editOperate(Request $request)
     {
 
-        return response()->json(msg('error','修改失败！'));
+        $data = $request->input();
+        if($this->type->update($data)){
+            return redirect('admin/type/index')->with('info','修改成功！');
+        }
+        return back()->withInput()->with('error','修改失败！');
     }
 
     /**

@@ -19,20 +19,13 @@ class Type extends Model
      * 可以被集体赋值的表字段
      * @var array
      */
-    public $fillable = array('id','type_name','cat_id','created_at','updated_at','deleted_at');
+    public $fillable = array('id','type_name','type_val','created_at','updated_at','deleted_at');
 
     /**
      * 关联分类（类型）
      */
     public function cat()
     {
-        return $this->belongsTo('App\Models\Admin\Cat','cat_id','id');
-    }
-    /**
-     * 关联属性
-     */
-    public function attr()
-    {
-        return $this->hasMany('App\Models\Admin\Attr','type_id','id');
+        return $this->belongsToMany('App\Models\Admin\Cat','emerald_cat_type','cat_id','type_id');
     }
 }

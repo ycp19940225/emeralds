@@ -21,29 +21,21 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <form action="{{ url('admin/attr/addBatchOperate') }}" class="form-horizontal form_need_validate" role="form" method="post" enctype="multipart/form-data">
+                        <form action="" class="form-horizontal form_need_validate" role="form" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <input type="hidden" name="type_id" value="{{ $type_data['id'] or '' }}">
-                                <label for="name" class="col-xs-4 control-label">当前分类</label>
+                                <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
+                                <label for="name" class="col-xs-4 control-label">二级分类</label>
                                 <div class="col-xs-4">
-                                   <input type="text" class="form-control" id="" name="" value="{{ $cat_data['cat_name'] or ''}}" disabled>
+                                    <input type="text" class="form-control" id="type_name" name="type_name" value="{{ $data['type_name'] or ''}}" placeholder="请输入二级分类" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-xs-4 control-label">当前类型</label>
+                                <label for="name" class="col-xs-4 control-label">三级明细</label>
                                 <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="" name="$type_data" value="{{ $type_data['type_name'] or ''}}" disabled>
-                                </div>
-                            </div>
+                                    <input type="text" class="form-control" id="type_val" name="type_val" value="{{ $data['type_val'] or ''}}" placeholder="请输入三级明细" required>
+                                    <span class="help-block m-b-none" style="color:red">请务必以逗号或者顿号隔开</span>
 
-                            <br>
-                            <div class="form-group " id="attr_group">
-                                <label for="attr_name" class="col-xs-3 control-label"></label>
-                                <label for="attr_val" class="col-xs-1 control-label">属性值</label>
-                                <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="attr_val" name="attr" value="" placeholder="请输入属性值" required>
-                                    <span class="help-block m-b-none">请输入属性值，以逗号或者顿号隔开</span>
                                 </div>
                             </div>
                             <div class="col-md-offset-5" >
@@ -61,10 +53,17 @@
     </div>
 @endsection
 @section('admin.page.js')
-    <script src="{{ loadStatic('admin/js/extend/upload.js') }}"></script>
     <script>
         $(document).ready(function() {
-
+            var method = "{{ Route::current()->getActionMethod() }}";
+            var url ='';
+            if(method === 'edit'){
+                url = '{{url('admin/type/editOperate')}}';
+                $("form").attr('action',url)
+            }else{
+                url = '{{url('admin/type/addOperate')}}';
+                $("form").attr('action',url);
+            }
         });
     </script>
     @endsection

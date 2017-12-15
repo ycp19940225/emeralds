@@ -8,7 +8,7 @@
     <!-- begin page-header -->
     <h1 class="page-header">
         <small>
-            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/cat/add' ">添加分类</button>
+            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/cat/add' ">添加品类</button>
         </small>
     </h1>
     <div class="row">
@@ -30,8 +30,8 @@
                         <table id="data-table" class="table table-hover table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th>分类名</th>
-                                <th>类型<span style="color: red">(点击类型,可以批量添加属性)</span></th>
+                                <th>品类名</th>
+                                <th>二级分类</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
                                 <th>操作</th>
@@ -43,7 +43,7 @@
                                     <td>{{ $v['cat_name'] }}</td>
                                     <td>
                                         @foreach($v->type as $type)
-                                            <a href="{{ url('admin/attr/addBatch',['cat_id'=>$type->id]) }}" style="color: red" title="点击批量添加属性值">{{ $type['type_name'] }}</a>
+                                            {{ $type['type_name'] }}
                                         @endforeach
                                     </td>
                                     <td>{{ $v['created_at'] }}</td>

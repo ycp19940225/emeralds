@@ -24,16 +24,18 @@
                         <form action="" class="form-horizontal form_need_validate" role="form" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="name" class="col-xs-4 control-label">选择分类</label>
+                                <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
+                                <label for="name" class="col-xs-4 control-label">二级分类</label>
                                 <div class="col-xs-4">
-                                   {{  buildSelect($cat_data,'','cat_id','id','cat_name',isset($data) ? $data['cat_id']:'') }}
+                                    <input type="text" class="form-control" id="type_name" name="type_name" value="{{ $data['type_name'] or ''}}" placeholder="请输入二级分类" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
-                                <label for="name" class="col-xs-4 control-label">类型名</label>
+                                <label for="name" class="col-xs-4 control-label">三级明细</label>
                                 <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="type_name" name="type_name" value="{{ $data['type_name'] or ''}}" placeholder="请输入类型名" required>
+                                    <input type="text" class="form-control" id="type_val" name="type_val" value="{{ $data['type_val'] or ''}}" placeholder="请输入三级明细" required>
+                                    <span class="help-block m-b-none" style="color:red">请务必以逗号或者顿号隔开</span>
+
                                 </div>
                             </div>
                             <div class="col-md-offset-5" >

@@ -26,15 +26,15 @@
                         <table id="data-table" class="table table-striped table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>编号</th>
                                 <th>姓名</th>
                                 <th>手机号</th>
-                                <th>摊位号</th>
+                                <th>商户地址</th>
                                 <th>微信号</th>
                                 <th>主营项目</th>
                                 <th>银行账号</th>
                                 <th>支付宝账号</th>
-                                <th>QQ号码</th>
+                                <th>营业执照(身份证照)</th>
                                 <th>注册时间</th>
                                 <th>状态</th>
                                 <th>操作</th>
@@ -51,7 +51,7 @@
                                 <td>{{ $v['pm'] }}</td>
                                 <td>{{ $v['bank_code'] }}</td>
                                 <td>{{ $v['alipay_code'] }}</td>
-                                <td>{{ $v['qq_code'] }}</td>
+                                <td>{{ $v['agent_pic'] }}</td>
                                 <td>{{ $v['created_at'] }}</td>
                                 <td>{{ check_status($v['status']) }}</td>
                                 <td>

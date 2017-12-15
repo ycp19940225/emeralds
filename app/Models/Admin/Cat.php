@@ -27,20 +27,14 @@ class Cat extends Base
      */
     public function type()
     {
-        return $this->hasMany('App\Models\Admin\type','cat_id','id');
+        return $this->belongsToMany('App\Models\Admin\type','emerald_cat_type','cat_id','type_id');
     }
 
 
     public function add($data)
     {
-        /*$res_data = $this->create($data);
-        $create_data['parent_id'] = $res_data->id;
-        $child_name = explode(',',replace_others($data['child_name']));
-        foreach ($child_name as $k=>$v){
-            $create_data['cat_name'] = $v;
-            $this->create($create_data);
-        }*/
-        return $this->create($data);
+        $model = $this->create($data);
+        return $model->type()->attach($data['type_id']);
     }
 
     /**
@@ -52,15 +46,7 @@ class Cat extends Base
     public function edit($data)
     {
         $this->find($data['id'])->update($data);
-        /*$child_name = explode(',',replace_others($data['child_name']));
-        //删除原来的子分类
-        $this->where('parent_id',$data['id'])->delete();
-        $create_data['parent_id'] = $data['id'];
-        foreach ($child_name as $k=>$v){
-            $create_data['cat_name'] = $v;
-            $this->create($create_data);
-        }*/
-        return true;
+        return $this->find($data['id'])->type()->sync($data['type_id']);
     }
 
     public function getAll()

@@ -31,7 +31,7 @@
                             <thead>
                             <tr>
                                 <th>翡翠名</th>
-                                <th>所属分类</th>
+                                <th>所属品种</th>
                                 <th>属性</th>
                                 <th>封面图</th>
                                 <th>视频地址</th>
@@ -47,10 +47,10 @@
                             @foreach($data as $k=>$v)
                                 <tr>
                                     <td>{{ $v['goods_name'] }}</td>
-                                    <td>{{ $v->cat->cat_name }}</td>
+                                    <td>{{ $v->cat->cat_name or '' }}</td>
                                     <td>
-                                        @foreach($v->attr as $attr)
-                                          {{ $attr->type->type_name }}:{{  $attr->attr_name }} &nbsp;
+                                        @foreach($v->type as $type)
+                                          {{ $attr->type->type_name }}:{{ $attr->type->type_val }} &nbsp;
                                             @endforeach
                                     </td>
                                     <td><img width="40px" height="40px" src="{{ loadStaticImg($v['logo']) }}" alt=""></td>

@@ -40,18 +40,13 @@ return [
                     'icon'=>''
                 ],
                 [
-                    'name'=>'分类列表',
+                    'name'=>'一级品类',
                     'access'=>'admin/cat/index',
                     'icon'=>''
                 ],
                 [
-                    'name'=>'类型列表',
+                    'name'=>'二级分类',
                     'access'=>'admin/type/index',
-                    'icon'=>''
-                ],
-                [
-                    'name'=>'属性列表',
-                    'access'=>'admin/attr/index',
                     'icon'=>''
                 ],
 
@@ -69,7 +64,7 @@ return [
                 ],
                 [
                     'name'=>'轮播图',
-                    'access'=>'admin/goods/index',
+                    'access'=>'admin/slide/index',
                     'icon'=>''
                 ],
                 [
