@@ -58,8 +58,13 @@ return [
             'icon'=>'cog',
             'access'=>[
                 [
-                    'name'=>'欢迎页管理',
-                    'access'=>'admin/goods/index',
+                    'name'=>'文章分类管理',
+                    'access'=>'admin/articlecat/index',
+                    'icon'=>''
+                ],
+                [
+                    'name'=>'文章管理',
+                    'access'=>'admin/article/index',
                     'icon'=>''
                 ],
                 [
@@ -68,7 +73,7 @@ return [
                     'icon'=>''
                 ],
                 [
-                    'name'=>'新闻资讯管理',
+                    'name'=>'欢迎页管理',
                     'access'=>'admin/goods/index',
                     'icon'=>''
                 ],

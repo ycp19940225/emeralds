@@ -245,7 +245,6 @@
         function goods_detail_save() {
             var markup = $('#goods_detail').code();
             var html = '<textarea style="display: none" name="goods_detail" value="'+markup+'" />';
-            console.log(html);
             $("form").append(html);
             layer.msg('保存成功！',{icon: 6});
         }

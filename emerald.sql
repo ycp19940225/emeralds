@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-15 18:19:34
+Date: 2017-12-16 13:16:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -90,6 +90,47 @@ CREATE TABLE `emerald_agent` (
 -- Records of emerald_agent
 -- ----------------------------
 INSERT INTO `emerald_agent` VALUES ('4', 'LYFC15114263421', '杨春坪', '18983663382', '123456789', '123456789wx', '翡翠，珠宝', '123456789', '123456789alpay', '', '1', '1511426342', '1511429137', '0', '123456789', '1');
+
+-- ----------------------------
+-- Table structure for emerald_article
+-- ----------------------------
+DROP TABLE IF EXISTS `emerald_article`;
+CREATE TABLE `emerald_article` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
+  `intro` varchar(255) NOT NULL DEFAULT '' COMMENT '简介',
+  `content` text NOT NULL COMMENT '内容',
+  `cat_id` int(10) NOT NULL DEFAULT '0',
+  `created_at` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `input_id` int(10) NOT NULL DEFAULT '0' COMMENT '录入人员Id',
+  `deleted_at` tinyint(5) NOT NULL DEFAULT '0',
+  `views` int(10) NOT NULL DEFAULT '0' COMMENT '访问次数',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章';
+
+-- ----------------------------
+-- Records of emerald_article
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for emerald_article_cat
+-- ----------------------------
+DROP TABLE IF EXISTS `emerald_article_cat`;
+CREATE TABLE `emerald_article_cat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `cat_name` varchar(255) NOT NULL DEFAULT '' COMMENT '分类名',
+  `intro` varchar(255) NOT NULL DEFAULT '' COMMENT '分类介绍',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `deleted_at` int(11) NOT NULL DEFAULT '0' COMMENT '是否删除',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文章分类表';
+
+-- ----------------------------
+-- Records of emerald_article_cat
+-- ----------------------------
+INSERT INTO `emerald_article_cat` VALUES ('2', '企业动向', '收集最新企业动向', '1513398620', '1513398647', '0');
 
 -- ----------------------------
 -- Table structure for emerald_cat
@@ -292,7 +333,7 @@ CREATE TABLE `emerald_privilege` (
   `updated_at` int(10) NOT NULL DEFAULT '0',
   `deleted_at` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8 COMMENT='权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8 COMMENT='权限表';
 
 -- ----------------------------
 -- Records of emerald_privilege
@@ -307,12 +348,12 @@ INSERT INTO `emerald_privilege` VALUES ('216', '冻结账户', '', 'Admin', 'Adm
 INSERT INTO `emerald_privilege` VALUES ('217', '代理商列表', '', 'Admin', 'Agent', 'index', '1512322613', '1512322613', '0');
 INSERT INTO `emerald_privilege` VALUES ('218', '代理商审核', '', 'Admin', 'Agent', 'editOperate', '1512322613', '1512322613', '0');
 INSERT INTO `emerald_privilege` VALUES ('219', '代理商删除', '', 'Admin', 'Agent', 'delete', '1512322613', '1512322613', '0');
-INSERT INTO `emerald_privilege` VALUES ('220', '分类列表', '', 'Admin', 'Cat', 'index', '1512322614', '1512322614', '0');
-INSERT INTO `emerald_privilege` VALUES ('221', '添加分类页面', '添加分类', 'Admin', 'Cat', 'add', '1512322614', '1512322614', '0');
+INSERT INTO `emerald_privilege` VALUES ('220', '品类列表', '', 'Admin', 'Cat', 'index', '1512322614', '1513399382', '0');
+INSERT INTO `emerald_privilege` VALUES ('221', '添加品类页面', '添加分类', 'Admin', 'Cat', 'add', '1512322614', '1513399382', '0');
 INSERT INTO `emerald_privilege` VALUES ('222', '添加操作', '', 'Admin', 'Cat', 'addOperate', '1512322614', '1512322614', '0');
 INSERT INTO `emerald_privilege` VALUES ('223', '修改页面', '修改页面', 'Admin', 'Cat', 'edit', '1512322614', '1512322614', '0');
 INSERT INTO `emerald_privilege` VALUES ('224', '修改操作', '', 'Admin', 'Cat', 'editOperate', '1512322614', '1512322614', '0');
-INSERT INTO `emerald_privilege` VALUES ('225', '分类删除', '', 'Admin', 'Cat', 'delete', '1512322614', '1512322614', '0');
+INSERT INTO `emerald_privilege` VALUES ('225', '品类删除', '', 'Admin', 'Cat', 'delete', '1512322614', '1513399383', '0');
 INSERT INTO `emerald_privilege` VALUES ('226', '后台首页', '后台首页', 'Admin', 'Index', 'index', '1512322614', '1512322614', '0');
 INSERT INTO `emerald_privilege` VALUES ('227', '后台主页', '后台主页', 'Admin', 'Index', 'main', '1512322614', '1512322614', '0');
 INSERT INTO `emerald_privilege` VALUES ('228', '权限首页', '权限首页', 'Admin', 'Privilege', 'index', '1512322614', '1512322614', '0');
@@ -326,14 +367,40 @@ INSERT INTO `emerald_privilege` VALUES ('235', '修改操作', '修改操作', '
 INSERT INTO `emerald_privilege` VALUES ('236', '删除角色', '删除角色', 'Admin', 'Role', 'delete', '1512322614', '1512322614', '0');
 INSERT INTO `emerald_privilege` VALUES ('237', '为管理员分配角色列表', '为管理员分配角色', 'Admin', 'Role', 'addUser', '1512322614', '1512322614', '0');
 INSERT INTO `emerald_privilege` VALUES ('238', '为管理员分配角色操作', '为管理员分配角色', 'Admin', 'Role', 'addUserOperate', '1512322614', '1512322614', '0');
-INSERT INTO `emerald_privilege` VALUES ('239', '分类属性页面', '', 'Admin', 'Attr', 'edit', '1512398912', '1512398912', '0');
-INSERT INTO `emerald_privilege` VALUES ('240', '分类属性操作', '', 'Admin', 'Attr', 'editOperate', '1512398912', '1512398912', '0');
-INSERT INTO `emerald_privilege` VALUES ('241', '分类列表', '', 'Admin', 'Goods', 'index', '1512398912', '1512398912', '0');
-INSERT INTO `emerald_privilege` VALUES ('242', '添加分类页面', '添加分类', 'Admin', 'Goods', 'add', '1512398912', '1512398912', '0');
+INSERT INTO `emerald_privilege` VALUES ('241', '翡翠列表', '', 'Admin', 'Goods', 'index', '1512398912', '1513399384', '0');
+INSERT INTO `emerald_privilege` VALUES ('242', '添加翡翠页面', '添加翡翠', 'Admin', 'Goods', 'add', '1512398912', '1513399384', '0');
 INSERT INTO `emerald_privilege` VALUES ('243', '添加操作', '', 'Admin', 'Goods', 'addOperate', '1512398912', '1512398912', '0');
 INSERT INTO `emerald_privilege` VALUES ('244', '修改页面', '修改页面', 'Admin', 'Goods', 'edit', '1512398912', '1512398912', '0');
 INSERT INTO `emerald_privilege` VALUES ('245', '修改操作', '', 'Admin', 'Goods', 'editOperate', '1512398912', '1512398912', '0');
-INSERT INTO `emerald_privilege` VALUES ('246', '分类删除', '', 'Admin', 'Goods', 'delete', '1512398913', '1512398913', '0');
+INSERT INTO `emerald_privilege` VALUES ('246', '商品删除', '', 'Admin', 'Goods', 'delete', '1512398913', '1513399384', '0');
+INSERT INTO `emerald_privilege` VALUES ('247', '文章分类列表', '', 'Admin', 'ArticleCat', 'index', '1513399377', '1513399377', '0');
+INSERT INTO `emerald_privilege` VALUES ('248', '添加文章分类页面', '添加分类', 'Admin', 'ArticleCat', 'add', '1513399378', '1513399378', '0');
+INSERT INTO `emerald_privilege` VALUES ('249', '添加操作', '', 'Admin', 'ArticleCat', 'addOperate', '1513399378', '1513399378', '0');
+INSERT INTO `emerald_privilege` VALUES ('250', '修改页面', '修改页面', 'Admin', 'ArticleCat', 'edit', '1513399378', '1513399378', '0');
+INSERT INTO `emerald_privilege` VALUES ('251', '修改操作', '', 'Admin', 'ArticleCat', 'editOperate', '1513399378', '1513399378', '0');
+INSERT INTO `emerald_privilege` VALUES ('252', '文章分类删除', '', 'Admin', 'ArticleCat', 'delete', '1513399379', '1513399379', '0');
+INSERT INTO `emerald_privilege` VALUES ('253', '文章列表', '', 'Admin', 'Article', 'index', '1513399379', '1513399379', '0');
+INSERT INTO `emerald_privilege` VALUES ('254', '添加文章页面', '添加分类', 'Admin', 'Article', 'add', '1513399379', '1513399379', '0');
+INSERT INTO `emerald_privilege` VALUES ('255', '添加操作', '', 'Admin', 'Article', 'addOperate', '1513399379', '1513399379', '0');
+INSERT INTO `emerald_privilege` VALUES ('256', '修改页面', '修改页面', 'Admin', 'Article', 'edit', '1513399380', '1513399380', '0');
+INSERT INTO `emerald_privilege` VALUES ('257', '修改操作', '', 'Admin', 'Article', 'editOperate', '1513399380', '1513399380', '0');
+INSERT INTO `emerald_privilege` VALUES ('258', '文章删除', '', 'Admin', 'Article', 'delete', '1513399380', '1513399380', '0');
+INSERT INTO `emerald_privilege` VALUES ('265', '获取类型属性', '', 'Admin', 'Cat', 'getType', '1513399383', '1513399383', '0');
+INSERT INTO `emerald_privilege` VALUES ('266', '上传翡翠相册', '', 'Admin', 'Goods', 'uploadImg', '1513399385', '1513399385', '0');
+INSERT INTO `emerald_privilege` VALUES ('267', '轮播图首页', '', 'Admin', 'Slide', 'index', '1513399386', '1513399386', '0');
+INSERT INTO `emerald_privilege` VALUES ('268', '添加轮播图页面', '添加轮播图', 'Admin', 'Slide', 'add', '1513399387', '1513399387', '0');
+INSERT INTO `emerald_privilege` VALUES ('269', '添加轮播图操作', '', 'Admin', 'Slide', 'addOperate', '1513399387', '1513399387', '0');
+INSERT INTO `emerald_privilege` VALUES ('270', '修改页面', '修改页面', 'Admin', 'Slide', 'edit', '1513399387', '1513399387', '0');
+INSERT INTO `emerald_privilege` VALUES ('271', '修改操作', '修改操作', 'Admin', 'Slide', 'editOperate', '1513399387', '1513399387', '0');
+INSERT INTO `emerald_privilege` VALUES ('272', '删除轮播图', '删除轮播图', 'Admin', 'Slide', 'delete', '1513399388', '1513399388', '0');
+INSERT INTO `emerald_privilege` VALUES ('273', '类型首页', '', 'Admin', 'Type', 'index', '1513399388', '1513399388', '0');
+INSERT INTO `emerald_privilege` VALUES ('274', '添加类型页面', '添加类型', 'Admin', 'Type', 'add', '1513399388', '1513399388', '0');
+INSERT INTO `emerald_privilege` VALUES ('275', '添加类型操作', '', 'Admin', 'Type', 'addOperate', '1513399388', '1513399388', '0');
+INSERT INTO `emerald_privilege` VALUES ('276', '修改页面', '修改页面', 'Admin', 'Type', 'edit', '1513399389', '1513399389', '0');
+INSERT INTO `emerald_privilege` VALUES ('277', '修改操作', '修改操作', 'Admin', 'Type', 'editOperate', '1513399389', '1513399389', '0');
+INSERT INTO `emerald_privilege` VALUES ('278', '删除类型', '删除类型', 'Admin', 'Type', 'delete', '1513399389', '1513399389', '0');
+INSERT INTO `emerald_privilege` VALUES ('279', '批量添加分类类型页面', '', 'Admin', 'Type', 'addBatch', '1513399389', '1513399389', '0');
+INSERT INTO `emerald_privilege` VALUES ('280', '批量添加分类类型操作', '', 'Admin', 'Type', 'addBatchOperate', '1513399390', '1513399390', '0');
 
 -- ----------------------------
 -- Table structure for emerald_role
