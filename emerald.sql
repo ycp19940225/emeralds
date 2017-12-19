@@ -3,14 +3,14 @@ Navicat MySQL Data Transfer
 
 Source Server         : phpstudy
 Source Server Version : 50553
-Source Host           : 127.0.0.1:3306
+Source Host           : localhost:3306
 Source Database       : emerald
 
 Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-19 18:51:09
+Date: 2017-12-20 03:39:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -83,13 +83,14 @@ CREATE TABLE `emerald_agent` (
   `deleted_at` int(11) NOT NULL DEFAULT '0',
   `license_number` varchar(255) NOT NULL DEFAULT '0' COMMENT '营业执照',
   `deleted` int(5) NOT NULL DEFAULT '0',
+  `user_id` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='代理商';
 
 -- ----------------------------
 -- Records of emerald_agent
 -- ----------------------------
-INSERT INTO `emerald_agent` VALUES ('4', 'LYFC15114263421', '杨春坪', '18983663382', '123456789', '123456789wx', '翡翠，珠宝', '123456789', '123456789alpay', '', '1', '1511426342', '1511429137', '0', '123456789', '1');
+INSERT INTO `emerald_agent` VALUES ('4', 'LYFC15114263421', '杨春坪', '18983663382', '123456789', '123456789wx', '翡翠，珠宝', '123456789', '123456789alpay', '', '1', '1511426342', '1511429137', '0', '123456789', '1', '0');
 
 -- ----------------------------
 -- Table structure for emerald_article
@@ -508,7 +509,7 @@ INSERT INTO `emerald_type` VALUES ('139', '', '', '1513678671', '1513678671', '0
 DROP TABLE IF EXISTS `emerald_user`;
 CREATE TABLE `emerald_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `telphone` int(11) NOT NULL DEFAULT '0' COMMENT '手机号',
+  `telphone` varchar(255) NOT NULL DEFAULT '0' COMMENT '手机号',
   `nickname` varchar(255) NOT NULL DEFAULT '' COMMENT '名称',
   `password` varchar(255) NOT NULL DEFAULT '' COMMENT '密码',
   `logo` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
@@ -518,8 +519,9 @@ CREATE TABLE `emerald_user` (
   `deleted_at` int(11) NOT NULL DEFAULT '0',
   `token` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of emerald_user
 -- ----------------------------
+INSERT INTO `emerald_user` VALUES ('4', '18983663382', '', '447910ff7241c373129b8761cc312c78', '', '', '1513705933', '1513705933', '0', '');
