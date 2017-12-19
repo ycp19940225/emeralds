@@ -27,6 +27,6 @@ class Article extends Base
      */
     public function cat()
     {
-        return $this->belongsTo('App\Models\Admin\cat','cat_id','id');
+        return $this->belongsTo('App\Models\Admin\ArticleCat','cat_id','id');
     }
 }

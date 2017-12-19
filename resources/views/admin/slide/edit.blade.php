@@ -23,19 +23,31 @@
                     <div class="row">
                         <form action="" class="form-horizontal form_need_validate" role="form" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
+                            <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
                             <div class="form-group">
-                                <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
-                                <label for="name" class="col-xs-4 control-label">二级分类</label>
+                                <label for="pic" class="col-xs-4 control-label">封面图片</label>
                                 <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="type_name" name="type_name" value="{{ $data['type_name'] or ''}}" placeholder="请输入二级分类" required>
+                                    @if(Route::current()->getActionMethod() == 'add')
+                                        <div id="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
+                                            <img id="img" src="" alt="" style="width:100px; height: 100px;">
+                                        </div>
+                                    @else
+                                        <div id="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
+                                            <img id="img" src="{{ loadStaticImg($data['pic']) }}" alt="" style="width:100px; height: 100px;">
+                                        </div>
+                                    @endif
+                                    <p>
+                                        <a href="javascript:;" class="file">
+                                            <input type="file" id="image-file" name="pic" value="{{ $data['pic'] or '' }}">
+                                        </a>
+                                    </p>
+                                    <p id="file-info"></p>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-xs-4 control-label">三级明细</label>
+                                <label for="name" class="col-xs-4 control-label">链接地址</label>
                                 <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="type_val" name="type_val" value="{{ $data['type_val'] or ''}}" placeholder="请输入三级明细" required>
-                                    <span class="help-block m-b-none" style="color:red">请务必以逗号或者顿号隔开</span>
-
+                                    <input type="text" class="form-control" id="url" name="url" value="{{ $data['url'] or ''}}" placeholder="请输入链接地址" required>
                                 </div>
                             </div>
                             <div class="col-md-offset-5" >
@@ -53,15 +65,17 @@
     </div>
 @endsection
 @section('admin.page.js')
+    <script src="{{ loadStatic('admin/js/extend/upload.js') }}"></script>
     <script>
         $(document).ready(function() {
+            upload.init();
             var method = "{{ Route::current()->getActionMethod() }}";
             var url ='';
             if(method === 'edit'){
-                url = '{{url('admin/type/editOperate')}}';
+                url = '{{url('admin/slide/editOperate')}}';
                 $("form").attr('action',url)
             }else{
-                url = '{{url('admin/type/addOperate')}}';
+                url = '{{url('admin/slide/addOperate')}}';
                 $("form").attr('action',url);
             }
         });

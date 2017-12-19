@@ -81,6 +81,23 @@ class CommonController extends controller
 
     }
 
+    /**
+     * @name 上传头像
+     * @desc 本地或者七牛可自由切换
+     * @param Request $request
+     * @param UploadServicesImpl $uploadServicesImpl
+     * @return mixed
+     */
+    public function uploadImg(Request $request,UploadServicesImpl $uploadServicesImpl)
+    {
+        $img_path = $uploadServicesImpl->uploadImg('user_info',$request->file('logo'));
+        if($this->user->updateUser(['id'=>SC::getLoginSession()->id,'logo'=>$img_path])){
+            return redirect('/admin')->with('status','修改成功！');
+        }
+        return back()->withInput()->with('error','修改失败！');
+
+    }
+
 
 
 }

@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repository\Eloquent\Admin\SlideRepository;
+use App\Services\Common\UploadServicesImpl;
 use Illuminate\Http\Request;
 
 class SlideController extends controller
@@ -43,8 +44,7 @@ class SlideController extends controller
      */
     public function add()
     {
-        $slide_data = $this->slide->getAll();
-        return view('admin.slide.edit',['slide_data'=>$slide_data,'title'=>'添加轮播图']);
+        return view('admin.slide.edit',['title'=>'添加轮播图']);
     }
 
     /**
@@ -52,9 +52,12 @@ class SlideController extends controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function addOperate(Request $request)
+    public function addOperate(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
-        if($this->slide->save($request->input())){
+        $data = $request->input();
+        $pic = $uploadServicesImpl->uploadImg('slide',$request->file('pic'));
+        $data['pic'] = $pic;
+        if($this->slide->save($data)){
             return redirect('admin/slide/index')->with('info','添加成功！');
         }
         return back()->withInput()->with('error','添加失败！');
@@ -78,9 +81,13 @@ class SlideController extends controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function editOperate(Request $request)
+    public function editOperate(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
         $data = $request->input();
+        if($request->file('pic')){
+            $pic = $uploadServicesImpl->uploadImg('slide',$request->file('pic'));
+            $data['pic'] = $pic;
+        }
         if($this->slide->update($data)){
             return redirect('admin/slide/index')->with('info','修改成功！');
         }

@@ -42,7 +42,7 @@
                             @foreach($data as $k=>$v)
                             <tr>
                                 <td>{{ $v['id'] }}</td>
-                                <td>{{ $v['pic'] }}</td>
+                                <td><img width="40px" height="40px" src="{{ loadStaticImg($v['pic']) }}" alt=""></td>
                                 <td>{{ $v['url'] }}</td>
                                 <td>{{ $v['created_at'] }}</td>
                                 <td>{{ $v['updated_at'] }}</td>

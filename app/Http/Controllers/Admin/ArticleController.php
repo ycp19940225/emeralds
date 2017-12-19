@@ -46,7 +46,8 @@ class ArticleController extends controller
      */
     public function add()
     {
-        return view('admin.article.edit',['title'=>'添加文章']);
+        $cat_data = $this->cat->getAll();
+        return view('admin.article.edit',['cat_data'=>$cat_data,'title'=>'添加文章']);
     }
 
     /**
@@ -75,7 +76,8 @@ class ArticleController extends controller
     public function edit($id)
     {
         $data = $this->article->getOne($id);
-        return view('admin.article.edit',['data'=>$data,'title'=>'添加文章']);
+        $cat_data = $this->cat->getAll();
+        return view('admin.article.edit',['data'=>$data,'cat_data'=>$cat_data,'title'=>'添加文章']);
     }
 
     /**

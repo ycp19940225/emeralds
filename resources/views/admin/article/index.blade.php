@@ -43,6 +43,7 @@
                             @foreach($data as $k=>$v)
                             <tr>
                                 <td>{{ $v['id'] }}</td>
+                                <td>{{ $v->cat->cat_name }}</td>
                                 <td>{{ $v['title'] }}</td>
                                 <td>{{ $v['intro'] }}</td>
                                 <td>{{ $v['created_at'] }}</td>

@@ -3,14 +3,14 @@ Navicat MySQL Data Transfer
 
 Source Server         : phpstudy
 Source Server Version : 50553
-Source Host           : localhost:3306
+Source Host           : 127.0.0.1:3306
 Source Database       : emerald
 
 Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-16 13:16:53
+Date: 2017-12-19 18:47:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -107,11 +107,12 @@ CREATE TABLE `emerald_article` (
   `deleted_at` tinyint(5) NOT NULL DEFAULT '0',
   `views` int(10) NOT NULL DEFAULT '0' COMMENT '访问次数',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章';
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='文章';
 
 -- ----------------------------
 -- Records of emerald_article
 -- ----------------------------
+INSERT INTO `emerald_article` VALUES ('1', '和田玉籽2', '和田玉籽料的天然外形，是任何人工所无法模仿的。', '<p>&nbsp;</p><h2 style=\"margin: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 128, 0); text-indent: 5px; padding: 10px 0px; font-size: 1.2rem; font-family: \">一、和田玉籽料的天然外形，是任何人工所无法模仿的。</h2><p style=\"margin-bottom: 20px; line-height: 28px; color: rgb(0, 0, 0); font-family: \">天然籽料的外形，是圆滑而不滚圆的。而纯粹是滚圆形状的籽料，基本上都是假冒的。尤其是和田玉籽料上的天然解理，也就是人们所说的裂口，是和田玉在形成过程中所必然出现的。而这些解理，会随着同人体接触而逐渐愈合。因此那些外形完美，没有解理，价钱便宜的籽料，一般来说，就是假的。</p><p style=\"margin-bottom: 20px; line-height: 28px; color: rgb(0, 0, 0); font-family: \"><img width=\"100%\" src=\"http://feicui.2fav.cn/fav258/images/13.jpg\" style=\"max-width: 100%;\"/></p><h2 style=\"margin: 0px; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 128, 0); text-indent: 5px; padding: 10px 0px; font-size: 1.2rem; font-family: \">二、就是从籽料的皮色来入手。</h2><p style=\"margin-bottom: 20px; line-height: 28px; color: rgb(0, 0, 0); font-family: \">真籽料是在河水中经千万年冲刷，自然受沁，只会在质地软松的地方沁入颜色，在有裂纹的地方颜色比较深。这种皮色是相当的自然，也就是活皮。它的颜色浸入玉内有层次感，皮和里面的玉感觉是一致的。皮上的颜色应是由深入浅，裂隙上的颜色应是由浅到深。不过真正好的籽玉是不长皮的，即使是有，也是星星点点，或在细小的裂子里。那活皮的色是从玉里透出来的，真皮不管它是什么颜色玉工雕玉时琢下来的玉粉都是白色的。而染色的假皮则浮于表面、色凝凹处，磨下的玉粉是带色的。和田玉的皮色是次生的，一般厚度小于一毫米。2</p><p>&nbsp; &nbsp; &nbsp; <img src=\"http://www.emerald.com/assets/admin/js/extend/umeditor/php/upload/20171219/15136776383298.jpg\"/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br/></p>', '2', '1513677149', '1513677643', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for emerald_article_cat
@@ -125,7 +126,7 @@ CREATE TABLE `emerald_article_cat` (
   `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   `deleted_at` int(11) NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文章分类表';
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='文章分类表';
 
 -- ----------------------------
 -- Records of emerald_article_cat
@@ -471,11 +472,12 @@ CREATE TABLE `emerald_slide` (
   `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   `deleted_at` int(11) NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='浏览历史';
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='浏览历史';
 
 -- ----------------------------
 -- Records of emerald_slide
 -- ----------------------------
+INSERT INTO `emerald_slide` VALUES ('5', 'slide/2017-12-19/tccsb64IwExYYNioUoz3JSJBFDssbghuBLJX38Bx.jpeg', 'type/index', '1513680004', '1513680242', '0');
 
 -- ----------------------------
 -- Table structure for emerald_type
@@ -489,7 +491,7 @@ CREATE TABLE `emerald_type` (
   `updated_at` int(11) NOT NULL DEFAULT '0',
   `deleted_at` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=139 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
+) ENGINE=MyISAM AUTO_INCREMENT=140 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
 
 -- ----------------------------
 -- Records of emerald_type
@@ -498,6 +500,7 @@ INSERT INTO `emerald_type` VALUES ('136', '种水1', '玻璃种、高冰种、�
 INSERT INTO `emerald_type` VALUES ('135', '题材1', '观音、佛、貔貅、如意、福瓜、平安扣、叶子、财豆、路路通、白菜、葫芦、关公、生肖、无事牌、龙凤牌、瑞兽、人物、节节高、金蝉、富贵、花鸟鱼、福禄寿、佛手、其他', '1513323909', '1513325965', '0');
 INSERT INTO `emerald_type` VALUES ('137', '颜色1', '浓阳绿、淡浅绿、飘绿、晴水、蓝水、飘花、紫罗兰、紫绿、红黄翡、多彩、墨翠、干花青、油青', '1513326019', '1513326019', '0');
 INSERT INTO `emerald_type` VALUES ('138', '价格1', '0-3千、3千-8千、8千-1.5万、1.5-3万、3-5万、5万-10万、10以上', '1513326034', '1513326034', '0');
+INSERT INTO `emerald_type` VALUES ('139', '', '', '1513678671', '1513678671', '0');
 
 -- ----------------------------
 -- Table structure for emerald_user
