@@ -9,9 +9,10 @@
 namespace App\Models\Admin;
 
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject as AuthenticatableUserContract;
 
-class User extends Model
+class User extends  Authenticatable implements AuthenticatableUserContract
 {
     protected $table = 'emerald_user';
     protected $dateFormat = 'U';
@@ -20,5 +21,32 @@ class User extends Model
      * @var array
      */
     public $fillable = array('id','telphone','nickname','password','logo','email','created_at','updated_at','deleted_at');
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'token',
+    ];
 
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey(); // Eloquent model method.
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }

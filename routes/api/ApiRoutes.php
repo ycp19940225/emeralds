@@ -11,6 +11,7 @@ $api->version('v1', function ($api) {
         $api->group(['middleware'=>['api']], function ($api) {
             //用户
             $api->post('users/register', 'UserController@register');
+            $api->post('users/login', 'UserController@login');
         });
 
     });

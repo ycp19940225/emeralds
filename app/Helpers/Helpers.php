@@ -33,6 +33,22 @@ if ( ! function_exists('get_md5_password'))
     }
 }
 /**
+ * laravel加密函数
+ *
+ * @param string $file 所要加载的资源
+ */
+if ( ! function_exists('get_hash_password'))
+{
+    function get_hash_password($password)
+    {
+        if ($password) {
+            return Hash::make($password);
+        }else{
+            return '';
+        }
+    }
+}
+/**
  * 自定义消息数组
  *
  */
@@ -249,6 +265,24 @@ if(!function_exists('buildSelect')){
         }
         $select .= '</select>';
         echo $select;
+    }
+}
+
+
+/**
+ * API格式化
+ *
+ */
+if ( ! function_exists('API_MSG'))
+{
+    function API_MSG($status='true',$code='200',$msg="",$data ='')
+    {
+        return [
+            'status' => $status,
+            'code'   => $code,
+            'msg'   => $msg,
+            'data'   => $data
+        ];
     }
 }
 

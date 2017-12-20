@@ -19,11 +19,11 @@ return [
             ]
         ],
         [
-            'name'=>'代理商',
+            'name'=>'供应商',
             'icon'=>'street-view',
             'access'=>[
                 [
-                    'name'=>'代理商列表',
+                    'name'=>'供应商列表',
                     'access'=>'admin/agent/index',
                     'icon'=>''
                 ]
@@ -105,12 +105,7 @@ return [
             'icon'=>'truck',
             'access'=>[
                 [
-                    'name'=>'欢迎页管理',
-                    'access'=>'admin/goods/index',
-                    'icon'=>''
-                ],
-                [
-                    'name'=>'轮播图',
+                    'name'=>'订单列表',
                     'access'=>'admin/goods/index',
                     'icon'=>''
                 ],

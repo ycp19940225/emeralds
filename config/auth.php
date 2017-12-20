@@ -43,7 +43,7 @@ return [
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'emerald_user',
         ],
     ],
 
@@ -67,13 +67,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' =>  App\Models\Admin\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+         'emerald_user' => [
+             'driver' => 'eloquent',
+             'model' => App\Models\Admin\User::class,
+         ],
     ],
 
     /*
@@ -91,12 +90,12 @@ return [
     |
     */
 
-    'passwords' => [
+    /*'passwords' => [
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
         ],
-    ],
+    ],*/
 
 ];
