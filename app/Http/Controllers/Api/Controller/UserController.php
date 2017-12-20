@@ -155,7 +155,7 @@ class UserController extends BaseController
      *     }})
      * })
      */
-    public function index()
+    public function index9()
     {
         return ["content" => "This notice can be seen only after Auth"];
     }
