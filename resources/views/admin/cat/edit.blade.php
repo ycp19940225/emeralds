@@ -21,6 +21,11 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
+                        @if (isset($error))
+                            <div class="alert alert-danger">
+                                {{ $error }}
+                            </div>
+                        @endif
                         <form action="" class="form-horizontal form_need_validate" role="form" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">

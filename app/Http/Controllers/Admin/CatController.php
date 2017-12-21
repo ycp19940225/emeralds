@@ -62,7 +62,8 @@ class CatController extends controller
     public function addOperate(Request $request)
     {
         $data = $request->input();
-        if($this->cat->save($data)){
+        $res = $this->cat->save($data);
+        if($res){
             $data=$data=$this->cat->getAll();
             return view('admin.cat.index',['data'=>$data,'title'=>'品类列表','info'=>'添加成功！']);
         }

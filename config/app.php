@@ -202,7 +202,6 @@ return [
 
         //jwt认证
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
-
         /********************业务逻辑
          */
 
@@ -267,6 +266,7 @@ return [
         //Captcha
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
 
+        //认证
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class
 
     ],

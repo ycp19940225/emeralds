@@ -275,7 +275,7 @@ if(!function_exists('buildSelect')){
  */
 if ( ! function_exists('API_MSG'))
 {
-    function API_MSG($status='true',$code='200',$msg="",$data ='')
+    function API_MSG($data ='',$msg="",$status='true',$code='200')
     {
         return [
             'status' => $status,

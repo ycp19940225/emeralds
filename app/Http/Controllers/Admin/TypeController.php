@@ -57,7 +57,9 @@ class TypeController extends controller
      */
     public function addOperate(Request $request)
     {
-        if($this->type->save($request->input())){
+        $data = $request->input();
+        $data['type_val'] =replace_others($data['type_val']);
+        if($this->type->save($data)){
             return redirect('admin/type/index')->with('info','添加成功！');
         }
         return back()->withInput()->with('error','添加失败！');
@@ -85,6 +87,7 @@ class TypeController extends controller
     {
 
         $data = $request->input();
+        $data['type_val'] =replace_others($data['type_val']);
         if($this->type->update($data)){
             return redirect('admin/type/index')->with('info','修改成功！');
         }
@@ -103,34 +106,5 @@ class TypeController extends controller
             return response()->json(msg('success','删除成功!'));
         } else
             return response()->json(msg('error','删除失败!'));
-    }
-
-
-    /**
-     * @name 批量添加分类类型页面
-     * @desc
-     * @author ycp
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function addBatch()
-    {
-        $cat_data = $this->cat->getAll();
-        return view('admin.type.add_batch',['cat_data'=>$cat_data,'title'=>'批量添加分类类型']);
-    }
-
-    /**
-     * @name 批量添加分类类型操作
-     * @desc
-     * @author ycp
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     */
-    public function addBatchOperate(Request $request)
-    {
-        $data = $request->input();
-        if($this->type->addBatch($data)){
-            return redirect('admin/type/index')->with('info','批量添加成功！');
-        }
-        return back()->withInput()->with('error','添加失败！');
     }
 }

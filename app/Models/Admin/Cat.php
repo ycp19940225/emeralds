@@ -34,7 +34,8 @@ class Cat extends Base
     public function add($data)
     {
         $model = $this->create($data);
-        return $model->type()->attach($data['type_id']);
+        $model->type()->attach($data['type_id']);
+        return $model;
     }
 
     /**
