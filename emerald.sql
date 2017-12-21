@@ -3,14 +3,14 @@ Navicat MySQL Data Transfer
 
 Source Server         : phpstudy
 Source Server Version : 50553
-Source Host           : localhost:3306
+Source Host           : 127.0.0.1:3306
 Source Database       : emerald
 
 Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-20 03:39:31
+Date: 2017-12-21 20:44:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -146,12 +146,18 @@ CREATE TABLE `emerald_cat` (
   `updated_at` int(11) NOT NULL DEFAULT '0',
   `deleted_at` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=115 DEFAULT CHARSET=utf8 COMMENT='商品分类表';
+) ENGINE=MyISAM AUTO_INCREMENT=121 DEFAULT CHARSET=utf8 COMMENT='商品分类表';
 
 -- ----------------------------
 -- Records of emerald_cat
 -- ----------------------------
 INSERT INTO `emerald_cat` VALUES ('114', '挂件', '', '1513327715', '1513327715', '0');
+INSERT INTO `emerald_cat` VALUES ('115', '南红', '', '1513841155', '1513841155', '0');
+INSERT INTO `emerald_cat` VALUES ('116', '手镯', '', '1513841227', '1513841227', '0');
+INSERT INTO `emerald_cat` VALUES ('117', '耳钉/坠', '', '1513841368', '1513841368', '0');
+INSERT INTO `emerald_cat` VALUES ('118', '珠串/手项链', '', '1513841482', '1513841482', '0');
+INSERT INTO `emerald_cat` VALUES ('119', '手表', '', '1513841610', '1513841610', '0');
+INSERT INTO `emerald_cat` VALUES ('120', '手表', '', '1513841627', '1513841637', '1');
 
 -- ----------------------------
 -- Table structure for emerald_cat_type
@@ -169,6 +175,21 @@ INSERT INTO `emerald_cat_type` VALUES ('114', '138');
 INSERT INTO `emerald_cat_type` VALUES ('114', '136');
 INSERT INTO `emerald_cat_type` VALUES ('114', '135');
 INSERT INTO `emerald_cat_type` VALUES ('114', '137');
+INSERT INTO `emerald_cat_type` VALUES ('115', '140');
+INSERT INTO `emerald_cat_type` VALUES ('115', '138');
+INSERT INTO `emerald_cat_type` VALUES ('116', '141');
+INSERT INTO `emerald_cat_type` VALUES ('116', '136');
+INSERT INTO `emerald_cat_type` VALUES ('116', '137');
+INSERT INTO `emerald_cat_type` VALUES ('116', '138');
+INSERT INTO `emerald_cat_type` VALUES ('117', '136');
+INSERT INTO `emerald_cat_type` VALUES ('117', '137');
+INSERT INTO `emerald_cat_type` VALUES ('117', '138');
+INSERT INTO `emerald_cat_type` VALUES ('118', '140');
+INSERT INTO `emerald_cat_type` VALUES ('118', '136');
+INSERT INTO `emerald_cat_type` VALUES ('118', '137');
+INSERT INTO `emerald_cat_type` VALUES ('118', '138');
+INSERT INTO `emerald_cat_type` VALUES ('119', '142');
+INSERT INTO `emerald_cat_type` VALUES ('120', '142');
 
 -- ----------------------------
 -- Table structure for emerald_collect
@@ -492,16 +513,19 @@ CREATE TABLE `emerald_type` (
   `updated_at` int(11) NOT NULL DEFAULT '0',
   `deleted_at` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=140 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
+) ENGINE=MyISAM AUTO_INCREMENT=143 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
 
 -- ----------------------------
 -- Records of emerald_type
 -- ----------------------------
-INSERT INTO `emerald_type` VALUES ('136', '种水1', '玻璃种、高冰种、冰种、冰糯种、糯种、豆种', '1513326000', '1513326000', '0');
-INSERT INTO `emerald_type` VALUES ('135', '题材1', '观音、佛、貔貅、如意、福瓜、平安扣、叶子、财豆、路路通、白菜、葫芦、关公、生肖、无事牌、龙凤牌、瑞兽、人物、节节高、金蝉、富贵、花鸟鱼、福禄寿、佛手、其他', '1513323909', '1513325965', '0');
-INSERT INTO `emerald_type` VALUES ('137', '颜色1', '浓阳绿、淡浅绿、飘绿、晴水、蓝水、飘花、紫罗兰、紫绿、红黄翡、多彩、墨翠、干花青、油青', '1513326019', '1513326019', '0');
-INSERT INTO `emerald_type` VALUES ('138', '价格1', '0-3千、3千-8千、8千-1.5万、1.5-3万、3-5万、5万-10万、10以上', '1513326034', '1513326034', '0');
-INSERT INTO `emerald_type` VALUES ('139', '', '', '1513678671', '1513678671', '0');
+INSERT INTO `emerald_type` VALUES ('136', '种水1', '玻璃种,高冰种,冰种,冰糯种,糯种,豆种', '1513326000', '1513842192', '0');
+INSERT INTO `emerald_type` VALUES ('135', '题材1', '观音,佛,貔貅,如意,福瓜,平安扣,叶子,财豆,路路通,白菜,葫芦,关公,生肖,无事牌,龙凤牌,瑞兽,人物,节节高,金蝉,富贵,花鸟鱼,福禄寿,佛手,其他', '1513323909', '1513842144', '0');
+INSERT INTO `emerald_type` VALUES ('137', '颜色1', '浓阳绿,淡浅绿,飘绿,晴水,蓝水,飘花,紫罗兰,紫绿,红黄翡,多彩,墨翠,干花青,油青', '1513326019', '1513842205', '0');
+INSERT INTO `emerald_type` VALUES ('138', '价格1', '0-3千,3千-8千,8千-1.5万,1.5-3万,3-5万,5万-10万,10以上', '1513326034', '1513842217', '0');
+INSERT INTO `emerald_type` VALUES ('139', '', '', '1513678671', '1513841123', '1');
+INSERT INTO `emerald_type` VALUES ('140', '类别1', '挂件,手串手链,手玩件,项链,手镯,耳钉耳坠,戒指,首饰套装,其他', '1513841033', '1513842230', '0');
+INSERT INTO `emerald_type` VALUES ('141', '形状', '福镯,圆条,贵妃,方条,个性', '1513841112', '1513842113', '0');
+INSERT INTO `emerald_type` VALUES ('142', '类别-手表', '男表,女表,对表', '1513841585', '1513842131', '0');
 
 -- ----------------------------
 -- Table structure for emerald_user
@@ -519,9 +543,11 @@ CREATE TABLE `emerald_user` (
   `deleted_at` int(11) NOT NULL DEFAULT '0',
   `token` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of emerald_user
 -- ----------------------------
-INSERT INTO `emerald_user` VALUES ('4', '18983663382', '', '447910ff7241c373129b8761cc312c78', '', '', '1513705933', '1513705933', '0', '');
+INSERT INTO `emerald_user` VALUES ('18', '18983663382', '', '$2y$10$bHIzugQXEvA4JErDpjjnquvYPevBO9Ygd2u.KZ7aavPm7659Wouji', '', '', '1513778706', '1513778706', '0', '');
+INSERT INTO `emerald_user` VALUES ('19', '18983663383', '', '$2y$10$JWyNLGUJLOg/g.CqrDW09uWmNPq1b6TWGEexxF9GGck6bIhKrRxBy', '', '', '1513835015', '1513835015', '0', '');
+INSERT INTO `emerald_user` VALUES ('20', '18983663381', '', '$2y$10$e4BnMaMKn6F0qPOihLGTG.HkH.wyWU8UuxWZqFhb5Bw3wXECezJ5m', '', '', '1513835481', '1513835481', '0', '');
