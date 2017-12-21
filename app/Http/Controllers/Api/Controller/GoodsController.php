@@ -18,7 +18,7 @@ use Validator;
 /**
  * 商品资源
  *
- * @Resource("Goods")
+ * @Resource("Group Goods")
  */
 class GoodsController extends BaseController
 {
@@ -28,6 +28,7 @@ class GoodsController extends BaseController
     {
         $this->goods=$goodsServices;
     }
+
     /**
      * 获取所有商品
      *
@@ -63,6 +64,45 @@ class GoodsController extends BaseController
        }
         return API_MSG('','获取商品失败！','false',500);
     }
+
+    /**
+     * 获取单个商品
+     *
+     *
+     * @Get("/api/goods/id")
+     * @Parameters({
+     *      @Parameter("id", type="int",description="商品ID")
+     * })
+     *@Transaction({
+     *      @Request({
+
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": 200,
+    "msg": "获取商品详情成功！",
+    "data": {
+
+    }
+    }),
+     *      @Response(500, body={"error": {
+    "status": "false",
+    "code": 500,
+    "msg": "获取商品详情失败！",
+    "data": ""
+     *     }})
+     * })
+     */
+    public function one($id)
+    {
+        $goods_data = $this->goods->getOne($id);
+        if($goods_data){
+            return API_MSG($goods_data,'获取商品详情成功！');
+        }
+        return API_MSG('','获取商品详情失败！','false',500);
+    }
+
+    
 
 
 }

@@ -202,6 +202,12 @@ return [
 
         //jwt认证
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
+        //短信验证
+        Toplan\PhpSms\PhpSmsServiceProvider::class,
+        Toplan\Sms\SmsManagerServiceProvider::class,
+
+
         /********************业务逻辑
          */
 
@@ -267,7 +273,11 @@ return [
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
 
         //认证
-        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+
+        //短信验证
+        'PhpSms' => Toplan\PhpSms\Facades\Sms::class,
+        'SmsManager' => Toplan\Sms\Facades\SmsManager::class,
 
     ],
 

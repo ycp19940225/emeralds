@@ -29,7 +29,7 @@ class ArticleRepository
 
     public function getAll()
     {
-        return $this->articleModel->where('deleted_at',0)->get();
+        return $this->articleModel->where('deleted_at',0)->with('cat')->get();
     }
 
     public function getOne($id)

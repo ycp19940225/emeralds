@@ -17,7 +17,7 @@ use Validator;
 /**
  * 用户资源
  *
- * @Resource("Users")
+ * @Resource("Group Users")
  */
 class UserController extends BaseController
 {

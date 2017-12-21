@@ -36,4 +36,4 @@
 php artisan api:docs --name "API_DOSC"  --use-version v1 --output-file "D:\phpStudy\WWW\emeralds\dosc\api.md"
 
 
-aglio -i "D:\phpStudy\WWW\emeralds\Doc\api.apib" -o "D:\phpStudy\WWW\emeralds\Doc\api.html"
+aglio -i "D:\phpStudy\WWW\emeralds\dosc\api.apib" -o "D:\phpStudy\WWW\emeralds\dosc\api.html"

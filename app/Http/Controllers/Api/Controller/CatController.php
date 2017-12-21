@@ -12,9 +12,9 @@ namespace App\Http\Controllers\Api\Controller;
 use App\Http\Controllers\Api\BaseController;
 use App\Services\Ifs\Admin\CatServices;
 /**
- * 分类资源
+ * 翡翠品种
  *
- * @Resource("Goods")
+ * @Resource("Group Cats")
  */
 class CatController extends BaseController
 {
