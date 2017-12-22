@@ -9,11 +9,8 @@
 namespace App\Http\Controllers\Api\Controller;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Repository\Eloquent\Admin\UserRepository;
 use App\Services\Ifs\Admin\GoodsServices;
 use Dingo\Api\Http\Request;
-use JWTAuth;
-use Validator;
 
 /**
  * 商品资源
@@ -102,7 +99,10 @@ class GoodsController extends BaseController
         return API_MSG('','获取商品详情失败！','false',500);
     }
 
-    
+    public function add(Request $request)
+    {
+       
+    }
 
 
 }

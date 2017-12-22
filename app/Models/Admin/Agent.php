@@ -21,7 +21,7 @@ class Agent extends Base
      * 可以被集体赋值的表字段
      * @var array
      */
-    public $fillable = array('id','agent_code','agent_name','telphone','booth_number','pm','wx','bank_code','alipay_code','qq_code','status','license_number','updated_at','deleted_at');
+    public $fillable = array('id','agent_code','agent_name','telphone','booth_number','pm','wx','bank_code','alipay_code','agent_pic','status','license_number','updated_at','deleted_at','user_id');
 
     public function add($data)
     {

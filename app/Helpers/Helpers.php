@@ -246,7 +246,7 @@ if ( ! function_exists('generate_code'))
 {
     function generate_code($pre)
     {
-        return $pre.time();
+        return $pre.time().rand(1,9);
     }
 }
 

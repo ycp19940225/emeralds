@@ -2,7 +2,7 @@ FORMAT: 1A
 
 # API_DOSC
 
-# Users
+# Group Users
 用户资源
 
 ## 用户注册 [POST /api/users/register]
@@ -144,7 +144,7 @@ FORMAT: 1A
 
             []
 
-# Goods
+# Group Goods
 商品资源
 
 ## 获取所有商品 [GET /api/goods]
@@ -177,8 +177,41 @@ FORMAT: 1A
                 }
             }
 
-# Goods
-分类资源
+## 获取单个商品 [GET /api/goods/id]
+
+
++ Parameters
+    + id: (int, optional) - 商品ID
+
++ Request (application/json)
+    + Body
+
+            []
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "获取商品详情成功！",
+                "data": []
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "获取商品详情失败！",
+                    "data": ""
+                }
+            }
+
+# Group Cats
+翡翠品种
 
 ## 获取所有品种 [GET /api/cats]
 [获取所有品种,以及二级分类，三级明细]
@@ -200,9 +233,7 @@ FORMAT: 1A
                 "status": "true",
                 "code": "200",
                 "msg": "获取品种成功！",
-                "data": {
-                    "s": 1
-                }
+                "data": ""
             }
 
 + Response 500 (application/json)
@@ -213,6 +244,154 @@ FORMAT: 1A
                     "status": "false",
                     "code": 500,
                     "msg": "获取品种失败！",
+                    "data": ""
+                }
+            }
+
+# Group Articles
+文章
+
+## 获取所有文章 [GET /api/articles]
+
+
++ Parameters
+    + cat: (json, optional) - 文章所属分类
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": "200",
+                "msg": "获取所有文章成功！",
+                "data": ""
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "获取文章失败！",
+                    "data": ""
+                }
+            }
+
+## 获取所有文章分类 [GET /api/articles/cats]
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": "200",
+                "msg": "获取所有文章分类成功！",
+                "data": ""
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "获取文章分类失败！",
+                    "data": ""
+                }
+            }
+
+## 获取分类文章（通过分类ID） [GET /api/article/cat/id]
+
+
++ Parameters
+    + id: (int, optional) - 分类ID
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": "200",
+                "msg": "获取分类文章成功！",
+                "data": {
+                    "id": 2,
+                    "cat_name": "企业动向",
+                    "intro": "收集最新企业动向",
+                    "created_at": "1513398620",
+                    "updated_at": "1513398647",
+                    "deleted_at": 0,
+                    "article": ""
+                }
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "获取分类文章失败！",
+                    "data": ""
+                }
+            }
+
+## 获取文章详情（通过文章ID） [GET /api/article/id]
+
+
++ Parameters
+    + id: (int, optional) - 文章ID
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": "200",
+                "msg": "获取文章成功！",
+                "data": ""
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "获取文章失败！",
+                    "data": ""
+                }
+            }
+
+# Group Slide
+轮播图
+
+## 获取所有轮播图 [GET /api/slides]
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": "200",
+                "msg": "获取成功！",
+                "data": ""
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "获取失败！",
                     "data": ""
                 }
             }

@@ -7,6 +7,10 @@ $api->version('v1', function ($api) {
         $api->group(['middleware'=>'jwt.auth','providers' => 'jwt'], function ($api) {
             $api->get('users/index', 'UserController@index');
             $api->get('users/refreshToken', 'UserController@refreshToken');
+            $api->post('users/logo', 'UserController@logo');
+            $api->post('users/edit', 'UserController@edit');
+            $api->post('users/agent/upload','UserController@upload_agent_pic');
+            $api->post('users/agent/add','UserController@user_to_agent');
         });
     });
     //不需要认证

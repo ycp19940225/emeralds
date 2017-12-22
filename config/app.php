@@ -204,8 +204,6 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         //短信验证
-        Toplan\PhpSms\PhpSmsServiceProvider::class,
-        Toplan\Sms\SmsManagerServiceProvider::class,
 
 
         /********************业务逻辑
@@ -276,8 +274,6 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
 
         //短信验证
-        'PhpSms' => Toplan\PhpSms\Facades\Sms::class,
-        'SmsManager' => Toplan\Sms\Facades\SmsManager::class,
 
     ],
 

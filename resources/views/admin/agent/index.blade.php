@@ -51,7 +51,7 @@
                                 <td>{{ $v['pm'] }}</td>
                                 <td>{{ $v['bank_code'] }}</td>
                                 <td>{{ $v['alipay_code'] }}</td>
-                                <td>{{ $v['agent_pic'] }}</td>
+                                <td><img class="agent_pic" width="40px" height="40px" src="{{ loadStaticImg($v['agent_pic']) }}" alt=""></td>
                                 <td>{{ $v['created_at'] }}</td>
                                 <td>{{ check_status($v['status']) }}</td>
                                 <td>
@@ -123,5 +123,17 @@
             });
 
         }
+        $(".agent_pic").click(function () {
+            var img_url = $(this).attr('src');
+            layer.open({
+                type: 1,
+                title: "查看详细图片",
+                closeBtn: 0,
+                area: '516px',
+                skin: 'layui-layer-nobg', //没有背景色
+                shadeClose: true,
+                content: '<img class="agent_pic" width="" height="" src="'+img_url+'" alt="">'
+            });
+        });
     </script>
     @endsection
