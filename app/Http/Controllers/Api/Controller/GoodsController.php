@@ -9,7 +9,9 @@
 namespace App\Http\Controllers\Api\Controller;
 
 use App\Http\Controllers\Api\BaseController;
+use App\Services\Common\UploadServicesImpl;
 use App\Services\Ifs\Admin\GoodsServices;
+use App\Services\Ifs\Common\UploadServices;
 use Dingo\Api\Http\Request;
 
 /**
@@ -101,8 +103,33 @@ class GoodsController extends BaseController
 
     public function add(Request $request)
     {
-
+        $data = $request->all();
+        if($data){
+            return API_MSG($data,'获取商品详情成功！');
+        }
+        return API_MSG('','获取商品详情失败！','false',500);
     }
 
+    public function uploadLogo(Request $request,UploadServicesImpl $uploadServicesImpl)
+    {
+        $files = $request->file('logo');
+        $urls = $uploadServicesImpl->uploadImg('goods_logo',$files);
+        if ($urls){
+            return API_MSG($urls,'上传成功！','true',200);
+        } else {
+            return API_MSG('','上传失败！','false',500);
+        }
+    }
+
+    public function uploadPic(Request $request,UploadServicesImpl $uploadServicesImpl)
+    {
+        $files = $request->file('pic');
+        $urls = $uploadServicesImpl->uploadImg('goods_pic',$files);
+        if ($urls){
+            return API_MSG($urls,'上传成功！','true',200);
+        } else {
+            return API_MSG('','上传失败！','false',500);
+        }
+    }
 
 }

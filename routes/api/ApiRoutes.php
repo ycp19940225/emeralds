@@ -12,6 +12,12 @@ $api->version('v1', function ($api) {
             $api->post('users/agent/upload','UserController@upload_agent_pic');
             $api->post('users/agent/add','UserController@user_to_agent');
         });
+        //商品
+        $api->group(['middleware'=>'jwt.auth','providers' => 'jwt'], function ($api) {
+            $api->post('goods/logo', 'GoodsController@uploadLogo');
+            $api->post('goods/pic', 'GoodsController@uploadpic');
+            $api->post('goods/add', 'GoodsController@add');
+        });
     });
     //不需要认证
     $api->group(['namespace' => 'App\Http\Controllers\Api\Controller'], function ($api) {
