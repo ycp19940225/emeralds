@@ -101,7 +101,7 @@ class GoodsController extends BaseController
 
     public function add(Request $request)
     {
-       
+
     }
 
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-21 20:44:49
+Date: 2017-12-22 17:59:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -68,7 +68,7 @@ INSERT INTO `emerald_admin_role` VALUES ('39', '8');
 DROP TABLE IF EXISTS `emerald_agent`;
 CREATE TABLE `emerald_agent` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `agent_code` varchar(255) NOT NULL COMMENT '代理商编号',
+  `agent_code` varchar(255) NOT NULL DEFAULT '' COMMENT '代理商编号',
   `agent_name` varchar(255) NOT NULL COMMENT '姓名',
   `telphone` varchar(255) NOT NULL DEFAULT '0' COMMENT '手机号',
   `booth_number` varchar(255) NOT NULL DEFAULT '' COMMENT '摊位号',
@@ -76,7 +76,7 @@ CREATE TABLE `emerald_agent` (
   `pm` varchar(255) NOT NULL COMMENT '主营项目',
   `bank_code` varchar(255) NOT NULL COMMENT '银行卡号',
   `alipay_code` varchar(255) NOT NULL COMMENT '支付宝账号',
-  `agent_pic` varchar(255) NOT NULL COMMENT 'qq账号',
+  `agent_pic` varchar(255) NOT NULL DEFAULT '' COMMENT '营业执照或者身份证',
   `status` int(11) NOT NULL DEFAULT '0' COMMENT '状态',
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
@@ -85,12 +85,13 @@ CREATE TABLE `emerald_agent` (
   `deleted` int(5) NOT NULL DEFAULT '0',
   `user_id` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='代理商';
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='代理商';
 
 -- ----------------------------
 -- Records of emerald_agent
 -- ----------------------------
 INSERT INTO `emerald_agent` VALUES ('4', 'LYFC15114263421', '杨春坪', '18983663382', '123456789', '123456789wx', '翡翠，珠宝', '123456789', '123456789alpay', '', '1', '1511426342', '1511429137', '0', '123456789', '1', '0');
+INSERT INTO `emerald_agent` VALUES ('6', 'LYFC15139231395', '翡翠代理商测试', '18983667722', 'taiwei123456', 'ycp18989999', '翡翠，珠宝', '34353435435345', 'ycpalipay2442', 'agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg', '0', '1513923139', '1513923139', '0', '0', '0', '18');
 
 -- ----------------------------
 -- Table structure for emerald_article
@@ -548,6 +549,6 @@ CREATE TABLE `emerald_user` (
 -- ----------------------------
 -- Records of emerald_user
 -- ----------------------------
-INSERT INTO `emerald_user` VALUES ('18', '18983663382', '', '$2y$10$bHIzugQXEvA4JErDpjjnquvYPevBO9Ygd2u.KZ7aavPm7659Wouji', '', '', '1513778706', '1513778706', '0', '');
+INSERT INTO `emerald_user` VALUES ('18', '18983663382', '杨春坪', '$2y$10$bHIzugQXEvA4JErDpjjnquvYPevBO9Ygd2u.KZ7aavPm7659Wouji', 'user/2017-12-22/8UiplhNSSPRnHAkqhIrtNwDksJnnXS59h1k0CtOY.jpeg', '820363773@qq.com', '1513778706', '1513920778', '0', '');
 INSERT INTO `emerald_user` VALUES ('19', '18983663383', '', '$2y$10$JWyNLGUJLOg/g.CqrDW09uWmNPq1b6TWGEexxF9GGck6bIhKrRxBy', '', '', '1513835015', '1513835015', '0', '');
 INSERT INTO `emerald_user` VALUES ('20', '18983663381', '', '$2y$10$e4BnMaMKn6F0qPOihLGTG.HkH.wyWU8UuxWZqFhb5Bw3wXECezJ5m', '', '', '1513835481', '1513835481', '0', '');

@@ -312,14 +312,14 @@ class UserController extends BaseController
      *
      * @Post("/api/users/agent/add?token={token}")
      * @Parameters({
-     *      @Parameter("agent_pic", type="varchar", required=true, description="营业执照或者身份证照片"),
-     *      @Parameter("agent_name", type="varchar", required=true, description="名称"),
+     *      @Parameter("agent_pic", type="varchar", description="营业执照或者身份证照片"),
+     *      @Parameter("agent_name", type="varchar", required=true, description="姓名"),
      *      @Parameter("telphone", type="varchar", required=true, description="电话号码"),
      *      @Parameter("booth_number", type="varchar", required=true, description="摊位号"),
-     *      @Parameter("wx", type="varchar", required=true, description="微信"),
-     *      @Parameter("pm", type="varchar", required=true, description="主营项目"),
-     *      @Parameter("bank_code", type="varchar", required=true, description="银行卡号"),
-     *      @Parameter("alipay_code", type="varchar", required=true, description="支付宝账号")
+     *      @Parameter("wx", type="varchar",required=true, description="微信"),
+     *      @Parameter("pm", type="varchar",description="主营项目"),
+     *      @Parameter("bank_code", type="varchar",description="银行卡号"),
+     *      @Parameter("alipay_code", type="varchar",description="支付宝账号")
      * })
      *@Transaction({
      *      @Request({
