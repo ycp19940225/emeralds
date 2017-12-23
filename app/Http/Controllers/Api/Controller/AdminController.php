@@ -116,7 +116,7 @@ class AdminController extends BaseController
      * 刷新密钥
      *
      *
-     * @get("/api/users/refreshToken?token={token}")
+     * @get("/api/admin/refreshToken?token={token}")
      *@Transaction({
      *      @Request({
 
