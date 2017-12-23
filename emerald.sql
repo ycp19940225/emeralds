@@ -3,14 +3,14 @@ Navicat MySQL Data Transfer
 
 Source Server         : phpstudy
 Source Server Version : 50553
-Source Host           : 127.0.0.1:3306
+Source Host           : localhost:3306
 Source Database       : emerald
 
 Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-22 18:03:34
+Date: 2017-12-24 03:46:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,14 +35,12 @@ CREATE TABLE `emerald_admin` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `adminname` (`adminname`),
   KEY `role_id` (`role_id`) COMMENT '角色'
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='管理员表';
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COMMENT='管理员表';
 
 -- ----------------------------
 -- Records of emerald_admin
 -- ----------------------------
-INSERT INTO `emerald_admin` VALUES ('1', 'ycp', '447910ff7241c373129b8761cc312c78', '', '', '1510902753', '1510902753', '0', '0', '0', '0', '1');
-INSERT INTO `emerald_admin` VALUES ('39', 'test', 'fed6fb05c04e7e31bc5a91b25834281f', '', '', '1510910879', '1510910879', '0', '0', '0', '0', '1');
-INSERT INTO `emerald_admin` VALUES ('40', 'feichui', 'fed6fb05c04e7e31bc5a91b25834281f', '', '', '1512321136', '1512321136', '0', '0', '0', '0', '1');
+INSERT INTO `emerald_admin` VALUES ('1', 'ycp', '$2y$10$BvocYzfIOtnVMF/M3Myh7ul7EhtjmbCVBQ7cgWtFtdzqtDz6NS3Mi', 'admin/2017-12-24/agOAeSGPNL96bj1dCmX14ayu6p9OggCCCKExIUAP.jpeg', '', '1514057062', '1514058001', '0', '0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for emerald_admin_role
