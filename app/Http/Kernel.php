@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'admin.check.pris' => \App\Http\Middleware\AdminNeedsPermission::class,
         'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
         'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
+        'app.admin' => \App\Http\Middleware\AppAdmin::class,
     ];
 }

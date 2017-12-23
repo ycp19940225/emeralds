@@ -2,6 +2,143 @@ FORMAT: 1A
 
 # API_DOSC
 
+# Group Admin
+管理员
+
+## 管理员登录 [POST /api/admin/login]
+
+
++ Parameters
+    + adminname: (varchar, required) - 登录名
+    + password: (varchar, required) - 密码
+    + data: (varchar, optional) - 密钥
+
++ Request (application/json)
+    + Body
+
+            {
+                "telphone": "18983663382",
+                "password": "1994okyang"
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "登录成功！",
+                "data": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmVtZXJhbGQuY29tL2FwaS91c2Vycy9sb2dpbiIsImlhdCI6MTUxMzc3MDc0MiwiZXhwIjoxNTEzNzc0MzQyLCJuYmYiOjE1MTM3NzA3NDIsImp0aSI6InVYS1YyYkRXN1BiUHVuRWUiLCJzdWIiOjE1LCJwcnYiOiI3MjM0OWFmZmRhMDQ0ZGMyYWQ3MGEzOWVmMTUxNjNlYTY3YTczMzEzIn0.sWuDl5AGS0NDzJpaJ2UkeJT0QJwBg2Xs8KYTZRSnNe8"
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "登录失败！",
+                    "data": ""
+                }
+            }
+
+## 管理员首页 [GET /api/admin/index?token={token}]
+
+
++ Parameters
+    + token: (varchar, required) - 密钥
+
++ Request (application/json)
+    + Body
+
+            []
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "获取管理员信息成功！",
+                "data": {
+                    "id": 1,
+                    "adminname": "ycp",
+                    "logo": "",
+                    "email": "",
+                    "created_at": "1514057062",
+                    "updated_at": "1514057062",
+                    "input_id": 0,
+                    "deleted_at": 0,
+                    "role_id": 0,
+                    "status": 1
+                }
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "message": "Token Signature could not be verified.",
+                    "status_code": 401
+                }
+            }
+
+## 刷新密钥 [GET /api/users/refreshToken?token={token}]
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "刷新成功！",
+                "data": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmVtZXJhbGQuY29tL2FwaS91c2Vycy9yZWZyZXNoVG9rZW4iLCJpYXQiOjE1MTM4MzgwNDksImV4cCI6MTUxMzg0MjMxOSwibmJmIjoxNTEzODM4NzE5LCJqdGkiOiJSR0s3UDM5QU5vVEg1a2xHIiwic3ViIjoyMCwicHJ2IjoiNzIzNDlhZmZkYTA0NGRjMmFkNzBhMzllZjE1MTYzZWE2N2E3MzMxMyJ9.m6HkK9MbKi7g7oAvSHWAdY0TdYlpflIrdx-vihw59OQ"
+            }
+
++ Request (application/json)
+    + Body
+
+            []
+
+## 修改管理员头像 [POST /api/admin/logo?token={token}]
+
+
++ Parameters
+    + logo: (file, required) - 头像
+    + token: (varchar, required) - 秘钥
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "头像修改失败！",
+                    "data": ""
+                }
+            }
+
++ Request (application/json)
+    + Body
+
+            {
+                "logo": ""
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "头像修改成功！",
+                "data": "admin/2017-12-24/agOAeSGPNL96bj1dCmX14ayu6p9OggCCCKExIUAP.jpeg"
+            }
+
 # Group Users
 用户资源
 
@@ -143,6 +280,175 @@ FORMAT: 1A
     + Body
 
             []
+
+## 完善用户信息 [POST /api/users/edit?token={token}]
+
+
++ Parameters
+    + nickname: (varchar, required) - 别名
+    + email: (varchar, required) - 邮箱
+    + token: (varchar, required) - 秘钥
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "编辑失败！",
+                    "data": ""
+                }
+            }
+
++ Request (application/json)
+    + Body
+
+            []
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "编辑成功！",
+                "data": true
+            }
+
+## 修改用户头像 [POST /api/users/logo?token={token}]
+手机号唯一，不能重复注册
+
++ Parameters
+    + logo: (file, required) - 头像
+    + token: (varchar, required) - 秘钥
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "头像修改失败！",
+                    "data": ""
+                }
+            }
+
++ Request (application/json)
+    + Body
+
+            {
+                "logo": ""
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "头像修改成功！",
+                "data": true
+            }
+
+## 上传供应商营业执照或者身份证 [POST /api/users/agent/upload?token={token}]
+
+
++ Parameters
+    + logo: (file, required) - 头像
+    + token: (varchar, required) - 秘钥
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "上传失败！",
+                    "data": ""
+                }
+            }
+
++ Request (application/json)
+    + Body
+
+            {
+                "pic": ""
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "上传成功！",
+                "data": "agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg"
+            }
+
+## 申请成为供应商 [POST /api/users/agent/add?token={token}]
+
+
++ Parameters
+    + agent_pic: (varchar, optional) - 营业执照或者身份证照片
+    + agent_name: (varchar, required) - 姓名
+    + telphone: (varchar, required) - 电话号码
+    + booth_number: (varchar, required) - 摊位号
+    + wx: (varchar, required) - 微信
+    + pm: (varchar, optional) - 主营项目
+    + bank_code: (varchar, optional) - 银行卡号
+    + alipay_code: (varchar, optional) - 支付宝账号
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "申请失败！",
+                    "data": ""
+                }
+            }
+
++ Request (application/json)
+    + Body
+
+            {
+                "agent_name": "翡翠代理商测试",
+                "telphone": "18983667722",
+                "booth_number": "taiwei123456",
+                "wx": "ycp18989999",
+                "pm": "翡翠，珠宝",
+                "bank_code": "34353435435345",
+                "alipay_code": "ycpalipay2442",
+                "agent_pic": "agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg"
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "申请成功,请等待审核！",
+                "data": {
+                    "agent_name": "翡翠代理商测试",
+                    "telphone": "18983667722",
+                    "booth_number": "taiwei123456",
+                    "wx": "ycp18989999",
+                    "pm": "翡翠，珠宝",
+                    "bank_code": "34353435435345",
+                    "alipay_code": "ycpalipay2442",
+                    "user_id": 18,
+                    "agent_code": "LYFC15139227896",
+                    "updated_at": "1513922789",
+                    "created_at": "1513922789",
+                    "id": 5
+                }
+            }
 
 # Group Goods
 商品资源

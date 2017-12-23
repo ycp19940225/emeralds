@@ -9,12 +9,12 @@
 namespace App\Models\Admin;
 
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Hash;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject as AuthenticatableUserContract;
 use Illuminate\Http\Request;
-use App\Models\Base;
 
-class Users extends Base
+class Users extends  Authenticatable implements AuthenticatableUserContract
 {
     protected $table = 'emerald_admin';
     protected $dateFormat = 'U';
@@ -25,6 +25,10 @@ class Users extends Base
      */
     public $fillable = array('id','adminname','password','email','logo','created_at','updated_at','input_id','token');
 
+
+    protected $hidden = [
+        'password', 'token',
+    ];
 
     /**
      * 关联模型
@@ -91,12 +95,12 @@ class Users extends Base
      */
     public function processingData($data, $method = ''){
         switch ($method){
-            case 'add':  $data['password'] = get_md5_password($data['password']) ;
+            case 'add':  $data['password'] = bcrypt($data['password']) ;
                 break;
             case 'edit':
                 $res = $this->find($data['id']);
                 if(isset($data['password']) && $res['password'] !== $data['password']){
-                    $data['password'] = get_md5_password($data['password']);
+                    $data['password'] = bcrypt($data['password']);
                 }
                 if(!isset($data['email'])){
                     $data['email'] = '';
@@ -114,7 +118,32 @@ class Users extends Base
      */
     public function doLogin($password,$username)
     {
-        return $this->where('adminname',$username)->where('status',1)->where('password',get_md5_password($password))->first();
+
+        $data = $this->where('adminname',$username)->where('status',1)->first();
+        $data_password =$data->password;
+        if(Hash::check($password,$data_password)){
+            return $data;
+        }
+        return $data;
     }
 
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey(); // Eloquent model method.
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
