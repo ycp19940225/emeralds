@@ -85,7 +85,7 @@ FORMAT: 1A
                 }
             }
 
-## 刷新密钥 [GET /api/users/refreshToken?token={token}]
+## 刷新密钥 [GET /api/admin/refreshToken?token={token}]
 
 
 + Response 200 (application/json)
@@ -512,6 +512,117 @@ FORMAT: 1A
                     "status": "false",
                     "code": 500,
                     "msg": "获取商品详情失败！",
+                    "data": ""
+                }
+            }
+
+## 上传商品
+[/api/admin/goods/add,为管理员上传路径]
+[/api/agent/goods/add,为管理员上传路径] [POST /api/admin/goods/logo]
+
+
++ Parameters
+    + logo: (file, optional) - 图片
+
++ Request (application/json)
+    + Body
+
+            {
+                "logo": ""
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "上传成功！",
+                "data": "goods_logo/2017-12-24/naxS3VYvCkPEcrCwsuua1IPTwmtFh80c3BIjCGPy.jpeg"
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "获取商品详情失败！",
+                    "data": ""
+                }
+            }
+
+## 上传商品封面
+[/api/admin/goods/logo,为管理员上传路径]
+[/api/agent/goods/logo,为代理商上传路径] [POST /api/admin/goods/logo]
+
+
++ Parameters
+    + logo: (file, optional) - 图片
+
++ Request (application/json)
+    + Body
+
+            {
+                "logo": ""
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "上传成功！",
+                "data": "goods_logo/2017-12-24/naxS3VYvCkPEcrCwsuua1IPTwmtFh80c3BIjCGPy.jpeg"
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "参数错误或者上传失败！",
+                    "data": ""
+                }
+            }
+
+## 上传商品封面
+[/api/admin/goods/pic,为管理员上传路径]
+[/api/agent/goods/pic,为代理商上传路径] [POST /api/admin/goods/logo]
+
+
++ Parameters
+    + pic: (file, optional) - 图片
+
++ Request (application/json)
+    + Body
+
+            {
+                "pic": ""
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "上传成功！",
+                "data": "goods_pic/2017-12-24/naxS3VYvCkPEcrCwsuua1IPTwmtFh80c3BIjCGPy.jpeg"
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "参数错误或者上传失败！",
                     "data": ""
                 }
             }

@@ -41,9 +41,10 @@ $api->version('v1', function ($api) {
         });
         //商品
         $api->group(['middleware'=>'jwt.auth','providers' => 'jwt'], function ($api) {
-            $api->post('goods/logo', 'GoodsController@uploadLogo');
-            $api->post('goods/pic', 'GoodsController@uploadpic');
-            $api->post('goods/add', 'GoodsController@add');
+            $api->post('agent/goods/logo', 'GoodsController@uploadLogo');
+            $api->post('agent/goods/pic', 'GoodsController@uploadpic');
+            $api->post('agent/goods/video', 'GoodsController@uploadVideo');
+            $api->post('agent/goods/add', 'GoodsController@add');
         });
     });
     //管理员
@@ -52,12 +53,12 @@ $api->version('v1', function ($api) {
             $api->get('admin/index', 'AdminController@index');
             $api->get('admin/refreshToken', 'AdminController@refreshToken');
             $api->post('admin/logo', 'AdminController@logo');
-            $api->post('admin/edit', 'AdminController@edit');
         });
         //商品
         $api->group(['middleware'=>['app.admin','jwt.auth'],'providers' => 'jwt'], function ($api) {
             $api->post('admin/goods/logo', 'GoodsController@uploadLogo');
             $api->post('admin/goods/pic', 'GoodsController@uploadpic');
+            $api->post('admin/goods/video', 'GoodsController@uploadVideo');
             $api->post('admin/goods/add', 'GoodsController@add');
         });
     });

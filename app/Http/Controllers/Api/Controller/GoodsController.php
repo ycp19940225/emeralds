@@ -101,35 +101,205 @@ class GoodsController extends BaseController
         return API_MSG('','获取商品详情失败！','false',500);
     }
 
-    public function add(Request $request)
-    {
-        $data = $request->all();
-        if($data){
-            return API_MSG($data,'获取商品详情成功！');
-        }
-        return API_MSG('','获取商品详情失败！','false',500);
-    }
-
+    /**
+     * 上传商品封面
+     *
+     *[/api/admin/goods/logo,为管理员上传路径]
+     *[/api/agent/goods/logo,为代理商上传路径]
+     *
+     * @Post("/api/admin(agent)/goods/logo")
+     * @Parameters({
+     *      @Parameter("logo", type="file",description="图片")
+     * })
+     *@Transaction({
+     *      @Request({
+     *     "logo":""
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": 200,
+    "msg": "上传成功！",
+    "data": "goods_logo/2017-12-24/naxS3VYvCkPEcrCwsuua1IPTwmtFh80c3BIjCGPy.jpeg"
+    }),
+     *      @Response(500, body={"error": {
+    "status": "false",
+    "code": 500,
+    "msg": "参数错误或者上传失败！",
+    "data": ""
+     *     }})
+     * })
+     */
     public function uploadLogo(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
         $files = $request->file('logo');
         $urls = $uploadServicesImpl->uploadImg('goods_logo',$files);
-        if ($urls){
+        if ($files&&$urls){
             return API_MSG($urls,'上传成功！','true',200);
         } else {
-            return API_MSG('','上传失败！','false',500);
+            return API_MSG('','参数错误或者上传失败！','false',500);
         }
     }
-
+    /**
+     * 上传商品相册
+     *
+     *[/api/admin/goods/pic,为管理员上传路径]
+     *[/api/agent/goods/pic,为代理商上传路径]
+     *
+     * @Post("/api/admin(agent)/goods/logo")
+     * @Parameters({
+     *      @Parameter("pic", type="file",description="图片")
+     * })
+     *@Transaction({
+     *      @Request({
+     *     "pic":""
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": 200,
+    "msg": "上传成功！",
+    "data": "goods_pic/2017-12-24/naxS3VYvCkPEcrCwsuua1IPTwmtFh80c3BIjCGPy.jpeg"
+    }),
+     *      @Response(500, body={"error": {
+    "status": "false",
+    "code": 500,
+    "msg": "参数错误或者上传失败！",
+    "data": ""
+     *     }})
+     * })
+     */
     public function uploadPic(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
         $files = $request->file('pic');
         $urls = $uploadServicesImpl->uploadImg('goods_pic',$files);
-        if ($urls){
+        if ($files&&$urls){
             return API_MSG($urls,'上传成功！','true',200);
         } else {
-            return API_MSG('','上传失败！','false',500);
+            return API_MSG('','参数错误或者上传失败！','false',500);
         }
     }
+
+    /**
+     * 上传商品视频
+     *
+     *[/api/admin/goods/pic,为管理员上传路径]
+     *[/api/agent/goods/pic,为代理商上传路径]
+     *
+     * 视频限制大小为8M
+     *
+     * @Post("/api/admin(agent)/goods/video")
+     * @Parameters({
+     *      @Parameter("video", type="file",description="视频")
+     * })
+     *@Transaction({
+     *      @Request({
+     *     "video":""
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": 200,
+    "msg": "上传成功！",
+    "data": "goods_video/2017-12-24/792190e9187897d3b67dc833f77f7da4.mp4"
+    }),
+     *      @Response(500, body={"error": {
+    "status": "false",
+    "code": 500,
+    "msg": "参数错误或者上传失败！",
+    "data": ""
+     *     }})
+     * })
+     */
+    public function uploadVideo(Request $request,UploadServicesImpl $uploadServicesImpl)
+    {
+        $files = $request->file('video');
+        $urls = $uploadServicesImpl->uploadVideo('goods_video',$files);
+        if ($files&&$urls){
+            return API_MSG($urls,'上传成功！','true',200);
+        } else {
+            return API_MSG('','参数错误或者上传失败！'.$urls,'false',500);
+        }
+    }
+
+    /**
+     * 上传商品
+     *
+     *[/api/admin/goods/add,为管理员上传路径]
+     *[/api/agent/goods/add,为管理员上传路径]
+     *
+     * @Post("/api/admin(agent)/goods/add")
+     * @Parameters({
+     *      @Parameter("logo", type="varchar",description="图片url"),
+     *      @Parameter("goods_name", type="varchar",description="翡翠名"),
+     *      @Parameter("pic", type="varchar",description="翡翠相册，每张图片以逗号隔开"),
+     *      @Parameter("video", type="varchar",description="视频地址"),
+     *      @Parameter("goods_detail", type="varchar",description="翡翠详情"),
+     *      @Parameter("price", type="varchar",description="翡翠价格"),
+     *      @Parameter("stock", type="varchar",description="库存"),
+     *      @Parameter("cat_id", type="varchar",description="品种"),
+     *      @Parameter("type", type="varchar",description="二级分类及三级明细，格式参考示例请求"),
+     *      @Parameter("input_type", type="int",description="录入者类型，1为代理商，2为管理员"),
+     *      @Parameter("input_id", type="int",description="录入者Id，结合input_type"),
+     * })
+     *@Transaction({
+     *      @Request({
+     *
+    "goods_name":"测试翡翠",
+    "logo":"goods_logo/2017-12-24/Y2rlFNKjVlv9xDTWjWG7FYsCoSe2SDDf5HHfrGFW.jpeg",
+    "pic":"goods_pic/2017-12-24/Zz7G0UBLUISswZPggrQ86UteBOr096hNw5JYmtfZ.jpeg,goods_pic/2017-12-24/naxS3VYvCkPEcrCwsuua1IPTwmtFh80c3BIjCGPy.jpe",
+    "video":"goods_video/2017-12-24/792190e9187897d3b67dc833f77f7da4.mp4",
+    "goods_detail":"库存仅此一件【尺寸】高35.5mm，宽23.5mm，厚5.6mm【颜　　色】略飘花【透明度】二分之一透明【必要说明】可见细小石纹，但瑕不掩瑜",
+    "price":"20000",
+    "stock":"1",
+    "cat_id":"114",
+    "type":{
+    "136":{"type_val":"玻璃种"},
+    "135":{"type_val":"观音"},
+    "137":{"type_val":"飘绿"},
+    "138":{"type_val":"1.5-3万"}
+    }
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": "200",
+    "msg": "添加成功！",
+    "data": {
+    "goods_name": "测试翡翠",
+    "logo": "goods_logo/2017-12-24/Y2rlFNKjVlv9xDTWjWG7FYsCoSe2SDDf5HHfrGFW.jpeg",
+    "pic": "goods_pic/2017-12-24/Zz7G0UBLUISswZPggrQ86UteBOr096hNw5JYmtfZ.jpeg,goods_pic/2017-12-24/naxS3VYvCkPEcrCwsuua1IPTwmtFh80c3BIjCGPy.jpe",
+    "video": "goods_video/2017-12-24/792190e9187897d3b67dc833f77f7da4.mp4",
+    "goods_detail": "库存仅此一件【尺寸】高35.5mm，宽23.5mm，厚5.6mm【颜　　色】略飘花【透明度】二分之一透明【必要说明】可见细小石纹，但瑕不掩瑜",
+    "price": "20000",
+    "stock": "1",
+    "cat_id": "114",
+    "goods_code": "LYFC15141200105",
+    "updated_at": "1514120010",
+    "created_at": "1514120010",
+    "id": 39
+    }
+    }),
+     *      @Response(500, body={"error": {
+    "status": "false",
+    "code": 500,
+    "msg": "添加失败！",
+    "data": ""
+     *     }})
+     * })
+     */
+    public function add(Request $request)
+    {
+        $data = $request->except('token');
+        if($this->auth()->user()->getTable() == 'emerald_admin'){
+            $data['input_type'] = 2 ;
+        }else{
+            $data['input_type'] = 1 ;
+        }
+        $data['goods_code'] = generate_code('LYFC');
+        $data['input_id'] = $this->auth()->user()->id;
+        $res = $this->goods->save($data);
+        if($res){
+            return API_MSG($res,'添加成功！');
+        }
+        return API_MSG('','添加失败！','false',500);
+    }
+
 
 }

@@ -31,4 +31,21 @@ class UploadServicesImpl implements UploadServices
         return $filename;
     }
 
+    public function uploadVideo($string, $files)
+    {
+        $ext = $files->guessClientExtension();
+        $path_urls = $string.'/'.date('Y-m-d').'/';
+        $path = '/uploads/'.$path_urls;
+
+        $destinationPath = public_path() . $path;
+
+        $filename = $files->getClientOriginalName();
+
+        $newfile = md5(date('YmdHis').$filename).'.'.$ext;
+
+        $res = $files->move($destinationPath, $newfile);
+
+        return $path_urls.$newfile;
+    }
+
 }

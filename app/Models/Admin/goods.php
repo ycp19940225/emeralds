@@ -21,7 +21,7 @@ class Goods extends Base
      * @var array
      */
     public $fillable = array('id','goods_code','pic','video','goods_detail','price',
-        'sort','is_hot','cat_id','agent_id','stock','status','logo','goods_name',
+        'sort','is_hot','cat_id','input_id','input_type','stock','status','logo','goods_name',
         'created_at','updated_at','deleted_at');
     /**
      * 关联商品下的分类
@@ -44,8 +44,8 @@ class Goods extends Base
     {
         $goods_data = $this->create($data);
         //添加属性
-        $goods_data->attr()->sync($data['goods_attr']);
-        return true;
+        $goods_data->attr()->attach($data['type']);
+        return $goods_data;
     }
 
     /**
