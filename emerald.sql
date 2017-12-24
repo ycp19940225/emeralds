@@ -3,14 +3,14 @@ Navicat MySQL Data Transfer
 
 Source Server         : phpstudy
 Source Server Version : 50553
-Source Host           : localhost:3306
+Source Host           : 127.0.0.1:3306
 Source Database       : emerald
 
 Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-24 03:46:40
+Date: 2017-12-24 21:08:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,7 +35,7 @@ CREATE TABLE `emerald_admin` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `adminname` (`adminname`),
   KEY `role_id` (`role_id`) COMMENT '角色'
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COMMENT='管理员表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='管理员表';
 
 -- ----------------------------
 -- Records of emerald_admin
@@ -227,21 +227,24 @@ CREATE TABLE `emerald_goods` (
   `updated_at` int(11) NOT NULL DEFAULT '0',
   `deleted_at` int(11) NOT NULL DEFAULT '0',
   `cat_id` int(11) NOT NULL COMMENT '分类',
-  `agent_id` int(11) NOT NULL DEFAULT '0',
+  `input_id` int(11) NOT NULL DEFAULT '0' COMMENT '录入人员ID',
+  `input_type` tinyint(5) NOT NULL DEFAULT '1' COMMENT '录入人员类型，1代理商，2，管理员',
   `stock` int(11) NOT NULL DEFAULT '1' COMMENT '库存',
   `status` tinyint(5) NOT NULL DEFAULT '1' COMMENT '商品状态（1上架，0下架）',
   `logo` varchar(255) NOT NULL DEFAULT '' COMMENT '封面图',
   PRIMARY KEY (`id`),
   KEY `cat_id` (`cat_id`),
-  KEY `agent_id` (`agent_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='商品表';
+  KEY `agent_id` (`input_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COMMENT='商品表';
 
 -- ----------------------------
 -- Records of emerald_goods
 -- ----------------------------
-INSERT INTO `emerald_goods` VALUES ('7', '测试', 'LY1512573252', 'goods_pic/2017-12-06/exgfNlPYHcOSadWMqvBLTqGlEfmanyytFQqif7BS.jpeg,goods_pic/2017-12-06/PT8SKemSuVAHm1f69vt5pPnIx579L90eSLFI1tOY.jpeg,goods_pic/2017-12-06/pWtsrgWyfty12YMdGDG0O9iFhEU3JhiaATSkzW2m.jpeg', 'file\\2017-12\\ef0f9ba5e8dbe06a8e1a85ab44b57bdf.xlb', '前不久召开的中国共产党第十九次全国代表大会制定了新时代中国特色社会主义的行动纲领和发展蓝图。我们将坚持以人民为中心的发展思想，深入贯彻新发展理念，建设现代化经济体<span style=\"text-decoration-line: underline;\">系；全面深化改革，大力激发全社会创造力，持续释放发展活力；发展更高层次的开放型经济，深入推进“一带一路”建设，推动形成全面开放新格局。展望未来，中国发展动力更足、人民获得感更多、同世界互动更深，将为全球发展创造更多机遇、作出更大贡献。</span></span>\r\n\r\n                                    \" />', '10000', '0', '0', '1512573252', '1512573252', '1', '36', '0', '1', '1', 'logo/2017-12-06/k56OzehwICWq0nOFVJaquffhlxmGCwDiy7xnrGO3.jpeg');
-INSERT INTO `emerald_goods` VALUES ('10', '越南翡翠', 'LY1512581987', 'goods_pic/2017-12-07/xYDxA0yTrSeMMO3Ca6gbY0iMEddUwoxDaYFVbiHT.jpeg,goods_pic/2017-12-07/IcNxW8cD0ZPLHiu8VuULEiqcPnCsKpqtya20eO5d.jpeg', 'file\\2017-12\\74ffc976729fae029d6907b460e1428e.xlb', '', '9999', '0', '0', '1512581987', '1512581987', '1', '36', '0', '1', '1', 'logo/2017-12-07/q42Nff10vmKb2f4SGROykodSxWxK0nqyIJ5r9EQP.jpeg');
-INSERT INTO `emerald_goods` VALUES ('13', '黄金戒指', 'LY1512668303', 'goods_pic/2017-12-08/NEhmFOn9POXjpOInNRwx87c8y6Rew7NrBhr6zVMk.jpeg,goods_pic/2017-12-08/aZS3awKzLH8irkaBfSjud27dNuqu9s0UOPPUTmK6.jpeg,goods_pic/2017-12-08/wTq8nJI4lomhciM8w3YKCyUYqUqkRFzGEOUJnMG0.jpeg', 'file\\2017-12\\921ba475d8caec2a988b052ba5fa3c17.xlb', '', '10000', '0', '0', '1512668303', '1512668303', '1', '36', '0', '1', '1', 'logo/2017-12-08/Lz7ROrAweSTG1vLn0fvAx2lwdvIkbplVNEoUJo4f.jpeg');
+INSERT INTO `emerald_goods` VALUES ('7', '测试', 'LY1512573252', 'goods_pic/2017-12-06/exgfNlPYHcOSadWMqvBLTqGlEfmanyytFQqif7BS.jpeg,goods_pic/2017-12-06/PT8SKemSuVAHm1f69vt5pPnIx579L90eSLFI1tOY.jpeg,goods_pic/2017-12-06/pWtsrgWyfty12YMdGDG0O9iFhEU3JhiaATSkzW2m.jpeg', 'file\\2017-12\\ef0f9ba5e8dbe06a8e1a85ab44b57bdf.xlb', '前不久召开的中国共产党第十九次全国代表大会制定了新时代中国特色社会主义的行动纲领和发展蓝图。我们将坚持以人民为中心的发展思想，深入贯彻新发展理念，建设现代化经济体<span style=\"text-decoration-line: underline;\">系；全面深化改革，大力激发全社会创造力，持续释放发展活力；发展更高层次的开放型经济，深入推进“一带一路”建设，推动形成全面开放新格局。展望未来，中国发展动力更足、人民获得感更多、同世界互动更深，将为全球发展创造更多机遇、作出更大贡献。</span></span>\r\n\r\n                                    \" />', '10000', '0', '0', '1512573252', '1512573252', '1', '36', '0', '0', '1', '1', 'logo/2017-12-06/k56OzehwICWq0nOFVJaquffhlxmGCwDiy7xnrGO3.jpeg');
+INSERT INTO `emerald_goods` VALUES ('10', '越南翡翠', 'LY1512581987', 'goods_pic/2017-12-07/xYDxA0yTrSeMMO3Ca6gbY0iMEddUwoxDaYFVbiHT.jpeg,goods_pic/2017-12-07/IcNxW8cD0ZPLHiu8VuULEiqcPnCsKpqtya20eO5d.jpeg', 'file\\2017-12\\74ffc976729fae029d6907b460e1428e.xlb', '', '9999', '0', '0', '1512581987', '1512581987', '1', '36', '0', '0', '1', '1', 'logo/2017-12-07/q42Nff10vmKb2f4SGROykodSxWxK0nqyIJ5r9EQP.jpeg');
+INSERT INTO `emerald_goods` VALUES ('13', '黄金戒指', 'LY1512668303', 'goods_pic/2017-12-08/NEhmFOn9POXjpOInNRwx87c8y6Rew7NrBhr6zVMk.jpeg,goods_pic/2017-12-08/aZS3awKzLH8irkaBfSjud27dNuqu9s0UOPPUTmK6.jpeg,goods_pic/2017-12-08/wTq8nJI4lomhciM8w3YKCyUYqUqkRFzGEOUJnMG0.jpeg', 'file\\2017-12\\921ba475d8caec2a988b052ba5fa3c17.xlb', '', '10000', '0', '0', '1512668303', '1512668303', '1', '36', '0', '0', '1', '1', 'logo/2017-12-08/Lz7ROrAweSTG1vLn0fvAx2lwdvIkbplVNEoUJo4f.jpeg');
+INSERT INTO `emerald_goods` VALUES ('41', '测试翡翠', 'LYFC15141202058', 'goods_pic/2017-12-24/Zz7G0UBLUISswZPggrQ86UteBOr096hNw5JYmtfZ.jpeg,goods_pic/2017-12-24/naxS3VYvCkPEcrCwsuua1IPTwmtFh80c3BIjCGPy.jpe', 'goods_video/2017-12-24/792190e9187897d3b67dc833f77f7da4.mp4', '库存仅此一件【尺寸】高35.5mm，宽23.5mm，厚5.6mm【颜　　色】略飘花【透明度】二分之一透明【必要说明】可见细小石纹，但瑕不掩瑜', '20000', '0', '0', '1514120205', '1514120205', '0', '114', '1', '2', '1', '1', 'goods_logo/2017-12-24/Y2rlFNKjVlv9xDTWjWG7FYsCoSe2SDDf5HHfrGFW.jpeg');
+INSERT INTO `emerald_goods` VALUES ('42', '测试翡翠', 'LYFC15141206139', 'goods_pic/2017-12-24/Zz7G0UBLUISswZPggrQ86UteBOr096hNw5JYmtfZ.jpeg,goods_pic/2017-12-24/naxS3VYvCkPEcrCwsuua1IPTwmtFh80c3BIjCGPy.jpe', 'goods_video/2017-12-24/792190e9187897d3b67dc833f77f7da4.mp4', '库存仅此一件【尺寸】高35.5mm，宽23.5mm，厚5.6mm【颜　　色】略飘花【透明度】二分之一透明【必要说明】可见细小石纹，但瑕不掩瑜', '20000', '0', '0', '1514120613', '1514120613', '0', '114', '18', '1', '1', '1', 'goods_logo/2017-12-24/Y2rlFNKjVlv9xDTWjWG7FYsCoSe2SDDf5HHfrGFW.jpeg');
 
 -- ----------------------------
 -- Table structure for emerald_goods_type
@@ -258,68 +261,14 @@ CREATE TABLE `emerald_goods_type` (
 -- ----------------------------
 -- Records of emerald_goods_type
 -- ----------------------------
-INSERT INTO `emerald_goods_type` VALUES ('1', '73', '');
-INSERT INTO `emerald_goods_type` VALUES ('3', '25', '');
-INSERT INTO `emerald_goods_type` VALUES ('4', '25', '');
-INSERT INTO `emerald_goods_type` VALUES ('4', '28', '');
-INSERT INTO `emerald_goods_type` VALUES ('4', '52', '');
-INSERT INTO `emerald_goods_type` VALUES ('4', '88', '');
-INSERT INTO `emerald_goods_type` VALUES ('5', '25', '');
-INSERT INTO `emerald_goods_type` VALUES ('5', '28', '');
-INSERT INTO `emerald_goods_type` VALUES ('5', '52', '');
-INSERT INTO `emerald_goods_type` VALUES ('5', '88', '');
-INSERT INTO `emerald_goods_type` VALUES ('6', '25', '');
-INSERT INTO `emerald_goods_type` VALUES ('6', '29', '');
-INSERT INTO `emerald_goods_type` VALUES ('6', '53', '');
-INSERT INTO `emerald_goods_type` VALUES ('6', '92', '');
-INSERT INTO `emerald_goods_type` VALUES ('7', '26', '');
-INSERT INTO `emerald_goods_type` VALUES ('7', '29', '');
-INSERT INTO `emerald_goods_type` VALUES ('7', '53', '');
-INSERT INTO `emerald_goods_type` VALUES ('7', '87', '');
-INSERT INTO `emerald_goods_type` VALUES ('8', '100', '');
-INSERT INTO `emerald_goods_type` VALUES ('8', '31', '');
-INSERT INTO `emerald_goods_type` VALUES ('8', '55', '');
-INSERT INTO `emerald_goods_type` VALUES ('8', '95', '');
-INSERT INTO `emerald_goods_type` VALUES ('9', '100', '');
-INSERT INTO `emerald_goods_type` VALUES ('9', '31', '');
-INSERT INTO `emerald_goods_type` VALUES ('9', '55', '');
-INSERT INTO `emerald_goods_type` VALUES ('9', '95', '');
-INSERT INTO `emerald_goods_type` VALUES ('10', '100', '');
-INSERT INTO `emerald_goods_type` VALUES ('10', '31', '');
-INSERT INTO `emerald_goods_type` VALUES ('10', '55', '');
-INSERT INTO `emerald_goods_type` VALUES ('10', '95', '');
-INSERT INTO `emerald_goods_type` VALUES ('11', '131', '');
-INSERT INTO `emerald_goods_type` VALUES ('11', '155', '');
-INSERT INTO `emerald_goods_type` VALUES ('11', '161', '');
-INSERT INTO `emerald_goods_type` VALUES ('11', '175', '');
-INSERT INTO `emerald_goods_type` VALUES ('12', '131', '');
-INSERT INTO `emerald_goods_type` VALUES ('12', '155', '');
-INSERT INTO `emerald_goods_type` VALUES ('12', '161', '');
-INSERT INTO `emerald_goods_type` VALUES ('12', '175', '');
-INSERT INTO `emerald_goods_type` VALUES ('13', '131', '');
-INSERT INTO `emerald_goods_type` VALUES ('13', '155', '');
-INSERT INTO `emerald_goods_type` VALUES ('13', '161', '');
-INSERT INTO `emerald_goods_type` VALUES ('13', '175', '');
-INSERT INTO `emerald_goods_type` VALUES ('14', '131', '');
-INSERT INTO `emerald_goods_type` VALUES ('14', '155', '');
-INSERT INTO `emerald_goods_type` VALUES ('14', '161', '');
-INSERT INTO `emerald_goods_type` VALUES ('14', '175', '');
-INSERT INTO `emerald_goods_type` VALUES ('15', '131', '');
-INSERT INTO `emerald_goods_type` VALUES ('15', '155', '');
-INSERT INTO `emerald_goods_type` VALUES ('15', '161', '');
-INSERT INTO `emerald_goods_type` VALUES ('15', '175', '');
-INSERT INTO `emerald_goods_type` VALUES ('16', '131', '');
-INSERT INTO `emerald_goods_type` VALUES ('16', '155', '');
-INSERT INTO `emerald_goods_type` VALUES ('16', '161', '');
-INSERT INTO `emerald_goods_type` VALUES ('16', '175', '');
-INSERT INTO `emerald_goods_type` VALUES ('17', '131', '');
-INSERT INTO `emerald_goods_type` VALUES ('17', '155', '');
-INSERT INTO `emerald_goods_type` VALUES ('17', '161', '');
-INSERT INTO `emerald_goods_type` VALUES ('17', '175', '');
-INSERT INTO `emerald_goods_type` VALUES ('18', '131', '');
-INSERT INTO `emerald_goods_type` VALUES ('18', '155', '');
-INSERT INTO `emerald_goods_type` VALUES ('18', '161', '');
-INSERT INTO `emerald_goods_type` VALUES ('18', '175', '');
+INSERT INTO `emerald_goods_type` VALUES ('41', '136', '玻璃种');
+INSERT INTO `emerald_goods_type` VALUES ('41', '135', '观音');
+INSERT INTO `emerald_goods_type` VALUES ('41', '137', '飘绿');
+INSERT INTO `emerald_goods_type` VALUES ('41', '138', '1.5-3万');
+INSERT INTO `emerald_goods_type` VALUES ('42', '136', '玻璃种');
+INSERT INTO `emerald_goods_type` VALUES ('42', '135', '观音');
+INSERT INTO `emerald_goods_type` VALUES ('42', '137', '飘绿');
+INSERT INTO `emerald_goods_type` VALUES ('42', '138', '1.5-3万');
 
 -- ----------------------------
 -- Table structure for emerald_history
