@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-24 21:08:19
+Date: 2017-12-25 18:01:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,7 +40,7 @@ CREATE TABLE `emerald_admin` (
 -- ----------------------------
 -- Records of emerald_admin
 -- ----------------------------
-INSERT INTO `emerald_admin` VALUES ('1', 'ycp', '$2y$10$BvocYzfIOtnVMF/M3Myh7ul7EhtjmbCVBQ7cgWtFtdzqtDz6NS3Mi', 'admin/2017-12-24/agOAeSGPNL96bj1dCmX14ayu6p9OggCCCKExIUAP.jpeg', '', '1514057062', '1514058001', '0', '0', '0', '0', '1');
+INSERT INTO `emerald_admin` VALUES ('1', 'ycp', '$2y$10$5FvaC7FITVc1U/U13b5FHu4OCuWP.Y9KZBahbgFF4YDtAM9nwMCky', 'admin_logo/2017-12-25/0Cpa4B6JDPVpMneyQ2kdqOQ3Wl5Gt5FXS0ljjDBj.jpeg', '820363773@qq.com', '1514057062', '1514191854', '0', '0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for emerald_admin_role
@@ -496,6 +496,5 @@ CREATE TABLE `emerald_user` (
 -- ----------------------------
 -- Records of emerald_user
 -- ----------------------------
-INSERT INTO `emerald_user` VALUES ('18', '18983663382', '杨春坪', '$2y$10$bHIzugQXEvA4JErDpjjnquvYPevBO9Ygd2u.KZ7aavPm7659Wouji', 'admin/2017-12-22/8UiplhNSSPRnHAkqhIrtNwDksJnnXS59h1k0CtOY.jpeg', '820363773@qq.com', '1513778706', '1513920778', '0', '');
+INSERT INTO `emerald_user` VALUES ('18', '18983663382', '杨春坪', '$2y$10$bHIzugQXEvA4JErDpjjnquvYPevBO9Ygd2u.KZ7aavPm7659Wouji', 'user/2017-12-22/8UiplhNSSPRnHAkqhIrtNwDksJnnXS59h1k0CtOY.jpeg', '820363773@qq.com', '1513778706', '1513920778', '0', '');
 INSERT INTO `emerald_user` VALUES ('19', '18983663383', '', '$2y$10$JWyNLGUJLOg/g.CqrDW09uWmNPq1b6TWGEexxF9GGck6bIhKrRxBy', '', '', '1513835015', '1513835015', '0', '');
-INSERT INTO `emerald_user` VALUES ('20', '18983663381', '', '$2y$10$e4BnMaMKn6F0qPOihLGTG.HkH.wyWU8UuxWZqFhb5Bw3wXECezJ5m', '', '', '1513835481', '1513835481', '0', '');
