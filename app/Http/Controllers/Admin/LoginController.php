@@ -52,6 +52,11 @@ class loginController extends controller
         }
         $is_login = $this->loginServices->check($password,$adminname);
         if($is_login){
+            $role_name = '';
+            foreach($is_login->roles as $v){
+                $role_name .=  $v->role_name;
+            }
+            $is_login['role_name'] = $role_name;
             SC::setLoginSession($is_login);
             $admin_id = $is_login->id;
             //设置权限

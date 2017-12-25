@@ -107,7 +107,7 @@ class GoodsController extends BaseController
      *[/api/admin/goods/logo,为管理员上传路径]
      *[/api/agent/goods/logo,为代理商上传路径]
      *
-     * @Post("/api/admin(agent)/goods/logo")
+     * @Post("/api/admin(agent)/goods/logo?token={token}")
      * @Parameters({
      *      @Parameter("logo", type="file",description="图片")
      * })
@@ -145,7 +145,7 @@ class GoodsController extends BaseController
      *[/api/admin/goods/pic,为管理员上传路径]
      *[/api/agent/goods/pic,为代理商上传路径]
      *
-     * @Post("/api/admin(agent)/goods/logo")
+     * @Post("/api/admin(agent)/goods/logo?token={token}")
      * @Parameters({
      *      @Parameter("pic", type="file",description="图片")
      * })
@@ -186,7 +186,7 @@ class GoodsController extends BaseController
      *
      * 视频限制大小为8M
      *
-     * @Post("/api/admin(agent)/goods/video")
+     * @Post("/api/admin(agent)/goods/video?token={token}")
      * @Parameters({
      *      @Parameter("video", type="file",description="视频")
      * })
@@ -225,7 +225,7 @@ class GoodsController extends BaseController
      *[/api/admin/goods/add,为管理员上传路径]
      *[/api/agent/goods/add,为管理员上传路径]
      *
-     * @Post("/api/admin(agent)/goods/add")
+     * @Post("/api/admin(agent)/goods/add?token={token}")
      * @Parameters({
      *      @Parameter("logo", type="varchar",description="图片url"),
      *      @Parameter("goods_name", type="varchar",description="翡翠名"),

@@ -1,8 +1,5 @@
 @extends('admin.layouts.layouts')
 @section('admin.page.content')
-
-    <div class="wrapper wrapper-content">
-
     <ol class="breadcrumb pull-left">
         <li><a href="javascript:;">Home</a></li>
         <li class="active">{{ $title }}</li>
@@ -11,7 +8,7 @@
     <!-- begin page-header -->
     <h1 class="page-header">
         <small>
-            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/admin/add' ">添加管理员</button>
+            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/users/add' ">添加用户</button>
         </small>
     </h1>
     <div class="row">
@@ -21,18 +18,25 @@
             <div class="panel panel-inverse">
                 <div class="panel-heading">
                     <h4 class="panel-title">{{ $title }}</h4>
+
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table id="data-table" class="table table-striped table-bordered table-hover">
+                        @if (session('info'))
+                            <div class="alert alert-info">
+                                {{ session('info') }}
+                            </div>
+                        @endif
+                        <table id="data-table" class="table table-hover table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>账号</th>
-                                <th>角色</th>
+                                <th>手机号</th>
+                                <th>别名</th>
+                                <th>头像</th>
+                                <th>邮箱</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
-                                <th>状态</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -40,31 +44,15 @@
                             @foreach($data as $k=>$v)
                             <tr>
                                 <td>{{ $v['id'] }}</td>
-                                <td>{{ $v['adminname'] }}</td>
-                                <td>
-                                    @foreach($v->roles as $role)
-                                    {{ $role->role_name or '' }}
-                                        @endforeach
-                                </td>
+                                <td>{{ $v['telphone'] }}</td>
+                                <td>{{ $v['nickname'] }}</td>
+                                <td><img width="40px" height="40px" src="{{ loadStaticImg($v['logo']) }}" alt=""></td>
+                                <td>{{ $v['email'] }}</td>
                                 <td>{{ $v['created_at'] }}</td>
                                 <td>{{ $v['updated_at'] }}</td>
-                                <td>@if( $v['status'] == 0)
-                                        <span style="color: red">冻结</span>
-                                        @elseif($v['status'] == 1)
-                                        <span style="color: green">启用</span>
-                                    @endif</td>
                                 <td>
-                                    <a class="btn btn-info btn-xs m-2 detail" href="{{ url('admin/admin/edit',['id'=>$v['id']]) }}" >编辑</a>
+                                    <a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/users/edit',['id'=>$v['id']]) }}" >编辑</a>
                                     <a href="JavaScript:void(0)" onclick="del({{ $v['id'] }})" class="btn btn-danger btn-xs m-2 delete" >删除</a>
-                                    @if( $v['status'] == 0)
-                                        <a href="JavaScript:void(0)" onclick="frozen('{{ $v['id'] }}',1)" class="btn btn-success btn-xs m-2 delete" >启用</a>
-
-                                    @elseif($v['status'] == 1)
-                                        <a href="JavaScript:void(0)" onclick="frozen('{{ $v['id']}}',0)" class="btn btn-default btn-xs m-2 delete" >冻结</a>
-
-                                    @endif
-
-                                    <a href="{{ url('admin/role/addUser',['id'=>$v['id']]) }}" class="btn btn-success btn-xs m-2 delete" >角色</a>
                                 </td>
                             </tr>
                                 @endforeach
@@ -77,45 +65,9 @@
         </div>
         <!-- end col-12 -->
     </div>
-    </div>
-{{--    <!-- 修改模态框（Modal） -->
-    <div class="modal fade" id="update_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">编辑用户</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" id="update" role="form">
-                        <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">物流公司</label>
-                            <div class="col-sm-10">
-                                {{ csrf_field() }}
-                                <label for="id"></label><input type="text" name="id" id="id" style="display: none">
-                                <div class="form-group">
-                                    <label for="name" class="col-xs-4 control-label">账号</label>
-                                    <div class="col-xs-5">
-                                        <input type="text" class="form-control" id="name" name="adminname" placeholder="请输入名字">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="col-xs-4 control-label">密码</label>
-                                    <div class="col-xs-5">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary save">保存</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>--}}
+
+@endsection
+@section('page.js')
 @endsection
 @section('admin.page.js')
     <script>
@@ -134,46 +86,11 @@
                     id:i,
                     _token: _token
                 };
-                console.log(data);
-                $.post("{{ url('admin/admin/delete') }}",data,function (res) {
+                $.post("{{ url('admin/users/delete') }}",data,function (res) {
                     console.log(res);
                     if(res['code'] === 'success'){
                         layer.msg(res['msg'],{icon: 6});
-                        setTimeout('location.href="{{ url('admin/admin/index') }}"',1000);
-                    }else{
-                        layer.msg(res['msg'],{icon:5});
-                    }
-                },"json");
-            });
-        }
-        /**
-         * 冻结账户
-         * @param i
-         */
-        function frozen(i,status) {
-            //询问框
-            var status_info = '';
-            if(status == '0'){
-                status_info = '冻结';
-            }
-            if(status == '1'){
-                status_info = '启用';
-            }
-            layer.confirm('是否'+status_info+'账户？', {
-                title:'确认操作',
-                btn: ['是','否'] //按钮
-            }, function(){
-                var _token =  "{{ csrf_token() }}";
-                var data = {
-                    id:i,
-                    _token: _token,
-                    status:status
-                };
-                console.log(data);
-                    $.post("{{ url('admin/admin/frozen') }}",data,function (res) {
-                    if(res['code'] === 'success'){
-                        layer.msg(res['msg'],{icon: 6});
-                        setTimeout('location.href="{{ url('admin/admin/index') }}"',1000);
+                        setTimeout('location.href="{{ url('admin/users/index') }}"',1000);
                     }else{
                         layer.msg(res['msg'],{icon:5});
                     }

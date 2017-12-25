@@ -49,8 +49,8 @@
                                     <td>{{ $v['goods_name'] }}</td>
                                     <td>{{ $v->cat->cat_name or '' }}</td>
                                     <td>
-                                        @foreach($v->type as $type)
-                                          {{ $attr->type->type_name }}:{{ $attr->type->type_val }} &nbsp;
+                                        @foreach($v->attr as $type)
+                                          {{ $type->type_name }}:{{ $type->pivot->type_val }} &nbsp;
                                             @endforeach
                                     </td>
                                     <td><img width="40px" height="40px" src="{{ loadStaticImg($v['logo']) }}" alt=""></td>

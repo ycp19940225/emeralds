@@ -8,7 +8,7 @@
     <!-- begin page-header -->
     <h1 class="page-header">
         <small>
-            <button class="btn btn-primary pull-right m-l-20" slide="button" onclick=" window.location.href='/admin/slide/add' ">添加轮播图</button>
+            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/slide/add' ">添加轮播图</button>
         </small>
     </h1>
     <div class="row">

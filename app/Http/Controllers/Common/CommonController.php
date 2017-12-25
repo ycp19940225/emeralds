@@ -34,7 +34,7 @@ class CommonController extends controller
     public function setting()
     {
         $user_info = $this->user->find(SC::getLoginSession()->id);
-        return view('admin.user.setting',['data'=>$user_info,'title'=>'个人中心']);
+        return view('admin.admin.setting',['data'=>$user_info,'title'=>'个人中心']);
     }
 
     /**
@@ -61,7 +61,7 @@ class CommonController extends controller
      */
     public function uploadLogo()
     {
-        return view('admin.user.user_logo',['title'=>'修改头像','data'=>SC::getLoginSession()->logo]);
+        return view('admin.admin.user_logo',['title'=>'修改头像','data'=>SC::getLoginSession()->logo]);
     }
 
     /**
@@ -73,30 +73,15 @@ class CommonController extends controller
      */
     public function upLogo(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
-        $img_path = $uploadServicesImpl->uploadImg('user_info',$request->file('logo'));
+        $img_path = $uploadServicesImpl->uploadImg('admin_logo',$request->file('pic'));
         if($this->user->updateUser(['id'=>SC::getLoginSession()->id,'logo'=>$img_path])){
-            return redirect('/admin')->with('status','修改成功！');
+            return redirect('/admin/logout')->with('status','修改头像成功！');
         }
         return back()->withInput()->with('error','修改失败！');
 
     }
 
-    /**
-     * @name 上传头像
-     * @desc 本地或者七牛可自由切换
-     * @param Request $request
-     * @param UploadServicesImpl $uploadServicesImpl
-     * @return mixed
-     */
-    public function uploadImg(Request $request,UploadServicesImpl $uploadServicesImpl)
-    {
-        $img_path = $uploadServicesImpl->uploadImg('user_info',$request->file('logo'));
-        if($this->user->updateUser(['id'=>SC::getLoginSession()->id,'logo'=>$img_path])){
-            return redirect('/admin')->with('status','修改成功！');
-        }
-        return back()->withInput()->with('error','修改失败！');
 
-    }
 
 
 

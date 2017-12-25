@@ -9,17 +9,17 @@
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="{{ loadStatic('admin/img/profile_small.jpg') }}}" /></span>
+                            <span><img alt="image" class="img-circle" style="width:70px; height: 70px;" src="{{ loadStaticImg(get_user()->logo) }}" /></span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                               <span class="block m-t-xs"><strong class="font-bold">{{  get_user()->adminname }}</strong></span>
+                                <span class="text-muted text-xs block">{{  get_user()->role_name }}<b class="caret"></b></span>
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
+                                <li><a class="J_menuItem" href="{{ url('common/uploadLogo') }}">修改头像</a>
                                 </li>
-                                <li><a class="J_menuItem" href="profile.html">个人资料</a>
+                                <li><a class="J_menuItem" href="{{ url('common/setting') }}">个人资料</a>
                                 </li>
                                 <li><a class="J_menuItem" href="contacts.html">联系我们</a>
                                 </li>
@@ -29,8 +29,6 @@
                                 <li><a href="{{ url('admin/logout') }}">安全退出</a>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="logo-element">H+
                         </div>
                     </li>
                     @include('admin.layouts.nav')

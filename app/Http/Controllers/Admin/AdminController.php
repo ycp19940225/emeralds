@@ -37,7 +37,7 @@ class AdminController extends controller
     public function index()
     {
         $data = $this->user->select();
-        return view('admin.user.index',['data'=>$data,'title'=>'管理员列表']);
+        return view('admin.admin.index',['data'=>$data,'title'=>'管理员列表']);
     }
 
     /**
@@ -49,7 +49,7 @@ class AdminController extends controller
     public function add()
     {
         $roles =$this->role->getAll();
-        return view('admin.user.edit',['roles'=>$roles,'title'=>'添加管理员']);
+        return view('admin.admin.edit',['roles'=>$roles,'title'=>'添加管理员']);
     }
 
     /**
@@ -79,7 +79,7 @@ class AdminController extends controller
     public function edit($id)
     {
         $data = $this->user->find($id);
-        return view('admin.user.edit',['data'=>$data,'title'=>'编辑管理员']);
+        return view('admin.admin.edit',['data'=>$data,'title'=>'编辑管理员']);
     }
     /**
      * @name 修改操作

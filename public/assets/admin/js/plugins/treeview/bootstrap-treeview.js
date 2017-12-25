@@ -363,7 +363,7 @@
 			}
 		},
 
-		// Construct trees style based on user options
+		// Construct trees style based on admin options
 		_buildStyle: function() {
 
 			var style = '.node-' + this._elementId + '{';

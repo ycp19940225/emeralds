@@ -496,6 +496,6 @@ CREATE TABLE `emerald_user` (
 -- ----------------------------
 -- Records of emerald_user
 -- ----------------------------
-INSERT INTO `emerald_user` VALUES ('18', '18983663382', '杨春坪', '$2y$10$bHIzugQXEvA4JErDpjjnquvYPevBO9Ygd2u.KZ7aavPm7659Wouji', 'user/2017-12-22/8UiplhNSSPRnHAkqhIrtNwDksJnnXS59h1k0CtOY.jpeg', '820363773@qq.com', '1513778706', '1513920778', '0', '');
+INSERT INTO `emerald_user` VALUES ('18', '18983663382', '杨春坪', '$2y$10$bHIzugQXEvA4JErDpjjnquvYPevBO9Ygd2u.KZ7aavPm7659Wouji', 'admin/2017-12-22/8UiplhNSSPRnHAkqhIrtNwDksJnnXS59h1k0CtOY.jpeg', '820363773@qq.com', '1513778706', '1513920778', '0', '');
 INSERT INTO `emerald_user` VALUES ('19', '18983663383', '', '$2y$10$JWyNLGUJLOg/g.CqrDW09uWmNPq1b6TWGEexxF9GGck6bIhKrRxBy', '', '', '1513835015', '1513835015', '0', '');
 INSERT INTO `emerald_user` VALUES ('20', '18983663381', '', '$2y$10$e4BnMaMKn6F0qPOihLGTG.HkH.wyWU8UuxWZqFhb5Bw3wXECezJ5m', '', '', '1513835481', '1513835481', '0', '');

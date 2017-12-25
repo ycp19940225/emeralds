@@ -259,7 +259,7 @@ class UserController extends BaseController
     public function logo(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
         $files = $request->file('logo');
-        $urls = $uploadServicesImpl->uploadImg('user',$files);
+        $urls = $uploadServicesImpl->uploadImg('admin',$files);
         $user_data = $this->auth()->user();
         $res = $this->user->update(['logo'=>$urls,'id'=>$user_data->id]);
         if ($res){

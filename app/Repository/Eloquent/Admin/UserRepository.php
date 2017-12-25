@@ -50,6 +50,6 @@ class UserRepository
 
     public function delete($id)
     {
-        return $this->userModel->where('id',$id)->update(['deleted_at'=>1]);
+        return $this->userModel->destroy($id);
     }
 }

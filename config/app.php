@@ -188,7 +188,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 
-        /******************user-setting************************/
+        /******************admin-setting************************/
 
         //ide-helper
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
@@ -264,7 +264,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        /******************user-setting************************/
+        /******************admin-setting************************/
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
         //Captcha

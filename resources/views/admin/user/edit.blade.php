@@ -21,31 +21,43 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <form action="" class="form-horizontal form_need_validate" role="form" method="post">
+                        <form action="" class="form-horizontal form_need_validate" role="form" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
+                            <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
                             <div class="form-group">
-                                <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
-                                <label for="name" class="col-xs-4 control-label">账号</label>
+                                <label for="telphone" class="col-xs-4 control-label">手机号（登录名）</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" id="name" name="adminname" value="{{ $data['adminname'] or ''}}" placeholder="请输入名字" required>
+                                    <input type="text" class="form-control" id="telphone" name="telphone" value="{{ $data['telphone'] or ''}}" placeholder="请输入名字">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="password" class="col-xs-4 control-label">密码</label>
+                                <label for="nickname" class="col-xs-4 control-label">别名</label>
                                 <div class="col-xs-5">
-                                    <input type="password" class="form-control" id="password" name="password" value="{{ $data['password'] or ''}}" placeholder="请输入密码" required>
+                                    <input type="text" class="form-control" id="nickname" name="nickname" value="{{ $data['telphone'] or ''}}" placeholder="请输入名字">
                                 </div>
                             </div>
-                            @if( Route::current()->getActionMethod() == 'add')
                             <div class="form-group">
-                                <label for="repass" class="col-xs-4 control-label">确认密码</label>
-                                <div class="col-xs-5">
-                                    <input type="password" class="form-control" id="repass" name="repass" placeholder="确认密码" required>
+                                <label for="pic" class="col-xs-4 control-label">头像</label>
+                                <div class="col-xs-4">
+                                    @if(Route::current()->getActionMethod() == 'add')
+                                        <div id="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
+                                            <img id="img" src="" alt="" style="width:100px; height: 100px;">
+                                        </div>
+                                    @else
+                                        <div id="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
+                                            <img id="img" src="{{ loadStaticImg($data['logo']) }}" alt="" style="width:100px; height: 100px;">
+                                        </div>
+                                    @endif
+                                    <p>
+                                        <a href="javascript:;" class="file">
+                                            <input type="file" id="image-file" name="pic" value="{{ $data['logo'] or '' }}">
+                                        </a>
+                                    </p>
+                                    <p id="file-info"></p>
                                 </div>
                             </div>
-                            @endif
                             <div class="col-md-offset-5" >
-                                <button type="button" class="btn btn-success m-2" id="submit" name="repass">保存</button>
+                                <button type="submit" class="btn btn-success m-2" id="submit" name="repass">保存</button>
                                 <button type="reset" class="btn btn-success m-2" id="reset" name="repass">重置</button>
                             </div>
                         </form>
@@ -59,54 +71,19 @@
     </div>
 @endsection
 @section('admin.page.js')
+    <script src="{{ loadStatic('admin/js/extend/upload.js') }}"></script>
     <script>
-        /**
-         * 表单提交
-         */
-        $("#submit").click(function () {
-            /**
-             *表单验证
-             */
-            if(!$(".form_need_validate").valid()){
-                return false;
-            }
-           var data = $("form").serialize();
+        $(document).ready(function() {
+            upload.init();
             var method = "{{ Route::current()->getActionMethod() }}";
+            var url ='';
             if(method === 'edit'){
-                $.post('{{ url('admin/admin/editOperate') }}',data,function (res) {
-                    handle(res);
-                },"json");
+                url = '{{url('admin/users/editOperate')}}';
+                $("form").attr('action',url)
             }else{
-                if(validation() === false){
-                    return false;
-                }
-                $.post('{{ url('admin/admin/addOperate') }}',data,function (res) {
-                    handle(res);
-                });
+                url = '{{url('admin/users/addOperate')}}';
+                $("form").attr('action',url);
             }
         });
-        /**
-         * 表单验证
-         */
-        function validation() {
-            var password = $("#password").val();
-            var repass = $("#repass").val();
-            if(password !==repass){
-                layer.msg('密码输入不一致！',{icon:5});
-                return false;
-            }
-        }
-        /**
-         * 结果处理
-         */
-        function handle(res){
-            console.log(res);
-            if(res['code'] === 'success'){
-                layer.msg(res['msg'],{icon: 6});
-                setTimeout('location.href="{{ url('admin/admin/index') }}"',1000);
-            }else{
-                layer.msg(res['msg'],{icon:5});
-            }
-        }
     </script>
     @endsection

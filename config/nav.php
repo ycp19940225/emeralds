@@ -4,7 +4,7 @@ return [
     'NAV'=>[
         [
             'name'=>'管理员',
-            'icon'=>'user',
+            'icon'=>'user-circle',
             'access'=>[
                 [
                     'name'=>'管理员列表',
@@ -95,7 +95,7 @@ return [
             'access'=>[
                 [
                     'name'=>'用户列表',
-                    'access'=>'admin/goods/index',
+                    'access'=>'admin/users/index',
                     'icon'=>''
                 ],
             ]
