@@ -11,8 +11,11 @@ namespace App\Models\Admin;
 
 use App\Models\Base;
 
+use Nicolaslopezj\Searchable\SearchableTrait;
+
 class Goods extends Base
 {
+    use SearchableTrait;
     protected $table = 'emerald_goods';
     protected $dateFormat = 'U';
 
@@ -23,6 +26,28 @@ class Goods extends Base
     public $fillable = array('id','goods_code','pic','video','goods_detail','price',
         'sort','is_hot','cat_id','input_id','input_type','stock','status','logo','goods_name',
         'created_at','updated_at','deleted_at');
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'emerald_goods.goods_name' => 10,
+            'emerald_goods.goods_code' => 2,
+        ]
+
+    ];
+
+
     /**
      * 关联商品下的分类
      */
@@ -70,11 +95,21 @@ class Goods extends Base
 
     public function getAll()
     {
-        return $this->where('deleted_at',0)->with('attr')->get();
+        return $this->where('deleted_at',0)
+            ->where('status',1)
+            ->with('attr')
+            ->simplePaginate(10);
     }
 
     public function find($id)
     {
         return $this->where('deleted_at',0)->find($id);
+    }
+
+    public function goods_search($input)
+    {
+
+        return $this->where('deleted_at',0)->search($input)
+            ->get();
     }
 }

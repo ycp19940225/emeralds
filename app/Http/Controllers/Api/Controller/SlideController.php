@@ -29,7 +29,7 @@ class SlideController extends BaseController
      * 获取所有轮播图
      *
      *
-     * @Get("/api/slides")
+     * @Get("http://temp.cqquality.com/api/slides")
      * @Parameters({
      * })
      *@Transaction({

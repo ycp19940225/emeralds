@@ -16,6 +16,7 @@ $api->version('v1', function ($api) {
             //商品
             $api->get('goods', 'GoodsController@all');
             $api->get('goods/{id}', 'GoodsController@one')->where('id', '[0-9]+');
+            $api->post('goods/search', 'GoodsController@search');
             //分类
             $api->get('cats', 'CatController@all');
             //文章
@@ -38,6 +39,9 @@ $api->version('v1', function ($api) {
             $api->post('users/edit', 'UserController@edit');
             $api->post('users/agent/upload','UserController@upload_agent_pic');
             $api->post('users/agent/add','UserController@user_to_agent');
+            //足迹
+            $api->get('users/history','HistoryController@all');
+            $api->post('users/history/add','HistoryController@add');
         });
         //商品
         $api->group(['middleware'=>'jwt.auth','providers' => 'jwt'], function ($api) {

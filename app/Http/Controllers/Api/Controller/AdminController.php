@@ -35,7 +35,7 @@ class AdminController extends BaseController
      *
      *
      *
-     * @Post("/api/admin/login")
+     * @Post("http://temp.cqquality.com/api/admin/login")
      * @Parameters({
      *      @Parameter("adminname", type="varchar", required=true, description="登录名"),
      *      @Parameter("password", type="varchar", required=true, description="密码"),
@@ -75,7 +75,7 @@ class AdminController extends BaseController
      * 管理员首页
      *
      *
-     * @get("/api/admin/index?token={token}")
+     * @get("http://temp.cqquality.com/api/admin/index?token={token}")
      * @Parameters({
      *      @Parameter("token", type="varchar", required=true, description="密钥")
      * })
@@ -116,7 +116,7 @@ class AdminController extends BaseController
      * 刷新密钥
      *
      *
-     * @get("/api/admin/refreshToken?token={token}")
+     * @get("http://temp.cqquality.com/api/admin/refreshToken?token={token}")
      *@Transaction({
      *      @Request({
 
@@ -140,7 +140,7 @@ class AdminController extends BaseController
      * 修改管理员头像
      *
      *
-     * @Post("/api/admin/logo?token={token}")
+     * @Post("http://temp.cqquality.com/api/admin/logo?token={token}")
      * @Parameters({
      *      @Parameter("logo", type="file", required=true, description="头像"),
      *      @Parameter("token", type="varchar", required=true, description="秘钥")

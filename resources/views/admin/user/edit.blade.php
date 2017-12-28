@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <label for="nickname" class="col-xs-4 control-label">别名</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" id="nickname" name="nickname" value="{{ $data['telphone'] or ''}}" placeholder="请输入名字">
+                                    <input type="text" class="form-control" id="nickname" name="nickname" value="{{ $data['nickname'] or ''}}" placeholder="请输入名字">
                                 </div>
                             </div>
                             <div class="form-group">

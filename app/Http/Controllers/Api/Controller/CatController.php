@@ -30,7 +30,7 @@ class CatController extends BaseController
      *[获取所有品种,以及二级分类，三级明细]
      *
      *
-     * @Get("/api/cats")
+     * @Get("http://temp.cqquality.com/api/cats")
      * @Parameters({
      *     @Parameter("data", type="varchar", required=true, description="品种"),
      *     @Parameter("type", type="varchar", required=true, description="二级分类"),

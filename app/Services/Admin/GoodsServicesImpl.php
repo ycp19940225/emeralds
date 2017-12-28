@@ -44,4 +44,9 @@ class GoodsServicesImpl implements GoodsServices
     {
         return $this->goodsDao->where('id',$id)->update(['deleted_at'=>1]);
     }
+
+    public function search($input)
+    {
+        return $this->goodsDao->goods_search($input);
+    }
 }

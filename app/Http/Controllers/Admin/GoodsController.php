@@ -136,4 +136,5 @@ class GoodsController extends controller
         }
         return response()->json(msg('success','相册上传成功!',$pic_data));
     }
+
 }

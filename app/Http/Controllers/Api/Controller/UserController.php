@@ -37,7 +37,7 @@ class UserController extends BaseController
      *
      * 手机号唯一，不能重复注册
      *
-     * @Post("/api/users/register")
+     * @Post("http://temp.cqquality.com/api/users/register")
      * @Parameters({
      *      @Parameter("telphone", type="varchar", required=true, description="手机号"),
      *      @Parameter("password", type="varchar", required=true, description="密码")
@@ -89,11 +89,11 @@ class UserController extends BaseController
      *
      *
      *
-     * @Post("/api/users/login")
+     * @Post("http://temp.cqquality.com/api/users/login")
      * @Parameters({
      *      @Parameter("telphone", type="varchar", required=true, description="手机号"),
      *      @Parameter("password", type="varchar", required=true, description="密码"),
-     *      @Parameter("data", type="varchar",description="密钥")
+     *      @Parameter("data", type="varchar",description="token:密钥,ttl：秘钥过期时间，refresh_ttl：本次token可用于获取新的token的时间，过期需重新登录,单位为秒")
      * })
      *@Transaction({
      *      @Request({
@@ -104,7 +104,11 @@ class UserController extends BaseController
     "status": "true",
     "code": 200,
     "msg": "登录成功！",
-    "data": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmVtZXJhbGQuY29tL2FwaS91c2Vycy9sb2dpbiIsImlhdCI6MTUxMzc3MDc0MiwiZXhwIjoxNTEzNzc0MzQyLCJuYmYiOjE1MTM3NzA3NDIsImp0aSI6InVYS1YyYkRXN1BiUHVuRWUiLCJzdWIiOjE1LCJwcnYiOiI3MjM0OWFmZmRhMDQ0ZGMyYWQ3MGEzOWVmMTUxNjNlYTY3YTczMzEzIn0.sWuDl5AGS0NDzJpaJ2UkeJT0QJwBg2Xs8KYTZRSnNe8"
+    "data": {
+    "ttl": 2592000,
+    "refresh_ttl": 1209600,
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmVtZXJhbGQuY29tL2FwaS91c2Vycy9sb2dpbiIsImlhdCI6MTUxNDQ1NTkzMSwiZXhwIjoxNTE3MDQ3OTMxLCJuYmYiOjE1MTQ0NTU5MzEsImp0aSI6IjhENjlMaE5uSU94Um53S04iLCJzdWIiOjE5LCJwcnYiOiI3MjM0OWFmZmRhMDQ0ZGMyYWQ3MGEzOWVmMTUxNjNlYTY3YTczMzEzIn0.r86fhFkmcZKayKrSomV0PrST4KLn7ok8Lg-3ljr9HtE"
+    }
     }),
      *      @Response(500, body={"error": {
     "status": "false",
@@ -116,10 +120,15 @@ class UserController extends BaseController
      */
     public function login(Request $request)
     {
+        $ttl = config('jwt.ttl');
+        $refresh_ttl = config('jwt.refresh_ttl');
         $input = $request->only('telphone','password');
         $token = JWTAuth::attempt($input);
+        $data['ttl'] = $ttl*60;
+        $data['refresh_ttl'] = $refresh_ttl*60;
+        $data['token'] = $token;
         if ($token){
-            return API_MSG($token,'登录成功！','true',200);
+            return API_MSG($data,'登录成功！','true',200);
         } else {
             return API_MSG('','登录失败！','false',500);
         }
@@ -129,7 +138,7 @@ class UserController extends BaseController
      * 用户首页
      *
      *
-     * @get("/api/users/index?token={token}")
+     * @get("http://temp.cqquality.com/api/users/index?token={token}")
      * @Parameters({
      *      @Parameter("token", type="varchar", required=true, description="密钥")
      * })
@@ -168,7 +177,10 @@ class UserController extends BaseController
      * 刷新密钥
      *
      *
-     * @get("/api/users/refreshToken?token={token}")
+     * @get("http://temp.cqquality.com/api/users/refreshToken?token={token}")
+     * @Parameters({
+      *      @Parameter("data", type="varchar",description="tokne:密钥,ttl：秘钥过期时间，refresh_ttl：本次token可用于获取新的token的时间，过期需重新登录，单位为秒")
+      * })
      *@Transaction({
      *      @Request({
 
@@ -178,20 +190,35 @@ class UserController extends BaseController
      "status": "true",
      "code": 200,
      "msg": "刷新成功！",
-     "data": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmVtZXJhbGQuY29tL2FwaS91c2Vycy9yZWZyZXNoVG9rZW4iLCJpYXQiOjE1MTM4MzgwNDksImV4cCI6MTUxMzg0MjMxOSwibmJmIjoxNTEzODM4NzE5LCJqdGkiOiJSR0s3UDM5QU5vVEg1a2xHIiwic3ViIjoyMCwicHJ2IjoiNzIzNDlhZmZkYTA0NGRjMmFkNzBhMzllZjE1MTYzZWE2N2E3MzMxMyJ9.m6HkK9MbKi7g7oAvSHWAdY0TdYlpflIrdx-vihw59OQ"
+     "data": {
+     "ttl": 43200,
+     "refresh_ttl": 20160,
+     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmVtZXJhbGQuY29tL2FwaS91c2Vycy9yZWZyZXNoVG9rZW4iLCJpYXQiOjE1MTQ0NTYzMzgsImV4cCI6MTUxNzA0ODUwNSwibmJmIjoxNTE0NDU2NTA1LCJqdGkiOiJ6eEtpdE5PYWhFQ2Y1aDQzIiwic3ViIjoxOSwicHJ2IjoiNzIzNDlhZmZkYTA0NGRjMmFkNzBhMzllZjE1MTYzZWE2N2E3MzMxMyJ9.s4Pei4VFF5tjnTyZh5SIjgAKJJMwv-HBc99LuPsVUBg"
+     }
      }),
+      *@Response(401, body={
+     "message": "The token has been blacklisted",
+     "status_code": 401
+     }),
+      *
      */
     public function refreshToken()
     {
+        $ttl = config('jwt.ttl');
+        $refresh_ttl = config('jwt.refresh_ttl');
         $token = JWTAuth::refresh();
-        return API_MSG($token,'刷新成功！','true',200);
+        $data['ttl'] = $ttl*60;
+        $data['refresh_ttl'] = $refresh_ttl*60;
+        $data['token'] = $token;
+        return API_MSG($data,'刷新成功！','true',200);
     }
+
 
     /**
      * 完善用户信息
      *
      *
-     * @Post("/api/users/edit?token={token}")
+     * @Post("http://temp.cqquality.com/api/users/edit?token={token}")
      * @Parameters({
      *      @Parameter("nickname", type="varchar", required=true, description="别名"),
      *      @Parameter("email", type="varchar", required=true, description="邮箱"),
@@ -199,7 +226,9 @@ class UserController extends BaseController
      * })
      *@Transaction({
      *      @Request({
-    }),
+     *     	"nickname":"杨春坪",
+      "email":"820363773@qq.com"
+      }),
      *      @Response(200, body={
      * "status": "true",
      *"code": 200,
@@ -232,7 +261,7 @@ class UserController extends BaseController
      *
      * 手机号唯一，不能重复注册
      *
-     * @Post("/api/users/logo?token={token}")
+     * @Post("http://temp.cqquality.com/api/users/logo?token={token}")
      * @Parameters({
      *      @Parameter("logo", type="file", required=true, description="头像"),
      *      @Parameter("token", type="varchar", required=true, description="秘钥")
@@ -272,7 +301,7 @@ class UserController extends BaseController
      * 上传供应商营业执照或者身份证
      *
      *
-     * @Post("/api/users/agent/upload?token={token}")
+     * @Post("http://temp.cqquality.com/api/users/agent/upload?token={token}")
      * @Parameters({
      *      @Parameter("logo", type="file", required=true, description="头像"),
      *      @Parameter("token", type="varchar", required=true, description="秘钥")
@@ -310,7 +339,7 @@ class UserController extends BaseController
      * 申请成为供应商
      *
      *
-     * @Post("/api/users/agent/add?token={token}")
+     * @Post("http://temp.cqquality.com/api/users/agent/add?token={token}")
      * @Parameters({
      *      @Parameter("agent_pic", type="varchar", description="营业执照或者身份证照片"),
      *      @Parameter("agent_name", type="varchar", required=true, description="姓名"),

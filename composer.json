@@ -14,7 +14,8 @@
         "laravel/tinker": "~1.0",
         "mews/captcha": "^2.1",
         "peinhu/aetherupload-laravel": "~1.0",
-        "tymon/jwt-auth": "1.0.*@dev"
+        "tymon/jwt-auth": "1.0.*@dev",
+        "nicolaslopezj/searchable": "1.*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.4",

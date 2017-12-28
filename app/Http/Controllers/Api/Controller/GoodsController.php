@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Api\Controller;
 use App\Http\Controllers\Api\BaseController;
 use App\Services\Common\UploadServicesImpl;
 use App\Services\Ifs\Admin\GoodsServices;
-use App\Services\Ifs\Common\UploadServices;
 use Dingo\Api\Http\Request;
 
 /**
@@ -31,8 +30,9 @@ class GoodsController extends BaseController
     /**
      * 获取所有商品
      *
+     * [分页：http://temp.cqquality.com/api/goods?page={number}]
      *
-     * @Get("/api/goods")
+     * @Get("http://temp.cqquality.com/api/goods")
      * @Parameters({
      * })
      *@Transaction({
@@ -45,7 +45,14 @@ class GoodsController extends BaseController
     "msg": "获取商品成功！",
     "data": {
 
-    }
+    },
+     * "first_page_url": "http://www.emerald.com/api/goods?page=1",
+    "from": 1,
+    "next_page_url": null,
+    "path": "http://www.emerald.com/api/goods",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 2
     }),
      *      @Response(500, body={"error": {
     "status": "false",
@@ -68,7 +75,7 @@ class GoodsController extends BaseController
      * 获取单个商品
      *
      *
-     * @Get("/api/goods/id")
+     * @Get("http://temp.cqquality.com/api/goods/id")
      * @Parameters({
      *      @Parameter("id", type="int",description="商品ID")
      * })
@@ -104,10 +111,10 @@ class GoodsController extends BaseController
     /**
      * 上传商品封面
      *
-     *[/api/admin/goods/logo,为管理员上传路径]
-     *[/api/agent/goods/logo,为代理商上传路径]
+     *[http://temp.cqquality.com/api/admin/goods/logo,为管理员上传路径]
+     *[http://temp.cqquality.com/api/agent/goods/logo,为代理商上传路径]
      *
-     * @Post("/api/admin(agent)/goods/logo?token={token}")
+     * @Post("http://temp.cqquality.com/api/admin(agent)/goods/logo?token={token}")
      * @Parameters({
      *      @Parameter("logo", type="file",description="图片")
      * })
@@ -142,10 +149,10 @@ class GoodsController extends BaseController
     /**
      * 上传商品相册
      *
-     *[/api/admin/goods/pic,为管理员上传路径]
-     *[/api/agent/goods/pic,为代理商上传路径]
+     *[http://temp.cqquality.com/api/admin/goods/pic,为管理员上传路径]
+     *[http://temp.cqquality.com/api/agent/goods/pic,为代理商上传路径]
      *
-     * @Post("/api/admin(agent)/goods/logo?token={token}")
+     * @Post("http://temp.cqquality.com/api/admin(agent)/goods/logo?token={token}")
      * @Parameters({
      *      @Parameter("pic", type="file",description="图片")
      * })
@@ -181,12 +188,12 @@ class GoodsController extends BaseController
     /**
      * 上传商品视频
      *
-     *[/api/admin/goods/pic,为管理员上传路径]
-     *[/api/agent/goods/pic,为代理商上传路径]
+     *[http://temp.cqquality.com/api/admin/goods/pic,为管理员上传路径]
+     *[http://temp.cqquality.com/api/agent/goods/pic,为代理商上传路径]
      *
      * 视频限制大小为8M
      *
-     * @Post("/api/admin(agent)/goods/video?token={token}")
+     * @Post("http://temp.cqquality.com/api/admin(agent)/goods/video?token={token}")
      * @Parameters({
      *      @Parameter("video", type="file",description="视频")
      * })
@@ -222,10 +229,10 @@ class GoodsController extends BaseController
     /**
      * 上传商品
      *
-     *[/api/admin/goods/add,为管理员上传路径]
-     *[/api/agent/goods/add,为管理员上传路径]
+     *[http://temp.cqquality.com/api/admin/goods/add,为管理员上传路径]
+     *[http://temp.cqquality.com/api/agent/goods/add,为管理员上传路径]
      *
-     * @Post("/api/admin(agent)/goods/add?token={token}")
+     * @Post("http://temp.cqquality.com/api/admin(agent)/goods/add?token={token}")
      * @Parameters({
      *      @Parameter("logo", type="varchar",description="图片url"),
      *      @Parameter("goods_name", type="varchar",description="翡翠名"),
@@ -301,5 +308,40 @@ class GoodsController extends BaseController
         return API_MSG('','添加失败！','false',500);
     }
 
-
+    /**
+     * 首页商品搜索
+     *
+     *
+     *
+     * @Post("http://temp.cqquality.com/api/goods/search")
+     * @Parameters({
+     *      @Parameter("input", type="varchar",description="用户输入")
+     * })
+     *@Transaction({
+     *      @Request({
+     *     "input":"翡翠"
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": 200,
+    "msg": "获取成功！",
+    "data": ""
+    }),
+     *      @Response(500, body={"error": {
+    "status": "false",
+    "code": 500,
+    "msg": "参数错误或者获取失败！",
+    "data": ""
+     *     }})
+     * })
+     */
+    public function search(Request $request)
+    {
+        $res = $this->goods->search($request->input('input'));
+        if ($res){
+            return API_MSG($res,'获取成功！','true',200);
+        } else {
+            return API_MSG('','参数错误或者获取失败！'.$res,'false',500);
+        }
+    }
 }

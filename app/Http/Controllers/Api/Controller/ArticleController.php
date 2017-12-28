@@ -31,7 +31,7 @@ class ArticleController extends BaseController
      * 获取所有文章
      *
      *
-     * @Get("/api/articles")
+     * @Get("http://temp.cqquality.com/api/articles")
      * @Parameters({
      *       @Parameter("cat", type="json",description="文章所属分类"),
      * })
@@ -63,7 +63,7 @@ class ArticleController extends BaseController
     /**
      * 获取所有文章分类
      *
-     * @Get("/api/articles/cats")
+     * @Get("http://temp.cqquality.com/api/articles/cats")
      * @Parameters({
      * })
      *@Transaction({
@@ -92,7 +92,7 @@ class ArticleController extends BaseController
     /**
      * 获取分类文章（通过分类ID）
      *
-     * @Get("/api/article/cat/id")
+     * @Get("http://temp.cqquality.com/api/article/cat/id")
      * @Parameters({
      *     @Parameter("id", type="int",description="分类ID")
      * })
@@ -131,7 +131,7 @@ class ArticleController extends BaseController
     /**
      * 获取文章详情（通过文章ID）
      *
-     * @Get("/api/article/id")
+     * @Get("http://temp.cqquality.com/api/article/id")
      * @Parameters({
      *     @Parameter("id", type="int",description="文章ID"),
      * })
