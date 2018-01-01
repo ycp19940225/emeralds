@@ -18,7 +18,7 @@ Route::post('/role/editOperate','RoleController@editOperate');
 Route::post('/role/delete','RoleController@delete');
 //管理员——角色
 Route::get('/role/addUser/{id}','RoleController@addUser')->where('id', '[0-9]+')->name('add-admin');
-Route::post('/admin/addUserOperate','RoleController@addUserOperate');
+Route::post('/role/addUserOperate','RoleController@addUserOperate');
 //权限
 Route::get('/privilege/index/{role_id}','PrivilegeController@index')->where('role_id', '[0-9]+')->name('pri-index');
 Route::get('/privilege/refresh','PrivilegeController@refresh')->name('pri-refresh');

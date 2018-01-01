@@ -79,7 +79,7 @@
                             status:$(this).val(),
                             _token:'{{ csrf_token() }}'
                         };
-                        $.post("{{ url('admin') }}",data,function (res) {
+                        $.post("{{ url('admin/role/addUserOperate') }}",data,function (res) {
                             handle(res);
                         });
                     }else{
@@ -90,7 +90,7 @@
                             status:$(this).val(),
                             _token:'{{ csrf_token() }}'
                         };
-                        $.post("{{ url('admin') }}",data,function (res) {
+                        $.post("{{ url('admin/role/addUserOperate') }}",data,function (res) {
                             handle(res);
                         });
                     }

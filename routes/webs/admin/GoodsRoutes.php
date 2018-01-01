@@ -17,14 +17,7 @@ Route::get('/type/addBatch','TypeController@addBatch');
 Route::post('/type/addBatchOperate','TypeController@addBatchOperate');
 Route::post('/type/delete','TypeController@delete');
 //属性
-Route::any('/attr/add','AttrController@add');
-Route::post('/attr/addOperate','AttrController@addOperate');
-Route::get('/attr/index','AttrController@index');
-Route::get('/attr/edit/{id}','AttrController@edit')->where('id', '[0-9]+');
-Route::post('/attr/editOperate','AttrController@editOperate');
-Route::post('/attr/delete','AttrController@delete');
-Route::get('/attr/addBatch/{id}','AttrController@addBatch')->where('id', '[0-9]+');
-Route::post('/attr/addBatchOperate','AttrController@addBatchOperate');
+
 
 //商品
 Route::any('/goods/add','GoodsController@add');
