@@ -32,12 +32,12 @@
                             <tr>
                                 <th>翡翠名</th>
                                 <th>所属品种</th>
-                                <th>属性</th>
+                                <th>分类明细</th>
                                 <th>封面图</th>
-                                <th>视频地址</th>
                                 <th>价格</th>
                                 <th>库存</th>
                                 <th>状态</th>
+                                <th>审核状态</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
                                 <th>操作</th>
@@ -54,15 +54,17 @@
                                             @endforeach
                                     </td>
                                     <td><img width="40px" height="40px" src="{{ loadStaticImg($v['logo']) }}" alt=""></td>
-                                    <td>{{ $v['video'] }}</td>
                                     <td>{{ $v['price'] }}</td>
                                     <td>{{ $v['stock'] }}</td>
-                                    <td>{{ $v['status'] }}</td>
+                                    <td>{{ check_goods_status($v['status']) }}</td>
+                                    <td>{{ check_goods_check($v['checked']) }}</td>
                                     <td>{{ $v['created_at'] }}</td>
                                     <td>{{ $v['updated_at'] }}</td>
                                     <td>
                                         <a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/goods/edit',['id'=>$v['id']]) }}" >编辑</a>
                                         <a href="JavaScript:void(0)" onclick="del({{ $v['id'] }})" class="btn btn-danger btn-xs m-2 delete" >删除</a>
+                                        <a href="JavaScript:void(0)" onclick="play_video('{{ loadStaticImg($v['video']) }}')" class="btn btn-info btn-xs m-2 delete" >预览视频</a>
+                                        <a href="JavaScript:void(0)" onclick="check({{ $v['id'] }})" class="btn btn-warning btn-xs m-2 delete" >审核</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -80,6 +82,7 @@
 @section('page.js')
 @endsection
 @section('admin.page.js')
+
     <script>
         /**
          * 删除
@@ -101,6 +104,56 @@
                     if(res['code'] === 'success'){
                         layer.msg(res['msg'],{icon: 6});
                         setTimeout('location.href="{{ url('admin/cat/index') }}"',1000);
+                    }else{
+                        layer.msg(res['msg'],{icon:5});
+                    }
+                },"json");
+            });
+        }
+
+        /**
+         * 视频播放
+         * @param url
+         */
+        function play_video(url) {
+            layer.open({
+                type: 2,
+                title: false,
+                area: ['630px', '360px'],
+                shade: 0.8,
+                closeBtn: 0,
+                shadeClose: true,
+                content: url
+            });
+        }
+
+        function check(i) {
+            //询问框
+            layer.confirm('是否通过审核？', {
+                title:'确认操作',
+                btn: ['通过','不通过'] //按钮
+            }, function(){
+                var data = {
+                    id:i,
+                    checked: 1
+                };
+                $.post("{{ url('admin/goods/check') }}",data,function (res) {
+                    if(res['code'] === 'success'){
+                        layer.msg(res['msg'],{icon: 6});
+                        setTimeout('location.href="{{ url('admin/goods/index') }}"',1000);
+                    }else{
+                        layer.msg(res['msg'],{icon:5});
+                    }
+                },"json");
+            },function () {
+                var data = {
+                    id:i,
+                    checked: 2
+                };
+                $.post("{{ url('admin/goods/check') }}",data,function (res) {
+                    if(res['code'] === 'success'){
+                        layer.msg(res['msg'],{icon: 6});
+                        setTimeout('location.href="{{ url('admin/goods/index') }}"',1000);
                     }else{
                         layer.msg(res['msg'],{icon:5});
                     }

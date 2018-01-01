@@ -20,7 +20,7 @@ class User extends  Authenticatable implements AuthenticatableUserContract
      * 可以被集体赋值的表字段
      * @var array
      */
-    public $fillable = array('id','telphone','nickname','password','logo','email','created_at','updated_at','deleted_at');
+    public $fillable = array('id','telphone','score','nickname','password','logo','email','created_at','updated_at','deleted_at');
     /**
      * The attributes that should be hidden for arrays.
      *

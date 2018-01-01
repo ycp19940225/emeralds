@@ -107,4 +107,25 @@ class UserController extends Controller
         } else
             return response()->json(msg('error','删除失败!'));
     }
+
+    /**
+     * @name 修改积分
+     * @desc
+     * @author ycp
+     * @param Request $request
+     */
+    public function editScore(Request $request)
+    {
+        $method = $request->only('type');
+        $data = $request->only('id','score');
+        if($method['type'] == 'minus'){
+            $data['score'] = -1*$data['score'];
+        }
+        $data['score'] = $this->user->getOne($data['id'])->score + $data['score'];
+        if($this->user->update($data)){
+            return response()->json(msg('success','操作成功!'));
+        } else
+            return response()->json(msg('error','操作失败!'));
+
+    }
 }

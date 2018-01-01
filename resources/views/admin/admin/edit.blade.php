@@ -31,6 +31,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <div class="col-xs-6">
+                                    <input type="radio" class="form-control" id="checked" name="checked" value="" >
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="radio" class="form-control" id="checked" name="checked" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="password" class="col-xs-4 control-label">密码</label>
                                 <div class="col-xs-5">
                                     <input type="password" class="form-control" id="password" name="password" value="{{ $data['password'] or ''}}" placeholder="请输入密码" required>

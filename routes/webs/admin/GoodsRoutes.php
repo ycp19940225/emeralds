@@ -16,7 +16,6 @@ Route::post('/type/editOperate','TypeController@editOperate');
 Route::get('/type/addBatch','TypeController@addBatch');
 Route::post('/type/addBatchOperate','TypeController@addBatchOperate');
 Route::post('/type/delete','TypeController@delete');
-//属性
 
 
 //商品
@@ -27,3 +26,4 @@ Route::get('/goods/edit/{id}','GoodsController@edit')->where('id', '[0-9]+');
 Route::post('/goods/editOperate','GoodsController@editOperate');
 Route::post('/goods/delete','GoodsController@delete');
 Route::post('/goods/uploadImg','GoodsController@uploadImg');
+Route::post('/goods/check','GoodsController@check');

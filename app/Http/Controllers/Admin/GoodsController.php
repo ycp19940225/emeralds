@@ -137,4 +137,18 @@ class GoodsController extends controller
         return response()->json(msg('success','相册上传成功!',$pic_data));
     }
 
+    /**
+     * @name 商品审核
+     * @desc
+     * @author ycp
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function check(Request $request)
+    {
+        if($this->goods->edit($request->input())){
+            return response()->json(msg('success','操作成功!'));
+        } else
+            return response()->json(msg('error','操作失败!'));
+    }
 }

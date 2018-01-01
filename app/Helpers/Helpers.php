@@ -286,4 +286,36 @@ if ( ! function_exists('API_MSG'))
     }
 }
 
+/**
+ * 检测商品状态
+ */
+if ( ! function_exists('check_goods_status')){
+    function check_goods_status($data){
+        if($data == 0){
+            echo '<span style="color: red">未上架</span>';
+        }
+        if($data == 1){
+            echo '<span style="color: green">已上架</span>';
+        }
+        if($data == 2){
+            echo '<span style="color: yellow">已下架</span>';
+        }
+    }
+}
 
+/**
+ * 检测商品审核
+ */
+if ( ! function_exists('check_goods_check')){
+    function check_goods_check($data){
+        if($data == 0){
+            echo '<span style="color: red">未审核</span>';
+        }
+        if($data == 1){
+            echo '<span style="color: green">通过审核</span>';
+        }
+        if($data == 2){
+            echo '<span style="color: yellow">未通过审核</span>';
+        }
+    }
+}

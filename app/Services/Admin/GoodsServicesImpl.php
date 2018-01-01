@@ -49,4 +49,9 @@ class GoodsServicesImpl implements GoodsServices
     {
         return $this->goodsDao->goods_search($input);
     }
+
+    public function edit($input)
+    {
+        return $this->goodsDao->where('id',$input['id'])->update($input);
+    }
 }

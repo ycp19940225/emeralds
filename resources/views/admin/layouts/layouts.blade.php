@@ -54,6 +54,9 @@
 
     <script>
         $(document).ready(function(){
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' }
+            });
             $("#data-table").dataTable({
                 "language": {
                     "sProcessing": "读取中...",

@@ -169,7 +169,6 @@
                     _token: _token,
                     status:status
                 };
-                console.log(data);
                     $.post("{{ url('admin/admin/frozen') }}",data,function (res) {
                     if(res['code'] === 'success'){
                         layer.msg(res['msg'],{icon: 6});

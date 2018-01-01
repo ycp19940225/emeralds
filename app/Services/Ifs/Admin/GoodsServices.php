@@ -22,4 +22,6 @@ interface GoodsServices
     public function delete($id);
 
     public function search($input);
+
+    public function edit($input);
 }

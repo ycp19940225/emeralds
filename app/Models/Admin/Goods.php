@@ -25,7 +25,7 @@ class Goods extends Base
      */
     public $fillable = array('id','goods_code','pic','video','goods_detail','price',
         'sort','is_hot','cat_id','input_id','input_type','stock','status','logo','goods_name',
-        'created_at','updated_at','deleted_at');
+        'created_at','updated_at','deleted_at','checked');
 
     /**
      * Searchable rules.
@@ -81,16 +81,10 @@ class Goods extends Base
      */
     public function edit($data)
     {
-        $this->find($data['id'])->update($data);
-        $child_name = explode(',',preg_replace("/(\n)|(\s)|(\t)|(\')|(')|(，)/" ,',' ,$data['child_name']));
-        //删除原来的子分类
-        $this->where('parent_id',$data['id'])->delete();
-        $create_data['parent_id'] = $data['id'];
-        foreach ($child_name as $k=>$v){
-            $create_data['cat_name'] = $v;
-            $this->create($create_data);
-        }
-        return true;
+        $data = $this->find($data['id'])->update($data);
+        //添加属性
+        $data->attr()->sync($data['type']);
+        return $data;
     }
 
     public function getAll()
