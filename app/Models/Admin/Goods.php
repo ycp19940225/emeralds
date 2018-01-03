@@ -81,10 +81,10 @@ class Goods extends Base
      */
     public function edit($data)
     {
-        $data = $this->find($data['id'])->update($data);
-        //添加属性
-        $data->attr()->sync($data['type']);
-        return $data;
+        $res = $this->find($data['id'])->update($data);
+        //修改属性
+        $this->find($data['id'])->attr()->sync($data['type']);
+        return $res;
     }
 
     public function getAll()

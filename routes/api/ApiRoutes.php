@@ -42,6 +42,7 @@ $api->version('v1', function ($api) {
             //足迹
             $api->get('users/history','HistoryController@all');
             $api->post('users/history/add','HistoryController@add');
+            $api->post('users/history/add','HistoryController@add');
         });
         //商品
         $api->group(['middleware'=>'jwt.auth','providers' => 'jwt'], function ($api) {
@@ -49,6 +50,9 @@ $api->version('v1', function ($api) {
             $api->post('agent/goods/pic', 'GoodsController@uploadpic');
             $api->post('agent/goods/video', 'GoodsController@uploadVideo');
             $api->post('agent/goods/add', 'GoodsController@add');
+            $api->post('agent/goods/edit','GoodsController@edit');
+            $api->get('agent/goods','UserController@getGoods');
+            $api->post('agent/goods/status','GoodsController@changeStatus');
         });
     });
     //管理员
@@ -64,6 +68,8 @@ $api->version('v1', function ($api) {
             $api->post('admin/goods/pic', 'GoodsController@uploadpic');
             $api->post('admin/goods/video', 'GoodsController@uploadVideo');
             $api->post('admin/goods/add', 'GoodsController@add');
+            $api->post('admin/goods/edit', 'GoodsController@edit');
+            $api->post('admin/goods/status', 'GoodsController@changeStatus');
         });
     });
 

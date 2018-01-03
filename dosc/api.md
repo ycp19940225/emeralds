@@ -191,7 +191,7 @@ FORMAT: 1A
 + Parameters
     + telphone: (varchar, required) - 手机号
     + password: (varchar, required) - 密码
-    + : (varchar, optional) - tokne:密钥,ttl：秘钥过期时间，refresh_ttl：本次token可用于获取新的token的时间，过期需重新登录
+    + data: (varchar, optional) - token:密钥,ttl：秘钥过期时间，refresh_ttl：本次token可用于获取新的token的时间，过期需重新登录,单位为秒
 
 + Request (application/json)
     + Body
@@ -209,8 +209,8 @@ FORMAT: 1A
                 "code": 200,
                 "msg": "登录成功！",
                 "data": {
-                    "ttl": 43200,
-                    "refresh_ttl": 20160,
+                    "ttl": 2592000,
+                    "refresh_ttl": 1209600,
                     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmVtZXJhbGQuY29tL2FwaS91c2Vycy9sb2dpbiIsImlhdCI6MTUxNDQ1NTkzMSwiZXhwIjoxNTE3MDQ3OTMxLCJuYmYiOjE1MTQ0NTU5MzEsImp0aSI6IjhENjlMaE5uSU94Um53S04iLCJzdWIiOjE5LCJwcnYiOiI3MjM0OWFmZmRhMDQ0ZGMyYWQ3MGEzOWVmMTUxNjNlYTY3YTczMzEzIn0.r86fhFkmcZKayKrSomV0PrST4KLn7ok8Lg-3ljr9HtE"
                 }
             }
@@ -271,7 +271,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + : (varchar, optional) - tokne:密钥,ttl：秘钥过期时间，refresh_ttl：本次token可用于获取新的token的时间，过期需重新登录
+    + data: (varchar, optional) - tokne:密钥,ttl：秘钥过期时间，refresh_ttl：本次token可用于获取新的token的时间，过期需重新登录，单位为秒
 
 + Response 200 (application/json)
     + Body
@@ -468,7 +468,7 @@ FORMAT: 1A
 商品资源
 
 ## 获取所有商品 [GET /http://temp.cqquality.com/api/goods]
-
+[分页：http://temp.cqquality.com/api/goods?page={number}]
 
 + Request (application/json)
     + Body
@@ -482,7 +482,14 @@ FORMAT: 1A
                 "status": "true",
                 "code": 200,
                 "msg": "获取商品成功！",
-                "data": []
+                "data": [],
+                "first_page_url": "http://www.emerald.com/api/goods?page=1",
+                "from": 1,
+                "next_page_url": null,
+                "path": "http://www.emerald.com/api/goods",
+                "per_page": 10,
+                "prev_page_url": null,
+                "to": 2
             }
 
 + Response 500 (application/json)
@@ -642,7 +649,7 @@ FORMAT: 1A
 
 ## 上传商品 [POST /http://temp.cqquality.com/api/admin(agent)/goods/add?token={token}]
 [http://temp.cqquality.com/api/admin/goods/add,为管理员上传路径]
-[http://temp.cqquality.com/api/agent/goods/add,为管理员上传路径]
+[http://temp.cqquality.com/api/agent/goods/add,为代理商上传路径]
 
 + Parameters
     + logo: (varchar, optional) - 图片url
@@ -717,6 +724,109 @@ FORMAT: 1A
                     "code": 500,
                     "msg": "添加失败！",
                     "data": ""
+                }
+            }
+
+## 首页商品搜索 [POST /http://temp.cqquality.com/api/goods/search]
+
+
++ Parameters
+    + input: (varchar, optional) - 用户输入
+
++ Request (application/json)
+    + Body
+
+            {
+                "input": "翡翠"
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": 200,
+                "msg": "获取成功！",
+                "data": ""
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "参数错误或者获取失败！",
+                    "data": ""
+                }
+            }
+
+## 编辑商品 [POST /http://temp.cqquality.com/api/admin(agent)/goods/add?token={token}]
+[http://temp.cqquality.com/api/admin/goods/add,为管理员编辑路径]
+[http://temp.cqquality.com/api/agent/goods/add,为代理商编辑路径]
+
++ Parameters
+    + logo: (varchar, optional) - 图片url
+    + goods_name: (varchar, optional) - 翡翠名
+    + pic: (varchar, optional) - 翡翠相册，每张图片以逗号隔开
+    + video: (varchar, optional) - 视频地址
+    + goods_detail: (varchar, optional) - 翡翠详情
+    + price: (varchar, optional) - 翡翠价格
+    + stock: (varchar, optional) - 库存
+    + cat_id: (varchar, optional) - 品种
+    + type: (varchar, optional) - 二级分类及三级明细，格式参考示例请求
+    + input_type: (int, optional) - 录入者类型，1为代理商，2为管理员
+    + input_id: (int, optional) - 录入者Id，结合input_type
+
++ Request (application/json)
+    + Body
+
+            {
+                "id": "42",
+                "goods_name": "测试翡翠",
+                "logo": "goods_logo/2017-12-24/Y2rlFNKjVlv9xDTWjWG7FYsCoSe2SDDf5HHfrGFW.jpeg",
+                "pic": "goods_pic/2017-12-24/Zz7G0UBLUISswZPggrQ86UteBOr096hNw5JYmtfZ.jpeg,goods_pic/2017-12-24/naxS3VYvCkPEcrCwsuua1IPTwmtFh80c3BIjCGPy.jpe",
+                "video": "goods_video/2017-12-24/792190e9187897d3b67dc833f77f7da4.mp4",
+                "goods_detail": "库存仅此一件【尺寸】高35.5mm，宽23.5mm，厚5.6mm【颜　　色】略飘花【透明度】二分之一透明【必要说明】可见细小石纹，但瑕不掩瑜",
+                "price": "33000",
+                "stock": "1",
+                "cat_id": "114",
+                "type": {
+                    "136": {
+                        "type_val": "玻璃种"
+                    },
+                    "135": {
+                        "type_val": "观音"
+                    },
+                    "137": {
+                        "type_val": "飘绿"
+                    },
+                    "138": {
+                        "type_val": "8千-1.5万"
+                    }
+                }
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": "200",
+                "msg": "修改成功！",
+                "data": true
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "true",
+                    "code": "200",
+                    "msg": "修改失败！",
+                    "data": true
                 }
             }
 
@@ -902,6 +1012,89 @@ FORMAT: 1A
                     "status": "false",
                     "code": 500,
                     "msg": "获取失败！",
+                    "data": ""
+                }
+            }
+
+# Group History
+足迹
+
+## 获取用户足迹 [GET /http://temp.cqquality.com/api/users/history?token={token}]
+[获取数据为数组，goods为浏览的商品信息，articles为浏览的文章信息。如果goods为null,这条足迹应该归档于文章]
+
++ Parameters
+    + token: (varchar, required) - 密钥
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": "200",
+                "msg": "获取成功！",
+                "data": ""
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "获取失败！",
+                    "data": ""
+                }
+            }
+
+## 记录浏览历史 [GET /http://temp.cqquality.com/api/users/history/add?token={token}]
+
+
++ Parameters
+    + token: (varchar, required) - 密钥
+    + goods_id: (int, required) - 商品ID
+    + article_id: (int, required) - 文章ID
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": "200",
+                "msg": "操作成功！",
+                "data": {
+                    "goods_id": "41",
+                    "user_id": 18,
+                    "updated_at": "1514470122",
+                    "created_at": "1514470122",
+                    "id": 2
+                }
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "true",
+                "code": "200",
+                "msg": "操作成功！",
+                "data": {
+                    "article_id": "1",
+                    "user_id": 18,
+                    "updated_at": "1514470122",
+                    "created_at": "1514470122",
+                    "id": 2
+                }
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "error": {
+                    "status": "false",
+                    "code": 500,
+                    "msg": "操作失败！",
                     "data": ""
                 }
             }

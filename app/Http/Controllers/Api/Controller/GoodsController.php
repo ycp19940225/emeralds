@@ -230,7 +230,7 @@ class GoodsController extends BaseController
      * 上传商品
      *
      *[http://temp.cqquality.com/api/admin/goods/add,为管理员上传路径]
-     *[http://temp.cqquality.com/api/agent/goods/add,为管理员上传路径]
+     *[http://temp.cqquality.com/api/agent/goods/add,为代理商上传路径]
      *
      * @Post("http://temp.cqquality.com/api/admin(agent)/goods/add?token={token}")
      * @Parameters({
@@ -343,5 +343,119 @@ class GoodsController extends BaseController
         } else {
             return API_MSG('','参数错误或者获取失败！'.$res,'false',500);
         }
+    }
+
+    /**
+     * 编辑商品
+     *
+     *[http://temp.cqquality.com/api/admin/goods/add,为管理员编辑路径]
+     *[http://temp.cqquality.com/api/agent/goods/add,为代理商编辑路径]
+     *
+     * @Post("http://temp.cqquality.com/api/admin(agent)/goods/add?token={token}")
+     * @Parameters({
+     *      @Parameter("id", type="int",description="商品ID"),
+     *      @Parameter("logo", type="varchar",description="图片url"),
+     *      @Parameter("goods_name", type="varchar",description="翡翠名"),
+     *      @Parameter("pic", type="varchar",description="翡翠相册，每张图片以逗号隔开"),
+     *      @Parameter("video", type="varchar",description="视频地址"),
+     *      @Parameter("goods_detail", type="varchar",description="翡翠详情"),
+     *      @Parameter("price", type="varchar",description="翡翠价格"),
+     *      @Parameter("stock", type="varchar",description="库存"),
+     *      @Parameter("cat_id", type="varchar",description="品种"),
+     *      @Parameter("type", type="varchar",description="二级分类及三级明细，格式参考示例请求"),
+     *      @Parameter("input_type", type="int",description="录入者类型，1为代理商，2为管理员"),
+     *      @Parameter("input_id", type="int",description="录入者Id，结合input_type"),
+     * })
+     *@Transaction({
+     *      @Request({
+     *
+    "id":"42",
+    "goods_name":"测试翡翠",
+    "logo":"goods_logo/2017-12-24/Y2rlFNKjVlv9xDTWjWG7FYsCoSe2SDDf5HHfrGFW.jpeg",
+    "pic":"goods_pic/2017-12-24/Zz7G0UBLUISswZPggrQ86UteBOr096hNw5JYmtfZ.jpeg,goods_pic/2017-12-24/naxS3VYvCkPEcrCwsuua1IPTwmtFh80c3BIjCGPy.jpe",
+    "video":"goods_video/2017-12-24/792190e9187897d3b67dc833f77f7da4.mp4",
+    "goods_detail":"库存仅此一件【尺寸】高35.5mm，宽23.5mm，厚5.6mm【颜　　色】略飘花【透明度】二分之一透明【必要说明】可见细小石纹，但瑕不掩瑜",
+    "price":"33000",
+    "stock":"1",
+    "cat_id":"114",
+    "type":{
+    "136":{"type_val":"玻璃种"},
+    "135":{"type_val":"观音"},
+    "137":{"type_val":"飘绿"},
+    "138":{"type_val":"8千-1.5万"}
+    }
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": "200",
+    "msg": "修改成功！",
+    "data": true
+    }),
+     *      @Response(500, body={"error": {
+    "status": "true",
+    "code": "200",
+    "msg": "修改失败！",
+    "data": true
+     *     }})
+     * })
+     */
+    public function edit(Request $request)
+    {
+        $data = $request->except('token');
+        $res = $this->goods->update($data);
+        if($res){
+            return API_MSG($res,'修改成功！');
+        }
+        return API_MSG('','修改失败！','false',500);
+    }
+    /**
+     * 商品上下架
+     *
+     *[http://temp.cqquality.com/api/admin/goods/status,为管理员编辑路径]
+     *[http://temp.cqquality.com/api/agent/goods/status,为代理商编辑路径]
+     *
+     *
+     * [代理商上架的商品必须先通过审核，管理员不需要]
+     *
+     *
+     * @Post("http://temp.cqquality.com/api/admin(agent)/goods/status?token={token}")
+     * @Parameters({
+     *      @Parameter("id", type="int",description="商品ID"),
+     *      @Parameter("status", type="int",description="商品状态，1上架。0下架"),
+     * })
+     *@Transaction({
+     *      @Request({
+     *
+    "id":"42",
+    "status":"0"
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": "200",
+    "msg": "操作成功！",
+    "data": 1
+    }),
+     *      @Response(500, body={"error": {
+    "status": "true",
+    "code": "200",
+    "msg": "修改失败！",
+    "data": false
+     *     }})
+     * })
+     */
+    public function changeStatus(Request $request)
+    {
+        $data = $request->only('id','status');
+        if($data['status'] == 1){
+            $goods_data = $this->goods->getOne($data['id']);
+            if($goods_data->checked == 0 && $goods_data->input_type == 1){
+                return API_MSG('','操作失败！,该商品还未通过审核','false',500);
+            }
+        }
+        $res = $this->goods->updateFields($data);
+        if($res){
+            return API_MSG($res,'操作成功！');
+        }
+        return API_MSG('','操作失败！','false',500);
     }
 }

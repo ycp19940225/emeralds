@@ -17,11 +17,15 @@ interface GoodsServices
     //添加
     public function save($data);
     //更新
-    public function update($id);
+    public function update($data);
     //删除
     public function delete($id);
 
     public function search($input);
 
     public function edit($input);
+
+    public function getByFields($data);
+
+    public function updateFields($input);
 }

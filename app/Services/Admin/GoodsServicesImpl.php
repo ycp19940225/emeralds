@@ -35,9 +35,9 @@ class GoodsServicesImpl implements GoodsServices
        return $this->goodsDao->add($data);
     }
 
-    public function update($id)
+    public function update($data)
     {
-        return $this->goodsDao->edit($id);
+        return $this->goodsDao->edit($data);
     }
 
     public function delete($id)
@@ -51,6 +51,21 @@ class GoodsServicesImpl implements GoodsServices
     }
 
     public function edit($input)
+    {
+        return $this->goodsDao->where('id',$input['id'])->update($input);
+    }
+
+    public function getByFields($data)
+    {
+       $sql = $this->goodsDao;
+       foreach ($data as $k=>$v){
+           $sql = $sql->where($k,$v);
+       }
+       $res = $sql->get();
+       return $res;
+    }
+
+    public function updateFields($input)
     {
         return $this->goodsDao->where('id',$input['id'])->update($input);
     }

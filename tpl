@@ -33,7 +33,7 @@
       *     }})
       * })
       */
-php artisan api:docs --name "API_DOSC"  --use-version v1 --output-file "D:\phpStudy\WWW\emeralds\dosc\api.md"
+php artisan api:docs --name "API_DOSC"  --use-version v1 --output-file "D:\phpStudy\WWW\emeralds\dosc\api.apib"
 php artisan api:docs --name "API_DOSC"  --use-version v1 --output-file "D:\phpStudy\PHPTutorial\WWW\emeralds\dosc\api.apib"
 
 

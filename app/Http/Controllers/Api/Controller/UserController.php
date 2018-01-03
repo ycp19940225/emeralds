@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Repository\Eloquent\Admin\UserRepository;
 use App\Services\Common\UploadServicesImpl;
 use App\Services\Ifs\Admin\AgentServices;
+use App\Services\Ifs\Admin\GoodsServices;
 use Dingo\Api\Http\Request;
 use JWTAuth;
 use Validator;
@@ -25,11 +26,15 @@ class UserController extends BaseController
 {
     protected $user;
     protected $agent;
+    protected $goods;
 
-    public function __construct(UserRepository $userRepository,AgentServices $agentServices)
+    public function __construct(UserRepository $userRepository,
+                                AgentServices $agentServices,
+                                GoodsServices $goodsServices)
     {
         $this->user=$userRepository;
         $this->agent=$agentServices;
+        $this->goods=$goodsServices;
     }
 
     /**
@@ -402,4 +407,51 @@ class UserController extends BaseController
         }
     }
 
+    /**
+     * 获取代理商的商品
+     *
+     * [分页：http://temp.cqquality.com/api/agent/goods?page={number}]
+     *
+     * @Get("http://temp.cqquality.com/api/agent/goods")
+     * @Parameters({
+     * })
+     *@Transaction({
+     *      @Request({
+
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": 200,
+    "msg": "获取商品成功！",
+    "data": {
+
+    },
+     * "first_page_url": "http://www.emerald.com/api/goods?page=1",
+    "from": 1,
+    "next_page_url": null,
+    "path": "http://www.emerald.com/api/goods",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 2
+    }),
+     *      @Response(500, body={"error": {
+    "status": "false",
+    "code": 500,
+    "msg": "获取商品失败！",
+    "data": ""
+     *     }})
+     * })
+     */
+    public function getGoods()
+    {
+        $data['input_id'] = $this->auth()->user()->id;
+        $data['input_type'] = 1;  //2位管理员
+
+        $res = $this->goods->getByFields($data);
+        if ($res){
+            return API_MSG($res,'获取成功！','true',200);
+        } else {
+            return API_MSG('','获取失败！','false',500);
+        }
+    }
 }
