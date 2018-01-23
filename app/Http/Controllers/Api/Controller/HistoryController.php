@@ -16,7 +16,7 @@ use Dingo\Api\Http\Request;
 /**
  * 足迹
  *
- * @Resource("Group History")
+ * @Resource("Group 足迹")
  */
 class HistoryController extends BaseController
 {

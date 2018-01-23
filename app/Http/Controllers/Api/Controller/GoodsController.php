@@ -16,7 +16,7 @@ use Dingo\Api\Http\Request;
 /**
  * 商品资源
  *
- * @Resource("Group Goods")
+ * @Resource("Group 商品")
  */
 class GoodsController extends BaseController
 {

@@ -20,7 +20,7 @@ use Validator;
 /**
  * 用户资源
  *
- * @Resource("Group Users")
+ * @Resource("Group 用户代理商")
  */
 class UserController extends BaseController
 {
@@ -78,7 +78,6 @@ class UserController extends BaseController
             'telphone' => 'required|unique:emerald_user|max:255',
             'password' => 'required',
         ]);
-
         if ($validator->fails()) {
             return API_MSG('','手机号已被注册！','false',500);
         }
@@ -446,7 +445,6 @@ class UserController extends BaseController
     {
         $data['input_id'] = $this->auth()->user()->id;
         $data['input_type'] = 1;  //2位管理员
-
         $res = $this->goods->getByFields($data);
         if ($res){
             return API_MSG($res,'获取成功！','true',200);

@@ -15,7 +15,7 @@ use App\Repository\Eloquent\Admin\SlideRepository;
 /**
  * 轮播图
  *
- * @Resource("Group Slide")
+ * @Resource("Group 轮播图")
  */
 class SlideController extends BaseController
 {

@@ -14,7 +14,7 @@ use App\Repository\Eloquent\Admin\ArticleRepository;
 /**
  * 文章
  *
- * @Resource("Group Articles")
+ * @Resource("Group 文章")
  */
 class ArticleController extends BaseController
 {

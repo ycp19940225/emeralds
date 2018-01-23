@@ -14,7 +14,7 @@ use App\Services\Ifs\Admin\CatServices;
 /**
  * 翡翠品种
  *
- * @Resource("Group Cats")
+ * @Resource("Group 分类")
  */
 class CatController extends BaseController
 {

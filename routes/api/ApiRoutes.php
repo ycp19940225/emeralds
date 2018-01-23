@@ -17,6 +17,8 @@ $api->version('v1', function ($api) {
             $api->get('goods', 'GoodsController@all');
             $api->get('goods/{id}', 'GoodsController@one')->where('id', '[0-9]+');
             $api->post('goods/search', 'GoodsController@search');
+            //根据分类名获取商品
+            $api->post('goods/search/cat', 'SearchController@getGoodsByCatName');
             //分类
             $api->get('cats', 'CatController@all');
             //文章

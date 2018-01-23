@@ -19,7 +19,7 @@ use Validator;
 /**
  * 管理员
  *
- * @Resource("Group Admin")
+ * @Resource("Group 管理员")
  */
 class AdminController extends BaseController
 {
