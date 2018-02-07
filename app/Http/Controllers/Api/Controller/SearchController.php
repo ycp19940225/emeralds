@@ -49,9 +49,9 @@ class SearchController extends BaseController
        $res = DB::table('emerald_cat as a')
            ->leftJoin('emerald_goods as b','a.id','=','b.cat_id')
            ->where('a.cat_name',$cat)
-           ->where('a.deleted_at',0)
-           ->where('a.status',1)
-           ->where('a.checked',1)
+           ->where('b.deleted_at',0)
+           ->where('b.status',1)
+           ->where('b.checked',1)
            ->get();
         return API_MSG($res,'获取该分类商品成功！');
     }
