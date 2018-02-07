@@ -52,7 +52,7 @@ class SearchController extends BaseController
            ->where('b.deleted_at',0)
            ->where('b.status',1)
            ->where('b.checked',1)
-           ->simplePaginate(10);
+           ->simplePaginate(1);
         return API_MSG($res,'获取该分类商品成功！');
     }
 
@@ -90,8 +90,8 @@ class SearchController extends BaseController
     public function getGoodsByCat(Request $request)
     {
         $cat_id = $request->input('cat_id');
-        $type_id = $request->input('type_id');
-        $type_value = $request->input('type_value');
+        $type = $request->input('type');
+
         $res = DB::table('emerald_goods as a')
             ->leftJoin('emerald_goods_type as b','a.id','=','b.goods_id')
             ->where('a.cat_id',$cat_id)
