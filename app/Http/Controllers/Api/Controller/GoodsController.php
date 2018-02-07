@@ -236,6 +236,7 @@ class GoodsController extends BaseController
      * @Parameters({
      *      @Parameter("logo", type="varchar",description="图片url"),
      *      @Parameter("goods_name", type="varchar",description="翡翠名"),
+     *      @Parameter("goods_code", type="varchar",description="编号"),
      *      @Parameter("pic", type="varchar",description="翡翠相册，每张图片以逗号隔开"),
      *      @Parameter("video", type="varchar",description="视频地址"),
      *      @Parameter("format", type="varchar",description="规格"),
