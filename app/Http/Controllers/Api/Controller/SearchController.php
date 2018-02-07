@@ -52,7 +52,7 @@ class SearchController extends BaseController
            ->where('b.deleted_at',0)
            ->where('b.status',1)
            ->where('b.checked',1)
-           ->get();
+           ->simplePaginate(10);
         return API_MSG($res,'获取该分类商品成功！');
     }
 
@@ -97,7 +97,7 @@ class SearchController extends BaseController
             ->where('a.cat_id',$cat_id)
             ->where('b.type_id',$type_id)
             ->where('b.type_val',$type_value)
-            ->get();
+            ->simplePaginate(10);
         return API_MSG($res,'获取详细分类商品成功！');
     }
     /**

@@ -34,7 +34,7 @@ class HistoryRepository
             ->where('user_id',$id)
             ->with('goods')
             ->with('articles')
-            ->get();
+            ->simplePaginate(10);
     }
 
     public function getOne($id)

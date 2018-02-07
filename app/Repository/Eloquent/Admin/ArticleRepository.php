@@ -29,7 +29,7 @@ class ArticleRepository
 
     public function getAll()
     {
-        return $this->articleModel->where('deleted_at',0)->with('cat')->get();
+        return $this->articleModel->where('deleted_at',0)->with('cat')->simplePaginate(10);
     }
 
     public function getOne($id)
