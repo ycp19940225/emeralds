@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/dosc', function () {
+    return view('api');
 });
 
 /*******************************backend*********************************/
