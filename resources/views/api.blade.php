@@ -342,6 +342,8 @@
 </dd><dt>goods_name</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>翡翠名</p>
 </dd><dt>pic</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>翡翠相册，每张图片以逗号隔开</p>
 </dd><dt>video</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>视频地址</p>
+</dd><dt>format</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>规格</p>
+</dd><dt>weight</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>重量</p>
 </dd><dt>goods_detail</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>翡翠详情</p>
 </dd><dt>price</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>翡翠价格</p>
 </dd><dt>stock</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>库存</p>

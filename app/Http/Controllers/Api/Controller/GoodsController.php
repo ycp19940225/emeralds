@@ -238,6 +238,8 @@ class GoodsController extends BaseController
      *      @Parameter("goods_name", type="varchar",description="翡翠名"),
      *      @Parameter("pic", type="varchar",description="翡翠相册，每张图片以逗号隔开"),
      *      @Parameter("video", type="varchar",description="视频地址"),
+     *      @Parameter("format", type="varchar",description="规格"),
+     *      @Parameter("weight", type="varchar",description="重量"),
      *      @Parameter("goods_detail", type="varchar",description="翡翠详情"),
      *      @Parameter("price", type="varchar",description="翡翠价格"),
      *      @Parameter("stock", type="varchar",description="库存"),
