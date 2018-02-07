@@ -108,7 +108,7 @@ class SearchController extends BaseController
             ->whereIn('b.type_val',$type_val)
             ->groupBy('b.goods_id')
             ->havingRaw($condition)
-            ->simplePaginate(10);
+            ->get();
         return API_MSG($res,'获取详细分类商品成功！');
     }
     /**
