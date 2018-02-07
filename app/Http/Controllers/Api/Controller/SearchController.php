@@ -69,8 +69,7 @@ class SearchController extends BaseController
      * @Transaction({
      *      @Request({
     "cat_id":"114",
-    "type_id":"137",
-    "type_value":"飘绿"
+    "type":"数组",
     })}),
      *@Transaction({
      *      @Response(200, body={
@@ -91,12 +90,21 @@ class SearchController extends BaseController
     {
         $cat_id = $request->input('cat_id');
         $type = $request->input('type');
-
+        $type_id = [];
+        $type_val= [];
+        foreach ($type as $v){
+            $type_id[]= $v['type_id'];
+            $type_val[] = $v['type_value'];
+        }
+        $count = count($type);
+        $condition = 'count(b.goods_id) = '.$count;
         $res = DB::table('emerald_goods as a')
             ->leftJoin('emerald_goods_type as b','a.id','=','b.goods_id')
             ->where('a.cat_id',$cat_id)
-            ->where('b.type_id',$type_id)
-            ->where('b.type_val',$type_value)
+            ->whereIn('b.type_id',$type_id)
+            ->whereIn('b.type_val',$type_val)
+            ->groupBy('b.goods_id')
+            ->havingRaw($condition)
             ->simplePaginate(10);
         return API_MSG($res,'获取详细分类商品成功！');
     }
