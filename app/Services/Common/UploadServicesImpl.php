@@ -49,7 +49,7 @@ class UploadServicesImpl implements UploadServices
     }
 
     public function upload($request){
-        $type='pic';
+        $type='goods';
         header("Access-Control-Allow-Origin: *");
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $ret=array('strings'=>$_POST,'error'=>'0');
