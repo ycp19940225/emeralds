@@ -65,6 +65,7 @@ class UploadServicesImpl implements UploadServices
                 $ypath=storage_path().$type.'/'.$ytime;//二级路径
                 $dpath=storage_path().$type.'/'.$ytime.'/'.$dtime;//最终路径
 
+                
                 if(!is_dir($tpath)){
                     mkdir($tpath,0777);
                     mkdir($ypath,0777);
