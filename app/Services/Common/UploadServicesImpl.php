@@ -49,7 +49,7 @@ class UploadServicesImpl implements UploadServices
     }
 
     public function upload($request){
-        $type=$request->file('pic');
+        $type='pic';
         header("Access-Control-Allow-Origin: *");
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $ret=array('strings'=>$_POST,'error'=>'0');
@@ -61,11 +61,10 @@ class UploadServicesImpl implements UploadServices
                 $fe=substr($fn,$ft); //后缀
                 $ytime = Date('Y',time());//年份文件夹
                 $dtime = Date('m-d',time());//日期文件夹
-                $tpath = storage_path().$type;//一级路径
-                $ypath=storage_path().$type.'/'.$ytime;//二级路径
-                $dpath=storage_path().$type.'/'.$ytime.'/'.$dtime;//最终路径
+                $tpath = public_path().'/'.$type;//一级路径
+                $ypath=public_path().'/'.$type.'/'.$ytime;//二级路径
+                $dpath=public_path().'/'.$type.'/'.$ytime.'/'.$dtime;//最终路径
 
-                
                 if(!is_dir($tpath)){
                     mkdir($tpath,0777);
                     mkdir($ypath,0777);
