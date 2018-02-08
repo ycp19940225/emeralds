@@ -52,7 +52,7 @@ class SearchController extends BaseController
            ->where('b.deleted_at',0)
            ->where('b.status',1)
            ->where('b.checked',1)
-           ->simplePaginate(1);
+           ->simplePaginate(10);
         return API_MSG($res,'获取该分类商品成功！');
     }
 
@@ -112,21 +112,13 @@ class SearchController extends BaseController
         return API_MSG($res,'获取详细分类商品成功！');
     }
     /**
-     * 通过筛选获取商品
+     * 通过一级分类ID获取推荐商品
      *
      *
-     * @Post("http://temp.cqquality.com/api/goods/search/type")
+     * @Get("http://temp.cqquality.com/api/goods/search/cat?cat_id={id}&&goods_id={goods_id}")
      * @Parameters({
-     *     @Parameter("cat_id", type="varchar", required=true, description="一级品种ID"),
-     *     @Parameter("type_id", type="varchar", required=true, description="二级分类ID"),
-     *     @Parameter("type_value", type="varchar", required=true, description="三级级明细")
-     * }),
-     * @Transaction({
-     *      @Request({
-    "cat_id":"114",
-    "type_id":"137",
-    "type_value":"飘绿"
-    })}),
+     *     @Parameter("cat_id", type="int", required=true, description="分类ID"),
+     * })
      *@Transaction({
      *      @Response(200, body={
     "status": "true",
@@ -142,8 +134,19 @@ class SearchController extends BaseController
      *     }})
      * })
      */
-    public function getGoodsByFields()
+    public function getGoodsByCatID(Request $request)
     {
-        
+        $cat = $request->input('cat_id');
+        $goods_id[] = $request->input('goods_id');
+        $res = DB::table('emerald_goods')
+            ->where('cat_id',$cat)
+            ->whereNotIn('id',$goods_id)
+            ->where('deleted_at',0)
+            ->where('status',1)
+            ->where('checked',1)
+            ->orderBy('updated_at')
+            ->limit('6')
+            ->get();
+        return API_MSG($res,'获取该分类推荐商品成功！');
     }
 }
