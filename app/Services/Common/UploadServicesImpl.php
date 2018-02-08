@@ -61,9 +61,10 @@ class UploadServicesImpl implements UploadServices
                 $fe=substr($fn,$ft); //后缀
                 $ytime = Date('Y',time());//年份文件夹
                 $dtime = Date('m-d',time());//日期文件夹
-                $tpath = public_path().'/'.$type;//一级路径
-                $ypath=public_path().'/'.$type.'/'.$ytime;//二级路径
-                $dpath=public_path().'/'.$type.'/'.$ytime.'/'.$dtime;//最终路径
+                $tpath = public_path().'/'.'uploads'.'/'.$type;//一级路径
+                $ypath=public_path().'/'.'uploads'.'/'.$type.'/'.$ytime;//二级路径
+                $vPath = 'uploads'.'/'.$type.'/'.$ytime.'/'.$dtime;
+                $dpath=public_path().'/'.'uploads'.'/'.$type.'/'.$ytime.'/'.$dtime;//最终路径
 
                 if(!is_dir($tpath)){
                     mkdir($tpath,0777);
@@ -83,7 +84,7 @@ class UploadServicesImpl implements UploadServices
                     $fi++;
                 }
                 move_uploaded_file($file['tmp_name'],$fp);
-                $fs=array('name'=>$fn,'url'=>$fp,'type'=>$file['type'],'size'=>$file['size']);
+                $fs=array('name'=>$fn,'url'=>$vPath.$fn,'type'=>$file['type'],'size'=>$file['size']);
             }
             //$ret['files']=$fs;
             return json_encode($fs);
