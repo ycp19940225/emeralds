@@ -176,9 +176,8 @@ class GoodsController extends BaseController
      */
     public function uploadPic(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
-        $files = $request->file('pic');
-        $urls = $uploadServicesImpl->uploadImg('goods_pic',$files);
-        if ($files&&$urls){
+        $urls = $uploadServicesImpl->upload($request);
+        if ($urls){
             return API_MSG($urls,'上传成功！','true',200);
         } else {
             return API_MSG('','参数错误或者上传失败！','false',500);
@@ -217,9 +216,8 @@ class GoodsController extends BaseController
      */
     public function uploadVideo(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
-        $files = $request->file('video');
-        $urls = $uploadServicesImpl->uploadVideo('goods_video',$files);
-        if ($files&&$urls){
+        $urls = $uploadServicesImpl->upload($request);
+        if ($urls){
             return API_MSG($urls,'上传成功！','true',200);
         } else {
             return API_MSG('','参数错误或者上传失败！'.$urls,'false',500);
