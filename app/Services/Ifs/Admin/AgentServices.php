@@ -17,7 +17,9 @@ interface AgentServices
     //添加
     public function save($data);
     //更新
-    public function update($id);
+    public function update($data);
     //删除
     public function delete($id);
+    //字段获取
+    public function getByField($field,$val);
 }

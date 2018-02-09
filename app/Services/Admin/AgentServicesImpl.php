@@ -35,13 +35,18 @@ class AgentServicesImpl implements AgentServices
        return $this->agentDao->add($data);
     }
 
-    public function update($id)
+    public function update($data)
     {
-        return $this->agentDao->edit($id);
+        return $this->agentDao->edit($data);
     }
 
     public function delete($id)
     {
         return $this->agentDao->where('id',$id)->update(['deleted_at'=>1]);
+    }
+
+    public function getByField($field,$val)
+    {
+        return $this->agentDao->where($field,$val)->find();
     }
 }

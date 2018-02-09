@@ -84,7 +84,7 @@ class UploadServicesImpl implements UploadServices
                     $fi++;
                 }
                 move_uploaded_file($file['tmp_name'],$fp);
-                $fs=array('name'=>$fn,'url'=>$vPath.$fn,'type'=>$file['type'],'size'=>$file['size']);
+                $fs=array('name'=>$fn,'url'=>$vPath.'/'.$fn,'type'=>$file['type'],'size'=>$file['size']);
             }
             //$ret['files']=$fs;
             return json_encode($fs);

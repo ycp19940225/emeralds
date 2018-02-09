@@ -397,12 +397,16 @@ class UserController extends BaseController
     {
        $data = $request->all();
        $data['user_id'] = $this->auth()->user()->id;
-       $data['agent_code'] = generate_code('LYFC');
-       $res = $this->agent->save($data);
+       if($this->agent->getByField('user_id',$data['user_id'])){
+           $res = $this->agent->update($data);
+       }else{
+           $data['agent_code'] = generate_code('LYFC');
+           $res = $this->agent->save($data);
+       }
         if ($res){
-            return API_MSG($res,'申请成功,请等待审核！','true',200);
+            return API_MSG($res,'保存成功！','true',200);
         } else {
-            return API_MSG('','申请失败！','false',500);
+            return API_MSG('','保存失败！','false',500);
         }
     }
 
