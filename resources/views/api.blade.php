@@ -192,7 +192,7 @@
 </dd><dt>booth_name</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>商铺名称</p>
 </dd><dt>telphone</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>电话</p>
 </dd><dt>wx</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>微信</p>
-</dd><dt>agent_addr</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>代理商地址</p>
+</dd><dt>agent_addr</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>商户地址</p>
 </dd><dt>pm</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>主营项目</p>
 </dd><dt>bank_name</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>银行持卡人</p>
 </dd><dt>bank_type</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>开户行</p>

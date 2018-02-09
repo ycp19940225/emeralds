@@ -348,7 +348,7 @@ class UserController extends BaseController
      *      @Parameter("booth_name", type="varchar", required=true, description="商铺名称"),
      *      @Parameter("telphone", type="varchar", required=true, description="电话"),
      *      @Parameter("wx", type="varchar",required=true, description="微信"),
-     *      @Parameter("agent_addr", type="varchar",required=true, description="代理商地址"),
+     *      @Parameter("agent_addr", type="varchar",required=true, description="商户地址"),
      *      @Parameter("pm", type="varchar",description="主营项目"),
      *      @Parameter("bank_name", type="varchar",description="银行持卡人"),
      *      @Parameter("bank_type", type="varchar",description="开户行"),
