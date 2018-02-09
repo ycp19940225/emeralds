@@ -57,6 +57,8 @@ $api->version('v1', function ($api) {
             $api->post('agent/goods/edit','GoodsController@edit');
             $api->get('agent/goods','UserController@getGoods');
             $api->post('agent/goods/status','GoodsController@changeStatus');
+            //代理商信息
+            $api->get('agent/info','UserController@getAgent');
         });
     });
     //管理员

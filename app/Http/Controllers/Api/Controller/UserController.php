@@ -432,6 +432,43 @@ class UserController extends BaseController
             return API_MSG('','保存失败！','false',500);
         }
     }
+    /**
+     * 获取代理商信息
+     *
+     *
+     * @Get("http://temp.cqquality.com/api/agent/info?token={token}")
+     * @Parameters({
+     * })
+     *@Transaction({
+     *      @Request({
+
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": 200,
+    "msg": "信息获取成功！",
+    "data": {
+
+    }
+    }),
+     *      @Response(500, body={"error": {
+    "status": "false",
+    "code": 500,
+    "msg": "未申请成为代理商！",
+    "data": ""
+     *     }})
+     * })
+     */
+    public function getAgent()
+    {
+       $user_id = $this->auth()->user()->id;
+        $res = $this->agent->getByField('user_id',$user_id);
+       if($res){
+           return API_MSG($res,'信息获取成功！','true',200);
+       }else{
+           return API_MSG('','未申请成为代理商！','false',500);
+       }
+    }
 
     /**
      * 获取代理商的商品
