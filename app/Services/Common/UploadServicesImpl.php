@@ -48,8 +48,7 @@ class UploadServicesImpl implements UploadServices
         return $path_urls.$newfile;
     }
 
-    public function upload($request){
-        $type='goods';
+    public function upload($type='',$request){
         header("Access-Control-Allow-Origin: *");
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $ret=array('strings'=>$_POST,'error'=>'0');

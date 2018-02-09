@@ -176,7 +176,7 @@ class GoodsController extends BaseController
      */
     public function uploadPic(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
-        $urls = $uploadServicesImpl->upload($request);
+        $urls = $uploadServicesImpl->upload('goods_pic',$request);
         if ($urls){
             return API_MSG($urls,'上传成功！','true',200);
         } else {
@@ -216,7 +216,7 @@ class GoodsController extends BaseController
      */
     public function uploadVideo(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
-        $urls = $uploadServicesImpl->upload($request);
+        $urls = $uploadServicesImpl->upload('goods_video',$request);
         if ($urls){
             return API_MSG($urls,'上传成功！','true',200);
         } else {
@@ -302,6 +302,11 @@ class GoodsController extends BaseController
         }
         $data['goods_code'] = generate_code('LYFC');
         $data['input_id'] = $this->auth()->user()->id;
+        $type = [];
+        foreach ($data['type'] as $k=>$v){
+            $type[$v['type_id']]['type_val'] = $v['type_value'];
+        }
+        $data['type']=$type;
         $res = $this->goods->save($data);
         if($res){
             return API_MSG($res,'添加成功！');

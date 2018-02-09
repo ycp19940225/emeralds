@@ -47,6 +47,6 @@ class AgentServicesImpl implements AgentServices
 
     public function getByField($field,$val)
     {
-        return $this->agentDao->where($field,$val)->find();
+        return $this->agentDao->where($field,$val)->first();
     }
 }

@@ -331,8 +331,7 @@ class UserController extends BaseController
      */
     public function upload_agent_pic(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
-        $files = $request->file('pic');
-        $urls = $uploadServicesImpl->uploadImg('agent',$files);
+        $urls = $uploadServicesImpl->upload('agent',$request);
         if ($urls){
             return API_MSG($urls,'上传成功！','true',200);
         } else {
@@ -397,7 +396,9 @@ class UserController extends BaseController
     {
        $data = $request->all();
        $data['user_id'] = $this->auth()->user()->id;
-       if($this->agent->getByField('user_id',$data['user_id'])){
+       $agent_id = $this->agent->getByField('user_id',$data['user_id']);
+       if($agent_id){
+           $data['id']=$agent_id->id;
            $res = $this->agent->update($data);
        }else{
            $data['agent_code'] = generate_code('LYFC');
@@ -448,7 +449,7 @@ class UserController extends BaseController
     public function getGoods()
     {
         $data['input_id'] = $this->auth()->user()->id;
-        $data['input_type'] = 1;  //2位管理员
+        $data['input_type'] = 1;  //2为管理员
         $res = $this->goods->getByFields($data);
         if ($res){
             return API_MSG($res,'获取成功！','true',200);
