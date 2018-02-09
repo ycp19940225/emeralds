@@ -302,6 +302,8 @@ class GoodsController extends BaseController
         }
         $data['goods_code'] = generate_code('LYFC');
         $data['input_id'] = $this->auth()->user()->id;
+        $logo = explode(',',$data['pic'])[0];
+        $data['logo'] = $logo;
         $type = [];
         foreach ($data['type'] as $k=>$v){
             $type[$v['type_id']]['type_val'] = $v['type_value'];
