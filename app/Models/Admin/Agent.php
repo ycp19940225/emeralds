@@ -23,7 +23,7 @@ class Agent extends Base
      */
     public $fillable = array('id','agent_code','agent_name','telphone','booth_name','pm','wx','bank_name','bank_type','bank_code',
         'bank_name_back','bank_type_back','bank_code_back','alipay_code','alipay_name',
-        'alipay_code_back','alipay_name_back','card_front','card_back',
+        'alipay_code_back','alipay_name_back','card_front','card_back','license','agent_addr',
         'agent_pic','status','license_number','updated_at','deleted_at','user_id');
 
     public function add($data)
