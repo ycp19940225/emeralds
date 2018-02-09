@@ -188,14 +188,25 @@
   "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
   "<span class="hljs-attribute">msg</span>": <span class="hljs-value"><span class="hljs-string">"上传成功！"</span></span>,
   "<span class="hljs-attribute">data</span>": <span class="hljs-value"><span class="hljs-string">"agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg"</span>
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="用户代理商-申请成为供应商" class="resource"><h3 class="resource-heading">申请成为供应商 <a href="#用户代理商-申请成为供应商" class="permalink">&nbsp;&para;</a></h3><div id="用户代理商-申请成为供应商-post" class="action post"><h4 class="action-heading"><div class="name">申请成为供应商</div><a href="#用户代理商-申请成为供应商-post" class="method post">POST</a><code class="uri">/http:/temp.cqquality.com/api/users/agent/add?token=</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/http:/temp.cqquality.com/api/users/agent/add?token=</span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>agent_pic</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>营业执照或者身份证照片</p>
-</dd><dt>agent_name</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>姓名</p>
-</dd><dt>telphone</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>电话号码</p>
-</dd><dt>booth_number</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>摊位号</p>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="用户代理商-申请成为供应商" class="resource"><h3 class="resource-heading">申请成为供应商 <a href="#用户代理商-申请成为供应商" class="permalink">&nbsp;&para;</a></h3><div id="用户代理商-申请成为供应商-post" class="action post"><h4 class="action-heading"><div class="name">申请成为供应商</div><a href="#用户代理商-申请成为供应商-post" class="method post">POST</a><code class="uri">/http:/temp.cqquality.com/api/users/agent/add?token=</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/http:/temp.cqquality.com/api/users/agent/add?token=</span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>agent_name</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>姓名</p>
+</dd><dt>booth_name</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>商铺名称</p>
+</dd><dt>telphone</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>电话</p>
 </dd><dt>wx</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>微信</p>
+</dd><dt>agent_addr</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>代理商地址</p>
 </dd><dt>pm</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>主营项目</p>
-</dd><dt>bank_code</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>银行卡号</p>
-</dd><dt>alipay_code</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>支付宝账号</p>
+</dd><dt>bank_name</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>银行持卡人</p>
+</dd><dt>bank_type</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>开户行</p>
+</dd><dt>bank_code</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>账号</p>
+</dd><dt>bank_name_bck</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>银行持卡人2</p>
+</dd><dt>bank_type_bck</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>开户行2</p>
+</dd><dt>bank_code_bck</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>账号2</p>
+</dd><dt>alipay_name</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>支付宝姓名</p>
+</dd><dt>alipay_code</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>支付宝账户</p>
+</dd><dt>alipay_name_back</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>支付宝账户2</p>
+</dd><dt>alipay_code_back</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>支付宝姓名2</p>
+</dd><dt>license</dt><dd><code>varchar</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>营业执照</p>
+</dd><dt>card_front</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>身份证正面</p>
+</dd><dt>card_back</dt><dd><code>varchar</code>&nbsp;<span>(optional)</span>&nbsp;<p>身份证反面</p>
 </dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>500</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">error</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"false"</span></span>,
@@ -204,18 +215,29 @@
     "<span class="hljs-attribute">data</span>": <span class="hljs-value"><span class="hljs-string">""</span>
   </span>}
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">agent_name</span>": <span class="hljs-value"><span class="hljs-string">"翡翠代理商测试"</span></span>,
-  "<span class="hljs-attribute">telphone</span>": <span class="hljs-value"><span class="hljs-string">"18983667722"</span></span>,
-  "<span class="hljs-attribute">booth_number</span>": <span class="hljs-value"><span class="hljs-string">"taiwei123456"</span></span>,
+  "<span class="hljs-attribute">agent_name</span>": <span class="hljs-value"><span class="hljs-string">"翡翠代理商测2试2"</span></span>,
+  "<span class="hljs-attribute">booth_name</span>": <span class="hljs-value"><span class="hljs-string">"云南翡翠店"</span></span>,
+  "<span class="hljs-attribute">telphone</span>": <span class="hljs-value"><span class="hljs-string">"18983778843"</span></span>,
   "<span class="hljs-attribute">wx</span>": <span class="hljs-value"><span class="hljs-string">"ycp18989999"</span></span>,
+  "<span class="hljs-attribute">agent_addr</span>": <span class="hljs-value"><span class="hljs-string">"云南沙柱县"</span></span>,
   "<span class="hljs-attribute">pm</span>": <span class="hljs-value"><span class="hljs-string">"翡翠，珠宝"</span></span>,
-  "<span class="hljs-attribute">bank_code</span>": <span class="hljs-value"><span class="hljs-string">"34353435435345"</span></span>,
-  "<span class="hljs-attribute">alipay_code</span>": <span class="hljs-value"><span class="hljs-string">"ycpalipay2442"</span></span>,
-  "<span class="hljs-attribute">agent_pic</span>": <span class="hljs-value"><span class="hljs-string">"agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg"</span>
+  "<span class="hljs-attribute">bank_name</span>": <span class="hljs-value"><span class="hljs-string">"持卡人1"</span></span>,
+  "<span class="hljs-attribute">bank_type</span>": <span class="hljs-value"><span class="hljs-string">"农行"</span></span>,
+  "<span class="hljs-attribute">bank_code</span>": <span class="hljs-value"><span class="hljs-string">"9898797987979777979"</span></span>,
+  "<span class="hljs-attribute">bank_name_back</span>": <span class="hljs-value"><span class="hljs-string">"持卡人2"</span></span>,
+  "<span class="hljs-attribute">bank_type_back</span>": <span class="hljs-value"><span class="hljs-string">"农行2"</span></span>,
+  "<span class="hljs-attribute">bank_code_back</span>": <span class="hljs-value"><span class="hljs-string">"9898797987979777979"</span></span>,
+  "<span class="hljs-attribute">alipay_name</span>": <span class="hljs-value"><span class="hljs-string">"执行宝"</span></span>,
+  "<span class="hljs-attribute">alipay_code</span>": <span class="hljs-value"><span class="hljs-string">"9898797987ws979777979"</span></span>,
+  "<span class="hljs-attribute">alipay_name_back</span>": <span class="hljs-value"><span class="hljs-string">"执行宝"</span></span>,
+  "<span class="hljs-attribute">alipay_code_back</span>": <span class="hljs-value"><span class="hljs-string">"9898797987ws979777979"</span></span>,
+  "<span class="hljs-attribute">license</span>": <span class="hljs-value"><span class="hljs-string">"agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg"</span></span>,
+  "<span class="hljs-attribute">card_front</span>": <span class="hljs-value"><span class="hljs-string">",agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg"</span></span>,
+  "<span class="hljs-attribute">card_back</span>": <span class="hljs-value"><span class="hljs-string">",agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"true"</span></span>,
   "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
-  "<span class="hljs-attribute">msg</span>": <span class="hljs-value"><span class="hljs-string">"申请成功,请等待审核！"</span></span>,
+  "<span class="hljs-attribute">msg</span>": <span class="hljs-value"><span class="hljs-string">"保存成功！"</span></span>,
   "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">agent_name</span>": <span class="hljs-value"><span class="hljs-string">"翡翠代理商测试"</span></span>,
     "<span class="hljs-attribute">telphone</span>": <span class="hljs-value"><span class="hljs-string">"18983667722"</span></span>,
@@ -651,7 +673,7 @@
     "<span class="hljs-attribute">msg</span>": <span class="hljs-value"><span class="hljs-string">"操作失败！"</span></span>,
     "<span class="hljs-attribute">data</span>": <span class="hljs-value"><span class="hljs-string">""</span>
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 08 Feb 2018</p><script>/* eslint-env browser */
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 09 Feb 2018</p><script>/* eslint-env browser */
 /* eslint quotes: [2, "single"] */
 'use strict';
 

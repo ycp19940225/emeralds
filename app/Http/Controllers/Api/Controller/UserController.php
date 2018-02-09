@@ -344,30 +344,52 @@ class UserController extends BaseController
      *
      * @Post("http://temp.cqquality.com/api/users/agent/add?token={token}")
      * @Parameters({
-     *      @Parameter("agent_pic", type="varchar", description="营业执照或者身份证照片"),
      *      @Parameter("agent_name", type="varchar", required=true, description="姓名"),
-     *      @Parameter("telphone", type="varchar", required=true, description="电话号码"),
-     *      @Parameter("booth_number", type="varchar", required=true, description="摊位号"),
+     *      @Parameter("booth_name", type="varchar", required=true, description="商铺名称"),
+     *      @Parameter("telphone", type="varchar", required=true, description="电话"),
      *      @Parameter("wx", type="varchar",required=true, description="微信"),
+     *      @Parameter("agent_addr", type="varchar",required=true, description="代理商地址"),
      *      @Parameter("pm", type="varchar",description="主营项目"),
-     *      @Parameter("bank_code", type="varchar",description="银行卡号"),
-     *      @Parameter("alipay_code", type="varchar",description="支付宝账号")
+     *      @Parameter("bank_name", type="varchar",description="银行持卡人"),
+     *      @Parameter("bank_type", type="varchar",description="开户行"),
+     *      @Parameter("bank_code", type="varchar",description="账号"),
+     *      @Parameter("bank_name_bck", type="varchar",description="银行持卡人2"),
+     *      @Parameter("bank_type_bck", type="varchar",description="开户行2"),
+     *      @Parameter("bank_code_bck", type="varchar",description="账号2"),
+     *      @Parameter("alipay_name", type="varchar",description="支付宝姓名"),
+     *      @Parameter("alipay_code", type="varchar",description="支付宝账户"),
+     *      @Parameter("alipay_name_back", type="varchar",description="支付宝账户2"),
+     *      @Parameter("alipay_code_back", type="varchar",description="支付宝姓名2"),
+     *      @Parameter("license", type="varchar", required=true, description="营业执照"),
+     *      @Parameter("card_front", type="varchar",description="身份证正面"),
+     *      @Parameter("card_back", type="varchar",description="身份证反面")
      * })
      *@Transaction({
      *      @Request({
-    "agent_name":"翡翠代理商测试",
-    "telphone":"18983667722",
-    "booth_number":"taiwei123456",
+    "agent_name":"翡翠代理商测2试2",
+    "booth_name":"云南翡翠店",
+    "telphone":"18983778843",
     "wx":"ycp18989999",
+    "agent_addr":"云南沙柱县",
     "pm":"翡翠，珠宝",
-    "bank_code":"34353435435345",
-    "alipay_code":"ycpalipay2442",
-    "agent_pic":"agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg"
+    "bank_name":"持卡人1",
+    "bank_type":"农行",
+    "bank_code":"9898797987979777979",
+    "bank_name_back":"持卡人2",
+    "bank_type_back":"农行2",
+    "bank_code_back":"9898797987979777979",
+    "alipay_name":"执行宝",
+    "alipay_code":"9898797987ws979777979",
+    "alipay_name_back":"执行宝",
+    "alipay_code_back":"9898797987ws979777979",
+    "license":"agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg",
+    "card_front":",agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg",
+    "card_back":",agent/2017-12-22/HyrVX1u1kqO5Lopx9gduGtB2913eAKY7D776tmqm.jpeg"
     }),
      *      @Response(200, body={
     "status": "true",
     "code": 200,
-    "msg": "申请成功,请等待审核！",
+    "msg": "保存成功！",
     "data": {
     "agent_name": "翡翠代理商测试",
     "telphone": "18983667722",
