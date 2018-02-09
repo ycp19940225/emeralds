@@ -63,7 +63,7 @@ class UploadServicesImpl implements UploadServices
                 $dtime = Date('m-d',time());//日期文件夹
                 $tpath = public_path().'/'.'uploads'.'/'.$type;//一级路径
                 $ypath=public_path().'/'.'uploads'.'/'.$type.'/'.$ytime;//二级路径
-                $vPath = 'uploads'.'/'.$type.'/'.$ytime.'/'.$dtime;
+                $vPath =$type.'/'.$ytime.'/'.$dtime;
                 $dpath=public_path().'/'.'uploads'.'/'.$type.'/'.$ytime.'/'.$dtime;//最终路径
 
                 if(!is_dir($tpath)){
