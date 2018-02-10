@@ -69,4 +69,9 @@ class GoodsServicesImpl implements GoodsServices
     {
         return $this->goodsDao->where('id',$input['id'])->update($input);
     }
+
+    public function getByField($field,$val)
+    {
+        return $this->goodsDao->where($field,$val)->first();
+    }
 }

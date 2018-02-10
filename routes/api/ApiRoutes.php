@@ -59,6 +59,9 @@ $api->version('v1', function ($api) {
             $api->post('agent/goods/status','GoodsController@changeStatus');
             //代理商信息
             $api->get('agent/info','UserController@getAgent');
+
+            //删除商品
+            $api->get('agent/goods/delete/{id}', 'GoodsController@deleteGoods');
         });
     });
     //管理员
@@ -76,6 +79,9 @@ $api->version('v1', function ($api) {
             $api->post('admin/goods/add', 'GoodsController@add');
             $api->post('admin/goods/edit', 'GoodsController@edit');
             $api->post('admin/goods/status', 'GoodsController@changeStatus');
+            //删除商品
+            $api->get('admin/goods/delete/{id}', 'GoodsController@deleteGoods');
+
         });
     });
 

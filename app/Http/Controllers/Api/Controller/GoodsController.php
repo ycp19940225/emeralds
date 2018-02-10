@@ -459,4 +459,56 @@ class GoodsController extends BaseController
         }
         return API_MSG('','操作失败！','false',500);
     }
+    /**
+     * 商品删除
+     *
+     *[http://temp.cqquality.com/api/admin/goods/delete,为管理员编辑路径]
+     *[http://temp.cqquality.com/api/agent/goods/delete,为代理商编辑路径]
+     *
+     *
+     *
+     *
+     * @Get("http://temp.cqquality.com/api/agent/goods/delete/{id}?token=={token}")
+     * @Parameters({
+     *      @Parameter("id", type="int",description="商品ID"),
+     * })
+     *@Transaction({
+     *      @Request({
+     *
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": "200",
+    "msg": "操作成功！",
+    "data": 1
+    }),
+     *      @Response(500, body={"error": {
+    "status": "true",
+    "code": "200",
+    "msg": "修改失败！",
+    "data": false
+     *     }})
+     * })
+     */
+    public function deleteGoods($id)
+    {
+        $user_id = $this->auth()->user()->id;
+        //判断是否是他自己的商品
+        $input_id = $this->goods->getByField('id',$id)->input_id;
+        $type = $this->goods->getByField('id',$id)->input_type;
+        if($this->auth()->user()->getTable() == 'emerald_admin'){
+            $input_type = 2 ;
+        }else{
+            $input_type = 1 ;
+        }
+        if($user_id == $input_id && $input_type == $type){
+            $res = $this->goods->delete($id);
+        }else{
+            return API_MSG('','非法操作！','false',500);
+        }
+        if($res){
+            return API_MSG($res,'操作成功！');
+        }
+        return API_MSG('','操作失败！','false',500);
+    }
 }
