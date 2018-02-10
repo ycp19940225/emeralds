@@ -244,8 +244,7 @@ class GoodsController extends BaseController
      *      @Parameter("stock", type="varchar",description="库存"),
      *      @Parameter("cat_id", type="varchar",description="品种"),
      *      @Parameter("type", type="varchar",description="二级分类及三级明细，格式参考示例请求"),
-     *      @Parameter("input_type", type="int",description="录入者类型，1为代理商，2为管理员"),
-     *      @Parameter("input_id", type="int",description="录入者Id，结合input_type"),
+     *      @Parameter("status", type="int",description="状态，1为上架，0下架，2仓库"),
      * })
      *@Transaction({
      *      @Request({
@@ -454,12 +453,6 @@ class GoodsController extends BaseController
     public function changeStatus(Request $request)
     {
         $data = $request->only('id','status');
-        if($data['status'] == 1){
-            $goods_data = $this->goods->getOne($data['id']);
-            if($goods_data->checked == 0 && $goods_data->input_type == 1){
-                return API_MSG('','操作失败！,该商品还未通过审核','false',500);
-            }
-        }
         $res = $this->goods->updateFields($data);
         if($res){
             return API_MSG($res,'操作成功！');
