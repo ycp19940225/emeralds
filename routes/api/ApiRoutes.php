@@ -62,6 +62,10 @@ $api->version('v1', function ($api) {
 
             //删除商品
             $api->get('agent/goods/delete/{id}', 'GoodsController@deleteGoods');
+
+            //订单
+            $api->get('agent/order/all', 'OrderController@getOrders');
+            $api->get('agent/order/{id}', 'OrderController@getOne');
         });
     });
     //管理员
@@ -71,8 +75,9 @@ $api->version('v1', function ($api) {
             $api->get('admin/refreshToken', 'AdminController@refreshToken');
             $api->post('admin/logo', 'AdminController@logo');
         });
-        //商品
+        //业务逻辑
         $api->group(['middleware'=>['app.admin','jwt.auth'],'providers' => 'jwt'], function ($api) {
+            //商品
             $api->post('admin/goods/logo', 'GoodsController@uploadLogo');
             $api->post('admin/goods/pic', 'GoodsController@uploadpic');
             $api->post('admin/goods/video', 'GoodsController@uploadVideo');
@@ -82,6 +87,13 @@ $api->version('v1', function ($api) {
             //删除商品
             $api->get('admin/goods/delete/{id}', 'GoodsController@deleteGoods');
 
+            //订单
+            $api->post('admin/order/add', 'OrderController@add');
+            $api->post('admin/order/edit', 'OrderController@edit');
+            $api->get('admin/order/delete/{id}', 'OrderController@delete')->where('id', '[0-9]+');
+            $api->get('admin/order/all', 'OrderController@getOrders');
+            $api->post('admin/order/status', 'OrderController@status');
+            $api->get('admin/order/{id}', 'OrderController@getOne');
         });
     });
 
