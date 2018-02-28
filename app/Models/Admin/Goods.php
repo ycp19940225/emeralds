@@ -92,7 +92,7 @@ class Goods extends Base
         return $this->where('deleted_at',0)
             ->where('status',1)
             ->with('attr')
-            ->get();
+            ->simplePaginate(10);
     }
 
     public function find($id)
