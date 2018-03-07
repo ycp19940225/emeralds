@@ -15,54 +15,54 @@ use App\Repository\Eloquent\Admin\SlideRepository;
 use App\Services\Common\UploadServicesImpl;
 use Illuminate\Http\Request;
 
-class SlideController extends controller
+class PageController extends controller
 {
-    protected  $slide ;
+    protected  $page;
     protected $article;
 
-    public function __construct(SlideRepository $slideRepository,ArticleRepository $articleRepository)
+    public function __construct(SlideRepository $pageRepository,ArticleRepository $articleRepository)
     {
-        $this->slide=$slideRepository;
+        $this->page=$pageRepository;
         $this->article=$articleRepository;
     }
 
     /**
-     * @name 轮播图首页
+     * @name 欢迎页首页
      * @desc
      * @author ycp
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $data = $this->slide->getAll();
-        return view('admin.slide.index',['data'=>$data,'title'=>'轮播图列表']);
+        $data = $this->page->getAll();
+        return view('admin.page.index',['data'=>$data,'title'=>'欢迎页列表']);
     }
 
 
     /**
-     * @name 添加轮播图页面
-     * @desc 添加轮播图
+     * @name 添加欢迎页页面
+     * @desc 添加欢迎页
      * @author ycp
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function add()
     {
         $article_data = $this->article->getAll();
-        return view('admin.slide.edit',['title'=>'添加轮播图','article_data'=>$article_data]);
+        return view('admin.page.edit',['title'=>'添加欢迎页','article_data'=>$article_data]);
     }
 
     /**
-     * @name 添加轮播图操作
+     * @name 添加欢迎页操作
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function addOperate(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
         $data = $request->input();
-        $pic = $uploadServicesImpl->uploadImg('slide',$request->file('pic'));
+        $pic = $uploadServicesImpl->uploadImg('page',$request->file('pic'));
         $data['pic'] = $pic;
-        if($this->slide->save($data)){
-            return redirect('admin/slide/index')->with('info','添加成功！');
+        if($this->page->save($data)){
+            return redirect('admin/page/index')->with('info','添加成功！');
         }
         return back()->withInput()->with('error','添加失败！');
     }
@@ -76,9 +76,9 @@ class SlideController extends controller
      */
     public function edit($id)
     {
-        $data = $this->slide->getOne($id);
+        $data = $this->page->getOne($id);
         $article_data = $this->article->getAll();
-        return view('admin.slide.edit',['data'=>$data,'article_data'=>$article_data,'title'=>'编辑轮播图']);
+        return view('admin.page.edit',['data'=>$data,'article_data'=>$article_data,'title'=>'编辑欢迎页']);
     }
     /**
      * @name 修改操作
@@ -90,24 +90,24 @@ class SlideController extends controller
     {
         $data = $request->input();
         if($request->file('pic')){
-            $pic = $uploadServicesImpl->uploadImg('slide',$request->file('pic'));
+            $pic = $uploadServicesImpl->uploadImg('page',$request->file('pic'));
             $data['pic'] = $pic;
         }
-        if($this->slide->update($data)){
-            return redirect('admin/slide/index')->with('info','修改成功！');
+        if($this->page->update($data)){
+            return redirect('admin/page/index')->with('info','修改成功！');
         }
         return back()->withInput()->with('error','修改失败！');
     }
 
     /**
-     * @name 删除轮播图
-     * @desc 删除轮播图
+     * @name 删除欢迎页
+     * @desc 删除欢迎页
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function delete(Request $request)
     {
-        if($this->slide->delete($request->input('id'))){
+        if($this->page->delete($request->input('id'))){
             return response()->json(msg('success','删除成功!'));
         } else
             return response()->json(msg('error','删除失败!'));

@@ -29,7 +29,7 @@ class OrderRepository
 
     public function getAll()
     {
-        return $this->orderModel->where('deleted_at',0)->get();
+        return $this->orderModel->where('deleted_at',0)->with('goods')->with('agent')->with('user')->with('admin')->get();
     }
 
     public function getOne($id)
@@ -55,6 +55,10 @@ class OrderRepository
             return $res;
         }
         return false;
+    }
+    public function edit($data)
+    {
+        return $this->orderModel->where('id',$data['id'])->update($data);
     }
 
     public function delete($id)

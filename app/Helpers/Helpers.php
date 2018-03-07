@@ -267,6 +267,27 @@ if(!function_exists('buildSelect')){
         echo $select;
     }
 }
+if(!function_exists('buildSelectMore')){
+    function  buildSelectMore($data,$select_id='',$select_name,$valueFieldName,$textFieldName,$selectValue = []){
+        $select = "<select class=\"form-control \" multiple='multiple' id='$select_id' name ='$select_name'>";
+        foreach($data as $k => $v){
+            $value = $v[$valueFieldName];   //id循环的id
+            $text = $v[$textFieldName];    //id对应的名称
+            $selected ='';
+            foreach ( $selectValue as $k1=>$v1){
+                if( $v1['id'] == $value ){
+                    $selected = 'selected ="selected"';
+                    break;
+                }else{
+                    $selected ='';
+                }
+            }
+            $select .= '<option ' .$selected. ' value="' .$value.'">'.$text. '</option>';
+        }
+        $select .= '</select>';
+        echo $select;
+    }
+}
 
 
 /**
@@ -295,10 +316,10 @@ if ( ! function_exists('check_goods_status')){
             echo '<span style="color: red">未上架</span>';
         }
         if($data == 1){
-            echo '<span style="color: green">已上架</span>';
+            echo '<span style="color: green">出售中</span>';
         }
         if($data == 2){
-            echo '<span style="color: yellow">已下架</span>';
+            echo '<span style="color: yellow">已出售</span>';
         }
     }
 }
@@ -316,6 +337,23 @@ if ( ! function_exists('check_goods_check')){
         }
         if($data == 2){
             echo '<span style="color: yellow">未通过审核</span>';
+        }
+    }
+}
+
+/**
+ * 检测订单状态
+ */
+if ( ! function_exists('check_order_status')){
+    function check_order_status($data){
+        if($data == 0){
+            echo '<span style="color: green">在路上</span>';
+        }
+        if($data == 1){
+            echo '<span style="color: yellow">已结缘</span>';
+        }
+        if($data == 2){
+            echo '<span style="color: red">已退回</span>';
         }
     }
 }

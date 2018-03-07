@@ -18,7 +18,6 @@ var handle = function () {
         }
         // 获取File引用:
         var file = fileInput.files[0];
-        console.log(file);
         // 获取File信息:
         info.innerHTML = '文件: ' + file.name + '<br>';
         if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {

@@ -49,6 +49,7 @@
                                 <div class="col-xs-4">
                                     {{  buildSelect($article_data,'','url','id','title',isset($data) ? $data['url']:'') }}
                                 </div>
+                                <span style="color: red"> * 如果没有链接文章请不要选择*</span>
                             </div>
                             <div class="col-md-offset-5" >
                                 <button type="submit" class="btn btn-success m-2" id="submit" name="repass">保存</button>
@@ -72,10 +73,10 @@
             var method = "{{ Route::current()->getActionMethod() }}";
             var url ='';
             if(method === 'edit'){
-                url = '{{url('admin/slide/editOperate')}}';
+                url = '{{url('admin/page/editOperate')}}';
                 $("form").attr('action',url)
             }else{
-                url = '{{url('admin/slide/addOperate')}}';
+                url = '{{url('admin/page/addOperate')}}';
                 $("form").attr('action',url);
             }
         });

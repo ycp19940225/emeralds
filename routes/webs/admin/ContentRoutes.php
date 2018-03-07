@@ -20,3 +20,10 @@ Route::get('/article/index','ArticleController@index');
 Route::get('/article/edit/{id}','ArticleController@edit')->where('id', '[0-9]+');
 Route::post('/article/editOperate','ArticleController@editOperate');
 Route::post('/article/delete','ArticleController@delete');
+//欢迎页
+Route::any('/page/add','PageController@add');
+Route::post('/page/addOperate','PageController@addOperate');
+Route::get('/page/index','PageController@index');
+Route::get('/page/edit/{id}','PageController@edit')->where('id', '[0-9]+');
+Route::post('/page/editOperate','PageController@editOperate');
+Route::post('/page/delete','PageController@delete');

@@ -74,7 +74,7 @@ return [
                 ],
                 [
                     'name'=>'欢迎页管理',
-                    'access'=>'admin/goods/index',
+                    'access'=>'admin/page/index',
                     'icon'=>''
                 ],
                 [
@@ -106,7 +106,7 @@ return [
             'access'=>[
                 [
                     'name'=>'订单列表',
-                    'access'=>'admin/goods/index',
+                    'access'=>'admin/order/index',
                     'icon'=>''
                 ],
             ]

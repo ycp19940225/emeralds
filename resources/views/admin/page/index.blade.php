@@ -8,7 +8,7 @@
     <!-- begin page-header -->
     <h1 class="page-header">
         <small>
-            <button class="btn btn-primary pull-right m-l-20" slide="button" onclick=" window.location.href='/admin/article/add' ">添加文章</button>
+            <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/page/add' ">添加封面图</button>
         </small>
     </h1>
     <div class="row">
@@ -31,13 +31,10 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>文章分类</th>
-                                <th>标题</th>
-                                <th>封面图</th>
-                                <th>简介</th>
+                                <th>图片</th>
+                                <th>链接文章</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
-                                <th>是否置顶</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -45,15 +42,12 @@
                             @foreach($data as $k=>$v)
                             <tr>
                                 <td>{{ $v['id'] }}</td>
-                                <td>{{ $v->cat->cat_name }}</td>
-                                <td>{{ $v['title'] }}</td>
                                 <td><img width="40px" height="40px" src="{{ loadStaticImg($v['pic']) }}" alt=""></td>
-                                <td>{{ $v['intro'] }}</td>
+                                <td>{{ $v['url'] }}</td>
                                 <td>{{ $v['created_at'] }}</td>
                                 <td>{{ $v['updated_at'] }}</td>
-                                <td><?php if($v['top']){ echo '是';} else echo "否";?></td>
                                 <td>
-                                    <a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/article/edit',['id'=>$v['id']]) }}" >编辑</a>
+                                    <a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/page/edit',['id'=>$v['id']]) }}" >编辑</a>
                                     <a href="JavaScript:void(0)" onclick="del({{ $v['id'] }})" class="btn btn-danger btn-xs m-2 delete" >删除</a>
                                 </td>
                             </tr>
@@ -88,11 +82,11 @@
                     id:i,
                     _token: _token
                 };
-                $.post("{{ url('admin/articlecat/delete') }}",data,function (res) {
+                $.post("{{ url('admin/page/delete') }}",data,function (res) {
                     console.log(res);
                     if(res['code'] === 'success'){
                         layer.msg(res['msg'],{icon: 6});
-                        setTimeout('location.href="{{ url('admin/article/index') }}"',1000);
+                        setTimeout('location.href="{{ url('admin/page/index') }}"',1000);
                     }else{
                         layer.msg(res['msg'],{icon:5});
                     }

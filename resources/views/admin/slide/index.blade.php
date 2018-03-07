@@ -32,7 +32,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>图片</th>
-                                <th>链接地址</th>
+                                <th>链接文章</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
                                 <th>操作</th>

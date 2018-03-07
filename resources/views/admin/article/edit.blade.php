@@ -24,6 +24,11 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
+                        @if (session('error'))
+                            <div class="alert alert-info">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <form action="" class="form-horizontal form_need_validate" role="form" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
@@ -32,6 +37,7 @@
                                 <div class="col-xs-4">
                                     {{  buildSelect($cat_data,'','cat_id','id','cat_name',isset($data) ? $data['cat_id']:'') }}
                                 </div>
+                                <span style="color:red">*必选*</span>
                             </div>
                             <div class="form-group">
                                 <label for="name" class="col-xs-4 control-label">标题</label>
@@ -40,9 +46,43 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">是否置顶</label>
+                                <?php if(isset($data['top']) && $data['top'] == 1){ $checked2 = 'checked';}else{$checked1 = 'checked';} ?>
+                                <div class="col-xs-4">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" value="0"  name="top" {{ $checked1 or ''}}>非置顶</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" value="1"  name="top" {{ $checked2 or ''}}>置顶</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="name" class="col-xs-4 control-label">简介</label>
                                 <div class="col-xs-4">
                                     <input type="text" class="form-control" id="intro" name="intro" value="{{ $data['intro'] or ''}}" placeholder="请输入简介" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pic" class="col-xs-4 control-label">封面图片</label>
+                                <div class="col-xs-4">
+                                    @if(Route::current()->getActionMethod() == 'add')
+                                        <div id="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
+                                            <img id="img" src="" alt="" style="width:100px; height: 100px;">
+                                        </div>
+                                    @else
+                                        <div id="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
+                                            <img id="img" src="{{ loadStaticImg($data['pic']) }}" alt="" style="width:100px; height: 100px;">
+                                        </div>
+                                    @endif
+                                    <p>
+                                        <a href="javascript:;" class="file">
+                                            <input type="file" id="image-file" name="pic" value="{{ $data['pic'] or '' }}">
+                                        </a>
+                                    </p>
+                                    <p id="file-info"></p>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -72,6 +112,7 @@
     </div>
 @endsection
 @section('admin.page.js')
+    <script src="{{ loadStatic('admin/js/extend/upload.js') }}"></script>
     {{--文本编辑器--}}
     <script src="{{ loadStatic('admin/js/extend/umeditor/umeditor.config.js') }}"></script>
     <script src="{{ loadStatic('admin/js/extend/umeditor/umeditor.js') }}"></script>
@@ -82,8 +123,10 @@
             initialFrameWidth: '100%'
         });
     </script>
+
     <script>
         $(document).ready(function() {
+            upload.init();
             var method = "{{ Route::current()->getActionMethod() }}";
             var url ='';
             if(method === 'edit'){

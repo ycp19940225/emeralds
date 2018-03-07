@@ -17,7 +17,6 @@ Route::get('/type/addBatch','TypeController@addBatch');
 Route::post('/type/addBatchOperate','TypeController@addBatchOperate');
 Route::post('/type/delete','TypeController@delete');
 
-
 //商品
 Route::any('/goods/add','GoodsController@add');
 Route::post('/goods/addOperate','GoodsController@addOperate');
@@ -27,3 +26,12 @@ Route::post('/goods/editOperate','GoodsController@editOperate');
 Route::post('/goods/delete','GoodsController@delete');
 Route::post('/goods/uploadImg','GoodsController@uploadImg');
 Route::post('/goods/check','GoodsController@check');
+
+//订单
+Route::any('/order/add','OrderController@add');
+Route::post('/order/addOperate','OrderController@addOperate');
+Route::get('/order/index','OrderController@index');
+Route::get('/order/edit/{id}','OrderController@edit')->where('id', '[0-9]+');
+Route::post('/order/editOperate','OrderController@editOperate');
+Route::post('/order/delete','OrderController@delete');
+Route::post('/order/check','OrderController@check');

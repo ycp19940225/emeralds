@@ -8,7 +8,9 @@
     <!-- begin page-header -->
     <h1 class="page-header">
         <small>
+{{--
             <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/goods/add' ">添加翡翠</button>
+--}}
         </small>
     </h1>
     <div class="row">
@@ -61,7 +63,7 @@
                                     <td>{{ $v['created_at'] }}</td>
                                     <td>{{ $v['updated_at'] }}</td>
                                     <td>
-                                        <a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/goods/edit',['id'=>$v['id']]) }}" >编辑</a>
+                                        {{--<a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/goods/edit',['id'=>$v['id']]) }}" >编辑</a>--}}
                                         <a href="JavaScript:void(0)" onclick="del({{ $v['id'] }})" class="btn btn-danger btn-xs m-2 delete" >删除</a>
                                         <a href="JavaScript:void(0)" onclick="play_video('{{ loadStaticImg($v['video']) }}')" class="btn btn-info btn-xs m-2 delete" >预览视频</a>
                                         <a href="JavaScript:void(0)" onclick="check({{ $v['id'] }})" class="btn btn-warning btn-xs m-2 delete" >审核</a>

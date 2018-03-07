@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Repository\Eloquent\Admin\ArticleRepository;
 use App\Repository\Eloquent\Admin\ArticleCatRepository;
+use App\Services\Common\UploadServicesImpl;
 use Illuminate\Http\Request;
 
 class ArticleController extends controller
@@ -57,13 +58,19 @@ class ArticleController extends controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function addOperate(Request $request)
+    public function addOperate(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
         $data = $request->input();
+       if($data['cat_id'] == null){
+           return back()->withInput()->with('error','必须选择文章分类！');
+       }
+        $pic = $uploadServicesImpl->uploadImg('slide',$request->file('pic'));
+        $data['pic'] = $pic;
         if($this->article->save($data)){
             return redirect('admin/article/index')->with('info','文章添加成功！');
         }
         return back()->withInput()->with('error','添加失败！');
+
     }
 
     /**
@@ -87,9 +94,16 @@ class ArticleController extends controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function editOperate(Request $request)
+    public function editOperate(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
         $data = $request->input();
+        if($data['cat_id'] == null){
+            return back()->withInput()->with('error','必须选择文章分类！');
+        }
+        if($request->file('pic')){
+            $pic = $uploadServicesImpl->uploadImg('slide',$request->file('pic'));
+            $data['pic'] = $pic;
+        }
         if($this->article->update($data)){
             return redirect('admin/article/index')->with('info','修改成功！');
         }

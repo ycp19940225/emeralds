@@ -25,7 +25,11 @@ class Order extends Base
 
     public function admin()
     {
-        return $this->hasOne('App\Models\Admin\Users','admin_id');
+        return $this->belongsTo('App\Models\Admin\Users','admin_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\Admin\User','user_id');
     }
     public function agent()
     {
