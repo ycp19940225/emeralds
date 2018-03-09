@@ -199,7 +199,7 @@ class OrderController extends BaseController
      *     }})
      * })
      */
-    public function getOrders()
+    public function getOrders(Request $request)
     {
         if($this->auth()->user()->getTable() == 'emerald_admin'){
             $admin_id = $this->auth()->user()->id;
@@ -212,11 +212,12 @@ class OrderController extends BaseController
         }
         if(isset($user_id)){
             //判断是否为代理商
+            $type = $request->input('type');
             $agent=DB::table("emerald_agent")->where('user_id',$user_id)->first();
-            if($agent){
+            if($type == 2){
                 $res = $this->order->getByField('agent_id',$agent->id);
                 return API_MSG($res,'获取成功！');
-            }else{
+            }elseif($type == 1){
                 $res = $this->order->getByField('user_id',$user_id);
                 return API_MSG($res,'获取成功！');
             }

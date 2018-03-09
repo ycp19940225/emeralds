@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api\Controller;
 
 
 use App\Http\Controllers\Api\BaseController;
+use App\Repository\Eloquent\Admin\ArticleRepository;
 use App\Repository\Eloquent\Admin\SlideRepository;
 
 /**
@@ -20,10 +21,12 @@ use App\Repository\Eloquent\Admin\SlideRepository;
 class SlideController extends BaseController
 {
     protected $slide;
+    protected $article;
 
-    public function __construct(SlideRepository $slideRepository)
+    public function __construct(SlideRepository $slideRepository,ArticleRepository $articleRepository)
     {
         $this->slide=$slideRepository;
+        $this->article=$articleRepository;
     }
     /**
      * 获取所有轮播图
@@ -50,6 +53,8 @@ class SlideController extends BaseController
     public function all()
     {
         $data = $this->slide->getAll();
+        $article_data = $this->article->getTop();
+        $data['articles'] = $article_data->toArray();
         if($data){
             return API_MSG($data,'获取成功！');
         }

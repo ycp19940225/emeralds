@@ -51,4 +51,9 @@ class ArticleRepository
     {
         return $this->articleModel->where('id',$id)->update(['deleted_at'=>1]);
     }
+
+    public function getTop()
+    {
+        return $this->articleModel->select('id','title','pic')->where('top',1)->limit(2)->get();
+    }
 }
