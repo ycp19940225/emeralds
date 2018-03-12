@@ -54,9 +54,15 @@ class SlideController extends BaseController
     {
         $data = $this->slide->getAll();
         $article_data = $this->article->getTop();
-        $data['articles'] = $article_data->toArray();
+        $data = [
+            'status' => 200,
+            'code'   => true,
+            'msg'   => '获取成功！',
+            'data'   => $data,
+            'articles' =>$article_data->toArray()
+        ];
         if($data){
-            return API_MSG($data,'获取成功！');
+            return $data;
         }
         return API_MSG('','获取失败！','false',500);
     }
