@@ -46,7 +46,9 @@ $api->version('v1', function ($api) {
             //足迹
             $api->get('users/history','HistoryController@all');
             $api->post('users/history/add','HistoryController@add');
-            $api->post('users/history/add','HistoryController@add');
+            //收藏
+            $api->get('users/collect','CollectController@all');
+            $api->post('users/collect/add','CollectController@add');
         });
         //商品
         $api->group(['middleware'=>'jwt.auth','providers' => 'jwt'], function ($api) {
