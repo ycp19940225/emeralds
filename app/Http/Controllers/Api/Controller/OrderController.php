@@ -213,12 +213,13 @@ class OrderController extends BaseController
         if(isset($user_id)){
             //判断是否为代理商
             $type = $request->input('type');
+            $status = $request->input('status');
             $agent=DB::table("emerald_agent")->where('user_id',$user_id)->first();
             if($type == 2){
-                $res = $this->order->getByField('agent_id',$agent->id);
+                $res = $this->order->getByField('agent_id',$agent->id,$status);
                 return API_MSG($res,'获取成功！');
             }elseif($type == 1){
-                $res = $this->order->getByField('user_id',$user_id);
+                $res = $this->order->getByField('user_id',$user_id,$status);
                 return API_MSG($res,'获取成功！');
             }
         }
