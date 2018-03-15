@@ -139,7 +139,7 @@ class GoodsController extends BaseController
     public function uploadLogo(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
         $files = $request->file('logo');
-        $urls = $uploadServicesImpl->uploadImg('goods_logo',$files);
+        $urls = $uploadServicesImpl->upload('user_chat_img',$files);
         if ($files&&$urls){
             return API_MSG($urls,'上传成功！','true',200);
         } else {
