@@ -71,8 +71,12 @@ class OrderRepository
         return false;
     }
 
-    public function getByField($field, $val,$status=0)
+    public function getByFields($field, $val,$status=0)
     {
         return $this->orderModel->where($field,$val)->where('status',$status)->where('deleted_at',0)->with('goods')->get();
+    }
+    public function getByField($field, $val)
+    {
+        return $this->orderModel->where($field,$val)->where('deleted_at',0)->with('goods')->get();
     }
 }
