@@ -69,6 +69,14 @@ $api->version('v1', function ($api) {
             $api->get('agent/order/all', 'OrderController@getOrders');
             $api->get('agent/order/{id}', 'OrderController@getOne');
         });
+        //聊天
+        $api->group(['middleware'=>'jwt.auth','providers' => 'jwt'], function ($api) {
+            $api->get('chat/admin', 'ChatController@getAdmin');
+            $api->post('chat/toyou', 'ChatController@toyou');
+            $api->post('chat/getdata', 'ChatController@getdata');
+            $api->post('chat/getdatadow', 'ChatController@getdatadow');
+            $api->post('chat/newest', 'ChatController@newest');
+        });
     });
     //管理员
     $api->group(['namespace' => 'App\Http\Controllers\Api\Controller'], function ($api) {

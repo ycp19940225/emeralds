@@ -30,9 +30,9 @@ class ChatController extends BaseController
     {
         $data = $this->admin->getAll();
         if($data){
-            return AP$request->input_MSG($data,'获取成功！');
+            return API_MSG($data,'获取成功！');
         }
-        return AP$request->input_MSG('','获取失败！','false',500);
+        return API_MSG('','获取失败！','false',500);
     }
 
     public function toyou(Request $request)
@@ -54,7 +54,7 @@ class ChatController extends BaseController
         }else{
             $result['response'] = 2;
         }
-        $this->ajaxReturn($result);   //返回数据
+        return $result;   //返回数据
     }
 
     public function getdata(Request $request){
@@ -64,11 +64,11 @@ class ChatController extends BaseController
         $touid= $request->input('touid');
         $shopid = $request->input('shopid');
         $request->input('lasttime')?$time=$request->input('lasttime'):$time=time();
-        $User = DB::table('friends_im'); // 实例化User对象
+        $User = DB::table('emerald_chat'); // 实例化User对象
         $scont=9;  //这个是要查询几条    9条是我们这边已经设定好了的，以方便用户体验，只能比9大。不能比9小哈
         $list = $User
-            ->where('(uid='.$shopid.' and touid='.$touid.' and add_time <'.$time.')or(uid='.$touid.' and touid='.$shopid.' and add_time <'.$time.')')
-            ->orderBy('add_time desc')->page($page,$scont)->select();
+            ->whereRaw('(uid='.$shopid.' and touid='.$touid.' and created_at <'.$time.')or(uid='.$touid.' and touid='.$shopid.' and created_at <'.$time.')')
+            ->orderBy('created_at','desc')->paginate($scont);
 
         /*
          * 根据 双方id 查询对应数据 条件为添加时间小于当前时间
@@ -76,9 +76,9 @@ class ChatController extends BaseController
          */
 
         $sa['state']=2;
-        $User->where($data)->save($sa);  //更新为一查看状态 条件为当前用户 uid 和touid
+        $User->where($data)->update($sa);  //更新为一查看状态 条件为当前用户 uid 和touid
 
-
+        $list = $list->toArray()['data'];
         $lists=array_reverse($list,true);  //反向排序
         $arr = array_values($lists);  //返回数组中所有的值
         if($list){
@@ -91,7 +91,7 @@ class ChatController extends BaseController
             $result['page'] = $page+1;
             $result['response'] = 2;
         }
-        $this->ajaxReturn($result);
+        return $result;
     }
 
     public function getdatadow(Request $request){
@@ -102,29 +102,29 @@ class ChatController extends BaseController
         $touid= $request->input('touid');
         $shopid = $request->input('shopid');
         $request->input('lasttime')?$time=$request->input('lasttime'):$time=time();   //前段传回来的用户最后刷新时间
-        $User = M('friends_im'); // 实例化User对象
+        $User = DB::table('emerald_chat'); // 实例化User对象
         $scont=9;
-        $list = $User->where('(uid='.$shopid.' and touid='.$touid.' and add_time <'.$time.')or(uid='.$touid.' and touid='.$shopid.' and add_time <'.$time.')')->order('add_time desc')->page($page,$scont)->select();
+        $list = $User->whereRaw('(uid='.$shopid.' and touid='.$touid.' and created_at <'.$time.')or(uid='.$touid.' and touid='.$shopid.' and created_at <'.$time.')')->orderBy('created_at','desc')->paginate($scont);
         $sa['state']=2;
-        $User->where($data)->save($sa);
-        $is_myimg['user_id']=$request->input('shopid');
-        $result['myimg'] = M('users')->where($is_myimg)->getField('head_pic');
+        $User->where($data)->update($sa);
+        $is_myimg['id']=$request->input('shopid');
+        $result['myimg'] = DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
+        $list = $list->toArray()['data'];
         $result['count'] = count($list);
         //var_dump($Page->totalPages);
         //var_dump($list);
 
         //exit;
-
+        $res=[];
         foreach($list as $k=>$v){
-            $where['user_id']=$v['uid'];
-            $list[$k]['hear_imgu']=M('users')->where($where)->getField('head_pic');
+            $res[$k]= $v;
+            $res[$k]->hear_imgu= $result['myimg'];
             unset($where);
         }
-
         // $lists=array_reverse($list,true);
         //$arr = array_values($lists);
         if($list){
-            $result['data'] = $list;
+            $result['data'] = $res;
             $result['scont'] = $scont;
 
             $result['page'] = $page+1;
@@ -135,32 +135,36 @@ class ChatController extends BaseController
             $result['page'] = $page+1;
             $result['response'] = 2;
         }
-        $this->ajaxReturn($result);
+        return $result;
     }
     public function newest(Request $request){
+        $scont =9;
+        $page = $request->input('page',1);  //获取当前页码 默认第一页
         $touid= $request->input('touid');
         $shopid = $request->input('shopid');
         $request->input('lasttime')?$time=$request->input('lasttime'):$time=time();
-        $User = M('friends_im'); // 实例化User对象
-        $list = $User->where('uid='.$touid.' and touid='.$shopid.' and state=1 and add_time >'.$time)->order('add_time desc')->select();
+        $User = DB::table('emerald_chat'); // 实例化User对象
+        $list = $User->whereRaw('(uid='.$shopid.' and touid='.$touid.' and created_at <'.$time.')or(uid='.$touid.' and touid='.$shopid.' and created_at <'.$time.')')->orderBy('created_at','desc')->paginate($scont);
         $sa['state']=2;
         $data['uid'] = $request->input('touid');
         $data['touid'] = $request->input('shopid');
-        $User->where($data)->save($sa);
-        $is_myimg['user_id']=$request->input('shopid');
-        $result['myimg'] = M('users')->where($is_myimg)->getField('head_pic');
+        $User->where($data)->update($sa);
+        $is_myimg['id']=$request->input('shopid');
+        $result['myimg'] = DB::table('emerald_user')->where($is_myimg)->where('logo')->first();
+        $list = $list->toArray()['data'];
         $result['count'] = count($list);
 
+        $res=[];
         foreach($list as $k=>$v){
-            $where['user_id']=$v['uid'];
-            $list[$k]['hear_imgu']=M('users')->where($where)->getField('head_pic');
+            $res[$k]= $v;
+            $res[$k]->hear_imgu= $result['myimg'];
             unset($where);
         }
 
-        $lists=array_reverse($list,true);
-        $arr = array_values($lists);
+        $lists=array_reverse($res,true);
+        $arr = array_values($res);
         if($list){
-            $result['data'] = $arr;
+            $result['data'] = $res;
             $result['scont'] = $scont;
 
             $result['page'] = $page+1;
@@ -171,6 +175,6 @@ class ChatController extends BaseController
             $result['page'] = $page+1;
             $result['response'] = 2;
         }
-        $this->ajaxReturn($result);
+        return $result;
     }
 }
