@@ -468,7 +468,7 @@ class GoodsController extends BaseController
      *
      *
      *
-     * @Get("http://temp.cqquality.com/api/agent/goods/delete/{id}?token=={token}")
+     * @Get("http://temp.cqquality.com/api/agent/goods/delete/{id}?token={token}")
      * @Parameters({
      *      @Parameter("id", type="int",description="商品ID"),
      * })

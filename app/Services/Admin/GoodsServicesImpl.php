@@ -42,7 +42,7 @@ class GoodsServicesImpl implements GoodsServices
 
     public function delete($id)
     {
-        return $this->goodsDao->where('id',$id)->update(['deleted_at'=>1]);
+        return $this->goodsDao->where('id',$id)->delete();
     }
 
     public function search($input)
