@@ -61,6 +61,9 @@ class CatController extends BaseController
         foreach($cat_data as $k=>$cat_datum){
             $data[$k]= $cat_datum;
             $data[$k]['type'] = $cat_datum->type;
+            foreach ($data[$k]['type'] as $k2=>$v2){
+                $data[$k]['type'][$k2]['type_val'] = explode(',',$v2->type_val);
+            }
         }
         if($cat_data){
             return API_MSG($data,'获取品种成功！');
