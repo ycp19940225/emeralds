@@ -131,6 +131,7 @@ class UserController extends BaseController
         $data['ttl'] = $ttl*60;
         $data['refresh_ttl'] = $refresh_ttl*60;
         $data['token'] = $token;
+        $data['id'] = $this->user->getByField('telphone',$input['telphone'])->id;
         if ($token){
             return API_MSG($data,'登录成功！','true',200);
         } else {

@@ -64,8 +64,10 @@ class AdminController extends BaseController
     {
         $input = $request->only('adminname','password');
         $token = JWTAuth::attempt($input);
+        $data['token'] = $token;
+        $data['id'] = $this->admin->getByField('adminname',$input['adminname'])->id;
         if ($token){
-            return API_MSG($token,'登录成功！','true',200);
+            return API_MSG($data,'登录成功！','true',200);
         } else {
             return API_MSG('','登录失败！','false',500);
         }

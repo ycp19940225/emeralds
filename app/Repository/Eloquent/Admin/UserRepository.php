@@ -52,4 +52,9 @@ class UserRepository
     {
         return $this->userModel->destroy($id);
     }
+
+    public function getByField($field, $val)
+    {
+        return $this->userModel->where($field,$val)->where('deleted_at',0)->first();
+    }
 }

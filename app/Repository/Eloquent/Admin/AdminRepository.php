@@ -52,4 +52,9 @@ class AdminRepository
     {
         return $this->adminModel->where('id',$id)->update(['deleted_at'=>1]);
     }
+
+    public function getByField($field, $val)
+    {
+        return $this->adminModel->where($field,$val)->where('deleted_at',0)->first();
+    }
 }
