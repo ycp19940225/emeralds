@@ -215,14 +215,18 @@ class OrderController extends BaseController
             $type = $request->input('type');
             $status = $request->input('status');
             $agent=DB::table("emerald_agent")->where('user_id',$user_id)->first();
-            if($status ==3){
-                $res = $this->order->getByField('agent_id',$agent->id);
-                return API_MSG($res,'获取成功！');
-            }
             if($type == 2){
+                if($status ==3){
+                    $res = $this->order->getByField('agent_id',$agent->id);
+                    return API_MSG($res,'获取成功！');
+                }
                 $res = $this->order->getByFields('agent_id',$agent->id,$status);
                 return API_MSG($res,'获取成功！');
             }elseif($type == 1){
+                if($status ==3){
+                    $res = $this->order->getByField('agent_id',$agent->id);
+                    return API_MSG($res,'获取成功！');
+                }
                 $res = $this->order->getByFields('user_id',$user_id,$status);
                 return API_MSG($res,'获取成功！');
             }
