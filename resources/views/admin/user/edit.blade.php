@@ -27,19 +27,19 @@
                             <div class="form-group">
                                 <label for="telphone" class="col-xs-4 control-label">手机号（登录名）</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" id="telphone" name="telphone" value="{{ $data['telphone'] or ''}}" placeholder="请输入手机号">
+                                    <input type="text" class="form-control" id="telphone" name="telphone" value="{{ $data['telphone'] or ''}}" placeholder="请输入手机号" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nickname" class="col-xs-4 control-label">别名</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" id="nickname" name="nickname" value="{{ $data['nickname'] or ''}}" placeholder="请输入别名">
+                                    <input type="text" class="form-control" id="nickname" name="nickname" value="{{ $data['nickname'] or ''}}" placeholder="请输入别名" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nickname" class="col-xs-4 control-label">登录密码</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" id="password" name="password" value="{{ $data['password'] or ''}}" placeholder="请输入密码">
+                                    <input type="text" class="form-control" id="password" name="password" value="" placeholder="请输入密码" required>
                                 </div>
                             </div>
                             <div class="form-group">

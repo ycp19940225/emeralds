@@ -60,7 +60,7 @@ class UserController extends Controller
         $data['logo'] = json_decode($pic)->url;
         if($this->user->save($data)){
             dd(1);
-            return redirect('admin/user/index')->with('info','添加成功！');
+            return redirect('admin/users/index')->with('info','添加成功！');
         }
         return back()->withInput()->with('error','添加失败！');
     }
@@ -87,11 +87,14 @@ class UserController extends Controller
     {
         $data = $request->input();
         if($request->file('pic')){
-            $pic = $uploadServicesImpl->uploadImg('user',$request->file('pic'));
-            $data['pic'] = $pic;
+            $pic = $uploadServicesImpl->upload('user',$request->file('pic'));
+            $data['logo'] = json_decode($pic)->url;
+        }
+        if(isset($data['password'])){
+            $data['password'] = bcrypt($data['password']);
         }
         if($this->user->update($data)){
-            return redirect('admin/user/index')->with('info','修改成功！');
+            return redirect('admin/users/index')->with('info','修改成功！');
         }
         return back()->withInput()->with('error','修改失败！');
     }
