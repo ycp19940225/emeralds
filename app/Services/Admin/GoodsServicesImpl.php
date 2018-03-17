@@ -52,7 +52,7 @@ class GoodsServicesImpl implements GoodsServices
 
     public function edit($input)
     {
-        return $this->goodsDao->where('id',$input['id'])->update($input);
+        return $this->goodsDao->where('id',$input['id'])->update(['checked'=>$input['checked']]);
     }
 
     public function getByFields($data)
