@@ -47,17 +47,17 @@
                                 <div class="col-xs-5">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" value="0" id="optionsRadios1" name="type" checked>普通用户
+                                            <input type="radio" value="0" id="optionsRadios0" name="type" checked="{{ $checked_0 or ''}}">普通用户
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio"  value="1" id="optionsRadios1" name="type">管理员客服
+                                            <input type="radio"  value="1" id="optionsRadios1" name="type" checked="{{ $checked_1 or ''}}">管理员客服
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio"  value="2" id="optionsRadios1" name="type">代理商
+                                            <input type="radio"  value="2" id="optionsRadios2" name="type" checked="{{ $checked_2 or ''}}">代理商
                                         </label>
                                     </div>
                                 </div>

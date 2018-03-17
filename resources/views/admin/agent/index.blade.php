@@ -130,7 +130,7 @@
                 };
                 $.post(url,data,function (res) {
                     if(res['code'] === 'success'){
-                        layer.msg(res['msg'],{icon: 6});
+                        layer.msg('操作成功！',{icon: 6});
                         setTimeout('location.href="{{ url('admin/agent/index') }}"',1000);
                     }else{
                         layer.msg(res['msg'],{icon:5});
