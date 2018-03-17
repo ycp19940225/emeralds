@@ -55,8 +55,9 @@ class UserController extends Controller
     public function addOperate(Request $request,UploadServicesImpl $uploadServicesImpl)
     {
         $data = $request->input();
-        $pic = $uploadServicesImpl->uploadImg('user',$request->file('pic'));
-        $data['pic'] = $pic;
+        $pic = $uploadServicesImpl->upload('user',$request->file('pic'));
+        $data['password'] = bcrypt($data['password']);
+        $data['logo'] = json_decode($pic)->url;
         if($this->user->save($data)){
             return redirect('admin/user/index')->with('info','添加成功！');
         }

@@ -27,13 +27,34 @@
                             <div class="form-group">
                                 <label for="telphone" class="col-xs-4 control-label">手机号（登录名）</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" id="telphone" name="telphone" value="{{ $data['telphone'] or ''}}" placeholder="请输入名字">
+                                    <input type="text" class="form-control" id="telphone" name="telphone" value="{{ $data['telphone'] or ''}}" placeholder="请输入手机号">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nickname" class="col-xs-4 control-label">别名</label>
                                 <div class="col-xs-5">
-                                    <input type="text" class="form-control" id="nickname" name="nickname" value="{{ $data['nickname'] or ''}}" placeholder="请输入名字">
+                                    <input type="text" class="form-control" id="nickname" name="nickname" value="{{ $data['nickname'] or ''}}" placeholder="请输入别名">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nickname" class="col-xs-4 control-label">登录密码</label>
+                                <div class="col-xs-5">
+                                    <input type="text" class="form-control" id="password" name="password" value="{{ $data['password'] or ''}}" placeholder="请输入密码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nickname" class="col-xs-4 control-label">用户类型</label>
+                                <div class="col-xs-5">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" value="0" id="optionsRadios1" name="type" checked>普通用户
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio"  value="1" id="optionsRadios1" name="type">管理员客服
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
