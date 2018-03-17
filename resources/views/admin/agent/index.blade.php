@@ -109,10 +109,26 @@
                 var _token =  "{{ csrf_token() }}";
                 var data = {
                     id:$id,
-                    _token: _token
+                    _token: _token,
+                    status:1
                 };
                 $.post(url,data,function (res) {
-                    console.log(res);
+                    if(res['code'] === 'success'){
+                        layer.msg(res['msg'],{icon: 6});
+                        setTimeout('location.href="{{ url('admin/agent/index') }}"',1000);
+                    }else{
+                        layer.msg(res['msg'],{icon:5});
+                    }
+                },"json");
+            },function(){
+                var url =  "{{ url('admin/agent/editOperate') }}";
+                var _token =  "{{ csrf_token() }}";
+                var data = {
+                    id:$id,
+                    _token: _token,
+                    status:2
+                };
+                $.post(url,data,function (res) {
                     if(res['code'] === 'success'){
                         layer.msg(res['msg'],{icon: 6});
                         setTimeout('location.href="{{ url('admin/agent/index') }}"',1000);

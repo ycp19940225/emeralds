@@ -74,13 +74,21 @@ class AgentController extends controller
      */
     public function editOperate(Request $request)
     {
-        $data = $request->input();
-        $data['status'] = 1;
+        $data['id'] = $request->input('id');
+        $data['status'] = $request->input('status');
         if($this->agent->update($data)){
-            $user_id = $this->agent->getByField('id',$request->input('id'))->user_id;
-            $user_data['id'] = $user_id;
-            $user_data['type'] = 2;
-            $this->user->update($user_data);
+            if($data['status'] == 1){
+                $user_id = $this->agent->getByField('id',$request->input('id'))->user_id;
+                $user_data['id'] = $user_id;
+                $user_data['type'] = 2;
+                $this->user->update($user_data);
+            }
+            if($data['status'] == 2){
+                $user_id = $this->agent->getByField('id',$request->input('id'))->user_id;
+                $user_data['id'] = $user_id;
+                $user_data['type'] = 0;
+                $this->user->update($user_data);
+            }
             return response()->json(msg('success','审核通过!'));
         }
         return response()->json(msg('error','审核失败！'));

@@ -172,8 +172,11 @@ if ( ! function_exists('check_status')){
         if($data == 0){
             echo '<span style="color: red">未审核</span>';
         }
-        else{
+        elseif($data == 1){
             echo '<span style="color: green">通过审核</span>';
+        }
+        elseif($data == 2){
+            echo '<span style="color: #80494d">未通过审核</span>';
         }
     }
 }
