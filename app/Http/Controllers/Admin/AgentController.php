@@ -10,16 +10,19 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Repository\Eloquent\Admin\UserRepository;
 use App\Services\Ifs\Admin\AgentServices;
 use Illuminate\Http\Request;
 
 class AgentController extends controller
 {
     protected $agent;
+    protected $user;
 
-    public function __construct(AgentServices $agentServices)
+    public function __construct(AgentServices $agentServices,UserRepository $userRepository)
     {
         $this->agent=$agentServices;
+        $this->user=$userRepository;
     }
 
     /**
@@ -74,6 +77,10 @@ class AgentController extends controller
         $data = $request->input();
         $data['status'] = 1;
         if($this->agent->update($data)){
+            $user_id = $this->agent->getByField('id',$request->input('id'))->user_id;
+            $user_data['id'] = $user_id;
+            $user_data['type'] = 2;
+            $this->user->update($user_data);
             return response()->json(msg('success','审核通过!'));
         }
         return response()->json(msg('error','审核失败！'));
