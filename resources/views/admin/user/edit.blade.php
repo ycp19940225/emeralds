@@ -55,6 +55,11 @@
                                             <input type="radio"  value="1" id="optionsRadios1" name="type">管理员客服
                                         </label>
                                     </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio"  value="2" id="optionsRadios1" name="type">代理商
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
