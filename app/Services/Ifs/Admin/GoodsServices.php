@@ -29,4 +29,6 @@ interface GoodsServices
 
     public function updateFields($input);
     public function getByField($data,$val);
+
+    public function getAlls();
 }

@@ -74,4 +74,12 @@ class GoodsServicesImpl implements GoodsServices
     {
         return $this->goodsDao->where($field,$val)->first();
     }
+
+    public function getAlls()
+    {
+        return $this->goodsDao->where('status',1)
+            ->where('deleted_at',0)
+            ->with('attr')
+            ->get();
+    }
 }

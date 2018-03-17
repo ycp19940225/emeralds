@@ -36,7 +36,7 @@ class GoodsController extends controller
      */
     public function index()
     {
-        $data=$this->goods->getAll();
+        $data=$this->goods->getAlls();
         return view('admin.goods.index',['data'=>$data,'title'=>'翡翠列表']);
     }
 
