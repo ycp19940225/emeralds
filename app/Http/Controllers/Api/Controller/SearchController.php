@@ -53,6 +53,7 @@ class SearchController extends BaseController
            ->where('b.status',1)
            ->where('b.checked',1)
            ->simplePaginate(10);
+
         return API_MSG($res,'获取该分类商品成功！');
     }
 
