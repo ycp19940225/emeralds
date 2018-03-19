@@ -75,13 +75,13 @@ class UserController extends Controller
     public function edit($id)
     {
         $data = $this->user->getOne($id);
-        if($data['status'] == 0){
+        if($data['type'] == 0){
             $data['checked_0'] = "checked";
         }
-        if($data['status'] == 1){
+        if($data['type'] == 1){
             $data['checked_1'] = "checked";
         }
-        if($data['status'] == 2){
+        if($data['type'] == 2){
             $data['checked_2'] = "checked";
         }
         return view('admin.user.edit',['data'=>$data,'title'=>'编辑用户']);
