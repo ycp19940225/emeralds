@@ -31,7 +31,7 @@ class CollectController extends BaseController
      *
      *[获取数据为数组，goods为浏览的商品信息，articles为浏览的文章信息。如果goods为null,这条收藏应该归档于文章]
      *
-     * @Get("http://temp.cqquality.com/api/users/history?token={token}")
+     * @Get("http://temp.cqquality.com/api/users/collect?token={token}")
      * @Parameters({
      *     @Parameter("token", type="varchar", required=true, description="密钥")
      * })
@@ -64,7 +64,7 @@ class CollectController extends BaseController
      * 记录浏览历史
      *
      *
-     * @Get("http://temp.cqquality.com/api/users/history/add?token={token}")
+     * @Get("http://temp.cqquality.com/api/users/collect/add?token={token}")
      * @Parameters({
      *     @Parameter("token", type="varchar", required=true, description="密钥"),
      *     @Parameter("goods_id", type="int", required=true, description="商品ID"),
