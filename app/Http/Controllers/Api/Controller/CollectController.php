@@ -64,7 +64,7 @@ class CollectController extends BaseController
      * 记录浏览历史
      *
      *
-     * @Get("http://temp.cqquality.com/api/users/collect/add?token={token}")
+     * @Post("http://temp.cqquality.com/api/users/collect/add?token={token}")
      * @Parameters({
      *     @Parameter("token", type="varchar", required=true, description="密钥"),
      *     @Parameter("goods_id", type="int", required=true, description="商品ID"),
