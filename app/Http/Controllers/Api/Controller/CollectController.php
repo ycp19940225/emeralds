@@ -51,10 +51,11 @@ class CollectController extends BaseController
      *     }})
      * })
      */
-    public function all()
+    public function all(Request $request)
     {
         $user_id = $this->auth()->user()->id;
-        $data = $this->collect->getAll($user_id);
+        $type = $request->input('type');
+        $data = $this->collect->getAll($user_id,$type);
         if($data){
             return API_MSG($data,'获取成功！');
         }

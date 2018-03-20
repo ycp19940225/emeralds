@@ -27,14 +27,22 @@ class CollectRepository
         $this->collectModel = $collect;
     }
 
-    public function getAll($id)
+    public function getAll($id,$type)
     {
-        return $this->collectModel
-            ->where('deleted_at',0)
-            ->where('user_id',$id)
-            ->with('goods')
-            ->with('articles')
-            ->simplePaginate(10);
+        if($type == 1){
+            return $this->collectModel
+                ->where('deleted_at',0)
+                ->where('user_id',$id)
+                ->with('articles')
+                ->simplePaginate(10);
+        }else if($type == 2){
+            return $this->collectModel
+                ->where('deleted_at',0)
+                ->where('user_id',$id)
+                ->with('goods')
+                ->simplePaginate(10);
+        }
+
     }
 
     public function getOne($id)
