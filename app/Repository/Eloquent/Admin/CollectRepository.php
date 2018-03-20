@@ -29,21 +29,24 @@ class CollectRepository
 
     public function getAll($id,$type)
     {
-        if($type == 1){
-            return $this->collectModel
-                ->where('deleted_at',0)
-                ->where('user_id',$id)
-                ->whereNotNull('article_id')
-                ->with('articles')
-                ->get();
-        }else if($type == 2){
-            return $this->collectModel
-                ->where('deleted_at',0)
-                ->where('user_id',$id)
-                ->with('goods')
-                ->get();
+        $data =$this->collectModel
+            ->where('deleted_at',0)
+            ->where('user_id',$id)
+            ->with('articles')
+            ->with('goods')
+            ->get();
+        foreach ($data as $k=>$v){
+            if($v->articles !== null){
+                $res['articles'][$k] = $v->articles;
+            }else{
+                $res['goods'][$k] = $v->goods;
+            }
         }
-
+        if($type == 1){
+            return $res['articles'];
+        }else if($type == 2){
+            return $res['goods'];
+        }
     }
 
     public function getOne($id)
