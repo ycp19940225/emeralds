@@ -129,7 +129,7 @@ class UserController extends BaseController
         $type = $request->only('type');
         $data['ttl'] = $ttl*60;
         $data['refresh_ttl'] = $refresh_ttl*60;
-        if(isset($type['type']) && $type['type']== 'weixin'){
+        if(isset($type['type']) && $type['type']== '2'){
             $open_id = $request->only('open_id')['open_id'];
             $data= $this->user->getByField('open_id',$open_id);//存在
             $res['ttl'] = $ttl*60;
