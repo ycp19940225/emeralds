@@ -137,21 +137,21 @@ class UserController extends BaseController
             $input['nickname'] = $request->input('account','');
             $input['cid'] = $request->input('cid','');
             $input['logo'] = $request->input('headImage','');
+            $input['telphone'] = $open_id;
+            $input['open_id'] = $open_id;
             if($data){
-                $token = JWTAuth::attempt(['telphone'=>'','password'=>'']);
+                $token = JWTAuth::attempt(['telphone'=>$open_id,'password'=>'']);
                 $res['token'] = $token;
                 $res['id'] = $this->user->getByField('open_id',$open_id)->id;
                 $res['type'] = $this->user->getByField('open_id',$open_id)->type;
                 return API_MSG($res,'登录成功！','true',200);
             }else{
-                $input['telphone'] = '';
-                $input['open_id'] = $open_id;
                 $input['password'] = '';
                 $input['password'] = bcrypt($data['password']);
-                $data  = $this->user->save($input);
+                $this->user->save($input);
                 $res['id'] = $this->user->getByField('open_id',$open_id)->id;
                 $res['type'] = $this->user->getByField('open_id',$open_id)->type;
-                $token = JWTAuth::attempt(['telphone'=>'','password'=>'']);
+                $token = JWTAuth::attempt(['telphone'=>$open_id,'password'=>'']);
                 $res['token'] = $token;
                 return API_MSG($res,'登录成功！','true',200);
             }

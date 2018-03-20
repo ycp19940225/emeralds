@@ -33,7 +33,7 @@ class CollectRepository
             return $this->collectModel
                 ->where('deleted_at',0)
                 ->where('user_id',$id)
-                ->where('article_id',$id)
+                ->whereNotNull('article_id')
                 ->with('articles')
                 ->get();
         }else if($type == 2){
