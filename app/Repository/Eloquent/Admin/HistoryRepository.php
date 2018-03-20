@@ -27,14 +27,21 @@ class HistoryRepository
         $this->historyModel = $history;
     }
 
-    public function getAll($id)
+    public function getAll($id,$type)
     {
-        return $this->historyModel
-            ->where('deleted_at',0)
-            ->where('user_id',$id)
-            ->with('goods')
-            ->with('articles')
-            ->simplePaginate(10);
+        if($type == 1){
+            return $this->collectModel
+                ->where('deleted_at',0)
+                ->where('user_id',$id)
+                ->with('articles')
+                ->get();
+        }else if($type == 2){
+            return $this->collectModel
+                ->where('deleted_at',0)
+                ->where('user_id',$id)
+                ->with('goods')
+                ->get();
+        }
     }
 
     public function getOne($id)

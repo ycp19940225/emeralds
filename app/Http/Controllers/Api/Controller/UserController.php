@@ -126,10 +126,38 @@ class UserController extends BaseController
     {
         $ttl = config('jwt.ttl');
         $refresh_ttl = config('jwt.refresh_ttl');
-        $input = $request->only('telphone','password');
-        $token = JWTAuth::attempt($input);
+        $type = $request->only('type');
         $data['ttl'] = $ttl*60;
         $data['refresh_ttl'] = $refresh_ttl*60;
+        if(isset($type['type']) && $type['type']== 'weixin'){
+            $open_id = $request->only('open_id')['open_id'];
+            $data= $this->user->getByField('open_id',$open_id);//存在
+            $res['ttl'] = $ttl*60;
+            $res['refresh_ttl'] = $refresh_ttl*60;
+            $input['nickname'] = $request->input('account','');
+            $input['cid'] = $request->input('cid','');
+            $input['logo'] = $request->input('headImage','');
+            if($data){
+                $token = JWTAuth::attempt(['telphone'=>'','password'=>'']);
+                $res['token'] = $token;
+                $res['id'] = $this->user->getByField('open_id',$open_id)->id;
+                $res['type'] = $this->user->getByField('open_id',$open_id)->type;
+                return API_MSG($res,'登录成功！','true',200);
+            }else{
+                $input['telphone'] = '';
+                $input['open_id'] = $open_id;
+                $input['password'] = '';
+                $input['password'] = bcrypt($data['password']);
+                $data  = $this->user->save($input);
+                $res['id'] = $this->user->getByField('open_id',$open_id)->id;
+                $res['type'] = $this->user->getByField('open_id',$open_id)->type;
+                $token = JWTAuth::attempt(['telphone'=>'','password'=>'']);
+                $res['token'] = $token;
+                return API_MSG($res,'登录成功！','true',200);
+            }
+        }
+        $input = $request->only('telphone','password');
+        $token = JWTAuth::attempt($input);
         $data['token'] = $token;
         $data['id'] = $this->user->getByField('telphone',$input['telphone'])->id;
         $data['type'] = $this->user->getByField('telphone',$input['telphone'])->type;

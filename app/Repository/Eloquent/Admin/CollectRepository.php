@@ -33,14 +33,15 @@ class CollectRepository
             return $this->collectModel
                 ->where('deleted_at',0)
                 ->where('user_id',$id)
+                ->where('article_id',$id)
                 ->with('articles')
-                ->simplePaginate(10);
+                ->get();
         }else if($type == 2){
             return $this->collectModel
                 ->where('deleted_at',0)
                 ->where('user_id',$id)
                 ->with('goods')
-                ->simplePaginate(10);
+                ->get();
         }
 
     }
