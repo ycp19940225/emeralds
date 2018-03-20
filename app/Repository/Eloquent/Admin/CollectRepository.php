@@ -9,7 +9,7 @@
 namespace App\Repository\Eloquent\Admin;
 
 
-use App\Models\Admin\History;
+use App\Models\Admin\Collect;
 
 class CollectRepository
 {
@@ -20,11 +20,11 @@ class CollectRepository
 
     /**
      * UserRepository constructor.
-     * @param History $history
+     * @param Collect $collect
      */
-    public function __construct(History $history)
+    public function __construct(Collect $collect)
     {
-        $this->collectModel = $history;
+        $this->collectModel = $collect;
     }
 
     public function getAll($id)
@@ -44,7 +44,7 @@ class CollectRepository
 
     public function save($data)
     {
-        return $this->collectModel->create($data);
+        return $this->collectModel->updateOrCreate($data);
     }
 
     public function update($data)

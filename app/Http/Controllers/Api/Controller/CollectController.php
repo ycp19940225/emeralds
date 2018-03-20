@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api\Controller;
 
 
 use App\Http\Controllers\Api\BaseController;
+use App\Repository\Eloquent\Admin\CollectRepository;
 use App\Repository\Eloquent\Admin\HistoryRepository;
 use Dingo\Api\Http\Request;
 
@@ -20,11 +21,11 @@ use Dingo\Api\Http\Request;
  */
 class CollectController extends BaseController
 {
-    protected $history;
+    protected $collect;
 
-    public function __construct(HistoryRepository $historyRepository)
+    public function __construct(CollectRepository $collectRepository)
     {
-        $this->history=$historyRepository;
+        $this->collect=$collectRepository;
     }
     /**
      * 获取用户收藏
@@ -53,7 +54,7 @@ class CollectController extends BaseController
     public function all()
     {
         $user_id = $this->auth()->user()->id;
-        $data = $this->history->getAll($user_id);
+        $data = $this->collect->getAll($user_id);
         if($data){
             return API_MSG($data,'获取成功！');
         }
@@ -61,7 +62,7 @@ class CollectController extends BaseController
     }
 
     /**
-     * 记录浏览历史
+     * 添加收藏
      *
      *
      * @Post("http://temp.cqquality.com/api/users/collect/add?token={token}")
@@ -114,7 +115,7 @@ class CollectController extends BaseController
             $data['article_id'] = $request->input('article_id');
         }
         $data['user_id'] = $user_id;
-        $res = $this->history->save($data);
+        $res = $this->collect->save($data);
         if($res){
             return API_MSG($res,'操作成功！');
         }
