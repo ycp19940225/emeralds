@@ -291,12 +291,11 @@ class UserController extends BaseController
      *     }})
      * })
      */
-    public function logo(Request $request,UploadServicesImpl $uploadServicesImpl)
+    public function logo(Request $request)
     {
-        $files = $request->file('logo');
-        $urls = $uploadServicesImpl->uploadImg('admin',$files);
+        $files = $request->input('logo');
         $user_data = $this->auth()->user();
-        $res = $this->user->update(['logo'=>$urls,'id'=>$user_data->id]);
+        $res = $this->user->update(['logo'=>$files,'id'=>$user_data->id]);
         if ($res){
             return API_MSG($res,'头像修改成功！','true',200);
         } else {
