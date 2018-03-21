@@ -55,7 +55,7 @@ class FamousController extends BaseController
      */
     public function all()
     {
-        $famous_data = $this->famous->getAlls();
+        $famous_data = $this->famous->getAll();
         if($famous_data){
             return API_MSG($famous_data,'获取所有名家成功！');
         }

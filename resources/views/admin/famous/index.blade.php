@@ -84,11 +84,10 @@
                     id:i,
                     _token: _token
                 };
-                $.post("{{ url('admin/articlecat/delete') }}",data,function (res) {
-                    console.log(res);
+                $.post("{{ url('admin/famous/delete') }}",data,function (res) {
                     if(res['code'] === 'success'){
                         layer.msg(res['msg'],{icon: 6});
-                        setTimeout('location.href="{{ url('admin/article/index') }}"',1000);
+                        setTimeout('location.href="{{ url('admin/famous/index') }}"',1000);
                     }else{
                         layer.msg(res['msg'],{icon:5});
                     }

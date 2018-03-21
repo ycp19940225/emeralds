@@ -30,7 +30,7 @@ class FamousController extends controller
      */
     public function index()
     {
-        $data=$this->famous->getAll();
+        $data=$this->famous->getAlls();
         return view('admin.famous.index',['data'=>$data,'title'=>'名家']);
     }
 
