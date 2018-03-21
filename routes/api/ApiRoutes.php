@@ -32,6 +32,10 @@ $api->version('v1', function ($api) {
             $api->get('slides', 'SlideController@all');
             //欢迎页
             $api->get('pages', 'PageController@all');
+            //名家
+            $api->get('famous', 'FamousController@all');
+            $api->get('famous/{id}', 'FamousController@famous')->where('id', '[0-9]+');
+            $api->post('famous/release', 'FamousController@addGoodsFamous');
         });
 
     });

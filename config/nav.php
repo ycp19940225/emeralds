@@ -78,15 +78,15 @@ return [
                     'icon'=>''
                 ],
                 [
-                    'name'=>'客服管理',
-                    'access'=>'admin/goods/index',
+                    'name'=>'名家管理',
+                    'access'=>'admin/famous/index',
                     'icon'=>''
                 ],
-                [
+                /*[
                     'name'=>'消息推送',
                     'access'=>'admin/goods/index',
                     'icon'=>''
-                ],
+                ],*/
             ]
         ],
         [

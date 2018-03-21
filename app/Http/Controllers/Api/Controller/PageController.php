@@ -33,7 +33,7 @@ class PageController extends BaseController
      * 获取所有欢迎页
      *
      *
-     * @Get("http://temp.cqquality.com/api/slides")
+     * @Get("http://temp.cqquality.com/api/pages")
      * @Parameters({
      * })
      *@Transaction({

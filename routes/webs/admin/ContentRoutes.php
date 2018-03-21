@@ -27,3 +27,10 @@ Route::get('/page/index','PageController@index');
 Route::get('/page/edit/{id}','PageController@edit')->where('id', '[0-9]+');
 Route::post('/page/editOperate','PageController@editOperate');
 Route::post('/page/delete','PageController@delete');
+//名家
+Route::any('/famous/add','FamousController@add');
+Route::post('/famous/addOperate','FamousController@addOperate');
+Route::get('/famous/index','FamousController@index');
+Route::get('/famous/edit/{id}','FamousController@edit')->where('id', '[0-9]+');
+Route::post('/famous/editOperate','FamousController@editOperate');
+Route::post('/famous/delete','FamousController@delete');
