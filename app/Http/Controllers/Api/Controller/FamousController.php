@@ -95,7 +95,7 @@ class FamousController extends BaseController
     /**
      * 发布到名家（通过名家ID）
      *
-     * @Get("http://temp.cqquality.com/api/famous/release")
+     * @Post("http://temp.cqquality.com/api/famous/release")
      * @Parameters({
      *     @Parameter("goods_id", type="int",description="商品ID"),
      *     @Parameter("famous_id", type="int",description="名家ID"),
