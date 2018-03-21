@@ -12,23 +12,24 @@ namespace App\Http\Controllers\Api\Controller;
 use App\Http\Controllers\Api\BaseController;
 use App\Repository\Eloquent\Admin\AdminRepository;
 use App\Repository\Eloquent\Admin\ChatRepository;
+use App\Repository\Eloquent\Admin\UserRepository;
 use DB;
 use Dingo\Api\Http\Request;
 
 class ChatController extends BaseController
 {
-    protected $admin;
+    protected $user;
     protected $chat;
 
-    public function __construct(AdminRepository $adminRepository,ChatRepository $chatRepository)
+    public function __construct(UserRepository $userRepository,ChatRepository $chatRepository)
     {
-        $this->admin=$adminRepository;
+        $this->user=$userRepository;
         $this->chat=$chatRepository;
     }
 
     public function getAdmin()
     {
-        $data = $this->admin->getAll();
+        $data = $this->user->getByField('type',1);
         if($data){
             return API_MSG($data,'获取成功！');
         }
