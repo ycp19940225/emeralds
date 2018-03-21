@@ -51,4 +51,9 @@ class FamousRepository
     {
         return $this->famousModel->where('id',$id)->update(['deleted_at'=>1]);
     }
+
+    public function getAlls()
+    {
+        return $this->famousModel->where('deleted_at',0)->get();
+    }
 }
