@@ -30,6 +30,7 @@
                         <table id="data-table" class="table table-hover table-striped table-bordered">
                             <thead>
                             <tr>
+                                <th>排序</th>
                                 <th>品类名</th>
                                 <th>二级分类</th>
                                 <th>创建时间</th>
@@ -40,6 +41,12 @@
                             <tbody>
                             @foreach($data as $k=>$v)
                                 <tr>
+                                    <td style="width: 5%">
+                                        <label>
+                                            <input width="5px" type="text" value="{{ $v['sort'] }}" name="sort"
+                                                   data-id="{{ $v['id'] }}">
+                                        </label>
+                                    </td>
                                     <td>{{ $v['cat_name'] }}</td>
                                     <td>
                                         @foreach($v->type as $type)
@@ -95,5 +102,26 @@
                 },"json");
             });
         }
+        $(document).ready(function () {
+            $("input[name = 'sort']").change(function () {
+                var _token =  "{{ csrf_token() }}";
+                var sort =  $(this).val();
+                var id =  '';
+                id = $(this).data('id');
+                var data = {
+                    id:id,
+                    sort:sort,
+                    _token: _token
+                };
+                $.post("{{ url('admin/cat/sort') }}",data,function (res) {
+                    if(res['code'] === 'success'){
+                        layer.msg(res['msg'],{icon: 6});
+                        setTimeout('location.href="{{ url('admin/cat/index') }}"',1000);
+                    }else{
+                        layer.msg(res['msg'],{icon:5});
+                    }
+                },"json");
+            });
+        });
     </script>
 @endsection

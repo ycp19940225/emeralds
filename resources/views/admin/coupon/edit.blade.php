@@ -25,6 +25,34 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
                             <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">优惠券名称</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ $data['name'] or ''}}" placeholder="请输入名称" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">优惠时间</label>
+                                <div class="col-xs-4">
+                                <div class="input-daterange input-group" id="datepicker">
+                                    <input type="text" class="input-sm form-control" name="start_time" value="{{ $data['start_time'] or ''}}">
+                                    <span class="input-group-addon">到</span>
+                                    <input type="text" class="input-sm form-control" name="end_time" value="{{ $data['end_time'] or ''}}">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">优惠价格</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="price" name="price" value="{{ $data['price'] or ''}}" placeholder="请输入价格" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">优惠条件</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="limit" name="limit" value="{{ $data['limit'] or ''}}" placeholder="请输入条件" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="pic" class="col-xs-4 control-label">封面图片</label>
                                 <div class="col-xs-4">
                                     @if(Route::current()->getActionMethod() == 'add')
@@ -33,35 +61,15 @@
                                         </div>
                                     @else
                                         <div id="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
-                                            <img id="img" src="{{ loadStaticImg($data['pic']) }}" alt="" style="width:100px; height: 100px;">
+                                            <img id="img" src="{{ loadStaticImg($data['logo']) }}" alt="" style="width:100px; height: 100px;">
                                         </div>
                                     @endif
                                     <p>
                                         <a href="javascript:;" class="file">
-                                            <input type="file" id="image-file" name="pic" value="{{ $data['pic'] or '' }}">
+                                            <input type="file" id="image-file" name="logo" value="{{ $data['logo'] or '' }}">
                                         </a>
                                     </p>
                                     <p id="file-info"></p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="name" class="col-xs-4 control-label">链接地址</label>
-                                <div class="col-xs-4">
-                                    {{  buildSelect($article_data,'','url','id','title',isset($data) ? $data['url']:'') }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="name" class="col-xs-4 control-label">类型</label>
-                                <?php if(isset($data['type']) && $data['type'] == 1){ $checked2 = 'checked';}else{$checked1 = 'checked';} ?>
-                                <div class="col-xs-4">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" value="0"  name="type" {{ $checked1 or ''}}>轮播</label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" value="1"  name="type" {{ $checked2 or ''}}>固定</label>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-offset-5" >
@@ -86,12 +94,14 @@
             var method = "{{ Route::current()->getActionMethod() }}";
             var url ='';
             if(method === 'edit'){
-                url = '{{url('admin/slide/editOperate')}}';
+                url = '{{url('admin/coupon/editOperate')}}';
                 $("form").attr('action',url)
             }else{
-                url = '{{url('admin/slide/addOperate')}}';
+                url = '{{url('admin/coupon/addOperate')}}';
                 $("form").attr('action',url);
             }
+            $("#datepicker").datepicker({
+            });
         });
     </script>
     @endsection

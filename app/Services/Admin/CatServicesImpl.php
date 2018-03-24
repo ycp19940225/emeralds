@@ -44,4 +44,9 @@ class CatServicesImpl implements CatServices
     {
         return $this->catDao->where('id',$id)->update(['deleted_at'=>1]);
     }
+
+    public function sort($data)
+    {
+        return $this->catDao->where('id',$data['id'])->update(['sort'=>$data['sort']]);
+    }
 }

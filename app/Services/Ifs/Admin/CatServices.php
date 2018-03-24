@@ -20,4 +20,6 @@ interface CatServices
     public function update($id);
     //删除
     public function delete($id);
+
+    public function sort($data);
 }

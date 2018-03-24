@@ -34,3 +34,11 @@ Route::get('/famous/index','FamousController@index');
 Route::get('/famous/edit/{id}','FamousController@edit')->where('id', '[0-9]+');
 Route::post('/famous/editOperate','FamousController@editOperate');
 Route::post('/famous/delete','FamousController@delete');
+
+//优惠券
+Route::any('/coupon/add','CouponController@add');
+Route::post('/coupon/addOperate','CouponController@addOperate');
+Route::get('/coupon/index','CouponController@index');
+Route::get('/coupon/edit/{id}','CouponController@edit')->where('id', '[0-9]+');
+Route::post('/coupon/editOperate','CouponController@editOperate');
+Route::post('/coupon/delete','CouponController@delete');

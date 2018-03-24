@@ -136,4 +136,18 @@ class CatController extends controller
           return response()->json(msg('error','获取类型属性失败!'));
       }
     }
+    /**
+     * @name 分类排序
+     * @desc
+     * @author ycp\
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function sort(Request $request)
+    {
+        $data = $request->input();
+        if($this->cat->sort($data)){
+            return response()->json(msg('success','排序成功!'));
+        }
+        return response()->json(msg('error','排序失败!'));
+    }
 }

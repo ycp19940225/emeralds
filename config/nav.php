@@ -78,6 +78,11 @@ return [
                     'icon'=>''
                 ],
                 [
+                    'name'=>'优惠券管理',
+                    'access'=>'admin/coupon/index',
+                    'icon'=>''
+                ],
+                [
                     'name'=>'名家管理',
                     'access'=>'admin/famous/index',
                     'icon'=>''

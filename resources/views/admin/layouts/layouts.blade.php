@@ -26,6 +26,9 @@
     <!-- Data Tables -->
     <link href="{{ loadStatic('admin/css/plugins/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet" />
 
+    <!-- DataTimePicker -->
+    <link href="{{ loadStatic('admin/css/plugins/datapicker/datepicker3.css') }}" rel="stylesheet" />
+
 
     @yield('admin.page.css')
 
@@ -50,6 +53,9 @@
     {{--dataTables--}}
     <script src="{{ loadStatic('admin/js/plugins/dataTables/jquery.dataTables.js') }}"></script>
     <script src="{{ loadStatic('admin/js/plugins/dataTables/dataTables.bootstrap.js') }}"></script>
+
+    {{--datatime picker--}}
+    <script src="{{ loadStatic('admin/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
 
 
     <script>

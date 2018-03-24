@@ -55,6 +55,8 @@ $api->version('v1', function ($api) {
             //收藏
             $api->get('users/collect','CollectController@all');
             $api->post('users/collect/add','CollectController@add');
+            //优惠券
+            $api->get('users/coupons','CouponController@all');
         });
         //商品
         $api->group(['middleware'=>'jwt.auth','providers' => 'jwt'], function ($api) {

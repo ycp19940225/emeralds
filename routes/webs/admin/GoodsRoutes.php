@@ -7,6 +7,7 @@ Route::get('/cat/edit/{id}','CatController@edit')->where('id', '[0-9]+');
 Route::post('/cat/editOperate','CatController@editOperate');
 Route::post('/cat/delete','CatController@delete');
 Route::post('/cat/getType','CatController@getType');
+Route::post('/cat/sort','CatController@sort');
 //类型
 Route::any('/type/add','TypeController@add');
 Route::post('/type/addOperate','TypeController@addOperate');
