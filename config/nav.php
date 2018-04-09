@@ -87,6 +87,11 @@ return [
                     'access'=>'admin/famous/index',
                     'icon'=>''
                 ],
+                [
+                    'name'=>'首页视频',
+                    'access'=>'admin/video/index',
+                    'icon'=>''
+                ],
                 /*[
                     'name'=>'消息推送',
                     'access'=>'admin/goods/index',

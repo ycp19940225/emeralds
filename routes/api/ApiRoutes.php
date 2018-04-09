@@ -30,6 +30,8 @@ $api->version('v1', function ($api) {
             $api->get('article/{id}', 'ArticleController@article')->where('id', '[0-9]+');
             //轮播图
             $api->get('slides', 'SlideController@all');
+            //视频
+            $api->get('video', 'SlideController@video');
             //欢迎页
             $api->get('pages', 'PageController@all');
             //名家

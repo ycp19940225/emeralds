@@ -29,7 +29,7 @@ class SlideRepository
 
     public function getAll()
     {
-        return $this->slideModel->where('deleted_at',0)->get();
+        return $this->slideModel->where('deleted_at',0)->where('type',0)->get();
     }
 
     public function getOne($id)
@@ -50,5 +50,10 @@ class SlideRepository
     public function delete($id)
     {
         return $this->slideModel->where('id',$id)->update(['deleted_at'=>1]);
+    }
+
+    public function getByField($fields,$val)
+    {
+        return $this->slideModel->where('deleted_at',0)->where($fields,$val)->first();
     }
 }

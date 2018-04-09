@@ -11,14 +11,14 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Slide extends Model
+class Video extends Model
 {
-    protected $table = 'emerald_slide';
+    protected $table = 'emerald_video';
     protected $dateFormat = 'U';
     /**
      * 可以被集体赋值的表字段
      * @var array
      */
-    public $fillable = array('id','pic','url','created_at','updated_at','deleted_at','type','link_goods');
+    public $fillable = array('id','pic','created_at','updated_at','deleted_at');
 
 }

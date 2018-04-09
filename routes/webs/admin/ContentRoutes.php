@@ -42,3 +42,11 @@ Route::get('/coupon/index','CouponController@index');
 Route::get('/coupon/edit/{id}','CouponController@edit')->where('id', '[0-9]+');
 Route::post('/coupon/editOperate','CouponController@editOperate');
 Route::post('/coupon/delete','CouponController@delete');
+
+//视频
+Route::any('/video/add','VideoController@add');
+Route::post('/video/addOperate','VideoController@addOperate');
+Route::get('/video/index','VideoController@index');
+Route::get('/video/edit/{id}','VideoController@edit')->where('id', '[0-9]+');
+Route::post('/video/editOperate','VideoController@editOperate');
+Route::post('/video/delete','VideoController@delete');

@@ -64,6 +64,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">是否连接到每日秒杀</label>
+                                <?php if(isset($data['link_goods']) && $data['link_goods'] == 1){ $checked2 = 'checked';}else{$checked1 = 'checked';} ?>
+                                <div class="col-xs-4">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" value="0"  name="link_goods" {{ $checked1 or ''}}>否</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" value="1"  name="link_goods" {{ $checked2 or ''}}>是</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-offset-5" >
                                 <button type="submit" class="btn btn-success m-2" id="submit" name="repass">保存</button>
                                 <button type="reset" class="btn btn-success m-2" id="reset" name="repass">重置</button>
