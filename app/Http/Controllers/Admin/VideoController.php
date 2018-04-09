@@ -73,8 +73,7 @@ class VideoController extends controller
     public function edit($id)
     {
         $data = $this->video->getOne($id);
-        $article_data = $this->article->getAll();
-        return view('admin.video.edit',['data'=>$data,'article_data'=>$article_data,'title'=>'编辑视频']);
+        return view('admin.video.edit',['data'=>$data,'title'=>'编辑视频']);
     }
     /**
      * @name 修改操作
