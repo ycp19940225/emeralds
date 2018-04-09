@@ -150,4 +150,17 @@ class SearchController extends BaseController
             ->get();
         return API_MSG($res,'获取该分类推荐商品成功！');
     }
+
+    public function getGoodsByLinks()
+    {
+        $res = DB::table('emerald_goods')
+            ->where('deleted_at',0)
+            ->where('type',1)
+            ->where('status',1)
+            ->where('checked',1)
+            ->orderBy('updated_at')
+            ->limit('6')
+            ->get();
+        return API_MSG($res,'获取每日秒抢商品成功！');
+    }
 }

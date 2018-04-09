@@ -32,6 +32,7 @@ $api->version('v1', function ($api) {
             $api->get('slides', 'SlideController@all');
             //视频
             $api->get('video', 'SlideController@video');
+            $api->get('links', 'SearchController@getGoodsByLinks');
             //欢迎页
             $api->get('pages', 'PageController@all');
             //名家
