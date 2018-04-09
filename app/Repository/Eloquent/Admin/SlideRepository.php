@@ -56,4 +56,8 @@ class SlideRepository
     {
         return $this->slideModel->where('deleted_at',0)->where($fields,$val)->first();
     }
+    public function getAlls()
+    {
+        return $this->slideModel->where('deleted_at',0)->get();
+    }
 }

@@ -34,7 +34,7 @@ class SlideController extends controller
      */
     public function index()
     {
-        $data = $this->slide->getAll();
+        $data = $this->slide->getAlls();
         return view('admin.slide.index',['data'=>$data,'title'=>'轮播图列表']);
     }
 
