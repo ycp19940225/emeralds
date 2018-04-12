@@ -105,6 +105,23 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">视频或者音频</label>
+                                <div class="col-xs-4">
+                                    <div class="form-group " id="aetherupload-wrapper" ><!--组件最外部需要有一个名为aetherupload-wrapper的id，用以包装组件-->
+                                        <div class="controls" >
+                                            <input type="file" id="file"  onchange="aetherupload(this,'file').success(getVideoUrl).upload()"/><!--需要有一个名为file的id，用以标识上传的文件，video(file,group)中第二个参数为分组名，success方法可用于声名上传成功后的回调方法名-->
+                                            <div class="progress " style="height: 6px;margin-bottom: 2px;margin-top: 10px;width: 200px;">
+                                                <div id="progressbar" style="background:blue;height:6px;width:0;"></div><!--需要有一个名为progressbar的id，用以标识进度条-->
+                                            </div>
+                                            <span style="font-size:12px;color:#aaa;" id="output">等待上传</span><!--需要有一个名为output的id，用以标识提示信息-->
+                                            <input type="hidden" name="file" id="savedpath" ><!--需要有一个名为savedpath的id，用以标识文件保存路径的表单字段，还需要一个任意名称的name-->
+                                        </div>
+                                    </div>
+                                    <span style="color: red">如为图文则不需上传</span>
+                                    <div id="result"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="name" class="col-xs-4 control-label">编辑文章详情</label>
                                 <div class="col-xs-4">
                                     <label for="myEditor"></label>
@@ -132,6 +149,9 @@
 @endsection
 @section('admin.page.js')
     <script src="{{ loadStatic('admin/js/extend/upload.js') }}"></script>
+    {{--大文件上传组件--}}
+    <script src="{{ URL::asset('js/spark-md5.min.js') }}"></script><!--需要引入spark-md5.min.js-->
+    <script src="{{ URL::asset('js/aetherupload.js') }}"></script><!--需要引入aetherupload.js-->
     {{--文本编辑器--}}
     <script src="{{ loadStatic('admin/js/extend/umeditor/umeditor.config.js') }}"></script>
     <script src="{{ loadStatic('admin/js/extend/umeditor/umeditor.js') }}"></script>
@@ -156,6 +176,17 @@
                 $("form").attr('action',url);
             }
         });
+
+        var getVideoUrl = function(){
+            // Example
+            $('#result').append(
+                '<p>原文件名：<span >'+this.fileName+'</span> | 原文件大小：<span >'+parseFloat(this.fileSize / (1000 * 1000)).toFixed(2) + 'MB'+'</span> | 储存文件名：<span >'+this.savedPath.substr(this.savedPath.lastIndexOf('/') + 1)+'</span></p>'
+            );
+            var html = '';
+            var url = this.savedPath.substr(this.savedPath.lastIndexOf('/') + 1);
+            html = '<input type="hidden" name="file" value="'+url+'" />';
+            $("form").append(html);
+        }
 
     </script>
 

@@ -104,6 +104,9 @@ class ArticleController extends controller
             $pic = $uploadServicesImpl->uploadImg('slide',$request->file('pic'));
             $data['pic'] = $pic;
         }
+        if($data['file'] == ''){
+            unset($data['file']);
+        }
         if($this->article->update($data)){
             return redirect('admin/article/index')->with('info','修改成功！');
         }

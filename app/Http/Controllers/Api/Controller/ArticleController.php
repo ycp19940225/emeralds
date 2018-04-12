@@ -92,7 +92,7 @@ class ArticleController extends BaseController
     /**
      * 获取分类文章（通过分类ID）
      *
-     * @Get("http://temp.cqquality.com/api/article/cat/id")
+     * @Get("http://temp.cqquality.com/api/articles/cat/id")
      * @Parameters({
      *     @Parameter("id", type="int",description="分类ID")
      * })
