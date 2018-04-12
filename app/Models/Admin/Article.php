@@ -20,7 +20,7 @@ class Article extends Base
      * 可以被集体赋值的表字段
      * @var array
      */
-    public $fillable = array('id','top','pic','title','intro','content','cat_id','input_id','views','created_at','updated_at','deleted_at');
+    public $fillable = array('id','top','pic','title','intro','content','cat_id','input_id','views','created_at','updated_at','deleted_at','type');
 
     /**
      * 关联分类下的文章

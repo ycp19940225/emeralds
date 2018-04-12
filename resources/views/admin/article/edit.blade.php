@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label for="name" class="col-xs-4 control-label">标题</label>
                                 <div class="col-xs-4">
-                                    <input type="text" class="form-control" id="title" name="title" value="{{ $data['title'] or ''}}" placeholder="请输入分类名" required>
+                                    <input type="text" class="form-control" id="title" name="title" value="{{ $data['title'] or ''}}" placeholder="请输入标题" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -56,6 +56,25 @@
                                     <div class="radio">
                                         <label>
                                             <input type="radio" value="1"  name="top" {{ $checked2 or ''}}>置顶</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">文章类型</label>
+                                <?php if(isset($data['type']) && $data['type'] == 1){ $checkedS = 'checked';}else if(isset($data['type']) && $data['type'] == 2){ $checkedY = 'checked';}
+                                else{$checkedT = 'checked';} ?>
+                                <div class="col-xs-4">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" value="3"  name="type" {{ $checkedT or ''}}>图文</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" value="2"  name="type" {{ $checkedY or ''}}>音频</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" value="1"  name="type" {{ $checkedS or ''}}>视频</label>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +105,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name" class="col-xs-4 control-label">翡翠详细描述</label>
+                                <label for="name" class="col-xs-4 control-label">编辑文章详情</label>
                                 <div class="col-xs-4">
                                     <label for="myEditor"></label>
                                     <textarea id="myEditor" name="content" >

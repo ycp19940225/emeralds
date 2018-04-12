@@ -84,7 +84,7 @@ class ArticleController extends controller
     {
         $data = $this->article->getOne($id);
         $cat_data = $this->cat->getAll();
-        return view('admin.article.edit',['data'=>$data,'cat_data'=>$cat_data,'title'=>'添加文章']);
+        return view('admin.article.edit',['data'=>$data,'cat_data'=>$cat_data,'title'=>'编辑文章']);
     }
 
     /**

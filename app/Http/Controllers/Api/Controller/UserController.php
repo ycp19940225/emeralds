@@ -454,6 +454,7 @@ class UserController extends BaseController
        }else{
            $data['agent_code'] = generate_code('LYFC');
            $res = $this->agent->save($data);
+           $user_data['id']=$this->auth()->user()->id;
        }
         if ($res){
             return API_MSG($res,'保存成功！','true',200);
