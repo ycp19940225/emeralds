@@ -153,6 +153,7 @@ class ArticleController extends BaseController
     public function article($id)
     {
         $data = $this->article->getOne($id);
+        $data['file'] = asset('storage/'.$data['file']);
         $data['cat'] = $this->article->getOne($id)->cat;
         if($data){
             return API_MSG($data,'获取文章成功！');
