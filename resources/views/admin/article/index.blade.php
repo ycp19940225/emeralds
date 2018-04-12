@@ -53,7 +53,7 @@
                                 <td>{{ $v['created_at'] }}</td>
                                 <td>{{ $v['updated_at'] }}</td>
                                 <td><?php if($v['top']){ echo '是';} else echo "否";?></td>
-                                <td><?php if($v['type']==1){ echo '视频';}if($v['type']==2){ echo '音频';} else echo "图文";?></td>
+                                <td><?php if($v['type']==1){ echo '视频';}if($v['type']==2){ echo '音频';} if($v['type']==3) echo "图文";?></td>
                                 <td>
                                     <a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/article/edit',['id'=>$v['id']]) }}" >编辑</a>
                                     <a href="JavaScript:void(0)" onclick="del({{ $v['id'] }})" class="btn btn-danger btn-xs m-2 delete" >删除</a>
