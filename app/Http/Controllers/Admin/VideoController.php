@@ -52,11 +52,9 @@ class VideoController extends controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function addOperate(Request $request,UploadServicesImpl $uploadServicesImpl)
+    public function addOperate(Request $request)
     {
         $data = $request->input();
-        $pic = $uploadServicesImpl->uploadImg('video',$request->file('pic'));
-        $data['pic'] = $pic;
         if($this->video->save($data)){
             return redirect('admin/video/index')->with('info','添加成功！');
         }
@@ -81,12 +79,11 @@ class VideoController extends controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function editOperate(Request $request,UploadServicesImpl $uploadServicesImpl)
+    public function editOperate(Request $request)
     {
         $data = $request->input();
-        if($request->file('pic')){
-            $pic = $uploadServicesImpl->uploadImg('video',$request->file('pic'));
-            $data['pic'] = $pic;
+        if(!$request->input('pic')){
+            unset($data['pic']);
         }
         if($this->video->update($data)){
             return redirect('admin/video/index')->with('info','修改成功！');
