@@ -55,6 +55,7 @@ class VideoController extends controller
     public function addOperate(Request $request)
     {
         $data = $request->input();
+        $data['pic'] = str_replace('\\','/',$data['pic']);;
         if($this->video->save($data)){
             return redirect('admin/video/index')->with('info','添加成功！');
         }
@@ -84,6 +85,9 @@ class VideoController extends controller
         $data = $request->input();
         if(!$request->input('pic')){
             unset($data['pic']);
+        }
+        if($request->input('pic')){
+            $data['pic'] = str_replace('\\','/',$data['pic']);;
         }
         if($this->video->update($data)){
             return redirect('admin/video/index')->with('info','修改成功！');

@@ -26,7 +26,8 @@ class SlideController extends BaseController
     protected $video;
 
     public function __construct(SlideRepository $slideRepository,
-                                ArticleRepository $articleRepository,VideoRepository $videoRepository)
+                                ArticleRepository $articleRepository,
+                                VideoRepository $videoRepository)
     {
         $this->slide=$slideRepository;
         $this->article=$articleRepository;
@@ -59,6 +60,8 @@ class SlideController extends BaseController
         $data = $this->slide->getAll();
         $type_fixed = $this->slide->getByField('type',1);
         $article_data = $this->article->getTop();
+        $video = $this->video->getByFields()->pic;
+        $video = asset('storage/aetherupload/'.$video);
         $data = [
             'status' => 200,
             'code'   => true,
@@ -66,6 +69,7 @@ class SlideController extends BaseController
             'data'   => $data,
             'articles' =>$article_data->toArray(),
             'type_fixed' =>$type_fixed,
+            'video' =>$video,
         ];
         if($data){
             return $data;
