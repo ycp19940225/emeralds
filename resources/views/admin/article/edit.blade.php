@@ -182,8 +182,6 @@
             $('#result').append(
                 '<p>原文件名：<span >'+this.fileName+'</span> | 原文件大小：<span >'+parseFloat(this.fileSize / (1000 * 1000)).toFixed(2) + 'MB'+'</span> | 储存文件名：<span >'+this.savedPath.substr(this.savedPath.lastIndexOf('/') + 1)+'</span></p>'
             );
-            var html = '';
-            var url = this.savedPath.substr(this.savedPath.lastIndexOf('/') + 1);
             html = '<input type="hidden" name="file" value="'+url+'" />';
             $("form").append(html);
         }

@@ -66,6 +66,7 @@ class ArticleController extends controller
        }
         $pic = $uploadServicesImpl->uploadImg('slide',$request->file('pic'));
         $data['pic'] = $pic;
+        $data['file'] = str_replace('\\','/',$data['file']);;
         if($this->article->save($data)){
             return redirect('admin/article/index')->with('info','文章添加成功！');
         }
