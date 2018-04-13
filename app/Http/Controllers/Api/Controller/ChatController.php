@@ -15,7 +15,11 @@ use App\Repository\Eloquent\Admin\ChatRepository;
 use App\Repository\Eloquent\Admin\UserRepository;
 use DB;
 use Dingo\Api\Http\Request;
-
+/**
+ * 客服
+ *
+ * @Resource("Group 客服")
+ */
 class ChatController extends BaseController
 {
     protected $user;
@@ -27,9 +31,32 @@ class ChatController extends BaseController
         $this->chat=$chatRepository;
     }
 
+    /**
+     * 获取客服列表
+     *
+     *
+     * @Get("http://temp.cqquality.com/api/chat/admin?token={token}")
+     * @Parameters({
+     *     @Parameter("token", type="varchar", required=true, description="密钥")
+     * })
+     *@Transaction({
+     *      @Response(200, body={
+    "status": "true",
+    "code": "200",
+    "msg": "获取成功！",
+    "data": ""
+    }),
+     *      @Response(500, body={"error": {
+    "status": "false",
+    "code": 500,
+    "msg": "获取失败！",
+    "data": ""
+     *     }})
+     * })
+     */
     public function getAdmin()
     {
-        $data = $this->user->getByField('type',1);
+        $data = $this->user->getByFields('type',1);
         if($data){
             return API_MSG($data,'获取成功！');
         }

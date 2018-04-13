@@ -57,4 +57,8 @@ class UserRepository
     {
         return $this->userModel->where($field,$val)->where('deleted_at',0)->first();
     }
+    public function getByFields($field, $val)
+    {
+        return $this->userModel->where($field,$val)->where('deleted_at',0)->get();
+    }
 }

@@ -38,7 +38,7 @@ class CollectRepository
         foreach ($data as $k=>$v){
             if($v->articles !== null){
                 $res['articles'][] = $v->articles;
-            }else{
+            }elseif($v->goods !== null){
                 $res['goods'][] = $v->goods;
             }
         }
