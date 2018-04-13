@@ -36,7 +36,9 @@ class HistoryRepository
             ->with('goods')
             ->get();
         foreach ($data as $k=>$v){
+            if($v->goods !== null){
                 $res['goods'][$k] = $v->goods;
+            }
         }
             return $res['goods'];
     }
