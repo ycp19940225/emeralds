@@ -29,7 +29,7 @@ class HistoryRepository
 
     public function getAll($id,$type)
     {
-        $data =$this->collectModel
+        $data =$this->historyModel
             ->where('deleted_at',0)
             ->where('user_id',$id)
             ->with('articles')
