@@ -53,8 +53,7 @@ class HistoryController extends BaseController
     public function all(Request $request)
     {
         $user_id = $this->auth()->user()->id;
-        $type = $request->input('type',1);
-        $data = $this->history->getAll($user_id,$type);
+        $data = $this->history->getAll($user_id);
         if($data){
             return API_MSG($data,'获取成功！');
         }

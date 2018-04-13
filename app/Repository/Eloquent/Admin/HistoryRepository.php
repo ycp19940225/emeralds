@@ -27,8 +27,9 @@ class HistoryRepository
         $this->historyModel = $history;
     }
 
-    public function getAll($id,$type)
+    public function getAll($id)
     {
+        $res=[];
         $data =$this->historyModel
             ->where('deleted_at',0)
             ->where('user_id',$id)
@@ -41,11 +42,8 @@ class HistoryRepository
                 $res['goods'][$k] = $v->goods;
             }
         }
-        if($type == 1){
-            return $res['articles'];
-        }else if($type == 2){
+
             return $res['goods'];
-        }
     }
 
     public function getOne($id)
