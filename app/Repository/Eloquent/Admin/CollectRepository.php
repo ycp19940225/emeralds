@@ -37,9 +37,9 @@ class CollectRepository
             ->get();
         foreach ($data as $k=>$v){
             if($v->articles !== null){
-                $res['articles'][$k] = $v->articles;
+                $res['articles'][] = $v->articles;
             }else{
-                $res['goods'][$k] = $v->goods;
+                $res['goods'][] = $v->goods;
             }
         }
         if($type == 1){
