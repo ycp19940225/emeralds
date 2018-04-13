@@ -54,8 +54,8 @@ class CouponController extends BaseController
     {
         $data = $this->coupon->getAll();
         foreach ($data as $k=>$v){
-            $v['start_time'] = date('Y-m-d H:i:s',$v['start_time']);
-            $v['end_time'] = date('Y-m-d H:i:s',  $v['end_time']);
+            $v['start_time'] = date('Y-m-d ',$v['start_time']);
+            $v['end_time'] = date('Y-m-d ',  $v['end_time']);
         }
         $data = [
             'status' => 200,
