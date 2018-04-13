@@ -32,7 +32,6 @@ class HistoryRepository
         $data =$this->historyModel
             ->where('deleted_at',0)
             ->where('user_id',$id)
-            ->with('articles')
             ->with('goods')
             ->get();
         foreach ($data as $k=>$v){
