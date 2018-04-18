@@ -61,6 +61,9 @@ class SlideController extends controller
         $data = $request->input();
         $pic = $uploadServicesImpl->uploadImg('slide',$request->file('pic'));
         $data['pic'] = $pic;
+        if($data['link_goods']==1){
+            $data['url'] = '';
+        }
         if($this->slide->save($data)){
             return redirect('admin/slide/index')->with('info','添加成功！');
         }
@@ -92,6 +95,9 @@ class SlideController extends controller
         if($request->file('pic')){
             $pic = $uploadServicesImpl->uploadImg('slide',$request->file('pic'));
             $data['pic'] = $pic;
+        }
+        if($data['link_goods']==1){
+            $data['url'] = '';
         }
         if($this->slide->update($data)){
             return redirect('admin/slide/index')->with('info','修改成功！');

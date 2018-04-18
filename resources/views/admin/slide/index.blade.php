@@ -33,6 +33,7 @@
                                 <th>ID</th>
                                 <th>图片</th>
                                 <th>链接文章</th>
+                                <th>每日秒杀</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
                                 <th>操作</th>
@@ -43,7 +44,13 @@
                             <tr>
                                 <td>{{ $v['id'] }}</td>
                                 <td><img width="40px" height="40px" src="{{ loadStaticImg($v['pic']) }}" alt=""></td>
-                                <td>{{ $v['url'] }}</td>
+                                <td>{{ $v->article->title or '每日秒杀' }}</td>
+                                <td>@if($v['link_goods']==1)
+                                        是
+                                        @elseif($v['link_goods']==0)
+                                    否
+                                        @endif
+                                </td>
                                 <td>{{ $v['created_at'] }}</td>
                                 <td>{{ $v['updated_at'] }}</td>
                                 <td>

@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repository\Eloquent\Admin\ArticleRepository;
-use App\Repository\Eloquent\Admin\SlideRepository;
+use App\Repository\Eloquent\Admin\PageRepository;
 use App\Services\Common\UploadServicesImpl;
 use Illuminate\Http\Request;
 
@@ -20,7 +20,7 @@ class PageController extends controller
     protected  $page;
     protected $article;
 
-    public function __construct(SlideRepository $pageRepository,ArticleRepository $articleRepository)
+    public function __construct(PageRepository $pageRepository,ArticleRepository $articleRepository)
     {
         $this->page=$pageRepository;
         $this->article=$articleRepository;
@@ -34,7 +34,7 @@ class PageController extends controller
      */
     public function index()
     {
-        $data = $this->page->getAll();
+        $data = $this->page->getAlls();
         return view('admin.page.index',['data'=>$data,'title'=>'欢迎页列表']);
     }
 

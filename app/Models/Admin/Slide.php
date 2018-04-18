@@ -21,4 +21,12 @@ class Slide extends Model
      */
     public $fillable = array('id','pic','url','created_at','updated_at','deleted_at','type','link_goods');
 
+    /**
+     * 关联文章
+     */
+    public function article()
+    {
+        return $this->hasOne('App\Models\Admin\Article','id','url');
+    }
+
 }

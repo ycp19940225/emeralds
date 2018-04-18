@@ -19,6 +19,6 @@ class Video extends Model
      * 可以被集体赋值的表字段
      * @var array
      */
-    public $fillable = array('id','pic','created_at','updated_at','deleted_at');
+    public $fillable = array('id','pic','logo','created_at','updated_at','deleted_at');
 
 }

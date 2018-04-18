@@ -25,6 +25,26 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{ $data['id'] or '' }}">
                             <div class="form-group">
+                                <label for="pic" class="col-xs-4 control-label">封面图片</label>
+                                <div class="col-xs-4">
+                                    @if(Route::current()->getActionMethod() == 'add')
+                                        <div id="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
+                                            <img id="img" src="" alt="" style="width:100px; height: 100px;">
+                                        </div>
+                                    @else
+                                        <div id="image-preview" style="border: 1px solid #ccc; width:100px; height: 100px; background: rgb(222, 222, 222)">
+                                            <img id="img" src="{{ loadStaticImg($data['pic']) }}" alt="" style="width:100px; height: 100px;">
+                                        </div>
+                                    @endif
+                                    <p>
+                                        <a href="javascript:;" class="file">
+                                            <input type="file" id="image-file" name="logo" value="{{ $data['logo'] or '' }}">
+                                        </a>
+                                    </p>
+                                    <p id="file-info"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="name" class="col-xs-4 control-label">视频或者音频</label>
                                 <div class="col-xs-4">
                                     <div class="form-group " id="aetherupload-wrapper" ><!--组件最外部需要有一个名为aetherupload-wrapper的id，用以包装组件-->
@@ -61,6 +81,7 @@
     <script src="{{ URL::asset('js/aetherupload.js') }}"></script><!--需要引入aetherupload.js-->
     <script>
         $(document).ready(function() {
+            upload.init();
             var method = "{{ Route::current()->getActionMethod() }}";
             var url ='';
             if(method === 'edit'){

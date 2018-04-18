@@ -58,6 +58,6 @@ class SlideRepository
     }
     public function getAlls()
     {
-        return $this->slideModel->where('deleted_at',0)->get();
+        return $this->slideModel->where('deleted_at',0)->with('article')->get();
     }
 }

@@ -49,6 +49,7 @@
                                 <div class="col-xs-4">
                                     {{  buildSelect($article_data,'','url','id','title',isset($data) ? $data['url']:'') }}
                                 </div>
+                                <span style="color: red"> * 如果链接每日秒杀请不要选择*</span>
                             </div>
                             <div class="form-group">
                                 <label for="name" class="col-xs-4 control-label">类型</label>

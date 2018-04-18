@@ -9,7 +9,7 @@
 namespace App\Repository\Eloquent\Admin;
 
 
-use App\Models\Admin\Slide;
+use App\Models\Admin\Page;
 
 class PageRepository
 {
@@ -20,11 +20,11 @@ class PageRepository
 
     /**
      * UserRepository constructor.
-     * @param Slide $slide
+     * @param Page $slide
      */
-    public function __construct(Slide $slide)
+    public function __construct(Page $page)
     {
-        $this->pageModel = $slide;
+        $this->pageModel = $page;
     }
 
     public function getAll()
@@ -50,5 +50,9 @@ class PageRepository
     public function delete($id)
     {
         return $this->pageModel->where('id',$id)->update(['deleted_at'=>1]);
+    }
+    public function getAlls()
+    {
+        return $this->pageModel->where('deleted_at',0)->with('article')->get();
     }
 }
