@@ -355,8 +355,8 @@ class GoodsController extends BaseController
     /**
      * 编辑商品
      *
-     *[http://temp.cqquality.com/api/admin/goods/add,为管理员编辑路径]
-     *[http://temp.cqquality.com/api/agent/goods/add,为代理商编辑路径]
+     *[http://temp.cqquality.com/api/admin/goods/edit,为管理员编辑路径]
+     *[http://temp.cqquality.com/api/agent/goods/edit,为代理商编辑路径]
      *
      * @Post("http://temp.cqquality.com/api/admin(agent)/goods/add?token={token}")
      * @Parameters({
