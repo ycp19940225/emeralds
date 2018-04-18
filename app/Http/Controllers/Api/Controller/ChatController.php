@@ -137,7 +137,8 @@ class ChatController extends BaseController
         $sa['state']=2;
         $User->where($data)->update($sa);
         $is_myimg['id']=$request->input('shopid');
-        $result['myimg'] = DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
+        $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
+        $result['myimg'] = env('APP_URL').'/'.'uploads'.'/'.$img->logo;
         $list = $list->toArray()['data'];
         $result['count'] = count($list);
         //var_dump($Page->totalPages);
@@ -177,7 +178,8 @@ class ChatController extends BaseController
         $data['touid'] = $request->input('shopid');
         $User->where($data)->update($sa);
         $is_myimg['id']=$request->input('shopid');
-        $result['myimg'] = DB::table('emerald_user')->where($is_myimg)->where('logo')->first();
+        $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
+        $result['myimg'] = env('APP_URL').'/'.'uploads'.'/'.$img->logo;
         if(empty($list)){
             $list = $list->toArray()['data'];
         }

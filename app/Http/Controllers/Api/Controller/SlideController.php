@@ -61,6 +61,8 @@ class SlideController extends BaseController
         $type_fixed = $this->slide->getByField('type',1);
         $article_data = $this->article->getTop();
         $video = $this->video->getByFields()->pic;
+        $logo = $this->video->getByFields()->logo;
+        $videologo =env('APP_URL').'/'.'uploads'.'/'.$logo;
         $video = asset('storage/aetherupload/'.$video);
         $data = [
             'status' => 200,
@@ -70,6 +72,7 @@ class SlideController extends BaseController
             'articles' =>$article_data->toArray(),
             'type_fixed' =>$type_fixed,
             'video' =>$video,
+            'videologo' =>$videologo,
         ];
         if($data){
             return $data;
