@@ -409,11 +409,11 @@ class GoodsController extends BaseController
     public function edit(Request $request)
     {
         $data = $request->except('token');
-        if($data['pic']){
+        if(isset($data['pic'])){
             $logo = explode(',',$data['pic'])[0];
             $data['logo'] = $logo;
         }
-        if($data['types']){
+        if(isset($data['types'])){
             $type = [];
             foreach ($data['types'] as $k=>$v){
                 $type[$v['type_id']]['type_val'] = $v['type_value'];
