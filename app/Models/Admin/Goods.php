@@ -69,7 +69,7 @@ class Goods extends Base
     {
         $goods_data = $this->create($data);
         //添加属性
-        $goods_data->attr()->attach($data['type']);
+        $goods_data->attr()->attach($data['types']);
         return $goods_data;
     }
 

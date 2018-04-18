@@ -304,10 +304,10 @@ class GoodsController extends BaseController
         $logo = explode(',',$data['pic'])[0];
         $data['logo'] = $logo;
         $type = [];
-        foreach ($data['type'] as $k=>$v){
+        foreach ($data['types'] as $k=>$v){
             $type[$v['type_id']]['type_val'] = $v['type_value'];
         }
-        $data['type']=$type;
+        $data['types']=$type;
         $res = $this->goods->save($data);
         if($res){
             return API_MSG($res,'添加成功！');
