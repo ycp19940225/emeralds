@@ -83,7 +83,9 @@ class Goods extends Base
     {
         $res = $this->find($data['id'])->update($data);
         //修改属性
-        $this->find($data['id'])->attr()->sync($data['type']);
+        if(isset($data['types'])){
+            $this->find($data['id'])->attr()->sync($data['types']);
+        }
         return $res;
     }
 
