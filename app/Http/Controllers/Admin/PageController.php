@@ -34,7 +34,7 @@ class PageController extends controller
      */
     public function index()
     {
-        $data = $this->page->getAlls();
+        $data = $this->page->getAll();
         return view('admin.page.index',['data'=>$data,'title'=>'欢迎页列表']);
     }
 
@@ -61,6 +61,9 @@ class PageController extends controller
         $data = $request->input();
         $pic = $uploadServicesImpl->uploadImg('page',$request->file('pic'));
         $data['pic'] = $pic;
+        if(!$data['url']){
+            $data['url']='';
+        }
         if($this->page->save($data)){
             return redirect('admin/page/index')->with('info','添加成功！');
         }
@@ -92,6 +95,9 @@ class PageController extends controller
         if($request->file('pic')){
             $pic = $uploadServicesImpl->uploadImg('page',$request->file('pic'));
             $data['pic'] = $pic;
+        }
+        if(!$data['url']){
+            $data['url']='';
         }
         if($this->page->update($data)){
             return redirect('admin/page/index')->with('info','修改成功！');
