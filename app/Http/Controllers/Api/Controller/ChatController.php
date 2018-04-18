@@ -123,6 +123,8 @@ class ChatController extends BaseController
     }
 
     public function getdatadow(Request $request){
+        $scont =9;
+        $page = $request->input('page',1);  //获取当前页码 默认第一页
         $data['uid'] = $request->input('touid');   //当前用户id
         $data['touid'] = $request->input('shopid');  //当前客服id 或者商户id  也就是被聊天者id
 
@@ -131,7 +133,7 @@ class ChatController extends BaseController
         $request->input('lasttime')?$time=$request->input('lasttime'):$time=time();   //前段传回来的用户最后刷新时间
         $User = DB::table('emerald_chat'); // 实例化User对象
         $scont=9;
-        $list = $User->whereRaw('(uid='.$shopid.' and touid='.$touid.' and created_at <'.$time.')or(uid='.$touid.' and touid='.$shopid.' and created_at <'.$time.')')->orderBy('created_at','desc')->get();
+        $list = $User->whereRaw('(uid='.$shopid.' and touid='.$touid.' and created_at <'.$time.')or(uid='.$touid.' and touid='.$shopid.' and created_at <'.$time.')')->orderBy('created_at','desc')->paginate($scont);
         $sa['state']=2;
         $User->where($data)->update($sa);
         $is_myimg['id']=$request->input('shopid');
@@ -154,29 +156,31 @@ class ChatController extends BaseController
             $result['data'] = $res;
             $result['scont'] = $scont;
 
+            $result['page'] = $page+1;
             $result['lasttime'] = time();
 
             $result['response'] = 1;
         }else{
+            $result['page'] = $page+1;
             $result['response'] = 2;
         }
         return $result;
     }
     public function newest(Request $request){
-        $scont =9;
-        $page = $request->input('page',1);  //获取当前页码 默认第一页
         $touid= $request->input('touid');
         $shopid = $request->input('shopid');
         $request->input('lasttime')?$time=$request->input('lasttime'):$time=time();
         $User = DB::table('emerald_chat'); // 实例化User对象
-        $list = $User->whereRaw('(uid='.$shopid.' and touid='.$touid.' and created_at <'.$time.')or(uid='.$touid.' and touid='.$shopid.' and created_at <'.$time.')')->orderBy('created_at','desc')->paginate($scont);
+        $list = $User->whereRaw('(uid='.$shopid.' and touid='.$touid.' and state=1 and created_at <'.$time.')or(uid='.$touid.' and touid='.$shopid.' and created_at <'.$time.')')->orderBy('created_at','desc')->get();
         $sa['state']=2;
         $data['uid'] = $request->input('touid');
         $data['touid'] = $request->input('shopid');
         $User->where($data)->update($sa);
         $is_myimg['id']=$request->input('shopid');
         $result['myimg'] = DB::table('emerald_user')->where($is_myimg)->where('logo')->first();
-        $list = $list->toArray()['data'];
+        if(empty($list)){
+            $list = $list->toArray()['data'];
+        }
         $result['count'] = count($list);
 
         $res=[];
@@ -190,14 +194,11 @@ class ChatController extends BaseController
         $arr = array_values($res);
         if($list){
             $result['data'] = $res;
-            $result['scont'] = $scont;
 
-            $result['page'] = $page+1;
             $result['lasttime'] = time();
 
             $result['response'] = 1;
         }else{
-            $result['page'] = $page+1;
             $result['response'] = 2;
         }
         return $result;
