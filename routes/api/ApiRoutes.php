@@ -87,6 +87,7 @@ $api->version('v1', function ($api) {
             $api->post('chat/getdata', 'ChatController@getdata');
             $api->post('chat/getdatadow', 'ChatController@getdatadow');
             $api->post('chat/newest', 'ChatController@newest');
+            $api->post('chat/getchats', 'ChatController@getChat');
         });
     });
     //管理员

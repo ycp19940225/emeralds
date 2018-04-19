@@ -205,4 +205,25 @@ class ChatController extends BaseController
         }
         return $result;
     }
+
+    public function getChat(Request $request){
+        $touid= $request->input('touid');
+        $User = DB::table('emerald_chat'); // 实例化User对象
+        $list = $User->select('id','touid','content')->where('uid',$touid)->groupBy('touid')->orderBy('created_at','desc')->get();
+        $list = $list->toArray();
+       foreach ($list as $k=>$v){
+           $is_myimg['id']=$v->touid;
+           $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
+           $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
+           $list[$k]->myimg = env('APP_URL').'/'.'uploads'.'/'.$img->logo;
+           $list[$k]->name = $name->nickname ;
+       }
+        if($list){
+            $result['data'] = $list;
+        }else{
+            $result['response'] = 2;
+        }
+        return $result;
+
+    }
 }
