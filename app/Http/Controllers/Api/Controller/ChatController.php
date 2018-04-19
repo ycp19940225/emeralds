@@ -216,7 +216,7 @@ class ChatController extends BaseController
            $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
            $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
            if(isset($img->logo)){
-               $list[$k]->myimg = env('APP_URL').'/'.'uploads'.'/'.$img->logo;
+               $list[$k]->myimg = $img->logo;
            }else{
                $list[$k]->myimg = "";
            }
