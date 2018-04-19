@@ -194,16 +194,18 @@ class ChatController extends BaseController
 
         $lists=array_reverse($res,true);
         $arr = array_values($res);
-        if($list){
+
+        if(count($list)!=0){
             $result['data'] = $res;
 
             $result['lasttime'] = time();
 
             $result['response'] = 1;
+            return $result;
         }else{
             $result['response'] = 2;
+            return $result;
         }
-        return $result;
     }
 
     public function getChat(Request $request){
