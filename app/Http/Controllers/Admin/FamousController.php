@@ -78,8 +78,9 @@ class FamousController extends controller
     public function edit($id)
     {
         $data = $this->famous->getOne($id);
-        $goods_data = $this->goods->getAll();
-        return view('admin.famous.edit',['data'=>$data,'title'=>'添加名家','goods_data'=>$goods_data]);
+        $goods_data = $this->goods->getLinks();
+        $goods_select = $this->goods->getSelects($id);
+        return view('admin.famous.edit',['data'=>$data,'title'=>'添加名家','goods_data'=>$goods_data,'goods_select'=>$goods_select]);
     }
 
     /**

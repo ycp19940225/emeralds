@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <label for="name" class="col-xs-4 control-label">关联名家商品</label>
                                 <div class="col-xs-3">
-                                    {{  buildSelectMore($goods_data,'','goods_id[]','id','goods_name',isset($data) ? $data->goods->toArray():[]) }}
+                                    {{  buildSelectMore($goods_data,'','goods_id[]','id','goods_name',isset($goods_select) ? $goods_select->toArray():[]) }}
                                 </div>
                             </div>
                             <div class="form-group">

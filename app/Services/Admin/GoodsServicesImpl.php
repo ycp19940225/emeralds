@@ -90,4 +90,12 @@ class GoodsServicesImpl implements GoodsServices
             ->where('type',3)
             ->get();
     }
+
+    public function getSelects($id)
+    {
+        return $this->goodsDao->where('status',1)
+            ->where('deleted_at',0)
+            ->where('famous_id',$id)
+            ->get();
+    }
 }
