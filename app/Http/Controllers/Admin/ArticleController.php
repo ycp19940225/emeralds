@@ -107,8 +107,9 @@ class ArticleController extends controller
         }
         if($data['file'] == ''){
             unset($data['file']);
+        }else{
+            $data['file'] = str_replace('\\','/',$data['file']);;
         }
-        $data['file'] = str_replace('\\','/',$data['file']);;
         if($this->article->update($data)){
             return redirect('admin/article/index')->with('info','修改成功！');
         }
