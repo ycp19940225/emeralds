@@ -11,15 +11,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repository\Eloquent\Admin\FamousRepository;
+use App\Services\Admin\GoodsServicesImpl;
 use App\Services\Common\UploadServicesImpl;
 use Illuminate\Http\Request;
 
 class FamousController extends controller
 {
     protected $famous;
-    public function __construct(FamousRepository $famousRepository)
+    protected $goods;
+    public function __construct(FamousRepository $famousRepository,GoodsServicesImpl $goodsServicesImpl)
     {
         $this->famous=$famousRepository;
+        $this->goods=$goodsServicesImpl;
     }
 
     /**
@@ -42,7 +45,8 @@ class FamousController extends controller
      */
     public function add()
     {
-        return view('admin.famous.edit',['title'=>'添加名家']);
+        $goods_data = $this->goods->getAlls();
+        return view('admin.famous.edit',['title'=>'添加名家','goods_data'=>$goods_data]);
     }
 
     /**
@@ -74,7 +78,8 @@ class FamousController extends controller
     public function edit($id)
     {
         $data = $this->famous->getOne($id);
-        return view('admin.famous.edit',['data'=>$data,'title'=>'添加名家']);
+        $goods_data = $this->goods->getAll();
+        return view('admin.famous.edit',['data'=>$data,'title'=>'添加名家','goods_data'=>$goods_data]);
     }
 
     /**

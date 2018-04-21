@@ -20,7 +20,7 @@ $api->version('v1', function ($api) {
             //根据分类名获取商品
             $api->post('goods/search/cat', 'SearchController@getGoodsByCatName');
             $api->get('goods/search/cat', 'SearchController@getGoodsByCatID');
-            $api->post('goods/search/type', 'SearchController@getGoodsByCat');
+            $api->get('goods/search/type', 'SearchController@getGoodsByCat');
             //分类
             $api->get('cats', 'CatController@all');
             //文章
@@ -33,6 +33,7 @@ $api->version('v1', function ($api) {
             //视频
             $api->get('video', 'SlideController@video');
             $api->get('links', 'SearchController@getGoodsByLinks');
+            $api->get('type', 'SearchController@getGoodsByLinks');
             //欢迎页
             $api->get('pages', 'PageController@all');
             //名家

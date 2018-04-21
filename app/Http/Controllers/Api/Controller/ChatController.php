@@ -184,7 +184,6 @@ class ChatController extends BaseController
             $list = $list->toArray()['data'];
         }
         $result['count'] = count($list);
-
         $res=[];
         foreach($list as $k=>$v){
             $res[$k]= $v;
