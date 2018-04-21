@@ -51,7 +51,7 @@ class FamousRepository
     {
         $insert_data = $this->famousModel->find($data['id'])->update($data);
         foreach ($data['goods_id'] as $k=>$v) {
-           DB::table("emerald_goods")->where('id', $data['goods_id'])->update(['famous_id' => $data['id']]);
+           DB::table("emerald_goods")->where('id', $v)->update(['famous_id' => $data['id']]);
         }
         return $insert_data;
     }
