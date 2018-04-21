@@ -45,7 +45,7 @@ class FamousController extends controller
      */
     public function add()
     {
-        $goods_data = $this->goods->getAlls();
+        $goods_data = $this->goods->getLinks();
         return view('admin.famous.edit',['title'=>'添加名家','goods_data'=>$goods_data]);
     }
 

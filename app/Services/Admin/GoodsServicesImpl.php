@@ -82,4 +82,12 @@ class GoodsServicesImpl implements GoodsServices
             ->with('attr')
             ->get();
     }
+
+    public function getLinks()
+    {
+        return $this->goodsDao->where('status',1)
+            ->where('deleted_at',0)
+            ->where('type',3)
+            ->get();
+    }
 }

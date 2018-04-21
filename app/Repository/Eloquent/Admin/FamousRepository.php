@@ -10,6 +10,7 @@ namespace App\Repository\Eloquent\Admin;
 
 
 use App\Models\Admin\Famous;
+use DB;
 
 class FamousRepository
 {
@@ -39,12 +40,20 @@ class FamousRepository
 
     public function save($data)
     {
-        return $this->famousModel->create($data);
+        $insert_data = $this->famousModel->create($data);
+        foreach ($data['goods_id'] as $k=>$v){
+           DB::table("emerald_goods")->where('id',$v)->update(['famous_id'=>$insert_data['id']]);
+        }
+        return $insert_data;
     }
 
     public function update($data)
     {
-        return $this->famousModel->find($data['id'])->update($data);
+        $insert_data = $this->famousModel->find($data['id'])->update($data);
+        foreach ($data['goods_id'] as $k=>$v) {
+           DB::table("emerald_goods")->where('id', $data['goods_id'])->update(['famous_id' => $data['id']]);
+        }
+        return $insert_data;
     }
 
     public function delete($id)
