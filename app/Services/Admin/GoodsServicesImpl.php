@@ -77,9 +77,8 @@ class GoodsServicesImpl implements GoodsServices
 
     public function getAlls()
     {
-        return $this->goodsDao->where('status',1)
+        return $this->goodsDao
             ->where('deleted_at',0)
-            ->where('checked',1)
             ->with('attr')
             ->get();
     }
@@ -88,7 +87,6 @@ class GoodsServicesImpl implements GoodsServices
     {
         return $this->goodsDao->where('status',1)
             ->where('deleted_at',0)
-            ->where('checked',1)
             ->where('type',3)
             ->get();
     }
@@ -98,7 +96,6 @@ class GoodsServicesImpl implements GoodsServices
         return $this->goodsDao->where('status',1)
             ->where('deleted_at',0)
             ->where('famous_id',$id)
-            ->where('checked',1)
             ->get();
     }
 }

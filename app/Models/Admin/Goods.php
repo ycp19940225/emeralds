@@ -93,6 +93,7 @@ class Goods extends Base
     {
         return $this->where('deleted_at',0)
             ->where('status',1)
+            ->where('checked',1)
             ->with('attr')
             ->orderBy('updated_at','desc')
             ->simplePaginate(10);
