@@ -26,6 +26,7 @@
                         <table id="data-table" class="table table-striped table-bordered table-hover">
                             <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>编号</th>
                                 <th>姓名</th>
                                 <th>手机号</th>
@@ -43,6 +44,7 @@
                             <tbody>
                             @foreach($data as $k=>$v)
                             <tr>
+                                <td>{{ $v['id'] }}</td>
                                 <td>{{ $v['agent_code'] }}</td>
                                 <td>{{ $v['agent_name'] }}</td>
                                 <td>{{ $v['telphone'] }}</td>

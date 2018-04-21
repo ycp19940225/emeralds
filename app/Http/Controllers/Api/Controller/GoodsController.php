@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Api\Controller;
 
 use App\Http\Controllers\Api\BaseController;
+use App\Services\Admin\AgentServicesImpl;
 use App\Services\Common\UploadServicesImpl;
 use App\Services\Ifs\Admin\GoodsServices;
 use Dingo\Api\Http\Request;
@@ -21,10 +22,12 @@ use Dingo\Api\Http\Request;
 class GoodsController extends BaseController
 {
     protected $goods;
+    protected $agent;
 
-    public function __construct(GoodsServices $goodsServices)
+    public function __construct(GoodsServices $goodsServices,AgentServicesImpl $agentServicesImpl)
     {
         $this->goods=$goodsServices;
+        $this->agent=$agentServicesImpl;
     }
 
     /**
@@ -299,8 +302,9 @@ class GoodsController extends BaseController
         }else{
             $data['input_type'] = 1 ;
         }
-        $data['goods_code'] = generate_code('LYFC');
         $data['input_id'] = $this->auth()->user()->id;
+        $res = $this->agent->getByField('user_id', $data['input_id']);
+        $data['goods_code'] = 'LYFC'.'_'.$res->id.'_'.time();
         $logo = explode(',',$data['pic'])[0];
         $data['logo'] = $logo;
         $type = [];
