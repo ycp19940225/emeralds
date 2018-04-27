@@ -59,7 +59,6 @@ class UserController extends Controller
         $data['password'] = bcrypt($data['password']);
         $data['logo'] = json_decode($pic)->url;
         if($this->user->save($data)){
-            dd(1);
             return redirect('admin/users/index')->with('info','添加成功！');
         }
         return back()->withInput()->with('error','添加失败！');

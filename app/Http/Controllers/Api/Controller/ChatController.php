@@ -202,8 +202,8 @@ class ChatController extends BaseController
             $result['response'] = 1;
             return $result;
         }else{
-            $res['response'] = 2;
             $res['lasttime'] = time();
+            $res['response'] = 2;
             return $res;
         }
     }
