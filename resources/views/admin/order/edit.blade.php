@@ -60,6 +60,12 @@
                                     {{  buildSelectMore($goods_data,'','goods_id[]','id','goods_name',isset($data) ? $data->goods->toArray():[]) }}
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="name" class="col-xs-4 control-label">备注</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="commit" name="commit" value="{{ $data['commit'] or ''}}" placeholder="" required>
+                                </div>
+                            </div>
                             <div class="col-md-offset-5" >
                                 <button type="submit" class="btn btn-success m-2" id="submit" name="repass">保存</button>
                                 <button type="reset" class="btn btn-success m-2" id="reset" name="repass">重置</button>

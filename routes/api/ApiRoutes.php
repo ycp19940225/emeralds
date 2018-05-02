@@ -40,6 +40,8 @@ $api->version('v1', function ($api) {
             $api->get('famous', 'FamousController@all');
             $api->get('famous/{id}', 'FamousController@famous')->where('id', '[0-9]+');
             $api->post('famous/release', 'FamousController@addGoodsFamous');
+            //短信验证码
+            $api->get('users/sendSms', 'UserController@sendSms');
         });
 
     });

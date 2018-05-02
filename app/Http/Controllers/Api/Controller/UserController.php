@@ -13,6 +13,7 @@ use App\Repository\Eloquent\Admin\UserRepository;
 use App\Services\Common\UploadServicesImpl;
 use App\Services\Ifs\Admin\AgentServices;
 use App\Services\Ifs\Admin\GoodsServices;
+use DB;
 use Dingo\Api\Http\Request;
 use JWTAuth;
 use Validator;
@@ -80,6 +81,13 @@ class UserController extends BaseController
         ]);
         if ($validator->fails()) {
             return API_MSG('','手机号已被注册！','false',500);
+        }
+        //验证码
+        $code = $request->input('code');
+        $tel = $request->input('telphone');
+        $sms_code  = DB::table('emerald_sms')->where('telphone',$tel)->first();
+        if($sms_code->code != $code){
+            return API_MSG('','验证码错误！','false',500);
         }
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
@@ -546,4 +554,51 @@ class UserController extends BaseController
             return API_MSG('','获取失败！','false',500);
         }
     }
+
+
+    /**
+     * 手机验证码
+     *
+     *
+     * @Get("http://temp.cqquality.com/api/users/sendSms?telphone=18983663382")
+     * @Parameters({
+     * })
+     *@Transaction({
+     *      @Request({
+
+    }),
+     *      @Response(200, body={
+    "status": "true",
+    "code": 200,
+    "msg": "短信验证码发送成功！",
+    "data":{
+    "status": "true",
+    "code": 200,
+    "msg": "短信验证码发送成功！",
+    "data": true
+    }
+     *     }),
+     *      @Response(500, body={"error": {
+    "status": "false",
+    "code": 500,
+    "msg": "短信验证码发送失败！",
+    "data": ""
+     *     }})
+     * })
+     */
+    public function sendSms(Request $request)
+    {
+        $tel = $request->input('telphone');
+        $res = sendSms($tel,'您的短信验证码为：');
+        $data = DB::table('emerald_sms')->insert([
+            'telphone'=>$tel,
+            'code'=>$res
+        ]);
+        if ($res && $data){
+            return API_MSG($data,'短信验证码发送成功！','true',200);
+        } else {
+            return API_MSG('','短信验证码发送失败！','false',500);
+        }
+    }
+
 }

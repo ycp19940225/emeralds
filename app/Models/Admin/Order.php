@@ -21,7 +21,7 @@ class Order extends Base
      * @var array
      */
     public $fillable = array('id','express_name','express_code','agent_id',
-        'admin_id','status','user_id','updated_at','created_at','deleted_at');
+        'admin_id','status','user_id','updated_at','created_at','deleted_at','commit');
 
     public function admin()
     {

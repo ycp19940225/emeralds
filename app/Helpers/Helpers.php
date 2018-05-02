@@ -360,3 +360,52 @@ if ( ! function_exists('check_order_status')){
         }
     }
 }
+
+/**
+ * 短信发送（凌凯）
+ */
+if ( ! function_exists('sendSms')){
+    function sendSms($telphone,$message){
+        //短信接口用户名 $uid
+        $uid = 'CQLKY01271';
+        //短信接口密码 $passwd
+        $passwd = 'ky@123';
+
+
+        $msg = rawurlencode(mb_convert_encoding($message, "gb2312", "utf-8"));
+
+        $gateway = "http://yzm.mb345.com/ws/BatchSend2.aspx?CorpID={$uid}&Pwd={$passwd}&Mobile={$telphone}&Content={$msg}&Cell=&SendTime=";
+
+        $result = curl($gateway);
+        return $result;
+    }
+}
+
+/**
+ * 短信发送（凌凯）
+ */
+if ( ! function_exists('curl')){
+    function curl($url,$data=[],$method='GET'){
+        $ch = curl_init();   //1.初始化
+        curl_setopt($ch, CURLOPT_URL, $url); //2.请求地址
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);//3.请求方式
+        //4.参数如下
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);//https
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 5.01; Windows NT 5.0)');//模拟浏览器
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER,array('Accept-Encoding: gzip, deflate'));//gzip解压内容
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip,deflate');
+        if($method=="POST"){//5.post方式的时候添加数据
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        }
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $tmpInfo = curl_exec($ch);//6.执行
+        if (curl_errno($ch)) {//7.如果出错
+            return curl_error($ch);
+        }
+        curl_close($ch);//8.关闭
+        return $tmpInfo;
+    }
+}

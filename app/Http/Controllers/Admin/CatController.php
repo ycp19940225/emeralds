@@ -11,8 +11,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repository\Eloquent\Admin\TypeRepository;
-use App\Services\Common\UploadServicesImpl;
-use App\Services\Ifs\Admin\AttrServices;
 use App\Services\Ifs\Admin\CatServices;
 use Illuminate\Http\Request;
 

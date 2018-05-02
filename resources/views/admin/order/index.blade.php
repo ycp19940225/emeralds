@@ -37,6 +37,7 @@
                                 <th>操作管理员</th>
                                 <th>用户</th>
                                 <th>状态</th>
+                                <th>备注</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
                                 <th>操作</th>
@@ -52,6 +53,7 @@
                                     <td>{{ $v->admin['adminname'] }}</td>
                                     <td>{{ $v->user['telphone'] }}</td>
                                     <td>{{ check_order_status($v['status']) }}</td>
+                                    <td>{{ $v['commit'] }}</td>
                                     <td>{{ $v['created_at'] }}</td>
                                     <td>{{ $v['updated_at'] }}</td>
                                     <td>
