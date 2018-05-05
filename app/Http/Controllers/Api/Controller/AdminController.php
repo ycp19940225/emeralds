@@ -62,14 +62,18 @@ class AdminController extends BaseController
      */
     public function login(Request $request)
     {
-        $input = $request->only('adminname','password');
+        if($request->only('adminname','password')){
+            $input = $request->only('adminname','password');
+        }else{
+            return API_MSG('','请输入登录名和密码！','false',500);
+        }
         $token = JWTAuth::attempt($input);
         $data['token'] = $token;
         $data['id'] = $this->admin->getByField('adminname',$input['adminname'])->id;
         if ($token){
             return API_MSG($data,'登录成功！','true',200);
         } else {
-            return API_MSG('','登录失败！','false',500);
+            return API_MSG('','用户名或密码错误！','false',500);
         }
     }
 

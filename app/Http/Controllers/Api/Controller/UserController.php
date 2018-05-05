@@ -50,26 +50,26 @@ class UserController extends BaseController
      * })
      *@Transaction({
      *      @Request({
-                "telphone":"18983663382",
-                "password":"1994okyang"
-                }),
+    "telphone":"18983663382",
+    "password":"1994okyang"
+    }),
      *      @Response(200, body={
-                        "status": "true",
-                        "code": 200,
-                        "msg": "注册成功！",
-                        "data": {
-                        "telphone": "18983663382",
-                        "password": "447910ff7241c373129b8761cc312c78",
-                        "updated_at": "1513758784",
-                        "created_at": "1513758784",
-                        "id": 7
-                        }
-                }),
+    "status": "true",
+    "code": 200,
+    "msg": "注册成功！",
+    "data": {
+    "telphone": "18983663382",
+    "password": "447910ff7241c373129b8761cc312c78",
+    "updated_at": "1513758784",
+    "created_at": "1513758784",
+    "id": 7
+    }
+    }),
      *      @Response(500, body={"error": {
-                    "status": "false",
-                    "code": 500,
-                    "msg": "手机号已被注册！",
-                    "data": ""
+    "status": "false",
+    "code": 500,
+    "msg": "手机号已被注册！",
+    "data": ""
      *     }})
      * })
      */
@@ -215,34 +215,34 @@ class UserController extends BaseController
         return API_MSG($user_data,'获取用户信息成功！','true',200);
     }
 
-     /**
+    /**
      * 刷新密钥
      *
      *
      * @get("http://temp.cqquality.com/api/users/refreshToken?token={token}")
      * @Parameters({
-      *      @Parameter("data", type="varchar",description="tokne:密钥,ttl：秘钥过期时间，refresh_ttl：本次token可用于获取新的token的时间，过期需重新登录，单位为秒")
-      * })
+     *      @Parameter("data", type="varchar",description="tokne:密钥,ttl：秘钥过期时间，refresh_ttl：本次token可用于获取新的token的时间，过期需重新登录，单位为秒")
+     * })
      *@Transaction({
      *      @Request({
 
     }),
      * })
-      *  @Response(200, body={
-     "status": "true",
-     "code": 200,
-     "msg": "刷新成功！",
-     "data": {
-     "ttl": 43200,
-     "refresh_ttl": 20160,
-     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmVtZXJhbGQuY29tL2FwaS91c2Vycy9yZWZyZXNoVG9rZW4iLCJpYXQiOjE1MTQ0NTYzMzgsImV4cCI6MTUxNzA0ODUwNSwibmJmIjoxNTE0NDU2NTA1LCJqdGkiOiJ6eEtpdE5PYWhFQ2Y1aDQzIiwic3ViIjoxOSwicHJ2IjoiNzIzNDlhZmZkYTA0NGRjMmFkNzBhMzllZjE1MTYzZWE2N2E3MzMxMyJ9.s4Pei4VFF5tjnTyZh5SIjgAKJJMwv-HBc99LuPsVUBg"
-     }
-     }),
-      *@Response(401, body={
-     "message": "The token has been blacklisted",
-     "status_code": 401
-     }),
-      *
+     *  @Response(200, body={
+    "status": "true",
+    "code": 200,
+    "msg": "刷新成功！",
+    "data": {
+    "ttl": 43200,
+    "refresh_ttl": 20160,
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmVtZXJhbGQuY29tL2FwaS91c2Vycy9yZWZyZXNoVG9rZW4iLCJpYXQiOjE1MTQ0NTYzMzgsImV4cCI6MTUxNzA0ODUwNSwibmJmIjoxNTE0NDU2NTA1LCJqdGkiOiJ6eEtpdE5PYWhFQ2Y1aDQzIiwic3ViIjoxOSwicHJ2IjoiNzIzNDlhZmZkYTA0NGRjMmFkNzBhMzllZjE1MTYzZWE2N2E3MzMxMyJ9.s4Pei4VFF5tjnTyZh5SIjgAKJJMwv-HBc99LuPsVUBg"
+    }
+    }),
+     *@Response(401, body={
+    "message": "The token has been blacklisted",
+    "status_code": 401
+    }),
+     *
      */
     public function refreshToken()
     {
@@ -269,8 +269,8 @@ class UserController extends BaseController
      *@Transaction({
      *      @Request({
      *     	"nickname":"杨春坪",
-      "email":"820363773@qq.com"
-      }),
+    "email":"820363773@qq.com"
+    }),
      *      @Response(200, body={
      * "status": "true",
      *"code": 200,
@@ -453,17 +453,17 @@ class UserController extends BaseController
      */
     public function user_to_agent(Request $request)
     {
-       $data = $request->all();
-       $data['user_id'] = $this->auth()->user()->id;
-       $agent_id = $this->agent->getByField('user_id',$data['user_id']);
-       if($agent_id){
-           $data['id']=$agent_id->id;
-           $res = $this->agent->update($data);
-       }else{
-           $data['agent_code'] = generate_code('LYFC');
-           $res = $this->agent->save($data);
-           $user_data['id']=$this->auth()->user()->id;
-       }
+        $data = $request->all();
+        $data['user_id'] = $this->auth()->user()->id;
+        $agent_id = $this->agent->getByField('user_id',$data['user_id']);
+        if($agent_id){
+            $data['id']=$agent_id->id;
+            $res = $this->agent->update($data);
+        }else{
+            $data['agent_code'] = generate_code('LYFC');
+            $res = $this->agent->save($data);
+            $user_data['id']=$this->auth()->user()->id;
+        }
         if ($res){
             return API_MSG($res,'保存成功！','true',200);
         } else {
@@ -499,13 +499,13 @@ class UserController extends BaseController
      */
     public function getAgent()
     {
-       $user_id = $this->auth()->user()->id;
+        $user_id = $this->auth()->user()->id;
         $res = $this->agent->getByField('user_id',$user_id);
-       if($res){
-           return API_MSG($res,'信息获取成功！','true',200);
-       }else{
-           return API_MSG('','未申请成为代理商！','false',500);
-       }
+        if($res){
+            return API_MSG($res,'信息获取成功！','true',200);
+        }else{
+            return API_MSG('','未申请成为代理商！','false',500);
+        }
     }
 
     /**
@@ -589,10 +589,11 @@ class UserController extends BaseController
     public function sendSms(Request $request)
     {
         $tel = $request->input('telphone');
-        $res = sendSms($tel,'您的短信验证码为：');
+        $code = rand(1000,9999);
+        $res = sendSms($tel,'本次申请的验证码为：'.$code);
         $data = DB::table('emerald_sms')->insert([
             'telphone'=>$tel,
-            'code'=>$res
+            'code'=>$code
         ]);
         if ($res && $data){
             return API_MSG($data,'短信验证码发送成功！','true',200);
