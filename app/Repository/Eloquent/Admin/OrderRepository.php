@@ -29,7 +29,7 @@ class OrderRepository
 
     public function getAll()
     {
-        return $this->orderModel->where('deleted_at',0)->with('goods')->with('agent')->with('user')->with('admin')->get();
+        return $this->orderModel->where('deleted_at',0)->orderBy('id','desc')->with('goods')->with('agent')->with('user')->with('admin')->get();
     }
 
     public function getOne($id)
@@ -73,10 +73,10 @@ class OrderRepository
 
     public function getByFields($field, $val,$status=0)
     {
-        return $this->orderModel->where($field,$val)->where('status',$status)->where('deleted_at',0)->with('goods')->get();
+        return $this->orderModel->where($field,$val)->where('status',$status)->where('deleted_at',0)->with('goods')->orderBy('id','desc')->get();
     }
     public function getByField($field, $val)
     {
-        return $this->orderModel->where($field,$val)->where('deleted_at',0)->with('goods')->get();
+        return $this->orderModel->where($field,$val)->where('deleted_at',0)->with('goods')->orderBy('id','desc')->get();
     }
 }

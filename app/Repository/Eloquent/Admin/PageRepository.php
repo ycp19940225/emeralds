@@ -29,7 +29,7 @@ class PageRepository
 
     public function getAll()
     {
-        return $this->pageModel->where('deleted_at',0)->get();
+        return $this->pageModel->where('deleted_at',0)->orderBy('id','desc')->get();
     }
 
     public function getOne($id)
@@ -53,6 +53,6 @@ class PageRepository
     }
     public function getAlls()
     {
-        return $this->pageModel->where('deleted_at',0)->with('article')->get();
+        return $this->pageModel->where('deleted_at',0)->with('article')->orderBy('id','desc')->get();
     }
 }

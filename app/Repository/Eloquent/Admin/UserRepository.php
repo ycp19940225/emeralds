@@ -30,7 +30,7 @@ class UserRepository
 
     public function getAll()
     {
-        return $this->userModel->where('deleted_at',0)->get();
+        return $this->userModel->where('deleted_at',0)->orderBy('id','desc')->get();
     }
 
     public function getOne($id)
@@ -59,6 +59,6 @@ class UserRepository
     }
     public function getByFields($field, $val)
     {
-        return $this->userModel->where($field,$val)->where('deleted_at',0)->get();
+        return $this->userModel->where($field,$val)->where('deleted_at',0)->orderBy('id','desc')->get();
     }
 }

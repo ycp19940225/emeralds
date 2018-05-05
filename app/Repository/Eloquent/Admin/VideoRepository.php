@@ -54,6 +54,6 @@ class VideoRepository
 
     public function getByFields()
     {
-        return $this->videoModel->where('deleted_at',0)->first();
+        return $this->videoModel->where('deleted_at',0)->orderBy('id','desc')->first();
     }
 }

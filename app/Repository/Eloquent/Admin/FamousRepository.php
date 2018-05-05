@@ -30,7 +30,7 @@ class FamousRepository
 
     public function getAll()
     {
-        return $this->famousModel->select('id','logo','name')->where('deleted_at',0)->get();
+        return $this->famousModel->select('id','logo','name')->where('deleted_at',0)->orderBy('id','desc')->get();
     }
 
     public function getOne($id)
@@ -63,6 +63,6 @@ class FamousRepository
 
     public function getAlls()
     {
-        return $this->famousModel->where('deleted_at',0)->get();
+        return $this->famousModel->where('deleted_at',0)->orderBy('id','desc')->get();
     }
 }

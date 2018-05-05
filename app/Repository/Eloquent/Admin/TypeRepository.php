@@ -29,7 +29,7 @@ class TypeRepository
 
     public function getAll()
     {
-        return $this->typeModel->where('deleted_at',0)->get();
+        return $this->typeModel->where('deleted_at',0)->orderBy('id','desc')->get();
     }
 
     public function getOne($id)

@@ -34,6 +34,7 @@ class CollectRepository
             ->where('user_id',$id)
             ->with('articles')
             ->with('goods')
+            ->orderBy('id','desc')
             ->get();
         foreach ($data as $k=>$v){
             if($v->articles !== null){
