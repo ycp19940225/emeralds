@@ -595,7 +595,7 @@ class UserController extends BaseController
             'telphone'=>$tel
         ])->get();
         if($unique ){
-            DB::table('emerald_sms')->where([
+            $data = DB::table('emerald_sms')->where([
                 'telphone'=>$tel
             ])->update(['code'=>$code]);
         }else{
