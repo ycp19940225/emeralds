@@ -52,7 +52,7 @@ class Cat extends Base
 
     public function getAll()
     {
-        return $this->where('deleted_at',0)->orderBy('sort')->get();
+        return $this->where('deleted_at',0)->orderBy('sort','desc')->get();
     }
 
     public function find($id)
