@@ -591,10 +591,19 @@ class UserController extends BaseController
         $tel = $request->input('telphone');
         $code = rand(1000,9999);
         $res = sendSms($tel,'本次申请的验证码为：'.$code);
-        $data = DB::table('emerald_sms')->insert([
-            'telphone'=>$tel,
-            'code'=>$code
-        ]);
+        $unique = DB::table('emerald_sms')->where([
+            'telphone'=>$tel
+        ])->get();
+        if($unique ){
+            DB::table('emerald_sms')->where([
+                'telphone'=>$tel
+            ])->update(['code'=>$code]);
+        }else{
+            $data = DB::table('emerald_sms')->insert([
+                'telphone'=>$tel,
+                'code'=>$code
+            ]);
+        }
         if ($res && $data){
             return API_MSG($data,'短信验证码发送成功！','true',200);
         } else {
