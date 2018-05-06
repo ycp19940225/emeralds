@@ -214,23 +214,7 @@ class ChatController extends BaseController
         $User = DB::table('emerald_chat'); // 实例化User对象
         $list = $User->select('id','touid','uid','content','state')->where('uid',$touid)->groupBy('touid')->orderBy('created_at','desc')->get();
         $list = $list->toArray();
-        dd($list,empty($list));
         if(!empty($list)){
-            $list2 = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
-            foreach ($list2 as $k=>$v){
-                $is_myimg['id']=$v->uid;
-                $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
-                $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
-                if(isset($img->logo)){
-                    $list2[$k]->myimg = $img->logo;
-
-                }else{
-                    $list2[$k]->myimg = "";
-                }
-                $list2[$k]->name = isset($name->nickname) ? $name->nickname:"";
-            }
-        }
-        if(empty($list)){
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->touid;
                 $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
@@ -242,11 +226,23 @@ class ChatController extends BaseController
                 }
                 $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
             }
+        }elseif(empty($list)){
+            $list = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
+            foreach ($list as $k=>$v){
+                $is_myimg['id']=$v->uid;
+                $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
+                $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
+                if(isset($img->logo)){
+                    $list[$k]->myimg = $img->logo;
+
+                }else{
+                    $list[$k]->myimg = "";
+                }
+                $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
+            }
         }
         if($list){
             return $list;
-        }elseif($list2){
-            return $list2;
         }else{
             $result['response'] = 2;
         }
