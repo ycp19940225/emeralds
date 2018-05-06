@@ -211,7 +211,7 @@ class ChatController extends BaseController
     public function getChat(Request $request){
         $touid= $request->input('touid');
         $User = DB::table('emerald_chat'); // 实例化User对象
-        $list = $User->select('id','touid','uid','content','state')->where('uid',$touid)->groupBy('touid')->orderBy('created_at','desc')->get();
+        $list = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('touid')->orderBy('created_at','desc')->get();
         $list = $list->toArray();
        foreach ($list as $k=>$v){
            $is_myimg['id']=$v->touid;
