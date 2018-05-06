@@ -74,6 +74,7 @@ class ChatController extends BaseController
         $dara['uid'] = $request->input('shopid');   //当前用户id
         $dara['touid'] = $request->input('touid');  //接收方id
         $dara['add_time'] = time();  //添加时间
+        $dara['state'] = 1;  //添加时间
         //state 为查看状态。 数据库默认为未查看 1   一查看2
         $fr = $this->chat->save($dara);  //添加到数据库
 
