@@ -29,6 +29,7 @@ $api->version('v1', function ($api) {
             $api->get('articles/cat/{id}', 'ArticleController@cat')->where('id', '[0-9]+');
             $api->post('article/{id}', 'ArticleController@article')->where('id', '[0-9]+');
             //轮播图
+            
             $api->get('slides', 'SlideController@all');
             //视频
             $api->get('video', 'SlideController@video');
