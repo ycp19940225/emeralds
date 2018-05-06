@@ -177,7 +177,7 @@ class ChatController extends BaseController
         $sa['state']=2;
         $data['uid'] = $request->input('touid');
         $data['touid'] = $request->input('shopid');
-        $User->where($data)->update($sa);
+        DB::table('emerald_chat')->where($data)->update($sa);
         $is_myimg['id']=$request->input('shopid');
         $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
         $result['myimg'] = $img->logo;
