@@ -228,7 +228,7 @@ class ChatController extends BaseController
             }
         }elseif(empty($list)){
             $list = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('touid')->orderBy('created_at','desc')->get();
-            dd($touid,$list);
+            dd($touid,$list,DB::getQueryLog());
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->uid;
                 $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
