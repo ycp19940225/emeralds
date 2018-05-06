@@ -215,18 +215,18 @@ class ChatController extends BaseController
         $list = $User->select('id','touid','uid','content','state')->where('uid',$touid)->groupBy('touid')->orderBy('created_at','desc')->get();
         $list = $list->toArray();
         if(!empty($list)){
-            $list = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
-            foreach ($list as $k=>$v){
+            $list2 = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
+            foreach ($list2 as $k=>$v){
                 $is_myimg['id']=$v->uid;
                 $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
                 $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
                 if(isset($img->logo)){
-                    $list[$k]->myimg = $img->logo;
+                    $list2[$k]->myimg = $img->logo;
 
                 }else{
-                    $list[$k]->myimg = "";
+                    $list2[$k]->myimg = "";
                 }
-                $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
+                $list2[$k]->name = isset($name->nickname) ? $name->nickname:"";
             }
         }
         if(empty($list)){
@@ -242,8 +242,10 @@ class ChatController extends BaseController
                 $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
             }
         }
-        if(empty($list)){
+        if($list){
             return $list;
+        }elseif($list2){
+            return $list2;
         }else{
             $result['response'] = 2;
         }
