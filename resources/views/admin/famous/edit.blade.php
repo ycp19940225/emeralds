@@ -44,12 +44,12 @@
                                     <input type="text" class="form-control" id="intro" name="intro" value="{{ $data['intro'] or ''}}" placeholder="请输入简介" required>
                                 </div>
                             </div>
-                            <div class="form-group">
+                           {{-- <div class="form-group">
                                 <label for="name" class="col-xs-4 control-label">关联名家商品</label>
                                 <div class="col-xs-3">
                                     {{  buildSelectMore($goods_data,'','goods_id[]','id','goods_name',isset($goods_select) ? $goods_select->toArray():[]) }}
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="form-group">
                                 <label for="pic" class="col-xs-4 control-label">名家照片</label>
                                 <div class="col-xs-4">

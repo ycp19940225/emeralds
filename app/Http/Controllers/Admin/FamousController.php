@@ -78,9 +78,9 @@ class FamousController extends controller
     public function edit($id)
     {
         $data = $this->famous->getOne($id);
-        $goods_data = $this->goods->getLinks();
-        $goods_select = $this->goods->getSelects($id);
-        return view('admin.famous.edit',['data'=>$data,'title'=>'添加名家','goods_data'=>$goods_data,'goods_select'=>$goods_select]);
+      /*  $goods_data = $this->goods->getLinks();
+        $goods_select = $this->goods->getSelects($id);*/
+        return view('admin.famous.edit',['data'=>$data,'title'=>'添加名家']);
     }
 
     /**
@@ -116,5 +116,67 @@ class FamousController extends controller
             return response()->json(msg('success','删除成功!'));
         } else
             return response()->json(msg('error','删除失败!'));
+    }
+
+    /**
+     * @name 名家商品
+     * @desc
+     * @author ycp
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function famousGoods()
+    {
+        $data=$this->goods->getLinks();
+        $famousData=$this->famous->getAlls();
+        return view('admin.famous.famousGoods',['data'=>$data,'famousData'=>$famousData,'title'=>'名家商品']);
+    }
+
+    /**
+     * @name 商品分配名家
+     * @desc
+     * @author ycp
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function goodsToFamous(Request $request)
+    {
+        $data = $request->only("id",'famous_id');
+        if($this->goods->update($data)){
+            return response()->json(msg('success','分配成功!'));
+        }
+        return response()->json(msg('error','分配失败!'));
+    }
+    /**
+     * @name 获取名家商品
+     * @desc
+     * @author ycp
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getFamousGoods(Request $request)
+    {
+        $famous_id = $request->only("id");
+        $data = $this->goods->getByFields(['famous_id'=>$famous_id]);
+        if($data){
+            return response()->json(msg('success','获取成功!',$data));
+        }
+        return response()->json(msg('error','获取失败!'));
+    }
+
+    /**
+     * @name 删除名家商品
+     * @desc
+     * @author ycp
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteFamousGoods(Request $request)
+    {
+        $data = $request->only("id",'famous_id',"type");
+        if($this->goods->update($data)){
+            return response()->json(msg('success','删除成功!'));
+        }
+        return response()->json(msg('error','获取失败!'));
     }
 }

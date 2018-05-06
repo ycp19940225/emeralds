@@ -41,18 +41,18 @@ class FamousRepository
     public function save($data)
     {
         $insert_data = $this->famousModel->create($data);
-        foreach ($data['goods_id'] as $k=>$v){
+        /*foreach ($data['goods_id'] as $k=>$v){
            DB::table("emerald_goods")->where('id',$v)->update(['famous_id'=>$insert_data['id']]);
-        }
+        }*/
         return $insert_data;
     }
 
     public function update($data)
     {
         $insert_data = $this->famousModel->find($data['id'])->update($data);
-        foreach ($data['goods_id'] as $k=>$v) {
+        /*foreach ($data['goods_id'] as $k=>$v) {
            DB::table("emerald_goods")->where('id', $v)->update(['famous_id' => $data['id']]);
-        }
+        }*/
         return $insert_data;
     }
 

@@ -88,6 +88,11 @@ return [
                     'icon'=>''
                 ],
                 [
+                    'name'=>'名家商品',
+                    'access'=>'admin/famous/famousGoods',
+                    'icon'=>''
+                ],
+                [
                     'name'=>'首页视频',
                     'access'=>'admin/video/index',
                     'icon'=>''

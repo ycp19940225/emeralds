@@ -83,10 +83,15 @@ class GoodsServicesImpl implements GoodsServices
             ->get();
     }
 
+    /**
+     * 获取名家收藏的商品
+     */
     public function getLinks()
     {
         return $this->goodsDao->where('status',1)
             ->where('deleted_at',0)
+            ->where('checked',1)
+            ->where('famous_id',"0")
             ->where('type',3)
             ->get();
     }

@@ -34,6 +34,11 @@ Route::get('/famous/index','FamousController@index');
 Route::get('/famous/edit/{id}','FamousController@edit')->where('id', '[0-9]+');
 Route::post('/famous/editOperate','FamousController@editOperate');
 Route::post('/famous/delete','FamousController@delete');
+//名家商品
+Route::get('/famous/famousGoods','FamousController@famousGoods');
+Route::post('/famous/goodsToFamous','FamousController@goodsToFamous');
+Route::post('/famous/getFamousGoods','FamousController@getFamousGoods');
+Route::post('/famous/deleteFamousGoods','FamousController@deleteFamousGoods');
 
 //优惠券
 Route::any('/coupon/add','CouponController@add');
