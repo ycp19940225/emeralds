@@ -214,6 +214,7 @@ class ChatController extends BaseController
         $User = DB::table('emerald_chat'); // 实例化User对象
         $list = $User->select('id','touid','uid','content','state')->where('uid',$touid)->groupBy('touid')->orderBy('created_at','desc')->get();
         $list = $list->toArray();
+        dd($list);
         if(!empty($list)){
             $list2 = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
             foreach ($list2 as $k=>$v){
