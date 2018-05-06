@@ -74,7 +74,7 @@ class ChatController extends BaseController
         $dara['uid'] = $request->input('shopid');   //当前用户id
         $dara['touid'] = $request->input('touid');  //接收方id
         $dara['add_time'] = time();  //添加时间
-        $dara['state'] = 1;  //为查看状态
+        $dara['state'] = 1;  //添加时间
         //state 为查看状态。 数据库默认为未查看 1   一查看2
         $fr = $this->chat->save($dara);  //添加到数据库
 
@@ -172,11 +172,12 @@ class ChatController extends BaseController
         $touid= $request->input('touid');
         $shopid = $request->input('shopid');
         $request->input('lasttime')?$time=$request->input('lasttime'):$time=time();
-        $list = DB::table('emerald_chat')->whereRaw('(uid='.$touid.' and touid='.$shopid.' and created_at >'.$time.')')->where('state',1)->orderBy('created_at','desc')->get();
+        $User = DB::table('emerald_chat'); // 实例化User对象
+        $list = $User->whereRaw('(uid='.$touid.' and touid='.$shopid.' and created_at >'.$time.')')->where('state',1)->orderBy('created_at','desc')->get();
         $sa['state']=2;
         $data['uid'] = $request->input('touid');
         $data['touid'] = $request->input('shopid');
-        DB::table('emerald_chat')->where($data)->update($sa);
+        $User->where($data)->update($sa);
         $is_myimg['id']=$request->input('shopid');
         $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
         $result['myimg'] = $img->logo;
@@ -193,6 +194,7 @@ class ChatController extends BaseController
 
         $lists=array_reverse($res,true);
         $arr = array_values($res);
+
         if(count($list)!=0){
             $result['data'] = $res;
 
@@ -210,30 +212,12 @@ class ChatController extends BaseController
     public function getChat(Request $request){
         $touid= $request->input('touid');
         $User = DB::table('emerald_chat'); // 实例化User对象
-        $list = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
+        $list = $User->select('id','touid','uid','content','state')->where('uid',$touid)->groupBy('touid')->orderBy('created_at','desc')->get();
         $list = $list->toArray();
-        if(!empty($list)){
+        if(empty($list)){
+            $list = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->uid;
-                $temp = $v->uid;
-                $v->uid = $v->touid;
-                $v->touid = $temp;
-                $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
-                $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
-                if(isset($img->logo)){
-                    $list[$k]->myimg = $img->logo;
-                }else{
-                    $list[$k]->myimg = "";
-                }
-                $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
-            }
-        }/*elseif(empty($list)){
-            $list = DB::table('emerald_chat')->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
-            foreach ($list as $k=>$v){
-                $is_myimg['id']=$v->uid;
-                $temp = $v->uid;
-                $v->uid = $v->touid;
-                $v->touid = $temp;
                 $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
                 $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
                 if(isset($img->logo)){
@@ -244,8 +228,21 @@ class ChatController extends BaseController
                 }
                 $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
             }
-        }*/
+        }
         if(!empty($list)){
+            foreach ($list as $k=>$v){
+                $is_myimg['id']=$v->touid;
+                $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
+                $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
+                if(isset($img->logo)){
+                    $list[$k]->myimg = $img->logo;
+                }else{
+                    $list[$k]->myimg = "";
+                }
+                $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
+            }
+        }
+        if($list){
             return $list;
         }else{
             $result['response'] = 2;
