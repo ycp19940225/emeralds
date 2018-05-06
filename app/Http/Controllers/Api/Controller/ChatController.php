@@ -226,6 +226,7 @@ class ChatController extends BaseController
                 }
                 $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
             }
+            dd(1);
         }elseif(empty($list)){
             $list = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
             foreach ($list as $k=>$v){
