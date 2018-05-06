@@ -227,8 +227,7 @@ class ChatController extends BaseController
                 $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
             }
         }elseif(empty($list)){
-            $list2 = DB::table('emerald_chat')->select('id','touid','uid','content','state')->where('touid',65)->orderBy('created_at','desc')->get();
-            dd($touid,$list2);
+            $list = DB::table('emerald_chat')->select('id','touid','uid','content','state')->where('touid',65)->groupBy('uid')->orderBy('created_at','desc')->get();
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->uid;
                 $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
