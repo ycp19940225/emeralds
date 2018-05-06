@@ -227,7 +227,7 @@ class ChatController extends BaseController
                 $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
             }
         }elseif(empty($list)){
-            dd(1);
+            dd($touid);
             $list = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->uid;
@@ -242,7 +242,7 @@ class ChatController extends BaseController
                 $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
             }
         }
-        if($list){
+        if(!empty($list)){
             return $list;
         }else{
             $result['response'] = 2;
