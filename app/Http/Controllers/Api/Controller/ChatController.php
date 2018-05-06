@@ -214,7 +214,7 @@ class ChatController extends BaseController
         $list = $list->toArray();
         if(!empty($list)){
             foreach ($list as $k=>$v){
-                $is_myimg['id']=$v->touid;
+                $is_myimg['id']=$v->uid;
                 $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
                 $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
                 if(isset($img->logo)){
