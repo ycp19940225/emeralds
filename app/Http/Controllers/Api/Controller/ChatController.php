@@ -193,9 +193,6 @@ class ChatController extends BaseController
 
         $lists=array_reverse($res,true);
         $arr = array_values($res);
-
-        dd($res);
-
         if(count($list)!=0){
             $result['data'] = $res;
 
