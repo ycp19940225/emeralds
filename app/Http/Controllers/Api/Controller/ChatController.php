@@ -173,7 +173,6 @@ class ChatController extends BaseController
         $shopid = $request->input('shopid');
         $request->input('lasttime')?$time=$request->input('lasttime'):$time=time();
         $list = DB::table('emerald_chat')->whereRaw('(uid='.$touid.' and touid='.$shopid.' and created_at >'.$time.')')->where('state',1)->orderBy('created_at','desc')->get();
-        dd($list);
         $sa['state']=2;
         $data['uid'] = $request->input('touid');
         $data['touid'] = $request->input('shopid');
@@ -194,6 +193,8 @@ class ChatController extends BaseController
 
         $lists=array_reverse($res,true);
         $arr = array_values($res);
+
+        dd($list);
 
         if(count($list)!=0){
             $result['data'] = $res;
