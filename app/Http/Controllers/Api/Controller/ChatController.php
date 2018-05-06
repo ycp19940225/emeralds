@@ -172,8 +172,7 @@ class ChatController extends BaseController
         $touid= $request->input('touid');
         $shopid = $request->input('shopid');
         $request->input('lasttime')?$time=$request->input('lasttime'):$time=time();
-        $User = DB::table('emerald_chat'); // 实例化User对象
-        $list = $User->whereRaw('(uid='.$touid.' and touid='.$shopid.' and created_at >'.$time.')')->where('state',1)->orderBy('created_at','desc')->get();
+        $list = DB::table('emerald_chat')->whereRaw('(uid='.$touid.' and touid='.$shopid.' and created_at >'.$time.')')->where('state',1)->orderBy('created_at','desc')->get();
         $sa['state']=2;
         $data['uid'] = $request->input('touid');
         $data['touid'] = $request->input('shopid');
