@@ -242,7 +242,7 @@ class ChatController extends BaseController
                 $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
             }
         }
-        if($list){
+        if(!empty($list)){
             return $list;
         }else{
             $result['response'] = 2;
