@@ -213,24 +213,23 @@ class ChatController extends BaseController
         $touid= $request->input('touid');
         $User = DB::table('emerald_chat'); // 实例化User对象
         $list = $User->select('id','touid','uid','content','state')->where('uid',$touid)->groupBy('touid')->orderBy('created_at','desc')->get();
-        if(!empty($list)){
+        $list = $list->toArray();
+        if(empty($list)){
             $list = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
-            $list = $list->toArray();
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->uid;
                 $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
                 $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
                 if(isset($img->logo)){
                     $list[$k]->myimg = $img->logo;
-                    
+
                 }else{
                     $list[$k]->myimg = "";
                 }
                 $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
             }
         }
-        if(empty($list)){
-            $list = $list->toArray();
+        if(!empty($list)){
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->touid;
                 $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
