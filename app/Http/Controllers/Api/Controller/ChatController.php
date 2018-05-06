@@ -214,7 +214,7 @@ class ChatController extends BaseController
         $User = DB::table('emerald_chat'); // 实例化User对象
         $list = $User->select('id','touid','uid','content','state')->where('uid',$touid)->groupBy('touid')->orderBy('created_at','desc')->get();
         $list = $list->toArray();
-        if(empty($list)){
+        if(!empty($list)){
             $list = $User->select('id','touid','uid','content','state')->where('touid',$touid)->groupBy('uid')->orderBy('created_at','desc')->get();
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->uid;
@@ -229,7 +229,7 @@ class ChatController extends BaseController
                 $list[$k]->name = isset($name->nickname) ? $name->nickname:"";
             }
         }
-        if(!empty($list)){
+        if(empty($list)){
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->touid;
                 $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
