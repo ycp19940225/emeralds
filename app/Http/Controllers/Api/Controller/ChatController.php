@@ -74,7 +74,7 @@ class ChatController extends BaseController
         $dara['uid'] = $request->input('shopid');   //当前用户id
         $dara['touid'] = $request->input('touid');  //接收方id
         $dara['add_time'] = time();  //添加时间
-        $dara['state'] = 1;  //添加时间
+        $dara['state'] = 1;  //为查看状态
         //state 为查看状态。 数据库默认为未查看 1   一查看2
         $fr = $this->chat->save($dara);  //添加到数据库
 
@@ -230,6 +230,9 @@ class ChatController extends BaseController
             $list = DB::table('emerald_chat')->select('id','touid','uid','content','state')->where('touid',65)->groupBy('uid')->orderBy('created_at','desc')->get();
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->uid;
+                $temp = $v->uid;
+                $v->uid = $v->touid;
+                $v->touid = $temp;
                 $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
                 $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
                 if(isset($img->logo)){
