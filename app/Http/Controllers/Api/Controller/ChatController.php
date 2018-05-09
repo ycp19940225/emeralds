@@ -213,7 +213,7 @@ class ChatController extends BaseController
         $list = $User->select('id','touid','uid','content','state')
             ->where('touid',$touid)
             ->whereIn('id',function ($query){
-                $query->select(DB::raw('MAX(created_at)'))->get();
+                $query->select(DB::raw('MAX(created_at)'))->groupBy('uid')->get();
             })
             ->orderBy('created_at','desc')
             ->get();
