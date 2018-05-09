@@ -216,15 +216,12 @@ class ChatController extends BaseController
             ->orderBy('created_at','desc')
             ->get();*/
         $list = DB::select(
-            "select id,uid,touid,content,state from emerald_chat where id in(select max(id) from emerald_chat where touid = :touid group by uid ) order by id desc",
+            "select uid,touid,content,state from emerald_chat where id in(select max(id) from emerald_chat where touid = :touid group by uid ) order by id desc",
             [":touid"=>$touid]
         );
         if(!empty($list)){
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->uid;
-                $temp = $v->uid;
-                $v->uid = $v->touid;
-                $v->touid = $temp;
                 $img =DB::table('emerald_user')->select('logo')->where($is_myimg)->first();
                 $name =DB::table('emerald_user')->select('nickname')->where($is_myimg)->first();
                 if(isset($img->logo)){
