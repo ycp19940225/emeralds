@@ -216,7 +216,7 @@ class ChatController extends BaseController
             ->orderBy('created_at','desc')
             ->get();*/
         $list = DB::select(
-            'select id,touid,uid,content,state from emerald_chat where touid = '.$touid. 'and id IN(select id from emerald_chat where touid ='.$touid. ' group by uid)  order by created_at desc'
+            "select id,touid,uid,content,state from emerald_chat where touid = '.$touid. 'and id IN(select id from emerald_chat where touid ='.$touid. ' group by uid)  order by created_at desc"
         );
         if(!empty($list)){
             foreach ($list as $k=>$v){
