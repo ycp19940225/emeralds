@@ -219,7 +219,6 @@ class ChatController extends BaseController
             'select * from emerald_chat where touid = :touid group by uid order by created_at',
             [':touid'=>$touid]
         );
-        $list = $list->toArray();
         if(!empty($list)){
             foreach ($list as $k=>$v){
                 $is_myimg['id']=$v->uid;
