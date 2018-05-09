@@ -210,10 +210,12 @@ class ChatController extends BaseController
     public function getChat(Request $request){
         $touid= $request->input('touid');
         $User = DB::table('emerald_chat'); // 实例化User对象
-        $list = $User->select('touid','uid','content','state',DB::raw('MAX(id)'))
+        $list = $User->select('id','touid','uid','content','state')
             ->where('touid',$touid)
-            ->groupBy('uid')
-            ->orderBy('id','desc')
+            ->whereIn('id',function ($query){
+                $query->select('id')->groupBy('uid')->get();
+            })
+            ->orderBy('created_at','desc')
             ->get();
         $list = $list->toArray();
         if(!empty($list)){
