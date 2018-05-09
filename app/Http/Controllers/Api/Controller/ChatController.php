@@ -212,9 +212,7 @@ class ChatController extends BaseController
         $User = DB::table('emerald_chat'); // 实例化User对象
         $list = $User->select('id','touid','uid','content','state')
             ->where('touid',$touid)
-            ->whereIn('id',function ($query){
-                $query->select('id')->groupBy('uid')->get();
-            })
+            ->whereIn('id',DB::raw("select max(id) from emerald_chat group by 'uid'"))
             ->orderBy('created_at','desc')
             ->get();
         $list = $list->toArray();
