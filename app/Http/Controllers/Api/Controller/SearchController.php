@@ -45,14 +45,14 @@ class SearchController extends BaseController
      */
     public function getGoodsByCatName(Request $request)
     {
-       $cat = $request->input('cat_name');
-       $res = DB::table('emerald_cat as a')
-           ->leftJoin('emerald_goods as b','a.id','=','b.cat_id')
-           ->where('a.cat_name',$cat)
-           ->where('b.deleted_at',0)
-           ->where('b.status',1)
-           ->where('b.checked',1)
-           ->simplePaginate(10);
+        $cat = $request->input('cat_name');
+        $res = DB::table('emerald_cat as a')
+            ->leftJoin('emerald_goods as b','a.id','=','b.cat_id')
+            ->where('a.cat_name',$cat)
+            ->where('b.deleted_at',0)
+            ->where('b.status',1)
+            ->where('b.checked',1)
+            ->simplePaginate(10);
 
         return API_MSG($res,'获取该分类商品成功！');
     }
@@ -97,6 +97,13 @@ class SearchController extends BaseController
             $type_id[]= $v['type_id'];
             $type_val[] = $v['type_value'];
         }
+        if($request->has('order')){
+            $field = 'a.'. $request->input('order');
+            $ds = $request->input('ds');
+        }else{
+            $field = "a.updated_at";
+            $ds = "desc";
+        }
         $count = count($type);
         $condition = 'count(b.goods_id) = '.$count;
         $res = DB::table('emerald_goods as a')
@@ -107,6 +114,7 @@ class SearchController extends BaseController
             ->where('a.checked',1)
             ->whereIn('b.type_id',$type_id)
             ->whereIn('b.type_val',$type_val)
+            ->orderBy($field,$ds)
             ->groupBy('b.goods_id')
             ->havingRaw($condition)
             ->get();
