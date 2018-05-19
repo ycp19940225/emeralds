@@ -88,7 +88,7 @@ return [
                     'icon'=>''
                 ],
                 [
-                    'name'=>'名家商品',
+                    'name'=>'分配名家商品',
                     'access'=>'admin/famous/famousGoods',
                     'icon'=>''
                 ],

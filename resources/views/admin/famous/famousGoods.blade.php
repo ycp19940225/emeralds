@@ -8,9 +8,9 @@
     <!-- begin page-header -->
     <h1 class="page-header">
         <small>
-            {{--
-                        <button class="btn btn-primary pull-right m-l-20" type="button" onclick=" window.location.href='/admin/goods/add' ">添加翡翠</button>
-            --}}
+            <small>
+                <button class="btn btn-primary pull-left m-l-20" type="button" onclick=" javascript:history.go(-1) ">返回首页</button>
+            </small>
         </small>
     </h1>
     <div class="row">

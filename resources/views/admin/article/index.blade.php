@@ -37,7 +37,6 @@
                                 <th>简介</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
-                                <th>是否置顶</th>
                                 <th>文章类型</th>
                                 <th>操作</th>
                             </tr>
@@ -52,7 +51,6 @@
                                 <td>{{ $v['intro'] }}</td>
                                 <td>{{ $v['created_at'] }}</td>
                                 <td>{{ $v['updated_at'] }}</td>
-                                <td><?php if($v['top']){ echo '是';} else echo "否";?></td>
                                 <td><?php if($v['type']==1){ echo '视频';}if($v['type']==2){ echo '音频';} if($v['type']==3) echo "图文";?></td>
                                 <td>
                                     <a class="btn btn-success btn-xs m-2 detail" href="{{ url('admin/article/edit',['id'=>$v['id']]) }}" >编辑</a>

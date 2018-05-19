@@ -146,7 +146,7 @@
             'source | undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |',
             'insertorderedlist insertunorderedlist | selectall cleardoc paragraph | fontfamily fontsize' ,
             '| justifyleft justifycenter justifyright justifyjustify |',
-            'link unlink | emotion image video  | map',
+            'link unlink | emotion image video  ',
             '| horizontal print preview fullscreen', 'drafts', 'formula'
         ]
 
@@ -241,7 +241,7 @@
         //,autoFloatEnabled:true
 
         //浮动时工具栏距离浏览器顶部的高度，用于某些具有固定头部的页面
-        //,topOffset:30
+        // ,topOffset:30
 
         //填写过滤规则
         ,filterRules: {}

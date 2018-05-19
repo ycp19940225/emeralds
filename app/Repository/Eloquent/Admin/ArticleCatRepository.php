@@ -34,7 +34,9 @@ class ArticleCatRepository
 
     public function getOne($id)
     {
-        return $this->articleCatModel->where('deleted_at',0)->find($id);
+        return $this->articleCatModel->where('deleted_at',0)->with(['articles' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->find($id);
     }
 
     public function save($data)

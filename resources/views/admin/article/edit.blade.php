@@ -45,20 +45,7 @@
                                     <input type="text" class="form-control" id="title" name="title" value="{{ $data['title'] or ''}}" placeholder="请输入标题" required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="name" class="col-xs-4 control-label">是否置顶</label>
-                                <?php if(isset($data['top']) && $data['top'] == 1){ $checked2 = 'checked';}else{$checked1 = 'checked';} ?>
-                                <div class="col-xs-4">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" value="0"  name="top" {{ $checked1 or ''}}>非置顶</label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" value="1"  name="top" {{ $checked2 or ''}}>置顶</label>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="form-group">
                                 <label for="name" class="col-xs-4 control-label">文章类型</label>
                                 <?php if(isset($data['type']) && $data['type'] == 1){ $checkedS = 'checked';}else if(isset($data['type']) && $data['type'] == 2){ $checkedY = 'checked';}
