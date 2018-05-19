@@ -159,4 +159,13 @@ class ArticleController extends BaseController
         }
         return API_MSG('','获取文章失败！','false',500);
     }
+
+    public function getShiCui()
+    {
+        $data = $this->article->getShiCui();
+        if($data){
+            return API_MSG($data,'获取文章成功！');
+        }
+        return API_MSG('','获取文章失败！','false',500);
+    }
 }

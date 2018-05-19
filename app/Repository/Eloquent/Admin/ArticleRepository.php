@@ -56,4 +56,9 @@ class ArticleRepository
     {
         return $this->articleModel->select('id','title','pic')->where('top',1)->limit(2)->orderBy('id','desc')->get();
     }
+
+    public function getShiCui()
+    {
+        return $this->articleModel->select('id','title','pic')->whereIn('cat_id',['11','13'])->orderBy('created_at','desc')->get();
+    }
 }

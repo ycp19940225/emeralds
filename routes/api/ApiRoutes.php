@@ -28,6 +28,7 @@ $api->version('v1', function ($api) {
             $api->get('articles/cats', 'ArticleController@cats');
             $api->get('articles/cat/{id}', 'ArticleController@cat')->where('id', '[0-9]+');
             $api->post('article/{id}', 'ArticleController@article')->where('id', '[0-9]+');
+            $api->get('articles/getsc', 'ArticleController@getShiCui');
             //轮播图
 
             $api->get('slides', 'SlideController@all');
