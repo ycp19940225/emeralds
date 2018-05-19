@@ -61,4 +61,5 @@ class ArticleRepository
     {
         return $this->articleModel->select('id','title','pic')->whereIn('cat_id',['11','13'])->orderBy('created_at','desc')->get();
     }
+
 }
