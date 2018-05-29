@@ -409,3 +409,24 @@ if ( ! function_exists('curl')){
         return $tmpInfo;
     }
 }
+
+/**
+ * 二维数组排序
+ */
+if ( ! function_exists('mulSort')){
+    function mulSort($arrays,$sort_key,$sort_order=SORT_ASC,$sort_type=SORT_NUMERIC ){
+        if(is_array($arrays)){
+            foreach ($arrays as $array){
+                if(is_array($array)){
+                    $key_arrays[] = $array[$sort_key];
+                }else{
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }
+        array_multisort($key_arrays,$sort_order,$sort_type,$arrays);
+        return $arrays;
+    }
+}

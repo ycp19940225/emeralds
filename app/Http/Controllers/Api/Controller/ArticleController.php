@@ -163,8 +163,9 @@ class ArticleController extends BaseController
     public function getShiCui()
     {
         $data = $this->article->getShiCui();
+        $res = mulSort($data->toArray(),'id',SORT_DESC);
         if($data){
-            return API_MSG($data,'获取文章成功！');
+            return API_MSG($res,'获取文章成功！');
         }
         return API_MSG('','获取文章失败！','false',500);
     }
