@@ -92,7 +92,7 @@
          */
         function del(i) {
             //询问框
-            layer.confirm('二级分类将会一并删除,是否删除？', {
+            layer.confirm('是否删除？', {
                 title:'确认操作',
                 btn: ['是','否'] //按钮
             }, function(){
