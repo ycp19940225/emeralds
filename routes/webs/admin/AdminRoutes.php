@@ -28,3 +28,6 @@ Route::post('/privilege/updateRolePri','PrivilegeController@updateRolePri')->nam
 Route::get('/agent/index','AgentController@index');
 Route::post('/agent/editOperate','AgentController@editOperate');
 Route::post('/agent/delete','AgentController@delete');
+
+//位置
+Route::get('/position/index','PositionController@index');
