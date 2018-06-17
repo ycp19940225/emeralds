@@ -19,17 +19,6 @@ return [
             ]
         ],
         [
-            'name'=>'位置信息',
-            'icon'=>'user-circle',
-            'access'=>[
-                [
-                    'name'=>'位置信息',
-                    'access'=>'admin/position/index',
-                    'icon'=>''
-                ]
-            ]
-        ],
-        [
             'name'=>'供应商',
             'icon'=>'street-view',
             'access'=>[
