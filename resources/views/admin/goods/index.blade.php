@@ -101,11 +101,10 @@
                     id:i,
                     _token: _token
                 };
-                $.post("{{ url('admin/cat/delete') }}",data,function (res) {
-                    console.log(res);
+                $.post("{{ url('admin/goods/delete') }}",data,function (res) {
                     if(res['code'] === 'success'){
                         layer.msg(res['msg'],{icon: 6});
-                        setTimeout('location.href="{{ url('admin/cat/index') }}"',1000);
+                        setTimeout('location.href="{{ url('admin/goods/index') }}"',1000);
                     }else{
                         layer.msg(res['msg'],{icon:5});
                     }
